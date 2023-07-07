@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.idle.campers.MainControl;
 import com.idle.campers.common.Control;
 import com.idle.campers.member.control.MypageForm;
+import com.idle.campers.member.control.loginForm;
+import com.idle.campers.member.control.logoutControl;
+import com.idle.campers.member.control.loginControl;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet{
@@ -30,6 +33,11 @@ public class FrontController extends HttpServlet{
 		
 		//은주
 		map.put("/mypage.do", new MypageForm());
+		
+		//준위
+		map.put("/loginForm.do", new loginForm());
+		map.put("/loginControl.do", new loginControl());
+		map.put("/logout.do", new logoutControl());
 	}
 	
 	@Override
