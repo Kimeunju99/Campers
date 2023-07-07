@@ -7,12 +7,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/menu.css">
+<script src="js/jquery-3.7.0.min.js"></script>
 </head>
 <body>
 	<nav id="topMenu">
 		<ul>
 			<li><a class="menuLink" href="main.do">Home</a></li>	
-			<li><a class="menuLink" href="#">Book</a></li>				
+			<li><a class="menuLink" href="mypage.do">MYPAGETEST</a></li>				
 			<li><a class="menuLink" href="#">Content</a></li>
 		<!-- 
 			<c:if test="${author eq 'ADMIN' }">

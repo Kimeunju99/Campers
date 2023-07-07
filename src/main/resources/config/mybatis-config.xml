@@ -8,6 +8,11 @@
   	<setting name="mapUnderscoreToCamelCase" value="true"/>
   	<setting name="jdbcTypeForNull" value="NULL"/>
   </settings>
+  
+  <typeAliases>
+  <typeAlias alias="member" type="com.idle.campers.member.service.MemberVO"/>
+ </typeAliases>
+  
   <!-- DB 환경 -->
   <environments default="development">
     <environment id="development">

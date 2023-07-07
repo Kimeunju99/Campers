@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.idle.campers.MainControl;
 import com.idle.campers.common.Control;
+import com.idle.campers.member.control.MypageForm;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet{
@@ -26,6 +27,9 @@ public class FrontController extends HttpServlet{
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		map.put("/main.do", new MainControl());
+		
+		//은주
+		map.put("/mypage.do", new MypageForm());
 	}
 	
 	@Override
