@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.idle.campers.MainControl;
+import com.idle.campers.board.control.BoardListControl;
 import com.idle.campers.common.Control;
 
 @WebServlet("*.do")
@@ -26,6 +27,9 @@ public class FrontController extends HttpServlet{
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		map.put("/main.do", new MainControl());
+		
+		//김시인 (23.07.07 - 게시글 리스트)
+		map.put("/boardList.do", new BoardListControl());
 	}
 	
 	@Override
