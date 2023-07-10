@@ -13,8 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.idle.campers.MainControl;
+import com.idle.campers.board.control.BoardListControl;
 import com.idle.campers.common.Control;
 import com.idle.campers.member.control.MypageForm;
+import com.idle.campers.member.control.loginControl;
+import com.idle.campers.member.control.loginForm;
+import com.idle.campers.member.control.logoutControl;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet{
@@ -27,9 +31,16 @@ public class FrontController extends HttpServlet{
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		map.put("/main.do", new MainControl());
+		//김시인 (23.07.07 - 게시글 리스트)
+		map.put("/boardList.do", new BoardListControl());
 		
 		//은주
 		map.put("/mypage.do", new MypageForm());
+		
+		//준위
+		map.put("/loginForm.do", new loginForm());
+		map.put("/loginControl.do", new loginControl());
+		map.put("/logout.do", new logoutControl());
 	}
 	
 	@Override
