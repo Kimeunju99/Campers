@@ -58,4 +58,9 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> starBoard(long id) {
 		return null;
 	}
+
+	@Override
+	public List<BoardVO> topInfoList() {
+		return mapper.topInfoList();
+	}
 }

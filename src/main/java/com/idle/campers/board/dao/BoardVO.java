@@ -18,4 +18,5 @@ public class BoardVO {
 	private int brdRead;
 	private int brdStar;
 	private int brdInquiry;
+	
 }

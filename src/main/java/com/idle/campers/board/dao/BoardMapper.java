@@ -9,6 +9,7 @@ public interface BoardMapper {
 	
 	public List<BoardVO> boardList(@Param("key") String key, @Param("type") String type);
 	
+	public List<BoardVO> topInfoList();
 	
 	public BoardVO boardSelect(long id);
 	

@@ -16,8 +16,10 @@ public class BoardListControl implements Control {
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		BoardService svc = new BoardServiceImpl();
 		List<BoardVO> list = svc.boardList();
+		List<BoardVO> infoList = svc.topInfoList();
 
 		req.setAttribute("board", list);
+		req.setAttribute("info", infoList);
 		
 		return "board/boardList";
 	}
