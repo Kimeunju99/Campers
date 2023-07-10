@@ -22,8 +22,10 @@
 					<h2 class="py-3 font-bold font-up blue-text">자유게시판</h2>
 				</div>
 				<div align="right" style="padding-right: 150px;">
+					<c:if test="${id != null }">
 					<button type="button" id="addBtn" value="write"
 						style="background-color: white; border: solid 0.5px; border-color: rgb(172, 178, 185);">글쓰기</button>
+					</c:if>
 				</div>
 				<br>
 				<br>
@@ -65,7 +67,7 @@
 						<c:forEach var="vo" items="${board}">
 							<tr>
 								<td><c:out value="${vo.brdId}" /></td>
-								<td><a href="boardInfo.do?bid=${vo.brdId}&bwri=${vo.brdWriter}"><c:out value="${vo.brdTitle}" /></a></td>
+								<td><a href="boardInfo.do?bid=${vo.brdId}&bwri=${vo.brdWriter}&title=${vo.brdTitle}"><c:out value="${vo.brdTitle}" /></a></td>
 								<td><c:out value="${vo.brdWriter}" /></td>
 								<td><c:out value="${vo.brdDate}" /></td>
 								<td><c:out value="${vo.brdRead}" /></td>
@@ -81,7 +83,7 @@
 
 	<script>
 		$('#addBtn').click(function(){
-			$(location).attr("href", "boardAdd.do")
+			$(location).attr("href", "boardAddForm.do")
 		})
 	</script>
 </body>
