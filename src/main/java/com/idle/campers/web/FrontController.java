@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.idle.campers.MainControl;
+import com.idle.campers.board.control.BoardListControl;
 import com.idle.campers.common.Control;
 import com.idle.campers.member.control.MypageForm;
 import com.idle.campers.member.control.loginControl;
