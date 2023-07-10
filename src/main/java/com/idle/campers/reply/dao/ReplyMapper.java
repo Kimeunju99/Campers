@@ -1,5 +1,7 @@
 package com.idle.campers.reply.dao;
 
-public interface ReplyMapper {
+import java.util.List;
 
+public interface ReplyMapper {
+	public List<ReplyVO> replyList();
 }
