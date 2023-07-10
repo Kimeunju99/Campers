@@ -22,4 +22,6 @@ public interface BoardService {
 	public int likeBoard(long id);
 	
 	public List<BoardVO> starBoard(long id);
+	
+	public List<BoardVO> topInfoList();
 }

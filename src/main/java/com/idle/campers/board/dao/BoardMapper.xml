@@ -20,6 +20,16 @@
   
   </select>
   
+  <select id="topInfoList" resultType="board">
+	<![CDATA[
+		select *
+		from tbl_board
+		where rownum <= 3
+		and brd_type = 'inform'
+		order by brd_id desc
+		]]>
+	</select>
+  
   <update id="boardInquiry" parameterType="long">
   UPDATE TBL_BOARD SET BRD_READ = BRD_READ+1 WHERE BRD_ID=#{brdId}
   </update>

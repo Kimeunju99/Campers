@@ -17,4 +17,5 @@ public class BoardVO {
 	private String brdAddr;
 	private int brdRead;
 	private int brdInquiry;
+	
 }
