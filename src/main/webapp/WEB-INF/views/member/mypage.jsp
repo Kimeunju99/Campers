@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="js/jquery-3.7.0.min.js"></script>
+<style>
+li{
+ list-style-type: none;
+}
+li.summery{
+ float: left;
+ margin: 15px;
+}
+</style>
 </head>
 <body>
 <!-- ----------------김은주: MYPAGE ----------------------- -->
@@ -15,9 +24,9 @@
 		<p id="mdfInfo">정보 수정하기</p>
 		<hr>
 		<ul>
-			<li>TEL&nbsp;&nbsp;<!--  -->유저값<li>
-			<li>E-MAIL&nbsp;&nbsp;<!--  -->유저값<li>
-			<li>ADDRESS&nbsp;&nbsp;<!--  -->유저값<li>
+			<li>TEL&nbsp;&nbsp;<!--유저값--><li>
+			<li>E-MAIL&nbsp;&nbsp;<!--유저값--><li>
+			<li>ADDRESS&nbsp;&nbsp;<!--유저값--><li>
 			<li><input type="button" name="logout" id="logout" value="로그아웃"><li>
 		</ul>
 	</div>
