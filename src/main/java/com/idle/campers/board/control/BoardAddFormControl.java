@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.idle.campers.common.Control;
 
-public class BoardFormControl implements Control {
+public class BoardAddFormControl implements Control {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {

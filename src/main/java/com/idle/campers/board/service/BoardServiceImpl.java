@@ -24,8 +24,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardVO selectBoard(long id) {
-		return mapper.boardSelect(id);
+	public BoardVO selectBoard(int id) {
+		BoardVO vo = mapper.boardSelect(id);
+		mapper.boardInquiry(id);
+		return vo;
 	}
 	
 
@@ -40,7 +42,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public boolean deleteBoard(String id) {
+	public boolean deleteBoard(int id) {
 		return mapper.boardDelete(0) == 1;
 	}
 
@@ -57,5 +59,10 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> starBoard(long id) {
 		return null;
+	}
+
+	@Override
+	public List<BoardVO> topInfoList() {
+		return mapper.topInfoList();
 	}
 }

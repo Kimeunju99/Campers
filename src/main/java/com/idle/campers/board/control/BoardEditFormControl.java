@@ -8,16 +8,17 @@ import com.idle.campers.board.service.BoardService;
 import com.idle.campers.board.service.BoardServiceImpl;
 import com.idle.campers.common.Control;
 
-public class BoardDeleteControl implements Control {
+public class BoardEditFormControl implements Control {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		
-		String brdId = req.getParameter("bid");
-		BoardService boardService = new BoardServiceImpl();
-		boardService.deleteBoard(Integer.parseInt(brdId));
-		
-		return "boardList.do";
+		String brdId = req.getParameter("bno");
+		BoardService service = new BoardServiceImpl();
+		BoardVO vo = service.selectBoard(Integer.parseInt(brdId));
+		req.setAttribute("brd", vo);
+	
+		return "board/boardEdit";
 	}
 
 }

@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.idle.campers.common.Control;
 
-public class loginForm implements Control {
+public class LoginForm implements Control {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {

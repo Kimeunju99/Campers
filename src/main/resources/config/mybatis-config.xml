@@ -32,4 +32,5 @@
 	<mappers>
 		<package name="com.idle.campers" />
 	</mappers>
+ 
 </configuration>

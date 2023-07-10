@@ -21,7 +21,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
                         <li><a class="dropdown-item" href="blog-home.html">공지사항</a></li>
-                        <li><a class="dropdown-item" href="blog-post.html">자유게시판</a></li>
+                        <li><a class="dropdown-item" href="boardList.do">자유게시판</a></li>
                         <li><a class="dropdown-item" href="blog-post.html">팁공유</a></li>
                     </ul>
                 </li>

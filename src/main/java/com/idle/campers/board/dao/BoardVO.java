@@ -16,6 +16,6 @@ public class BoardVO {
 	private int brdLike;
 	private String brdAddr;
 	private int brdRead;
-	private int brdStar;
 	private int brdInquiry;
+	
 }

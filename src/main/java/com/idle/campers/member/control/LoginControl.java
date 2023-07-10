@@ -9,7 +9,7 @@ import com.idle.campers.member.service.MemberService;
 import com.idle.campers.member.service.MemberServiceImpl;
 import com.idle.campers.member.service.MemberVO;
 
-public class loginControl implements Control {
+public class LoginControl implements Control {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
@@ -20,16 +20,19 @@ public class loginControl implements Control {
 		MemberService service = new MemberServiceImpl();
 		MemberVO vo = service.selectMember(userId, userPw);
 		
+		HttpSession session = req.getSession();
 		if( vo == null) {	//로그인실패
-			return "loginForm.do";
+			String message = "아이디 또는 비밀번호가 일치하지 않습니다.";
+			session.setAttribute("message", message);
+			return "member/loginForm";
+		} else {
+			session.setAttribute("id", vo.getUserId());
+			session.setAttribute("name", vo.getUserName());
+			session.setAttribute("auth", vo.getUserAuth());			
 		}
 		
-		HttpSession session = req.getSession();
-		session.setAttribute("id", vo.getUserId());
-		session.setAttribute("name", vo.getUserName());
-		session.setAttribute("auth", vo.getUserAuth());
 
 		return "main.do";
 	}
-
+	
 }
