@@ -21,10 +21,19 @@ import com.idle.campers.board.control.BoardInfoControl;
 import com.idle.campers.board.control.BoardAddFormControl;
 import com.idle.campers.board.control.BoardListControl;
 import com.idle.campers.common.Control;
+import com.idle.campers.member.control.FindMemberId;
 import com.idle.campers.member.control.MypageForm;
+
+import com.idle.campers.member.control.ResetMemberPassword;
+import com.idle.campers.member.control.LoginForm;
+import com.idle.campers.member.control.LogoutControl;
+import com.idle.campers.member.control.MemberJoin;
+import com.idle.campers.member.control.LoginControl;
+
 import com.idle.campers.member.control.loginControl;
 import com.idle.campers.member.control.loginForm;
 import com.idle.campers.member.control.logoutControl;
+
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet{
@@ -49,12 +58,21 @@ public class FrontController extends HttpServlet{
 		map.put("/mypage.do", new MypageForm());
 		
 		//준위
+
+		map.put("/loginForm.do", new LoginForm());
+		map.put("/loginControl.do", new LoginControl());
+		map.put("/logout.do", new LogoutControl());
+		map.put("/memberJoin.do", new MemberJoin());
+		map.put("/findMemberId.do", new FindMemberId());
+		map.put("/resetMemberPassword.do", new ResetMemberPassword());
+
 		map.put("/loginForm.do", new loginForm());
 		map.put("/loginControl.do", new loginControl());
 		map.put("/logout.do", new logoutControl());
 		
 		//김시인 (23.07.07 - 게시글 리스트)
 		map.put("/boardList.do", new BoardListControl());
+
 	}
 	
 	@Override
