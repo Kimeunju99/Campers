@@ -24,7 +24,6 @@ public class FindMemberId implements Control {
 		String str = "Ajax:";
 		str += gson.toJson(vo);
 		
-		System.out.println(str);
 		return str;
 	}
 

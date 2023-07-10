@@ -14,10 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.idle.campers.MainControl;
 import com.idle.campers.common.Control;
+import com.idle.campers.member.control.FindMemberId;
 import com.idle.campers.member.control.MypageForm;
-import com.idle.campers.member.control.loginForm;
-import com.idle.campers.member.control.logoutControl;
-import com.idle.campers.member.control.loginControl;
+import com.idle.campers.member.control.ResetMemberPassword;
+import com.idle.campers.member.control.LoginForm;
+import com.idle.campers.member.control.LogoutControl;
+import com.idle.campers.member.control.MemberJoin;
+import com.idle.campers.member.control.LoginControl;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet{
@@ -35,9 +38,12 @@ public class FrontController extends HttpServlet{
 		map.put("/mypage.do", new MypageForm());
 		
 		//준위
-		map.put("/loginForm.do", new loginForm());
-		map.put("/loginControl.do", new loginControl());
-		map.put("/logout.do", new logoutControl());
+		map.put("/loginForm.do", new LoginForm());
+		map.put("/loginControl.do", new LoginControl());
+		map.put("/logout.do", new LogoutControl());
+		map.put("/memberJoin.do", new MemberJoin());
+		map.put("/findMemberId.do", new FindMemberId());
+		map.put("/resetMemberPassword.do", new ResetMemberPassword());
 	}
 	
 	@Override
