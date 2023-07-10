@@ -12,8 +12,6 @@
 		<tr>
 			<th>업체명</th>
 			<td><input type="text" name="manager" id="manager" value="" readonly></td>
-			<th>주소</th>
-			<td><input type="text" name="addr" id="addr" value="" readonly></td>
 		</tr>
 		<tr>
 			<th>예약자</th>
