@@ -15,15 +15,16 @@
   	SELECT * FROM TBL_BOARD WHERE BRD_ID = #{brdId}
   </select>
   
-  <select id="boardSelect" parameterType="long">
+  <select id="boardSelect" parameterType="int">
   SELECT * FROM TBL_BOARD WHERE BRD_ID = #{brdId}
+  
   </select>
   
   <update id="boardInquiry" parameterType="long">
-  UPDATE TBL_BOARD SET CLICK_CNT=CLICK_CNT+1 WHERE BRD_ID=#{brdId}
+  UPDATE TBL_BOARD SET BRD_READ = BRD_READ+1 WHERE BRD_ID=#{brdId}
   </update>
   
-  <delete id="boardDelete" parameterType="long">
+  <delete id="boardDelete" parameterType="int">
   DELETE FROM TBL_BOARD WHERE BRD_ID=#{brdId} 
   </delete>
   
@@ -37,6 +38,6 @@
   
   <insert id="boardAdd" parameterType="com.idle.campers.board.dao.BoardVO">
   	INSERT INTO TBL_BOARD (BRD_ID, BRD_TITLE, BRD_WRITER, BRD_CONTENT,  BRD_TYPE, BRD_ADDR)
-  	VALUES (brd_seq.nextval, #{brdTitle}, #{brdWriter}, #{brdContent}, #{brdType}, #{brdAddr})
+  	VALUES (board_seq.nextval, #{brdTitle}, #{brdWriter}, #{brdContent}, #{brdType}, #{brdAddr})
   	</insert>
 </mapper>

@@ -9,8 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="board/boardEdit" name="myFrm" method="post">
-		<h3>상세 게시판</h3>
+	<form action="boardEditForm.do" name="myFrm" method="post">
+		<h3>${brd.brdType}</h3>
+		<input type="hidden" name="bno" value="${brd.brdId}">
 		<h2 align="left">제목: ${brd.brdTitle}</h2>
 		<table border="1" width="400">
 			<tbody>
@@ -20,17 +21,19 @@
 				<tr width="450" height="450" align="left">
 					<td>${brd.brdContent}</td>
 				</tr>
+				
 			</tbody>
 		</table>
 		<br>
-		<button type="submit">수정</button>
-		<button type="button">삭제</button>
+		<c:if test="${id != null }">
+			<button type="submit">수정</button>
+			<button type="button" onclick="return submit2(this.form);">삭제</button>
+		</c:if>
 	</form>
 	<script>
-		document.querySelector('form[name=myFrm] button[type]').addEventListener('click', function(e){
-			document.forms[0].action = "boardDelete.do";
-			document.forms[0].submit();
-		});
+		function submit2(frm) {
+			frm.action="boardDelete.do"
+		}
 	</script>
 </body>
 </html>

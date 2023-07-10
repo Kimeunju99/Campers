@@ -21,7 +21,7 @@
 				<property name="driver"
 					value="oracle.jdbc.driver.OracleDriver" />
 				<property name="url"
-					value="jdbc:oracle:thin:@3.34.198.59:1521:xe" />
+					value="jdbc:oracle:thin:@3.35.218.234:1521:xe" />
 				<property name="username" value="idle" />
 				<property name="password" value="Campers1234" />
 			</dataSource>

@@ -1,5 +1,8 @@
 package com.idle.campers.board.control;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,7 +14,8 @@ import com.idle.campers.common.Control;
 public class BoardAddControl implements Control {
 
 	@Override
-	public String exec(HttpServletRequest req, HttpServletResponse resp) {
+	public String exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
 		
 		String brdWriter = req.getParameter("writer");
 		String brdTitle = req.getParameter("title");
@@ -19,6 +23,7 @@ public class BoardAddControl implements Control {
 		String brdContent = req.getParameter("content");
 		String brdImage = req.getParameter("image");
 		String brdInquiry = req.getParameter("inquiry");
+	
 		
 		
 		BoardVO vo  = new BoardVO();
@@ -27,11 +32,14 @@ public class BoardAddControl implements Control {
 		vo.setBrdType(brdType);
 		vo.setBrdContent(brdContent);
 		vo.setBrdImage(brdImage);
+		
+		
 		req.setAttribute("brd", vo);
+		
 		
 		BoardService service = new BoardServiceImpl();
 		if(service.addBoard(vo)) {
-			return "board/boardCheck";
+			return "board/boardInfo";
 		} else {
 			return "board/boardAdd";
 		}
