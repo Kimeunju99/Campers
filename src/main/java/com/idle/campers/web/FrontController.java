@@ -13,6 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.idle.campers.MainControl;
+import com.idle.campers.board.control.BoardAddControl;
+import com.idle.campers.board.control.BoardDeleteControl;
+import com.idle.campers.board.control.BoardEditControl;
+import com.idle.campers.board.control.BoardEditFormControl;
+import com.idle.campers.board.control.BoardFormControl;
 import com.idle.campers.board.control.BoardListControl;
 import com.idle.campers.common.Control;
 import com.idle.campers.member.control.MypageForm;
@@ -31,7 +36,13 @@ public class FrontController extends HttpServlet{
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		map.put("/main.do", new MainControl());
-		
+
+		// 손석연
+		map.put("/boardAdd.do", new BoardAddControl());
+		map.put("/boardForm.do", new BoardFormControl());
+		map.put("/boardDelete.do", new BoardDeleteControl());
+		map.put("/boardEdit.do", new BoardEditControl());
+		map.put("/boardEditForm.do", new BoardEditFormControl());
 		//은주
 		map.put("/mypage.do", new MypageForm());
 		

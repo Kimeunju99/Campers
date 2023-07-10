@@ -10,8 +10,17 @@
 		<if test="key  == 'information'">where board_type = #{type}</if>
 		order by brd_id desc
 	</select>
-
-	<select id="topInfoList" resultType="board">
+	
+	  <select id="boardStar" >
+  	SELECT * FROM TBL_BOARD WHERE BRD_ID = #{brdId}
+  </select>
+  
+  <select id="boardSelect" parameterType="int">
+  SELECT * FROM TBL_BOARD WHERE BRD_ID = #{brdId}
+  
+  </select>
+  
+  <select id="topInfoList" resultType="board">
 	<![CDATA[
 		select *
 		from tbl_board
@@ -20,37 +29,25 @@
 		order by brd_id desc
 		]]>
 	</select>
-
-	<select id="boardStar">
-		SELECT * FROM TBL_BOARD WHERE BRD_ID = #{brdId}
-	</select>
-
-	<select id="boardSelect" parameterType="long">
-		SELECT * FROM TBL_BOARD WHERE BRD_ID = #{brdId}
-	</select>
-
-	<update id="boardInquiry" parameterType="long">
-		UPDATE TBL_BOARD SET CLICK_CNT=CLICK_CNT+1 WHERE BRD_ID=#{brdId}
-	</update>
-
-	<delete id="boardDelete" parameterType="long">
-		DELETE FROM TBL_BOARD WHERE BRD_ID=#{brdId}
-	</delete>
-
-	<update id="boardEdit"
-		parameterType="com.idle.campers.board.dao.BoardVO">
-		UPDATE TBL_BOARD
-		SET BRD_TITLE = #{brdTitle}
-		, BRD_CONTENT = #{brdContent}
-		WHERE BRD_ID = #{brdId}
-
-	</update>
-
-	<insert id="boardAdd"
-		parameterType="com.idle.campers.board.dao.BoardVO">
-		INSERT INTO TBL_BOARD (BRD_ID, BRD_TITLE, BRD_WRITER, BRD_CONTENT, BRD_TYPE,
-		BRD_ADDR)
-		VALUES (brd_seq.nextval, #{brdTitle}, #{brdWriter}, #{brdContent},
-		#{brdType}, #{brdAddr})
-	</insert>
+  
+  <update id="boardInquiry" parameterType="long">
+  UPDATE TBL_BOARD SET BRD_READ = BRD_READ+1 WHERE BRD_ID=#{brdId}
+  </update>
+  
+  <delete id="boardDelete" parameterType="int">
+  DELETE FROM TBL_BOARD WHERE BRD_ID=#{brdId} 
+  </delete>
+  
+  <update id="boardEdit" parameterType="com.idle.campers.board.dao.BoardVO">
+  	UPDATE TBL_BOARD
+  	SET   BRD_TITLE = #{brdTitle}
+  		, BRD_CONTENT = #{brdContent}
+  	WHERE BRD_ID = #{brdId} 
+  	
+  </update>
+  
+  <insert id="boardAdd" parameterType="com.idle.campers.board.dao.BoardVO">
+  	INSERT INTO TBL_BOARD (BRD_ID, BRD_TITLE, BRD_WRITER, BRD_CONTENT,  BRD_TYPE, BRD_ADDR)
+  	VALUES (board_seq.nextval, #{brdTitle}, #{brdWriter}, #{brdContent}, #{brdType}, #{brdAddr})
+  	</insert>
 </mapper>

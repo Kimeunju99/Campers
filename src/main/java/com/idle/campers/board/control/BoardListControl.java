@@ -20,7 +20,6 @@ public class BoardListControl implements Control {
 
 		req.setAttribute("board", list);
 		req.setAttribute("info", infoList);
-		
 		return "board/boardList";
 	}
 
