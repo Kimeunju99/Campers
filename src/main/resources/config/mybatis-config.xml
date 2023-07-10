@@ -10,7 +10,9 @@
   </settings>
   
   <typeAliases>
-  <typeAlias alias="member" type="com.idle.campers.member.service.MemberVO"/>
+ 	<typeAlias alias="board" type="com.idle.campers.board.dao.BoardVO" />
+	<typeAlias alias="reply" type="com.idle.campers.reply.dao.ReplyVO" />
+ 	<typeAlias alias="member" type="com.idle.campers.member.service.MemberVO"/>
  </typeAliases>
   
   <!-- DB 환경 -->

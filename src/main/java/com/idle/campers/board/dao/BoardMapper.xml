@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.idle.campers.board.dao.BoardMapper">
+	<select id="boardList" resultType="board">
+		select *
+		from tbl_board
+		<if test="key  == 'free'">where board_type = #{type}</if>
+		<if test="key  == 'experience'">where board_type = #{type}</if>
+		<if test="key  == 'share'">where board_type = #{type}</if>
+		<if test="key  == 'information'">where board_type = #{type}</if>
+		order by brd_id desc
+	</select>
+	
+	  <select id="boardStar" >
+  	SELECT * FROM TBL_BOARD WHERE BRD_ID = #{brdId}
+  </select>
+  
+  <select id="boardSelect" parameterType="int">
+  SELECT * FROM TBL_BOARD WHERE BRD_ID = #{brdId}
+  
+  </select>
+  
+  <select id="topInfoList" resultType="board">
+	<![CDATA[
+		select *
+		from tbl_board
+		where rownum <= 3
+		and brd_type = 'inform'
+		order by brd_id desc
+		]]>
+	</select>
+  
+  <update id="boardInquiry" parameterType="long">
+  UPDATE TBL_BOARD SET BRD_READ = BRD_READ+1 WHERE BRD_ID=#{brdId}
+  </update>
+  
+  <delete id="boardDelete" parameterType="int">
+  DELETE FROM TBL_BOARD WHERE BRD_ID=#{brdId} 
+  </delete>
+  
+  <update id="boardEdit" parameterType="com.idle.campers.board.dao.BoardVO">
+  	UPDATE TBL_BOARD
+  	SET   BRD_TITLE = #{brdTitle}
+  		, BRD_CONTENT = #{brdContent}
+  	WHERE BRD_ID = #{brdId} 
+  	
+  </update>
+  
+  <insert id="boardAdd" parameterType="com.idle.campers.board.dao.BoardVO">
+  	INSERT INTO TBL_BOARD (BRD_ID, BRD_TITLE, BRD_WRITER, BRD_CONTENT,  BRD_TYPE, BRD_ADDR)
+  	VALUES (board_seq.nextval, #{brdTitle}, #{brdWriter}, #{brdContent}, #{brdType}, #{brdAddr})
+  	</insert>
+</mapper>
