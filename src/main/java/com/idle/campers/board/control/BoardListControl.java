@@ -14,7 +14,7 @@ public class BoardListControl implements Control {
 		BoardService svc = new BoardServiceImpl();
 		
 		
-		return null;
+		return "board/boardList";
 	}
 
 }
