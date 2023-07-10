@@ -7,18 +7,10 @@ import com.idle.campers.member.service.MemberVO;
 public class test {
 	public static void main(String[] args) {
 		MemberService svc = new MemberServiceImpl();
-		MemberVO vo = new MemberVO();
+		MemberVO vo = svc.findMember("user01", "aaaa@gmail.com", null);
 		
-		vo.setUserName("구십오");
-		vo.setUserAuth("general");
-		vo.setUserEmail("asdasd@gsdgs.com");
-		vo.setUserId("user95");
-		vo.setUserPw("1111");
-		vo.setUserTel("010-2222-3333");
+		System.out.println(vo);
 		
-		if(svc.insertMember(vo)) {
-			System.out.println("성공===============");
-		}
 		
 		
 	}

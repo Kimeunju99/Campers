@@ -17,6 +17,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public MemberVO findMember(String name, String email, String id) {
+		// TODO Auto-generated method stub
+		return mapper.findMember(name, email, id);
+	}
+	
+	@Override
 	public boolean insertMember(MemberVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.insertMember(vo) == 1;

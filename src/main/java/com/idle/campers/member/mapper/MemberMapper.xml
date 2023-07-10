@@ -8,6 +8,13 @@
 	<if test="userPw != null"> AND user_pw = #{userPw}</if>
 </select>
 
+<select id="findMember" resultType="member">
+	SELECT * FROM tbl_user
+	WHERE user_name = #{userName} AND user_email = #{userEmail}
+	<if test="userId != null"> AND user_id = #{userId}</if>
+</select>
+
+
 <insert id="insertMember">
 	INSERT INTO TBL_USER (USER_ID, USER_PW, USER_NAME, USER_TEL, USER_EMAIL, USER_AUTH, USER_ADDR)
 	VALUES (#{userId}, #{userPw}, #{userName}, #{userTel}, #{userEmail}, #{userAuth}, #{userAddr})

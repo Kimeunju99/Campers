@@ -2,6 +2,6 @@
     pageEncoding="UTF-8"%>
 <div>
 	<form action="">
-		<input type="text">
+
 	</form>
 </div>
