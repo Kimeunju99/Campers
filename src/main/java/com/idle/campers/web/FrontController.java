@@ -22,17 +22,16 @@ import com.idle.campers.board.control.BoardListControl;
 import com.idle.campers.common.Control;
 import com.idle.campers.member.control.FindMemberId;
 import com.idle.campers.member.control.MypageForm;
-<<<<<<< HEAD
+
 import com.idle.campers.member.control.ResetMemberPassword;
+import com.idle.campers.member.control.UserIdCheck;
+import com.idle.campers.member.control.MemberJoinType;
 import com.idle.campers.member.control.LoginForm;
 import com.idle.campers.member.control.LogoutControl;
+import com.idle.campers.member.control.MailCertification;
 import com.idle.campers.member.control.MemberJoin;
 import com.idle.campers.member.control.LoginControl;
-=======
-import com.idle.campers.member.control.loginControl;
-import com.idle.campers.member.control.loginForm;
-import com.idle.campers.member.control.logoutControl;
->>>>>>> branch 'develop' of https://github.com/Kimeunju99/Campers.git
+
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet{
@@ -56,21 +55,18 @@ public class FrontController extends HttpServlet{
 		map.put("/mypage.do", new MypageForm());
 		
 		//준위
-<<<<<<< HEAD
 		map.put("/loginForm.do", new LoginForm());
 		map.put("/loginControl.do", new LoginControl());
 		map.put("/logout.do", new LogoutControl());
 		map.put("/memberJoin.do", new MemberJoin());
 		map.put("/findMemberId.do", new FindMemberId());
 		map.put("/resetMemberPassword.do", new ResetMemberPassword());
-=======
-		map.put("/loginForm.do", new loginForm());
-		map.put("/loginControl.do", new loginControl());
-		map.put("/logout.do", new logoutControl());
+		map.put("/memberJoinType.do", new MemberJoinType());
+		map.put("/userIdCheck.do", new UserIdCheck());
+		map.put("/mailCertification.do", new MailCertification());
 		
 		//김시인 (23.07.07 - 게시글 리스트)
 		map.put("/boardList.do", new BoardListControl());
->>>>>>> branch 'develop' of https://github.com/Kimeunju99/Campers.git
 	}
 	
 	@Override

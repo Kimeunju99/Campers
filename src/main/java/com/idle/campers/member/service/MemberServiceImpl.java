@@ -28,4 +28,10 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.insertMember(vo) == 1;
 	}
 
+	@Override
+	public boolean updateMember(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.updateMember(vo) == 1;
+	}
+
 }

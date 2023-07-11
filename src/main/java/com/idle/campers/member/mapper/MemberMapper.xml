@@ -20,4 +20,14 @@
 	VALUES (#{userId}, #{userPw}, #{userName}, #{userTel}, #{userEmail}, #{userAuth}, #{userAddr})
 </insert>
 
+<update id="updateMember" parameterType="member">
+	UPDATE TBL_USER
+	SET USER_PW = #{userPw},
+		<if test="userName != null">USER_NAME = #{userName},</if>
+		<if test="userTel != null">USER_TEL = #{userTel},</if>
+		<if test="userEmail != null">USER_EMAIL = #{userEmail},</if>
+		<if test="userAddr != null">USER_ADDR = #{userAddr}</if>
+	WHERE USER_ID = #{userId}
+</update>
+
 </mapper>
