@@ -7,7 +7,7 @@ import com.idle.campers.board.dao.BoardVO;
 public interface BoardService {
 	public List<BoardVO> boardList();
 
-	public List<BoardVO> boardList(String key, String type);
+	public List<BoardVO> boardList(String sch, String keyword);
 	
 	public BoardVO selectBoard(int id);
 	

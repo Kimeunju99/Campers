@@ -14,16 +14,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.idle.campers.MainControl;
 import com.idle.campers.board.control.BoardAddControl;
+import com.idle.campers.board.control.BoardAddFormControl;
 import com.idle.campers.board.control.BoardDeleteControl;
 import com.idle.campers.board.control.BoardEditControl;
 import com.idle.campers.board.control.BoardEditFormControl;
-import com.idle.campers.board.control.BoardFormControl;
 import com.idle.campers.board.control.BoardListControl;
+import com.idle.campers.board.control.BoardSearchListControl;
 import com.idle.campers.common.Control;
+import com.idle.campers.member.control.FindMemberId;
+import com.idle.campers.member.control.LoginControl;
+import com.idle.campers.member.control.LoginForm;
+import com.idle.campers.member.control.LogoutControl;
+import com.idle.campers.member.control.MemberJoin;
 import com.idle.campers.member.control.MypageForm;
-import com.idle.campers.member.control.loginControl;
-import com.idle.campers.member.control.loginForm;
-import com.idle.campers.member.control.logoutControl;
+import com.idle.campers.member.control.ResetMemberPassword;
+
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet{
@@ -39,7 +44,7 @@ public class FrontController extends HttpServlet{
 
 		// 손석연
 		map.put("/boardAdd.do", new BoardAddControl());
-		map.put("/boardForm.do", new BoardFormControl());
+		map.put("/boardAddForm.do", new BoardAddFormControl());
 		map.put("/boardDelete.do", new BoardDeleteControl());
 		map.put("/boardEdit.do", new BoardEditControl());
 		map.put("/boardEditForm.do", new BoardEditFormControl());
@@ -47,12 +52,18 @@ public class FrontController extends HttpServlet{
 		map.put("/mypage.do", new MypageForm());
 		
 		//준위
-		map.put("/loginForm.do", new loginForm());
-		map.put("/loginControl.do", new loginControl());
-		map.put("/logout.do", new logoutControl());
-		
-		//김시인 (23.07.07 - 게시글 리스트)
-		map.put("/boardList.do", new BoardListControl());
+
+		map.put("/loginForm.do", new LoginForm());
+		map.put("/loginControl.do", new LoginControl());
+		map.put("/logout.do", new LogoutControl());
+		map.put("/memberJoin.do", new MemberJoin());
+		map.put("/findMemberId.do", new FindMemberId());
+		map.put("/resetMemberPassword.do", new ResetMemberPassword());
+
+		//김시인 
+		map.put("/boardList.do", new BoardListControl()); //일반 게시글 리스트
+		map.put("/boardSearchList.do", new BoardSearchListControl()); //게시글 검색
+
 	}
 	
 	@Override

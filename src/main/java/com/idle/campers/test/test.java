@@ -9,6 +9,8 @@ public class test {
 		MemberService svc = new MemberServiceImpl();
 		MemberVO vo = new MemberVO();
 		
+		System.out.println(vo);
+		
 		vo.setUserName("구십오");
 		vo.setUserAuth("general");
 		vo.setUserEmail("asdasd@gsdgs.com");
@@ -19,7 +21,6 @@ public class test {
 		if(svc.insertMember(vo)) {
 			System.out.println("성공===============");
 		}
-		
 		
 	}
 }

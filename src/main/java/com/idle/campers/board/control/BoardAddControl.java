@@ -14,7 +14,7 @@ import com.idle.campers.common.Control;
 public class BoardAddControl implements Control {
 
 	@Override
-	public String exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 	
 		
 		String brdWriter = req.getParameter("writer");
