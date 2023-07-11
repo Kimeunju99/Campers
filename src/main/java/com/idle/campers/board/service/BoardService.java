@@ -7,7 +7,7 @@ import com.idle.campers.board.dao.BoardVO;
 public interface BoardService {
 	public List<BoardVO> boardList();
 
-	public List<BoardVO> boardList(String key, String type);
+	public List<BoardVO> boardList(String sch, String keyword);
 	
 	public BoardVO selectBoard(int id);
 	
@@ -24,4 +24,6 @@ public interface BoardService {
 	public List<BoardVO> starBoard(long id);
 	
 	public List<BoardVO> topInfoList();
+	
+	public int myBoardCnt(String id); //내 게시글 카운트
 }

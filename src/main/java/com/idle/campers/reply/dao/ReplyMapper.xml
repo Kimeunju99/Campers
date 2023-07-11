@@ -2,5 +2,40 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.idle.campers.reply.dao.ReplyMapper">
+
+	<select id="replyList" resultType="reply">
+		select *
+		from tbl_reply
+		where brd_id = #{brdId}
+		order by reply_id
+	</select>
+
+	<select id="replyOne" parameterType="int">
+		select *
+		from tbl_reply
+		where reply_id = #{replyId}
+	</select>
+
+	<insert id="insertReply" parameterType="reply">
+		<selectKey>
+			select reply_seq.nextval
+			from dual
+		</selectKey>
+		insert into tbl_reply (reply_id, brd_id, reply, replyer)
+		values (#{replyId}, #{brdId}, #{reply}, #{replyer})
+	</insert>
+
+	<update id="updateReply" parameterType="reply">
+		update tbl_reply
+		set reply = #{reply},
+		reply_modify = 'modify'
+		where reply_id = #{replyId}
+	</update>
+
+	<delete id="deleteReply" parameterType="int">
+		delete from tbl_reply
+		where reply_id = #{replyId}
+	</delete>
+
 </mapper>
 

@@ -14,7 +14,7 @@ import com.idle.campers.member.service.MemberVO;
 public class UserIdCheck implements Control {
 
 	@Override
-	public String exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public String exec(HttpServletRequest req, HttpServletResponse resp){
 		String result = "Ajax:";
 		String id = req.getParameter("userId");
 		MemberService service = new MemberServiceImpl();

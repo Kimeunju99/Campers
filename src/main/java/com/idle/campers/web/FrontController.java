@@ -14,23 +14,39 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.idle.campers.MainControl;
 import com.idle.campers.board.control.BoardAddControl;
+import com.idle.campers.board.control.BoardAddFormControl;
 import com.idle.campers.board.control.BoardDeleteControl;
 import com.idle.campers.board.control.BoardEditControl;
 import com.idle.campers.board.control.BoardEditFormControl;
-import com.idle.campers.board.control.BoardFormControl;
+import com.idle.campers.board.control.BoardInfoControl;
 import com.idle.campers.board.control.BoardListControl;
+import com.idle.campers.book.control.BookList;
+import com.idle.campers.book.control.BookStateUpdateControl;
+import com.idle.campers.board.control.BoardSearchListControl;
+import com.idle.campers.book.control.NewBookForm;
+import com.idle.campers.book.control.SelectBookForm;
 import com.idle.campers.common.Control;
 import com.idle.campers.member.control.FindMemberId;
+
 import com.idle.campers.member.control.MypageForm;
 
 import com.idle.campers.member.control.ResetMemberPassword;
 import com.idle.campers.member.control.UserIdCheck;
 import com.idle.campers.member.control.MemberJoinType;
+
+import com.idle.campers.member.control.LoginControl;
+
 import com.idle.campers.member.control.LoginForm;
 import com.idle.campers.member.control.LogoutControl;
 import com.idle.campers.member.control.MailCertification;
 import com.idle.campers.member.control.MemberJoin;
+
 import com.idle.campers.member.control.LoginControl;
+
+
+import com.idle.campers.member.control.MemberModifyControl;
+import com.idle.campers.member.control.MypageForm;
+import com.idle.campers.member.control.ResetMemberPassword;
 
 
 @WebServlet("*.do")
@@ -47,12 +63,20 @@ public class FrontController extends HttpServlet{
 
 		// 손석연
 		map.put("/boardAdd.do", new BoardAddControl());
-		map.put("/boardForm.do", new BoardFormControl());
+		map.put("/boardAddForm.do", new BoardAddFormControl());
 		map.put("/boardDelete.do", new BoardDeleteControl());
 		map.put("/boardEdit.do", new BoardEditControl());
 		map.put("/boardEditForm.do", new BoardEditFormControl());
+		map.put("/boardEditForm.do", new BoardEditFormControl());
+		map.put("/boardInfo.do", new BoardInfoControl());
+		
 		//은주
 		map.put("/mypage.do", new MypageForm());
+		map.put("/memberModify.do", new MemberModifyControl());
+		map.put("/selectBook.do", new SelectBookForm());
+		map.put("/bookList.do", new BookList());
+		map.put("/bookStateUpdate.do", new BookStateUpdateControl());
+		map.put("/newBook.do", new NewBookForm());
 		
 		//준위
 		map.put("/loginForm.do", new LoginForm());
@@ -66,7 +90,8 @@ public class FrontController extends HttpServlet{
 		map.put("/mailCertification.do", new MailCertification());
 		
 		//김시인 (23.07.07 - 게시글 리스트)
-		map.put("/boardList.do", new BoardListControl());
+		map.put("/boardList.do", new BoardListControl()); //일반 게시글 리스트
+		map.put("/boardSearchList.do", new BoardSearchListControl()); //게시글 검색
 	}
 	
 	@Override

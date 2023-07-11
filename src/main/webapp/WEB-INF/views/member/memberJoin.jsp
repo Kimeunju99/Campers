@@ -5,7 +5,6 @@
 
 <div class="joinForm">
 	<h4>회원가입</h4>
-	
 	<div>
 		<form action="">
 			<table>
@@ -59,9 +58,6 @@
 			<input type="submit" value="가입하기">
 	        <input type="reset" value="다시작성">
 		</div>
-
-	</form>
-</div>
 
 <script>
 	$('.redtext').css('color','red');

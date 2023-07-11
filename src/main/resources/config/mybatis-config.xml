@@ -3,33 +3,35 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-  <!-- java 설정 -->
-  <settings>
-  	<setting name="mapUnderscoreToCamelCase" value="true"/>
-  	<setting name="jdbcTypeForNull" value="NULL"/>
-  </settings>
-  
-  <typeAliases>
- 	<typeAlias alias="board" type="com.idle.campers.board.dao.BoardVO" />
-	<typeAlias alias="reply" type="com.idle.campers.reply.dao.ReplyVO" />
- 	<typeAlias alias="member" type="com.idle.campers.member.service.MemberVO"/>
- </typeAliases>
-  
-  <!-- DB 환경 -->
-  <environments default="development">
-    <environment id="development">
-      <transactionManager type="JDBC"/>
-      <dataSource type="POOLED">
-        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@3.35.218.234:1521:xe"/>
-        <property name="username" value="idle"/>
-        <property name="password" value="Campers1234"/>
-      </dataSource>
-    </environment>
-  </environments>
-  <!-- Mapper 연결 -->
-  <mappers>
-  	<package name="com.idle.campers"/>
-  </mappers>
-  
+
+	<!-- java 설정 -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="board" type="com.idle.campers.board.dao.BoardVO" />
+		<typeAlias alias="book" type="com.idle.campers.book.service.BookVO" />
+		<typeAlias alias="reply" type="com.idle.campers.reply.dao.ReplyVO" />
+		<typeAlias alias="member" type="com.idle.campers.member.service.MemberVO" />
+	</typeAliases>
+	<!-- DB 환경 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver"
+					value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url"
+					value="jdbc:oracle:thin:@3.35.218.234:1521:xe" />
+				<property name="username" value="idle" />
+				<property name="password" value="Campers1234" />
+			</dataSource>
+		</environment>
+	</environments>
+	<!-- Mapper 연결 -->
+	<mappers>
+		<package name="com.idle.campers" />
+	</mappers>
+ 
 </configuration>

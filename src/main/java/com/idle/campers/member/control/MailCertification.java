@@ -21,7 +21,7 @@ import com.idle.campers.common.Control;
 public class MailCertification implements Control {
 
 	@Override
-	public String exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public String exec(HttpServletRequest req, HttpServletResponse resp){
 		String userEmail = req.getParameter("userEmail");
 		String msg = "Ajax:";
 		
