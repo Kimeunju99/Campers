@@ -24,4 +24,6 @@ public interface BoardService {
 	public List<BoardVO> starBoard(long id);
 	
 	public List<BoardVO> topInfoList();
+	
+	public int myBoardCnt(String id); //내 게시글 카운트
 }

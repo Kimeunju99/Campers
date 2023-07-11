@@ -50,4 +50,10 @@
   	INSERT INTO TBL_BOARD (BRD_ID, BRD_TITLE, BRD_WRITER, BRD_CONTENT,  BRD_TYPE, BRD_ADDR)
   	VALUES (board_seq.nextval, #{brdTitle}, #{brdWriter}, #{brdContent}, #{brdType}, #{brdAddr})
   	</insert>
+  	
+  	<select id="myBoardCnt">
+  		SELECT COUNT(*) board_cnt
+  		FROM TBL_BOARD WHERE BRD_WRITER =#{id}
+  	</select>
+  	
 </mapper>

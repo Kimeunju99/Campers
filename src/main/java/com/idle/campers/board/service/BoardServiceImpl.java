@@ -65,4 +65,9 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> topInfoList() {
 		return mapper.topInfoList();
 	}
+
+	@Override
+	public int myBoardCnt(String id) {
+		return mapper.myBoardCnt(id);
+	}
 }

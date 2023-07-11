@@ -14,25 +14,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.idle.campers.MainControl;
 import com.idle.campers.board.control.BoardAddControl;
+import com.idle.campers.board.control.BoardAddFormControl;
 import com.idle.campers.board.control.BoardDeleteControl;
 import com.idle.campers.board.control.BoardEditControl;
 import com.idle.campers.board.control.BoardEditFormControl;
 import com.idle.campers.board.control.BoardInfoControl;
-import com.idle.campers.board.control.BoardAddFormControl;
 import com.idle.campers.board.control.BoardListControl;
+import com.idle.campers.book.control.BookList;
+import com.idle.campers.book.control.BookStateUpdateControl;
 import com.idle.campers.book.control.NewBookForm;
+import com.idle.campers.book.control.SelectBookForm;
 import com.idle.campers.common.Control;
-
-import com.idle.campers.member.control.MemberModifyControl;
-
 import com.idle.campers.member.control.FindMemberId;
-import com.idle.campers.member.control.MypageForm;
-
-import com.idle.campers.member.control.ResetMemberPassword;
+import com.idle.campers.member.control.LoginControl;
 import com.idle.campers.member.control.LoginForm;
 import com.idle.campers.member.control.LogoutControl;
 import com.idle.campers.member.control.MemberJoin;
-import com.idle.campers.member.control.LoginControl;
+import com.idle.campers.member.control.MemberModifyControl;
+import com.idle.campers.member.control.MypageForm;
+import com.idle.campers.member.control.ResetMemberPassword;
 
 
 
@@ -58,8 +58,11 @@ public class FrontController extends HttpServlet{
 		
 		//은주
 		map.put("/mypage.do", new MypageForm());
-		map.put("/newBook.do", new NewBookForm());
 		map.put("/memberModify.do", new MemberModifyControl());
+		map.put("/selectBook.do", new SelectBookForm());
+		map.put("/bookList.do", new BookList());
+		map.put("/bookStateUpdate.do", new BookStateUpdateControl());
+		map.put("/newBook.do", new NewBookForm());
 		
 		//준위
 

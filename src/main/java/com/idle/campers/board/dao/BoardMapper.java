@@ -24,4 +24,6 @@ public interface BoardMapper {
 	public int boardLike(long id);
 	
 	public List<BoardVO> boardStar();
+	
+	public int myBoardCnt(@Param("id")String id);
 }

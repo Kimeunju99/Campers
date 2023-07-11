@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.idle.campers.book.mapper.BookMapper">
+	<select id="managerBookList" resultType="book">
+		SELECT * FROM tbl_book
+		WHERE book_manager = #{bookManager}
+	</select>
+	
+	<select id="clientBookList" resultType="book">
+		SELECT * FROM tbl_book
+		WHERE book_client = #{bookClient}
+		<if test="bookState != null">AND BOOK_STATE = #{bookState}</if>
+	</select>
+	
+	<select id="bookSelectVo" resultType="book">
+		SELECT * FROM tbl_book
+		WHERE book_client = #{bookClient} AND book_camp_id = #{campId} AND book_start_date = #{bookStartDate}
+	</select>
+	<select id="bookSelectId" resultType="book">
+		SELECT * FROM tbl_book
+		WHERE BOOK_ID = #{bookId}
+	</select>
+	<update id="stateUpdate" parameterType="book">
+		UPDATE tbl_book SET BOOK_STATE = #{bookState}
+		WHERE BOOK_ID = #{bookId}
+	</update>
+	
+	<insert id="clientBookadd" parameterType="book">
+		INSERT INTO tbl_book (BOOK_ID, BOOK_CLIENT, BOOK_MANAGER, BOOK_START_DATE, BOOK_END_DATE,
+		BOOK_ROOM_ID, BOOK_PERSONNEL, BOOK_CAMP_ID, BOOK_COST)
+		VALUES (book_seq.nextval, #{bookClient}, #{bookManager}, #{bookStartDate}, #{bookEndDate},
+		 #{bookRoomId}, #{bookPersonnel}, #{bookCampId}, #{bookCost})
+	</insert>
+	
+	
+	<select id="stateCount" resultType="int">
+		SELECT COUNT(*) waits FROM tbl_book
+		WHERE book_state = #{bookState}
+		<if test="bookClient != null">AND BOOK_CLIENT = #{bookClient}</if>
+		<if test="bookManager != null">AND BOOK_MANAGER = #{bookManager}</if>
+	</select>
+</mapper>
