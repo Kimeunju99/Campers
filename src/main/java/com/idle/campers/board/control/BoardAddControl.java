@@ -39,10 +39,9 @@ public class BoardAddControl implements Control {
 		
 		BoardService service = new BoardServiceImpl();
 		if(service.addBoard(vo)) {
-			return "boardList.do"; 
-					
+			return "board/boardInfo";
 		} else {
-			return "boardAdd.do";
+			return "board/boardAdd";
 		}
 				
 	}

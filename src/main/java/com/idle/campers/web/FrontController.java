@@ -22,6 +22,7 @@ import com.idle.campers.board.control.BoardInfoControl;
 import com.idle.campers.board.control.BoardListControl;
 import com.idle.campers.book.control.BookList;
 import com.idle.campers.book.control.BookStateUpdateControl;
+import com.idle.campers.board.control.BoardSearchListControl;
 import com.idle.campers.book.control.NewBookForm;
 import com.idle.campers.book.control.SelectBookForm;
 import com.idle.campers.common.Control;
@@ -33,8 +34,6 @@ import com.idle.campers.member.control.MemberJoin;
 import com.idle.campers.member.control.MemberModifyControl;
 import com.idle.campers.member.control.MypageForm;
 import com.idle.campers.member.control.ResetMemberPassword;
-
-
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet{
@@ -54,6 +53,7 @@ public class FrontController extends HttpServlet{
 		map.put("/boardDelete.do", new BoardDeleteControl());
 		map.put("/boardEdit.do", new BoardEditControl());
 		map.put("/boardEditForm.do", new BoardEditFormControl());
+		map.put("/boardEditForm.do", new BoardEditFormControl());
 		map.put("/boardInfo.do", new BoardInfoControl());
 		
 		//은주
@@ -72,10 +72,11 @@ public class FrontController extends HttpServlet{
 		map.put("/memberJoin.do", new MemberJoin());
 		map.put("/findMemberId.do", new FindMemberId());
 		map.put("/resetMemberPassword.do", new ResetMemberPassword());
-		
-		//김시인 (23.07.07 - 게시글 리스트)
-		map.put("/boardList.do", new BoardListControl());
 
+		//김시인 
+		map.put("/boardList.do", new BoardListControl()); //일반 게시글 리스트
+		map.put("/boardSearchList.do", new BoardSearchListControl()); //게시글 검색
+		
 	}
 	
 	@Override
