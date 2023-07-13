@@ -5,7 +5,7 @@ import java.util.List;
 import com.idle.campers.reply.dao.ReplyVO;
 
 public interface ReplyService {
-	public List<ReplyVO> replyList();
+	public List<ReplyVO> replyList(int brdId);
 	public ReplyVO replyOne(int replyId);
 	
 	public boolean insertReply(ReplyVO vo);

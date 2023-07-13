@@ -5,9 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface BoardMapper {
-	public List<BoardVO> boardList();
 	
-	public List<BoardVO> boardList(@Param("sch") String key, @Param("keyword") String keyword);
+	public List<BoardVO> boardList(@Param("page") int page, @Param("sch") String key, @Param("keyword") String keyword, @Param("type") String type);
 	
 	public List<BoardVO> topInfoList();
 	
@@ -25,5 +24,6 @@ public interface BoardMapper {
 	
 	public List<BoardVO> boardStar();
 	
+	public int getTotalCnt(@Param("type") String type);
 	public int myBoardCnt(@Param("id")String id);
 }
