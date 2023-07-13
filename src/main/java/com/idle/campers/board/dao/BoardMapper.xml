@@ -6,17 +6,19 @@
 		from (select a.*, rownum as rnum
              from   (select *
                      from tbl_board
-	<if test="sch  == 'writer'">WHERE BRD_WRITER LIKE '%' || #{keyword} || '%'</if>
-	<if test="sch  == 'title'">WHERE BRD_TITLE LIKE '%' || #{keyword} || '%'</if>
-	<if test="sch  == 'content'">WHERE BRD_CONTENT LIKE '%' || #{keyword} || '%'</if>
-	<if test="sch  == 'wdate'">where brd_date between to_date(#{keyword}, 'yyyy-MM-dd')
-								and TO_CHAR(to_date(#{keyword}, 'yyyy-MM-dd') + INTERVAL '1' DAY, 'YYYY-MM-DD')</if>
+                     where brd_type = #{type}
+	<if test="sch  == 'writer'">and BRD_WRITER LIKE '%' || #{keyword} || '%'</if>
+	<if test="sch  == 'title'">and BRD_TITLE LIKE '%' || #{keyword} || '%'</if>
+	<if test="sch  == 'content'">and BRD_CONTENT LIKE '%' || #{keyword} || '%'</if>
+	<if test="sch  == 'wdate'">and brd_date between to_date(#{keyword}, 'yyyy-MM-dd')
+								and TO_CHAR(TO_DATE(#{keyword}, 'yyyy-MM-dd') + INTERVAL '1' DAY, 'YYYY-MM-DD')</if>
 					 order by brd_id desc
 					) a
+			
 			) b
 	<![CDATA[
-		where b.rnum > 1
-		and     b.rnum <= 10
+		where b.rnum > (#{page} - 1) * 10
+		and     b.rnum <= (#{page} * 10)
 	]]>
 	</select>
 	
@@ -59,4 +61,11 @@
   	INSERT INTO TBL_BOARD (BRD_ID, BRD_TITLE, BRD_WRITER, BRD_CONTENT,  BRD_TYPE, BRD_ADDR)
   	VALUES (board_seq.nextval, #{brdTitle}, #{brdWriter}, #{brdContent}, #{brdType}, #{brdAddr})
   	</insert>
+  	
+  	<select id="getTotalCnt" parameterType="String" resultType="int">
+  		select count(1) 
+		from tbl_board
+		where brd_type = #{type}
+  	</select>
+  	
 </mapper>

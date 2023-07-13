@@ -13,14 +13,10 @@ public class BoardServiceImpl implements BoardService {
 	SqlSession session = DataSource.getInstance().openSession(true);
 	BoardMapper mapper = session.getMapper(BoardMapper.class);
 
-	@Override
-	public List<BoardVO> boardList() {
-		return mapper.boardList();
-	}
 
 	@Override
-	public List<BoardVO> boardList(String sch, String keyword) {
-		return mapper.boardList(sch, keyword);
+	public List<BoardVO> boardList(int page, String sch, String keyword, String type) {
+		return mapper.boardList(page, sch, keyword, type);
 	}
 
 	@Override
@@ -65,4 +61,11 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> topInfoList() {
 		return mapper.topInfoList();
 	}
+
+	@Override
+	public int totalCnt(String type) {
+		return mapper.getTotalCnt(type);
+	}
+
+	
 }

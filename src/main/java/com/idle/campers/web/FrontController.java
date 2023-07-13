@@ -33,8 +33,12 @@ import com.idle.campers.member.control.MemberJoin;
 import com.idle.campers.member.control.MemberModifyControl;
 import com.idle.campers.member.control.MypageForm;
 import com.idle.campers.member.control.ResetMemberPassword;
+import com.idle.campers.reply.control.ReplyAddControl;
+import com.idle.campers.reply.control.ReplyListControl;
+import com.idle.campers.reply.control.ReplyModifyControl;
+import com.idle.campers.reply.control.ReplyRemoveControl;
+import com.idle.campers.reply.control.ReplyControl;
 
->>>>>>> branch 'develop' of https://github.com/Kimeunju99/Campers.git
 
 
 @WebServlet("*.do")
@@ -75,6 +79,12 @@ public class FrontController extends HttpServlet{
 		//김시인 
 		map.put("/boardList.do", new BoardListControl()); //일반 게시글 리스트
 		map.put("/boardSearchList.do", new BoardSearchListControl()); //게시글 검색
+		//
+		map.put("/replyList.do", new ReplyListControl()); //댓글리스트
+		map.put("/getReply.do", new ReplyControl()); 
+		map.put("/replyAdd.do", new ReplyAddControl());
+		map.put("/replyModify.do", new ReplyModifyControl());
+		map.put("/replyRemove.do", new ReplyRemoveControl());
 		
 	}
 	
