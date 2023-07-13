@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 public interface BoardMapper {
 	public List<BoardVO> boardList();
 	
-	public List<BoardVO> boardList(@Param("key") String key, @Param("type") String type);
+	public List<BoardVO> boardList(@Param("sch") String key, @Param("keyword") String keyword);
 	
 	public List<BoardVO> topInfoList();
 	
@@ -31,6 +31,10 @@ public interface BoardMapper {
 	public int boarLikeDelete(@Param("bid")int bid, @Param("id")String id);
 	
 	public int boardLikeCount(@Param("bid")int bid); // LIKE - 개수
+
+	public List<BoardVO> boardStar();
 	
+	public int myBoardCnt(@Param("id")String id);
 	
+	public List<BoardVO> myBoardList(@Param("id")String id);
 }

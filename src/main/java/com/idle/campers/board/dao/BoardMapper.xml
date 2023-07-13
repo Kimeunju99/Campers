@@ -3,12 +3,21 @@
 <mapper namespace="com.idle.campers.board.dao.BoardMapper">
 	<select id="boardList" resultType="board">
 		select *
-		from tbl_board
-		<if test="key  == 'free'">where board_type = #{type}</if>
-		<if test="key  == 'experience'">where board_type = #{type}</if>
-		<if test="key  == 'share'">where board_type = #{type}</if>
-		<if test="key  == 'information'">where board_type = #{type}</if>
-		order by brd_id desc
+		from (select a.*, rownum as rnum
+             from   (select *
+                     from tbl_board
+	<if test="sch  == 'writer'">WHERE BRD_WRITER LIKE '%' || #{keyword} || '%'</if>
+	<if test="sch  == 'title'">WHERE BRD_TITLE LIKE '%' || #{keyword} || '%'</if>
+	<if test="sch  == 'content'">WHERE BRD_CONTENT LIKE '%' || #{keyword} || '%'</if>
+	<if test="sch  == 'wdate'">where brd_date between to_date(#{keyword}, 'yyyy-MM-dd')
+								and TO_CHAR(to_date(#{keyword}, 'yyyy-MM-dd') + INTERVAL '1' DAY, 'YYYY-MM-DD')</if>
+					 order by brd_id desc
+					) a
+			) b
+	<![CDATA[
+		where b.rnum >= 1
+		and     b.rnum <= 10
+	]]>
 	</select>
 	
   <select id="boardSelect" parameterType="int">
@@ -45,11 +54,13 @@
   </update>
   
   
-  <insert id="boardAdd" parameterType="com.idle.campers.board.dao.BoardVO">
+    <insert id="boardAdd" parameterType="com.idle.campers.board.dao.BoardVO">
   	INSERT INTO TBL_BOARD (BRD_ID, BRD_TITLE, BRD_WRITER, BRD_CONTENT,  BRD_TYPE, BRD_ADDR, brd_image)
   	VALUES (board_seq.nextval, #{brdTitle}, #{brdWriter}, #{brdContent}, #{brdType}, #{brdAddr}, #{brdImage})
   	</insert>
   	
+  	
+  
   	<!-- 좋아요 mybatis 영역 -->
   	<select id="likecheck"  resultType="int">
   		select count(*) from tbl_brd_like where brd_id = #{bid} and user_Id = #{id}
@@ -69,5 +80,15 @@
   	<select id="boardLikeCount">
   		select count(*) from tbl_brd_like where brd_id = #{bid}
   	</select>
-  	
+	
+	<!-- my 페이지 -->
+	<!-- my 작성한 게시글 수 -->
+  	<select id="myBoardCnt">
+  		SELECT COUNT(*) board_cnt
+  		FROM TBL_BOARD WHERE BRD_WRITER =#{id}
+  	</select>
+  	<!-- my 작성한 게시글 리스트 최근 5개 -->
+  	<select id="myBoardList">
+  		SELECT * FROM TBL_BOARD WHERE BRD_WRITER = #{id} order by brd_id desc
+  	</select>
 </mapper>

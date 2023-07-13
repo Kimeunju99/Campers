@@ -20,8 +20,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> boardList(String key, String type) {
-		return mapper.boardList(key, type);
+	public List<BoardVO> boardList(String sch, String keyword) {
+		return mapper.boardList(sch, keyword);
 	}
 
 	@Override
@@ -83,6 +83,17 @@ public class BoardServiceImpl implements BoardService {
 		int count = mapper.boardLikeCount(boardId);
 		
 		return count;
+	}
+	
+	// mypage 정보
+	@Override
+	public int myBoardCnt(String id) {
+		return mapper.myBoardCnt(id);
+	}
+	// mypage 정보
+	@Override
+	public List<BoardVO> myBoardList(String id) {
+		return mapper.myBoardList(id);
 	}
 
 }

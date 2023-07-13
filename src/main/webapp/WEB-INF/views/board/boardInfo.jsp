@@ -65,6 +65,9 @@ tr, td {
 			</c:if>
 			<button type="button" onclick="submit2(this.form);">삭제</button>
 		</c:if>
+		<c:if test="${id != null }">
+				<button type="button">게시글 신고</button>
+		</c:if>
 			<button type="button" onclick="submit3(this.form);">목록</button>
 	</form>
 	
@@ -107,12 +110,7 @@ tr, td {
 				
 			})
 		})
-		
-		//let t = document.getElementById('btn');
-		//t.addEventListener('click', function (e) {
-		//	alert('로그인 후 사용하세요.');
-		//});
-		
+	
 
 
 	function recCount() {
