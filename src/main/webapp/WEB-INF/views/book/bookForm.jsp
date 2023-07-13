@@ -65,10 +65,8 @@
 <script>
 let state = ""; //예약 상태 관리
 let togleBtn = document.getElementById("stateBtn");
-
 //뒤로가기
 document.getElementById("backBtn").addEventListener('click', backF);
-
 function backF(e){
 	location.href="/campers/main.do";
 }
@@ -84,15 +82,15 @@ if(${logUser.userId == book.bookClient}){ //유저가 클라이언트
 	}
 }else if(${logUser.userId == book.bookManager }){//유저가 매니저
 	togleBtn.style.display = 'block';
-	if(${book.bookState == "wait" }){
+	if(${book.bookState == "wait" }){ //대기 상태
 		togleBtn.innerText = "예약승인";
 		state = "approval";
 		togleBtn.style.display = 'block';
-	}else if(${book.bookState == "approval" }){
+	}else if(${book.bookState == "approval" }){ //승인 상태
 		togleBtn.innerText = "예약취소";
 		state = "cancle";
 		togleBtn.style.display = 'block';
-	}else{
+	}else{//취소, 만료 상태
 		togleBtn.style.display = 'none';
 	}
 }else{ //유저가 관리자

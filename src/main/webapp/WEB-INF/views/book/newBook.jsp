@@ -1,51 +1,221 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="js/jquery-3.7.0.min.js"></script>
 </head>
 <body>
 <h1>예약하기</h1>
-<form id="bookForm" action="newbooking.do">
-	<table>
+<form id="bookForm">
+	<table border="1">
 		<tr>
 			<th>업체명</th>
-			<td><input type="text" name="manager" id="manager" value="" readonly></td>
+			<td><input type="text" name="manager" id="manager" value="${campOwner}" readonly></td>
 			<th>주소</th>
-			<td><input type="text" name="addr" id="addr" value="" readonly></td>
+			<td><input type="text" name="addr" id="addr" value="${campAddr}" readonly></td>
 		</tr>
 		<tr>
-			<th>예약자</th>
-			<td><input type="text" name="client" id="client" value="" readonly></td>
+			<th>방번호</th>
+			<td><input type="text" name="manager" id="manager" value="${RoomId}" readonly></td>
 			<th>인원</th>
-			<td><select name="personnel" id="personnel"></select></td>
+			<td><input type="text" name="manager" id="manager" value="${campPersonnel}" readonly></td>
 		</tr>
 		<tr>
-			<th>체크인</th>
-			<td></td>
-			<th>체크아웃</th>
-			<td></td>
+			<th>일시</th>
+			<td>
+				<div><table class="Calendar">
+	     			<thead><tr>
+			        	<td class="prev" style="cursor:pointer;">&#60;</td>
+			            <td colspan="5">
+			            	<span class="calYear" id="calYear"></span>년
+	                		<span class="calMonth" id="calMonth"></span>월
+			            </td>
+			            <td class="next"  style="cursor:pointer;">&#62;</td>
+			        </tr>
+			        <tr>
+			            <td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>
+			        </tr></thead>
+			    	<tbody></tbody>
+			    </table></div>
+			    <input type="date" class="date" name="startDate" id="startDate" readonly>
+			</td>
+			<th>~</th>
+			<td>
+				<div><table class="Calendar">
+			     	<thead><tr>
+			        	<td class="prev" style="cursor:pointer;">&#60;</td>
+			            <td colspan="5">
+			            	<span class="calYear" id="calYear"></span>년
+	                		<span class="calMonth" id="calMonth"></span>월
+			            </td>
+			            <td class="next" style="cursor:pointer;">&#62;</td>
+			        </tr>
+			        <tr>
+			            <td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>
+			        </tr></thead>
+			    	<tbody></tbody>
+			    </table></div>
+			    <input type="date" class="date" name="endDate" id="endDate" readonly>
+			</td>
 		</tr>
 		<tr>
-			<th>가격</th><td><!-- n박*가격 --></td>
-			<td colspan="2" align="center">
-				<button type="submit">예약</button>
-				<button type="button">뒤로가기</button></td>
+			<th>가격</th><td><input type="text" name="cost" id="cost" readonly></td>
+			<th>예약자</th>
+			<td><input type="text" name="client" id="client" value="${logUser.userId}" readonly></td>
+		</tr>
+		<tr>
+			<td colspan="4" align="center">
+				<button type="submit" id="bookBtn">예약</button>
+				<button type="button" id="backBtn">뒤로가기</button>
+			</td>
 		</tr>
 	</table>
 </form>
 
 <script>
-//예약가능 인원 select 옵션 설정
+let cost = document.getElementById("cost");
+document.getElementById("backBtn").addEventListener('click', function(e){
+	location.href = document.referrer;
+});//뒤로가기
 
-//예약날짜 Calendar 작업
+document.getElementById("bookBtn").addEventListener('click', function(e){
+	if(cost.value != null){
+		$.ajax({
+			url: "newBookControl.do",
+			method: 'post',
+			data: $('form[name="bookForm"]').serialize(),
+			success: function(result){
+				alert(result);
+				location.href = "/campers/main.do";
+			},
+			error: function(err){	console.log(err);	}	
+		});//ajax
+	}else{
+		alert('예약 정보를 다 채우지 않았습니다.');
+	}
+});//예약버튼
 
-//예약버튼
+let first = document.getElementById("startDate").value;
+let last = document.getElementById("endDate").value;
 
+document.querySelectorAll(".date").forEach(function (item){
+	item.addEventListener('change', function(e){
+		let weekday = 0, weekend = 0 //평일, 주말
+		
+		for(let i=first; i<last; i++){
+			let thatdate = new Date(i);
+			console.log(i, thatdate);
+			if(thatdate.getDay() == 0 || thatdate.getDay() == 6){ //주말
+				weekend++;
+			}else{ //평일
+				weekday++;
+			}
+		}
+		if(first != "" && last != "")
+			cost.value = ((20000 * weekday) + (25000 * weekend));
+			//((${campWeekday} * weekday) + (${campWeekend} * weekend));
+	});//날짜 변동에 따른 가격 동적 변화
+});//시작날과 끝날 input 태그의 value 값이 변함
 
-//뒤로가기 버튼
+let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
+let today = new Date();     // 페이지를 로드한 날짜를 저장
+today.setHours(0, 0, 0, 0);    // 비교 편의를 위해 today의 시간을 초기화
+
+document.querySelectorAll(".Calendar").forEach(function(item){
+	item.addEventListener('DOMContentLoaded', drowCal(item));
+});
+
+//Calendar 작업
+function drowCal(item){
+	let firstDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth(), 1);     // 이번달 1일
+    let lastDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, 0);  // 이번달 마지막날
+    let tbody_Calendar = $(item).find("tbody");
+    console.log(item, tbody_Calendar)
+    $(item).find(".calYear").text(nowMonth.getFullYear()); // 연도 숫자 갱신
+    $(item).find(".calMonth").text(leftPad(nowMonth.getMonth() + 1)); // 월 숫자 갱신
+
+   	if(tbody_Calendar.innerHTML != "") { // 이전 출력결과가 남아있는 경우 초기화
+        tbody_Calendar.text("");
+    }
+
+    let nowRow = tbody_Calendar.append('<tr/>'); // 첫번째 행 추가           
+    for (let j = 0; j < firstDate.getDay(); j++) {
+        let td = $('<td/>')
+    	let nowColumn = nowRow.append(td);
+    }// 이번달 1일의 요일만큼 열 추가
+
+    for (let nowDay = firstDate; nowDay <= lastDate; nowDay.setDate(nowDay.getDate() + 1)) {
+		let newDIV = $('<p/>').text(leftPad(nowDay.getDate())); //날짜 입력
+        let nowColumn = nowRow.append($('<td/>').append(newDIV)); // 새 열을 추가
+        if (nowDay.getDay() == 6) { // 토요일인 경우 새로운 행 추가
+            nowRow = tbody_Calendar.append('<tr/>');
+        }
+
+        if (nowDay < today) { // 오늘 이전
+            newDIV.className = "pastDay";
+        }
+        else if (nowDay.getFullYear() == today.getFullYear() && 
+        		nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘           
+            newDIV.className = "today";
+            newDIV.on('click', function () { 
+            	choiceDate(this);
+            	console.log( $(item).find(".date") );
+            	$(item).find($(".date").val(
+            			$(item).find(".calYear").text()+"-"+
+            			$(item).find(".calMonth").text()+"-"+ this.innerText            			
+            	));
+            });
+        }
+        else { // 오늘 이후
+            newDIV.className = "futureDay";
+            newDIV.on('click', function () { 
+            	choiceDate(this);
+            	console.log( $(item).find(".date") );
+            	$(item).find($(".date").val(
+            			$(item).find(".calYear").text()+"-"+
+            			$(item).find(".calMonth").text()+"-"+ this.innerText            			
+            	));
+            });
+        }
+		//console.log(newDIV.className);
+    }
+}//drowCal
+
+// 날짜 선택
+function choiceDate(newDIV) {
+    if (document.getElementsByClassName("choiceDay")[0]) { // 기존에 선택한 날짜가 있으면
+        document.getElementsByClassName("choiceDay")[0].classList.remove("choiceDay");  // 해당 날짜의 "choiceDay" class 제거
+    }
+    newDIV.classList.add("choiceDay");           // 선택된 날짜에 "choiceDay" class 추가
+}
+
+document.querySelectorAll('.next').forEach(function(item){
+	item.addEventListener('click', nextCalendar);
+});
+document.querySelectorAll('.prev').forEach(function(item){
+	item.addEventListener('click', prevCalendar);
+});
+
+function prevCalendar() {
+    nowMonth = new Date(nowMonth.getFullYear(), nowMonth.getMonth() - 1, nowMonth.getDate());   // 현재 달을 1 감소
+    drowCal(this.parentElement.parentElement.parentElement);    // 달력 다시 생성
+}// 이전달 버튼 클릭
+
+function nextCalendar() {
+    nowMonth = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, nowMonth.getDate());   // 현재 달을 1 증가
+    drowCal(this.parentElement.parentElement.parentElement);    // 달력 다시 생성
+}// 다음달 버튼 클릭
+
+// input값이 한자리 숫자인 경우 앞에 '0' 붙혀주는 함수
+function leftPad(value) {
+    if (value < 10) {
+        value = "0" + value;
+        return value;
+    }
+    return value;
+}
 
 
 </script>

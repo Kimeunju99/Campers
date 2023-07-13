@@ -15,8 +15,8 @@ public class ReplyServiceImpl implements ReplyService {
 	
 	
 	@Override
-	public List<ReplyVO> replyList() {
-		return mapper.replyList();
+	public List<ReplyVO> replyList(int brdId) {
+		return mapper.replyList(brdId);
 	}
 
 	@Override
@@ -38,5 +38,9 @@ public class ReplyServiceImpl implements ReplyService {
 	public boolean deleteReply(int replyId) {
 		return mapper.deleteReply(replyId) == 1;
 	}
-
+	
+	@Override
+	public int myReplyCnt(String id) {
+		return mapper.myReplyCnt(id);
+	}
 }

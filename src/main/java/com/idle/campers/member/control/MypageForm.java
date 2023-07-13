@@ -16,6 +16,9 @@ import com.idle.campers.common.Control;
 import com.idle.campers.member.service.MemberService;
 import com.idle.campers.member.service.MemberServiceImpl;
 import com.idle.campers.member.service.MemberVO;
+import com.idle.campers.reply.dao.ReplyVO;
+import com.idle.campers.reply.service.ReplyService;
+import com.idle.campers.reply.service.ReplyServiceImpl;
 
 public class MypageForm implements Control {
 
@@ -32,6 +35,9 @@ public class MypageForm implements Control {
 		bookProcess(memVo, req, resp);
 		//게시글 -- 개수, 목록
 		boardProcess(memVo, req, resp);
+		boardListProcess(memVo, req, resp);
+		//댓글 --- 개수
+		replyProcess(memVo, req, resp);
 		
 		
 		if(memVo.getUserAuth().equals("business")) {//사업자일 경우
@@ -49,16 +55,11 @@ public class MypageForm implements Control {
 	public void bookProcess(MemberVO memVo, HttpServletRequest req, HttpServletResponse resp) {
 		BookService bookSv = new BookServiceImpl();
 		BookVO bookVo = new BookVO();
-		List<BookVO> bookList = null;
 		bookVo.setBookState("wait");
 		
-		if(memVo.getUserAuth().equals("general")) {
-			bookVo.setBookClient(memVo.getUserId());			
-			bookList = bookSv.clientBookList(memVo.getUserId(), null);
-		}else if(memVo.getUserAuth().equals("business")) {
-			bookVo.setBookManager(memVo.getUserId());
-			bookList = bookSv.managerBookList(memVo.getUserId());
-		}
+		bookVo.setBookManager(memVo.getUserId());
+		List<BookVO> bookList = bookSv.bookList(memVo.getUserId(), memVo.getUserAuth(), null);
+		
 		int waitCtn = bookSv.stateCount(bookVo); //대기 수
 		bookVo.setBookState("approval");
 		int apprCtn = bookSv.stateCount(bookVo); //승인 수
@@ -74,5 +75,16 @@ public class MypageForm implements Control {
 		int boardCnt = service.myBoardCnt(memVo.getUserId());
 		req.setAttribute("boardCnt", boardCnt);
 	}
-	
+	//댓글 개수
+	public void replyProcess(MemberVO memVo, HttpServletRequest req, HttpServletResponse resp) {
+		ReplyService service = new ReplyServiceImpl();
+		ReplyVO reply = new ReplyVO();
+		int replyCnt = service.myReplyCnt(memVo.getUserId()); 
+		req.setAttribute("replyCnt", replyCnt);
+	}
+	public void boardListProcess(MemberVO memVo, HttpServletRequest req, HttpServletResponse resp) {
+		BoardService service = new BoardServiceImpl();
+		List<BoardVO> list = service.myBoardList(memVo.getUserId());
+		req.setAttribute("list", list);
+	}
 }

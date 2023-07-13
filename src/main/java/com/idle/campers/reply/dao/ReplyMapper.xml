@@ -36,6 +36,10 @@
 		delete from tbl_reply
 		where reply_id = #{replyId}
 	</delete>
-
+	<!-- 마이 페이지 댓글 개수 -->
+	<select id="myReplyCnt">
+  		SELECT COUNT(*) reply_cnt
+  		FROM TBL_REPLY WHERE REPLYER =#{id}
+  	</select>
 </mapper>
 
