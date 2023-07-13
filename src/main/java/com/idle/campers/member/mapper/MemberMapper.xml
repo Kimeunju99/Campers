@@ -29,4 +29,5 @@
 		<if test="userAddr != null">USER_ADDR = #{userAddr}</if>
 	WHERE USER_ID = #{userId}
 </update>
+
 </mapper>

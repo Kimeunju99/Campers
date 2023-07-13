@@ -43,6 +43,7 @@ public class MemberModifyControl implements Control {
 			System.out.println(vo.toString());
 			if(service.updateMember(vo)) {
 				result = "내 정보 업데이트에 성공했습니다.";
+				session.setAttribute("logUser", vo); //세션정보 업데이트
 			}else {
 				result = "내 정보 업데이트에 실패했습니다.";
 			}

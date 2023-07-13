@@ -21,25 +21,25 @@ li.summery{
 <div>
 	<!-- 개인 정보창 -->
 	<div id="userInfo" class="userInfo">
-		<p><c:out value="${logUser.userName }" />님</p>
+		<p id="infoName"><c:out value="${logUser.userName }" />님</p>
 		<p id="mdfInfo">정보 수정하기</p>
 		<hr>
 		<table id="infoTbl">
 		<tr>	
-		<th>아이디</th>
-		<td>${logUser.userId }</td>
+			<th>아이디</th>
+			<td>${logUser.userId }</td>
 		</tr>
 		<tr>	
 			<th>전화번호</th>
-			<td>${logUser.userTel }</td>
+			<td id="infoTel">${logUser.userTel }</td>
 		</tr>
 		<tr>
 			<th>E-MAIL</th>
-			<td>${logUser.userEmail }</td>
+			<td id="infoEmail">${logUser.userEmail }</td>
 		</tr>
 		<tr>
 			<th>주소</th>
-			<td>${logUser.userAddr }</td>
+			<td id="infoAddr">${logUser.userAddr }</td>
 		</tr>
 		<tr>
 		<td colspan="2" align="center">
@@ -54,9 +54,9 @@ li.summery{
 		<!-- 요약창: 예약n건 | 작성 게시글 n개 | 좋아요 n개 | 댓글 n개 -->
 		<div class="summery">
 			<ul class="summery">
-				<li class="summery"><b>대기예약</b><br>개</li> <!-- 현재 대기된 예약 건수-->
-				<li class="summery"><b>승인예약</b><br>개</li> <!-- 현재 승인된 예약 건수-->
-				<li class="summery"><b>게시글</b><br>개</li> <!-- 내가 쓴 게시글 수-->
+				<li class="summery"><b>대기예약</b><br>${waitCtn }개</li> <!-- 현재 대기된 예약 건수-->
+				<li class="summery"><b>승인예약</b><br>${apprCtn }개</li> <!-- 현재 승인된 예약 건수-->
+				<li class="summery"><b>게시글</b><br>${boardCnt }개</li> <!-- 내가 쓴 게시글 수-->
 				<li class="summery"><b>댓글</b><br>개</li> <!-- 내가 쓴 댓글 수-->
 				<li class="summery"><b>찜</b><br>개</li> <!-- 내가 누른 좋아요(캠핑장) 수-->
 			</ul>
@@ -64,8 +64,47 @@ li.summery{
 		
 		<!-- 예약 리스트 -->
 		<div class="bookList">
-			<h3>예약 목록</h3>
-			<ul class="bookList"></ul>
+			<h3><a href="/campers/bookList.do">예약 목록</a></h3>
+			<table class="bookList" border="1">
+				<c:choose >
+					<c:when test="${logUser.userAuth == 'general' }">
+						<thead align="center"><tr>
+							<th>업체명</th><th>호실</th>
+							<th>예약일</th><th>체크인</th>
+							<th>가격</th><th>예약상태</th>
+						</tr></thead>
+						<tbody align="center"><c:forEach items="${bookList }" var="book" begin="0" end="4">
+							<tr onclick="location.href='/campers/selectBook.do?book=${book.bookId}'">
+								<td>${book.bookManager }</td><td>${book.bookRoomId }</td>
+								<td>${book.bookDate }</td><td>${book.bookStartDate }</td>
+								<td>${book.bookCost }</td>
+								<c:if test="${book.bookState  == 'wait'}"><td>대기</td></c:if>
+								<c:if test="${book.bookState == 'approval'}"><td>승인</td></c:if>
+								<c:if test="${book.bookState == 'expire'}"><td>만료</td></c:if>
+								<c:if test="${book.bookState == 'cancle'}"><td>취소</td></c:if>
+							</tr>
+						</c:forEach></tbody>
+					</c:when>
+					<c:when test="${logUser.userAuth == 'business' }">
+						<thead align="center"><tr>
+							<th>예약자</th><th>호실</th>
+							<th>예약일</th><th>체크인</th>
+							<th>가격</th><th>예약상태</th>
+						</tr></thead>
+						<tbody align="center"><c:forEach items="${bookList }" var="book" begin="0" end="4">
+							<tr onclick="location.href='/campers/selectBook.do?book=${book.bookId}'">
+								<td>${book.bookClient }</td><td>${book.bookRoomId }</td>
+								<td>${book.bookDate }</td><td>${book.bookStartDate }</td>
+								<td>${book.bookCost }</td>
+								<c:if test="${book.bookState  == 'wait'}"><td>대기</td></c:if>
+								<c:if test="${book.bookState == 'approval'}"><td>승인</td></c:if>
+								<c:if test="${book.bookState == 'expire'}"><td>만료</td></c:if>
+								<c:if test="${book.bookState == 'cancle'}"><td>취소</td></c:if>
+							</tr>
+						</c:forEach></tbody>
+					</c:when>
+				</c:choose>
+			</table>
 		</div>
 		
 		<!-- 내 게시글 모아보기 -->
@@ -74,18 +113,18 @@ li.summery{
 			<ul class="boardList"></ul>
 		</div>
 		
-		<!-- 좋아요(게시글) 모아보기 -->
+		<!-- 좋아요(게시글) 모아보기 
 		<div class="likeList">
 			<h3>좋아요 한 게시물</h3>
 			<ul class="likeList"></ul>
 		</div>
+		-->
 	</div>
 </div>
 
 
 <!-- 모달창 -->
 <div class="modifyWindow" style ="display:none;">
-	<button type="button" id="closeBtn">X</button>
 	<p>정보수정</p>
 	<hr>
 	<form name="modifyForm" id="modifyForm">
@@ -125,7 +164,7 @@ li.summery{
 			<tr>
 				<td colspan="2" align="center">
 					<button type="button" name="saveBtn" id="saveBtn">저장</button>
-					<button type="reset">취소</button>
+					<button type="button" class="closeBtn">취소</button>
 				</td>
 			</tr>
 		</table>
@@ -134,36 +173,20 @@ li.summery{
 
 
 <script>
-	function initInfo(){ //****************수정중: request.getAttribute err!!!!!!!!!!!!!
-		$('#infoTbl').innerHTML = "";
-		let vo = request.getAttribute('logUser');
-		console.log(vo);
-		let trId = $('<tr/>').append($('<th />').text('아이디')).append($('<td/>').text(vo.userId));
-		let trTel = $('<tr/>').append($('<th />').text('전화번호')).append($('<td/>').text(vo.userTel));
-		let trEmail = $('<tr/>').append($('<th />').text('E-MAIL')).append($('<td/>').text(vo.userEmail));
-		let trAddr = $('<tr/>').append( $('<th />').text('주소'), $('<td/>').text(vo.userAddr) );
-		let trBtn = $('<tr/>').append(
-						$('<td />').attr('colspan', '2').attr('align','center')
-						.append($('<button/>').text('로그아웃').attr('id', 'logoutBtn').on('click', logoutF)
-						)
-				);
-		
-		$('#infoTbl').append(trId, trTel, trEmail, trAddr, trBtn);	
-	}
-	
+let md = document.querySelector('.modifyWindow');
+let pw = document.getElementById("userPw");
+let npw1 = document.getElementById("userNewPw1");
+let npw2 = document.getElementById("userNewPw2");
+
 	document.getElementById("logoutBtn").addEventListener('click', logoutF);//로그아웃
 	function logoutF(){	document.location.href='logout.do';	};
 	
 	document.getElementById("mdfInfo").addEventListener('click', function(e){
-		let md = document.querySelector('.modifyWindow');
 		md.style.display = 'block';
 		document.querySelector('#checkPw').style.visibility='hidden';
 	});//모달창 열기
 	
 	document.getElementById("saveBtn").addEventListener('click', function(e){
-		let pw = document.getElementById("userPw");
-		let npw1 = document.getElementById("userNewPw1");
-		let npw2 = document.getElementById("userNewPw2");
 		if(pw.value != ""){
 			if(npw1.value == npw2.value){
 				$.ajax({
@@ -172,9 +195,13 @@ li.summery{
 					data: $('form[name="modifyForm"]').serialize(),
 					success: function(result){
 						if(result == "내 정보 업데이트에 성공했습니다."){
-							console.log(result);
 							document.querySelector('.modifyWindow').style.display = 'none';
-							initInfo();
+							console.log(document.getElementById("infoName").innerText);
+							console.log(document.getElementById("infoTel").innerText);
+							document.getElementById("infoName").innerText = document.getElementById("userName").value + "님"
+							document.getElementById("infoTel").innerText = document.getElementById("userTel").value
+							document.getElementById("infoAddr").innerText = document.getElementById("userAddr").value
+							document.getElementById("infoEmail").innerText = document.getElementById("userEmail").value
 						}
 						alert(result);
 					},
@@ -193,8 +220,11 @@ li.summery{
 		
 	});//사용자 정보 수정
 	
-	document.getElementById("closeBtn").addEventListener('click', function(e){
-		this.parentElement.style.display = 'none';
+	document.querySelector("button.closeBtn").addEventListener('click', function(e){
+		pw.value = "";
+		npw1.value = "";
+		npw2.value = "";
+		md.style.display = 'none';
 	});//모달창 닫기
 
 </script>

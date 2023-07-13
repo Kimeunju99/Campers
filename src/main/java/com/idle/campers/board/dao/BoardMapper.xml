@@ -66,6 +66,11 @@
   		select count(1) 
 		from tbl_board
 		where brd_type = #{type}
+	</select>
+	
+  	<select id="myBoardCnt">
+  		SELECT COUNT(*) board_cnt
+  		FROM TBL_BOARD WHERE BRD_WRITER =#{id}
   	</select>
   	
 </mapper>

@@ -28,7 +28,8 @@ public class LoginControl implements Control {
 		} else {
 			session.setAttribute("id", vo.getUserId());
 			session.setAttribute("name", vo.getUserName());
-			session.setAttribute("auth", vo.getUserAuth());			
+			session.setAttribute("auth", vo.getUserAuth());	
+			session.setAttribute("logUser", vo);	
 		}
 		
 

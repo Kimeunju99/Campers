@@ -8,29 +8,35 @@
 </head>
 <body>
 <h1>예약목록</h1>
-	<table id="bookList">
-		<tr>
-			<th>업체명</th>
-			<td><input type="text" name="manager" id="manager" value="" readonly></td>
-		</tr>
-		<tr>
-			<th>예약자</th>
-			<td><input type="text" name="client" id="client" value="" readonly></td>
-			<th>인원</th>
-			<td><select name="personnel" id="personnel"></select></td>
-		</tr>
-		<tr>
-			<th>체크인</th>
-			<td></td>
-			<th>체크아웃</th>
-			<td></td>
-		</tr>
-		<tr>
-			<th>가격</th><td><!-- n박*가격 --></td>
-			<td colspan="2" align="center">
-				<button type="submit">예약</button>
-				<button type="button">뒤로가기</button></td>
-		</tr>
-	</table>
+<table id="bookList">
+	<tr>
+		<th>업체명</th>
+		<th>예약자</th>
+		<th>인원</th>
+		<th>체크인</th>
+		<th>체크아웃</th>
+		<th>가격</th>
+	</tr>
+	<tr>
+		<td><input type="text" name="manager" id="manager" value="" readonly></td>
+		<td><input type="text" name="client" id="client" value="" readonly></td>
+		<td><select name="personnel" id="personnel"></select></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<button type="button" id="backBtn">뒤로가기</button></td>
+	</tr>
+</table>
+	
+	
+<script type="text/javascript">
+document.getElementById("backBtn").addEventListener('click', function(e){
+	location.href = document.referrer;
+});//뒤로가기
+
+
+</script>
+
+
 </body>
 </html>
