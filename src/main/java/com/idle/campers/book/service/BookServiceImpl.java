@@ -12,15 +12,11 @@ public class BookServiceImpl implements BookService {
 	BookMapper mapper = session.getMapper(BookMapper.class);
 
 	@Override
-	public List<BookVO> managerBookList(String manager) {
-		return mapper.managerBookList(manager);
+	public List<BookVO> bookList(String userId, String userAuth, String state) {
+		mapper.expireCheck();
+		return mapper.bookList(userId, userAuth, state);
 	}
-
-	@Override
-	public List<BookVO> clientBookList(String client, String state) {
-		return mapper.clientBookList(client, state);
-	}
-
+	
 
 	@Override
 	public BookVO bookSelectVo(BookVO vo) {
@@ -48,6 +44,4 @@ public class BookServiceImpl implements BookService {
 	public int stateCount(BookVO vo) {
 		return mapper.stateCount(vo);
 	}
-
-
 }

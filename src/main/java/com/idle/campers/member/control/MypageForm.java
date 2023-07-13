@@ -49,16 +49,11 @@ public class MypageForm implements Control {
 	public void bookProcess(MemberVO memVo, HttpServletRequest req, HttpServletResponse resp) {
 		BookService bookSv = new BookServiceImpl();
 		BookVO bookVo = new BookVO();
-		List<BookVO> bookList = null;
 		bookVo.setBookState("wait");
 		
-		if(memVo.getUserAuth().equals("general")) {
-			bookVo.setBookClient(memVo.getUserId());			
-			bookList = bookSv.clientBookList(memVo.getUserId(), null);
-		}else if(memVo.getUserAuth().equals("business")) {
-			bookVo.setBookManager(memVo.getUserId());
-			bookList = bookSv.managerBookList(memVo.getUserId());
-		}
+		bookVo.setBookManager(memVo.getUserId());
+		List<BookVO> bookList = bookSv.bookList(memVo.getUserId(), memVo.getUserAuth(), null);
+		
 		int waitCtn = bookSv.stateCount(bookVo); //대기 수
 		bookVo.setBookState("approval");
 		int apprCtn = bookSv.stateCount(bookVo); //승인 수
