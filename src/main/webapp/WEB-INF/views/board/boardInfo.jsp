@@ -10,41 +10,45 @@
 <title>Insert title here</title>
 <style type="text/css">
 tr, td {
-    border: 1px solid #444444;
-  }
+	border: 1px solid #444444;
+}
 </style>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
 	<br>
 	<c:choose>
-	<c:when test="${board.brdType == 'normal' }">
-		<h2>자유게시판</h2>
-	</c:when>
-	<c:when test="${board.brdType == 'review' }">
-		<h2>리뷰게시판</h2>
-	</c:when>
-	<c:when test="${board.brdType == 'tip' }">
-		<h2>팁/정보공유 게시판</h2>
-	</c:when>
-	<c:when test="${board.brdType == 'inform' }">
-		<h2>공지사항</h2>
-	</c:when>
+		<c:when test="${board.brdType == 'normal' }">
+			<h2>자유게시판</h2>
+		</c:when>
+		<c:when test="${board.brdType == 'review' }">
+			<h2>리뷰게시판</h2>
+		</c:when>
+		<c:when test="${board.brdType == 'tip' }">
+			<h2>팁/정보공유 게시판</h2>
+		</c:when>
+		<c:when test="${board.brdType == 'inform' }">
+			<h2>공지사항</h2>
+		</c:when>
 	</c:choose>
 	<hr>
 	<form action="" name="myFrm" method="post">
 		<c:if test="${board.brdImage != null }">
-		<img width="250px" src="images/${board.brdImage }">
+			<img width="250px" src="images/${board.brdImage }">
 		</c:if>
 		<table border="1" width="600">
 			<tbody>
 				<tr border="1" width="450" height="50" align="left">
-					<td>제목:  ${board.brdTitle}</td>
+					<td>제목: ${board.brdTitle}</td>
 					<td>작성자: ${board.brdWriter}</td>
 				</tr>
 				<tr width="70" height="70" align="left">
 					<td border="1">내용: ${board.brdContent}</td>
 				</tr>
+
 				<tr width="70" height="70" align="left">
 					<td>작성날짜: ${board.brdDate}</td>
 				</tr>
@@ -53,9 +57,12 @@ tr, td {
 				</tr>
 				<tr width="70" height="70" align="left">
 					<th>좋아요</th>
-					<td><input type="button" value="♥" id="likeBtn">&nbsp;<span class="likeCount"></span></td>
-						
+					<td><input type="button" value="♥" id="likeBtn">&nbsp;<span
+						class="likeCount"></span></td>
+
 				</tr>
+
+
 			</tbody>
 		</table>
 		<br>
@@ -66,25 +73,48 @@ tr, td {
 			<button type="button" onclick="submit2(this.form);">삭제</button>
 		</c:if>
 		<c:if test="${id != null }">
-				<button type="button">게시글 신고</button>
+			<button type="button">게시글 신고</button>
 		</c:if>
-			<button type="button" onclick="submit3(this.form);">목록</button>
+		<button type="button" onclick="submit3(this.form);">목록</button>
 	</form>
-	
+
+
 	<script>
-	
-		
-		
+
 		function submit1(frm) { 
 			frm.action = "boardEditForm.do?bid="+${board.brdId};
+
+	<!-- 댓글 부분 -->
+	<br>
+	<div class="replyBody">
+		<h2>댓글창</h2>
+		<ul class="reple">
+			<li><div>
+					<div class="header">
+						<strong>user1</strong> 
+						<small>2023-06-05 15:24</small>
+					</div>
+					<p>Good Job!!!!!!!!!!!!</p>
+				</div></li>
+		</ul>
+	</div>
+
+
+
+	<script type="text/javascript">
+		//if 작성해서 값는 값으면 action값을 바꿀 수 있음.
+
+		function submit1(frm) {
+			frm.action = "boardEdit.do?bid=" + ${board.brdId};
 			frm.submit();
-			return true;	
+			return true;
+
 		}
-	
-		function submit2(frm) { 
-			frm.action = "boardDelete.do?bid="+${board.brdId};
+
+		function submit2(frm) {
+			frm.action = "boardDelete.do?bid=" + ${board.brdId};
 			frm.submit();
-			return true;	
+			return true;
 		}
 		
 		function submit3(frm) { 
@@ -126,7 +156,31 @@ tr, td {
 		})
 	};
 	recCount();
+
+
+		//댓글부분
 		
+		//댓글 리스트 보여주기
+		const bid = '${board.brdId}';
+		const replyUL = $('reple');
+		
+	
+		function replyFnc(bid){
+			console.log(bid);
+			fetch('/replyList.do?bid='+ bid)
+			.then(function(response){
+				console.log(response);
+				return response.json();
+			})
+			.then(function(result){
+				console.log(result);
+			})
+			.catch(function(err){
+				console.error(err);
+			}
+		}
+		
+		replyFnc(bid);
 	</script>
 </body>
 </html>

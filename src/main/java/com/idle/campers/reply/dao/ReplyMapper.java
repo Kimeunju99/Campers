@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ReplyMapper {
-	public List<ReplyVO> replyList();
+	public List<ReplyVO> replyList(@Param("brdId") long brdId);
 	
 	public ReplyVO replyOne(int replyId);
 	
