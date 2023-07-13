@@ -2,7 +2,6 @@ package com.idle.campers.board.control;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,21 +9,29 @@ import com.idle.campers.board.dao.BoardVO;
 import com.idle.campers.board.service.BoardService;
 import com.idle.campers.board.service.BoardServiceImpl;
 import com.idle.campers.common.Control;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class BoardAddControl implements Control {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
-	
 		
-		String brdWriter = req.getParameter("writer");
-		String brdTitle = req.getParameter("title");
-		String brdType = req.getParameter("type");
-		String brdContent = req.getParameter("content");
-		String brdImage = req.getParameter("image");
-		String brdInquiry = req.getParameter("inquiry");
-	
-		
+		String savePath = req.getServletContext().getRealPath("/images");
+		int maxSize = 1024 * 1024 * 10;
+		String enc = "UTF-8";
+		MultipartRequest multi = null;
+		try {
+			multi = new MultipartRequest(req, savePath, maxSize, enc, new DefaultFileRenamePolicy());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String brdWriter = multi.getParameter("writer");
+		String brdTitle = multi.getParameter("title");
+		String brdType = multi.getParameter("type");
+		String brdContent = multi.getParameter("content");
+		String brdImage = multi.getFilesystemName("img");
+		String brdInquiry = multi.getParameter("inquiry");
 		
 		BoardVO vo  = new BoardVO();
 		vo.setBrdWriter(brdWriter);
@@ -35,7 +42,6 @@ public class BoardAddControl implements Control {
 		
 		
 		req.setAttribute("brd", vo);
-		
 		
 		BoardService service = new BoardServiceImpl();
 		if(service.addBoard(vo)) {

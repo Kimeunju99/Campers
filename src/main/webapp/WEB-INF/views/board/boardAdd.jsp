@@ -58,7 +58,7 @@ select{
 	
 	<br>
 	<h3>등록페이지</h3>
-    <form action="boardAdd.do" method="post"> 
+    <form action="boardAdd.do" method="post" enctype="multipart/form-data"> 
     	<table class="table">
 			<tr>
     			<td><select name="type">
@@ -73,13 +73,15 @@ select{
     			<td><input type="text" name="title" placeholder="제목을 입력하세요"></td>
     		</tr>
     		<tr>
-    			<td><input type="text" name="writer" placeholder="나중에 아이디로 받음" ></td>
+    			<td><input type="text" name="writer" readonly value="${id }" ></td>
     		</tr>
     		<tr>
     			<td><textarea name="content" placeholder="내용을 입력하세요." 
     			cols="40" rows="10" style="width:50%; height:50%;"></textarea></td>
     		</tr>
-    		
+    		<tr>
+    			<td>사진 업로드: <input type="file" name="img"></td>
+    		</tr>
     		</table>
     		<div id="btn_group">	
     			<button id="btn1" type="submit">등록</button>

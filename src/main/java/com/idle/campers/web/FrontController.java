@@ -14,25 +14,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.idle.campers.MainControl;
 import com.idle.campers.board.control.BoardAddControl;
+import com.idle.campers.board.control.BoardAddFormControl;
 import com.idle.campers.board.control.BoardDeleteControl;
 import com.idle.campers.board.control.BoardEditControl;
 import com.idle.campers.board.control.BoardEditFormControl;
 import com.idle.campers.board.control.BoardInfoControl;
-import com.idle.campers.board.control.BoardAddFormControl;
+import com.idle.campers.board.control.BoardLikeControl;
+import com.idle.campers.board.control.BoardLikeCountControl;
 import com.idle.campers.board.control.BoardListControl;
 import com.idle.campers.common.Control;
 import com.idle.campers.member.control.FindMemberId;
-import com.idle.campers.member.control.MypageForm;
-
-import com.idle.campers.member.control.ResetMemberPassword;
+import com.idle.campers.member.control.LoginControl;
 import com.idle.campers.member.control.LoginForm;
 import com.idle.campers.member.control.LogoutControl;
 import com.idle.campers.member.control.MemberJoin;
-import com.idle.campers.member.control.LoginControl;
-
-import com.idle.campers.member.control.loginControl;
-import com.idle.campers.member.control.loginForm;
-import com.idle.campers.member.control.logoutControl;
+import com.idle.campers.member.control.MypageForm;
+import com.idle.campers.member.control.ResetMemberPassword;
 
 
 @WebServlet("*.do")
@@ -54,6 +51,8 @@ public class FrontController extends HttpServlet{
 		map.put("/boardEdit.do", new BoardEditControl());
 		map.put("/boardEditForm.do", new BoardEditFormControl());
 		map.put("/boardInfo.do", new BoardInfoControl());
+		map.put("/boardLike.do", new BoardLikeControl());
+		map.put("/boardLikeCount.do", new BoardLikeCountControl());
 		//은주
 		map.put("/mypage.do", new MypageForm());
 		
@@ -66,9 +65,9 @@ public class FrontController extends HttpServlet{
 		map.put("/findMemberId.do", new FindMemberId());
 		map.put("/resetMemberPassword.do", new ResetMemberPassword());
 
-		map.put("/loginForm.do", new loginForm());
-		map.put("/loginControl.do", new loginControl());
-		map.put("/logout.do", new logoutControl());
+		map.put("/loginForm.do", new LoginForm());
+		map.put("/loginControl.do", new LoginControl());
+		map.put("/logout.do", new LogoutControl());
 		
 		//김시인 (23.07.07 - 게시글 리스트)
 		map.put("/boardList.do", new BoardListControl());

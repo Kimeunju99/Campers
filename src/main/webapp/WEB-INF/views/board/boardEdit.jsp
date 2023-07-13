@@ -57,12 +57,13 @@ select{
 <body>
 	<br>
 	<h3>수정 페이지</h3>
-    <form action="boardEdit.do" method="post"> 
+    <form action="boardEdit.do" method="post" enctype="multipart/form-data"> 
+    <input type="hidden" name="bid" value="${brd.brdId }" >
     	<table class="table">
 			<tr>
     			<td><select name="type">
 						<c:if test="${auth eq 'admin'}">
-		            		<input type="text" value="inform">공지사항
+		            		<option value="inform">공지사항</option>
 		            	</c:if>
                     		<option value="normal">자유게시판</option>
                     	    <option value="review">방문자 리뷰</option>
@@ -75,10 +76,11 @@ select{
     			<td><input type="text" name="writer" readonly value="${brd.brdWriter}" ></td>
     		</tr>
     		<tr>
-    			<td><textarea name="content" placeholder="내용을 입력하세요."  value="${brd.brdContent}"
-    			cols="40" rows="10" style="width:50%; height:50%;"></textarea></td>
+    			<td><textarea name="content" cols="40" rows="10" style="width:50%; height:50%;">${brd.brdContent}</textarea></td>
     		</tr>
-    		
+    		<tr>
+    			<td>사진 업로드: <input type="file" name="img"></td>
+    		</tr>
     		</table>
     		<div id="btn_group">	
     			<button id="btn1" type="submit">등록</button>

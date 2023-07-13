@@ -1,6 +1,7 @@
 package com.idle.campers.board.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -43,26 +44,45 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public boolean deleteBoard(int id) {
-		return mapper.boardDelete(0) == 1;
-	}
-
-	@Override
-	public int inquiryBoard(long id) {
-		return 0;
+		return mapper.boardDelete(id) == 1;
 	}
 
 	@Override
 	public int likeBoard(long id) {
 		return 0;
 	}
-
-	@Override
-	public List<BoardVO> starBoard(long id) {
-		return null;
-	}
-
+	
 	@Override
 	public List<BoardVO> topInfoList() {
 		return mapper.topInfoList();
 	}
+
+	// 좋아요 기능
+	
+	@Override
+	public int likeBoardCheck(int bid, String id) {
+		int result = mapper.likecheck(bid, id);
+		return result;
+	}
+	
+	@Override
+	public void likeBoardUpdate(int bid, String id) {
+		mapper.boarLikeUpdate(bid, id);
+		
+	}
+
+	@Override
+	public void likeBoardDelete(int bid, String id) {
+		mapper.boarLikeDelete(bid, id);
+	}
+
+	
+	@Override
+	public int likeBoardCount(int boardId) {
+		
+		int count = mapper.boardLikeCount(boardId);
+		
+		return count;
+	}
+
 }

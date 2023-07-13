@@ -62,11 +62,7 @@
 						<c:forEach var="vo" items="${board}">
 							<tr>
 								<td><c:out value="${vo.brdId}" /></td>
-<<<<<<< HEAD
-								<td><a href="boardInfo.do?bid=${vo.brdId}&bwri=${vo.brdWriter}&title=${vo.brdTitle}"><c:out value="${vo.brdTitle}" /></a></td>
-=======
 								<td><a href="boardInfo.do?bid=${vo.brdId}&bwri=${vo.brdWriter}" style="text-decoration:none; color:black;"><c:out value="${vo.brdTitle}" /></a></td>
->>>>>>> branch 'develop' of https://github.com/Kimeunju99/Campers.git
 								<td><c:out value="${vo.brdWriter}" /></td>
 								<td><c:out value="${vo.brdDate}" /></td>
 								<td><c:out value="${vo.brdRead}" /></td>
@@ -93,13 +89,10 @@
 	</div>
 
 	<script>
-<<<<<<< HEAD
+
 		$('#addBtn').click(function(){
 			$(location).attr("href", "boardAddForm.do")
-=======
-		$('#addBtn').click(function() {
-			$(location).attr("href", "boardAdd.do")
->>>>>>> branch 'develop' of https://github.com/Kimeunju99/Campers.git
+
 		})
 	</script>
 </body>

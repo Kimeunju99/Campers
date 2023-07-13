@@ -1,6 +1,7 @@
 package com.idle.campers.board.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -23,5 +24,13 @@ public interface BoardMapper {
 	
 	public int boardLike(long id);
 	
-	public List<BoardVO> boardStar();
+	public int likecheck(@Param("bid")int bid, @Param("id")String id);
+	
+	public int boarLikeUpdate(@Param("bid")int bid, @Param("id")String id);
+	
+	public int boarLikeDelete(@Param("bid")int bid, @Param("id")String id);
+	
+	public int boardLikeCount(@Param("bid")int bid); // LIKE - 개수
+	
+	
 }

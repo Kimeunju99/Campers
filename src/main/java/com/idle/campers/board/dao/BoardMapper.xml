@@ -11,10 +11,6 @@
 		order by brd_id desc
 	</select>
 	
-	  <select id="boardStar" >
-  	SELECT * FROM TBL_BOARD WHERE BRD_ID = #{brdId}
-  </select>
-  
   <select id="boardSelect" parameterType="int">
   SELECT * FROM TBL_BOARD WHERE BRD_ID = #{brdId}
   
@@ -42,12 +38,36 @@
   	UPDATE TBL_BOARD
   	SET   BRD_TITLE = #{brdTitle}
   		, BRD_CONTENT = #{brdContent}
+  		, BRD_TYPE = #{brdType}
+  		, BRD_IMAGE = #{brdImage}
   	WHERE BRD_ID = #{brdId} 
   	
   </update>
   
+  
   <insert id="boardAdd" parameterType="com.idle.campers.board.dao.BoardVO">
-  	INSERT INTO TBL_BOARD (BRD_ID, BRD_TITLE, BRD_WRITER, BRD_CONTENT,  BRD_TYPE, BRD_ADDR)
-  	VALUES (board_seq.nextval, #{brdTitle}, #{brdWriter}, #{brdContent}, #{brdType}, #{brdAddr})
+  	INSERT INTO TBL_BOARD (BRD_ID, BRD_TITLE, BRD_WRITER, BRD_CONTENT,  BRD_TYPE, BRD_ADDR, brd_image)
+  	VALUES (board_seq.nextval, #{brdTitle}, #{brdWriter}, #{brdContent}, #{brdType}, #{brdAddr}, #{brdImage})
   	</insert>
+  	
+  	<!-- 좋아요 mybatis 영역 -->
+  	<select id="likecheck"  resultType="int">
+  		select count(*) from tbl_brd_like where brd_id = #{bid} and user_Id = #{id}
+  	</select>
+  	
+  	<!-- 게시글 추천 -->
+  	<insert id="boarLikeUpdate" >
+  		insert into tbl_brd_like values(#{bid},#{id})
+  	</insert>
+  	
+  	<!-- 게시글 추천 취소 -->
+  	<delete id="boarLikeDelete" >
+  		delete from tbl_brd_like where brd_id = #{bid} and user_Id = #{id}
+  	</delete>
+  	
+  	<!-- 게시글 추천수 -->
+  	<select id="boardLikeCount">
+  		select count(*) from tbl_brd_like where brd_id = #{bid}
+  	</select>
+  	
 </mapper>
