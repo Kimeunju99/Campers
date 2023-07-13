@@ -25,6 +25,7 @@ import com.idle.campers.book.control.BookStateUpdateControl;
 import com.idle.campers.board.control.BoardSearchListControl;
 import com.idle.campers.book.control.NewBookForm;
 import com.idle.campers.book.control.SelectBookForm;
+import com.idle.campers.camp.control.SearchCamp;
 import com.idle.campers.common.Control;
 import com.idle.campers.member.control.FindMemberId;
 
@@ -40,7 +41,7 @@ import com.idle.campers.member.control.LoginForm;
 import com.idle.campers.member.control.LogoutControl;
 import com.idle.campers.member.control.MailCertification;
 import com.idle.campers.member.control.MemberJoin;
-
+import com.idle.campers.member.control.MemberJoinControl;
 import com.idle.campers.member.control.LoginControl;
 
 
@@ -88,6 +89,8 @@ public class FrontController extends HttpServlet{
 		map.put("/memberJoinType.do", new MemberJoinType());
 		map.put("/userIdCheck.do", new UserIdCheck());
 		map.put("/mailCertification.do", new MailCertification());
+		map.put("/memberJoinControl.do", new MemberJoinControl());
+		map.put("/searchCamp.do", new SearchCamp());
 		
 		//김시인 (23.07.07 - 게시글 리스트)
 		map.put("/boardList.do", new BoardListControl()); //일반 게시글 리스트
