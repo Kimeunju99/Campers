@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.idle.campers.MainControl;
+import com.idle.campers.accuse.control.AccuseAddFormControl;
 import com.idle.campers.board.control.BoardAddControl;
 import com.idle.campers.board.control.BoardAddFormControl;
 import com.idle.campers.board.control.BoardDeleteControl;
@@ -60,7 +61,7 @@ public class FrontController extends HttpServlet{
 	public void init(ServletConfig config) throws ServletException {
 		map.put("/main.do", new MainControl());
 
-		// 손석연
+		// 손석연 - 게시물
 		map.put("/boardAdd.do", new BoardAddControl());
 		map.put("/boardAddForm.do", new BoardAddFormControl());
 		map.put("/boardDelete.do", new BoardDeleteControl());
@@ -69,7 +70,9 @@ public class FrontController extends HttpServlet{
 		map.put("/boardInfo.do", new BoardInfoControl());
 		map.put("/boardLike.do", new BoardLikeControl());
 		map.put("/boardLikeCount.do", new BoardLikeCountControl());
-		map.put("/boardInfo.do", new BoardInfoControl());
+		// 손석연 - user 신고 기능
+		map.put("/accuseAddForm.do", new AccuseAddFormControl());
+		
 		
 		//은주
 		map.put("/mypage.do", new MypageForm()); //마이페이지 form

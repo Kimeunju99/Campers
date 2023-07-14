@@ -6,9 +6,9 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>board/boardList.jsp</title>
-	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<meta charset="UTF-8">
+<title>board/boardList.jsp</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 
 <body>
@@ -19,7 +19,8 @@
 			<!-- Grid row -->
 			<div class="row">
 				<!-- Grid column -->
-				<div class="col-md-12" align="left" style="padding-left: 100px; padding-top: 15px; padding-bottom: 0;">
+				<div class="col-md-12" align="left"
+					style="padding-left: 100px; padding-top: 15px; padding-bottom: 0;">
 
 				</div>
 
@@ -50,22 +51,18 @@
 					<!--Table body-->
 					<tbody>
 						<c:forEach var="brd" items="${info}">
-							<tr style="background-color: rgb(240, 232, 232); border: solid 1px white;">
+							<tr
+								style="background-color: rgb(240, 232, 232); border: solid 1px white;">
 								<td><span
-										style="background-color: rgb(228, 49, 49); border-radius: 4px; color: rgb(250, 204, 204); padding: 2px; font-size: small">공지</span>
+									style="background-color: rgb(228, 49, 49); border-radius: 4px; color: rgb(250, 204, 204); padding: 2px; font-size: small">공지</span>
 								</td>
-								<td><a href="boardInfo.do?bid=${brd.brdId}&bwri=${brd.brdWriter}"
-										style="text-decoration: none; color: red;">
-										<c:out value="${brd.brdTitle}" /></a></td>
-								<td>
-									<c:out value="${brd.brdWriter}" />
-								</td>
-								<td>
-									<c:out value="${brd.brdDate}" />
-								</td>
-								<td>
-									<c:out value="${brd.brdRead}" />
-								</td>
+								<td><a
+									href="boardInfo.do?bid=${brd.brdId}&bwri=${brd.brdWriter}"
+									style="text-decoration: none; color: red;"> <c:out
+											value="${brd.brdTitle}" /></a></td>
+								<td><c:out value="${brd.brdWriter}" /></td>
+								<td><c:out value="${brd.brdDate}" /></td>
+								<td><c:out value="${brd.brdRead}" /></td>
 							<tr>
 						</c:forEach>
 					</tbody>
@@ -73,28 +70,13 @@
 						<c:forEach var="vo" items="${board}">
 							<tr>
 								<td><c:out value="${vo.brdId}" /></td>
-								<td><a href="boardInfo.do?bid=${vo.brdId}&bwri=${vo.brdWriter}" style="text-decoration:none; color:black;"><c:out value="${vo.brdTitle}" /></a></td>
+								<td><a
+									href="boardInfo.do?bid=${vo.brdId}&bwri=${vo.brdWriter}"
+									style="text-decoration: none; color: black;"><c:out
+											value="${vo.brdTitle}" /></a></td>
 								<td><c:out value="${vo.brdWriter}" /></td>
 								<td><c:out value="${vo.brdDate}" /></td>
 								<td><c:out value="${vo.brdRead}" /></td>
-							<tr>
-								<td>
-									<c:out value="${vo.brdId}" />
-								</td>
-								<td><a href="boardInfo.do?bid=${vo.brdId}&bwri=${vo.brdWriter}"
-										style="text-decoration: none; color: black;">
-										<c:out value="${vo.brdTitle}" /></a></td>
-								<td>
-									<c:out value="${vo.brdWriter}" />
-								</td>
-								<td>
-									<c:out value="${vo.brdDate}" />
-								</td>
-								<td>
-									<c:out value="${vo.brdRead}" />
-								</td>
-
-							</tr>
 						</c:forEach>
 					</tbody>
 					<!--Table body-->
@@ -108,7 +90,8 @@
 						<option value="title">제목</option>
 						<option value="content">내용</option>
 						<option value="wdate">작성일</option>
-					</select> <input type="text" id="keyword" name="keyword" style="height: 25px">
+					</select> <input type="text" id="keyword" name="keyword"
+						style="height: 25px">
 					<button type="button" id="searchBtn"
 						style="height: 25px; background-color: white; border: solid 0.5px; border-color: rgb(172, 178, 185);">검색</button>
 				</form>
@@ -128,12 +111,11 @@
 
 			<c:choose>
 				<c:when test="${i == curPage}">
-					<a href="boardList.do?type=${t}&page=${i}" class="active">
-						<c:out value="${i}" /></a>
+					<a href="boardList.do?type=${t}&page=${i}" class="active"> <c:out
+							value="${i}" /></a>
 				</c:when>
 				<c:otherwise>
-					<a href="boardList.do?type=${t}&page=${i}">
-						<c:out value="${i}" /></a>
+					<a href="boardList.do?type=${t}&page=${i}"> <c:out value="${i}" /></a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>

@@ -20,7 +20,6 @@ public class BoardLikeControl implements Control {
 		
 		BoardService service = new BoardServiceImpl();
 		int result = service.likeBoardCheck(brdId, userId);
-		System.out.println(result);
 		String isTrue ="";
 		if( userId == null) {
 			isTrue = "false";
