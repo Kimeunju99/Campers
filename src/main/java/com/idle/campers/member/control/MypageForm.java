@@ -39,16 +39,10 @@ public class MypageForm implements Control {
 		//댓글 --- 개수
 		replyProcess(memVo, req, resp);
 		
-		
 		if(memVo.getUserAuth().equals("business")) {//사업자일 경우
-			//캠프 관리
+			campProcess(memVo, req, resp);//캠프 관리
 		}
-		
-		//if(memVo.getUserAuth().equals("")) {//관리자일 경우		
-		//유저, 게시글 관리
-		//}
-		
-		//System.out.println(memVo.getUserPw());	
+			
 		return "member/mypage";
 	}
 
@@ -70,21 +64,22 @@ public class MypageForm implements Control {
 
 	public void boardProcess(MemberVO memVo, HttpServletRequest req, HttpServletResponse resp) {
 		BoardService service = new BoardServiceImpl();
-		BoardVO board = new BoardVO();
-		//List<BoardVO> boardList = service. 내 게시글 리스트
 		int boardCnt = service.myBoardCnt(memVo.getUserId());
 		req.setAttribute("boardCnt", boardCnt);
 	}
 	//댓글 개수
 	public void replyProcess(MemberVO memVo, HttpServletRequest req, HttpServletResponse resp) {
 		ReplyService service = new ReplyServiceImpl();
-		ReplyVO reply = new ReplyVO();
 		int replyCnt = service.myReplyCnt(memVo.getUserId()); 
 		req.setAttribute("replyCnt", replyCnt);
 	}
 	public void boardListProcess(MemberVO memVo, HttpServletRequest req, HttpServletResponse resp) {
 		BoardService service = new BoardServiceImpl();
-		List<BoardVO> list = service.myBoardList(memVo.getUserId());
-		req.setAttribute("list", list);
+		List<BoardVO> boardList = service.myBoardList(memVo.getUserId());
+		req.setAttribute("boardList", boardList);
+	}
+	
+	public void campProcess(MemberVO memVo, HttpServletRequest req, HttpServletResponse resp) {
+		
 	}
 }

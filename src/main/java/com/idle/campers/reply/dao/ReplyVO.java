@@ -15,6 +15,15 @@ public class ReplyVO {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date replyDate;
 	private String replyModify;
+	
+	private int accuseId; //신고번호
+	private int accuseReply; //신고 댓글(번호)
+	private String accuseReport; //신고자 id
+	private String accuseContent; //신고사유
+	private int accuseState; //신고처리상태(0:접수 1:완료)
+	private String accuseResult; //신고처리내용
+	private String accuseUserId; //신고당한 유저 id
+	
 }
 
 

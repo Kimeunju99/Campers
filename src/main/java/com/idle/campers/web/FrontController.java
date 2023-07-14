@@ -26,11 +26,15 @@ import com.idle.campers.board.control.BoardListControl;
 import com.idle.campers.book.control.BookList;
 import com.idle.campers.book.control.BookListControl;
 import com.idle.campers.book.control.BookStateUpdateControl;
+import com.idle.campers.book.control.NewBookControl;
 import com.idle.campers.board.control.BoardSearchListControl;
+import com.idle.campers.board.control.MyBoardListControl;
 import com.idle.campers.book.control.NewBookForm;
 import com.idle.campers.book.control.SelectBookForm;
+import com.idle.campers.camp.control.SearchCamp;
 import com.idle.campers.common.Control;
 import com.idle.campers.member.control.FindMemberId;
+import com.idle.campers.member.control.JoinOutControl;
 import com.idle.campers.member.control.LoginControl;
 import com.idle.campers.member.control.MypageForm;
 import com.idle.campers.member.control.ResetMemberPassword;
@@ -39,7 +43,11 @@ import com.idle.campers.member.control.MemberJoinType;
 import com.idle.campers.member.control.LoginForm;
 import com.idle.campers.member.control.LogoutControl;
 import com.idle.campers.member.control.MailCertification;
+
 import com.idle.campers.member.control.MemberJoin;
+import com.idle.campers.member.control.MemberJoinControl;
+
+
 import com.idle.campers.member.control.MemberModifyControl;
 import com.idle.campers.reply.control.ReplyAddControl;
 import com.idle.campers.reply.control.ReplyListControl;
@@ -76,12 +84,14 @@ public class FrontController extends HttpServlet{
 		
 		//은주
 		map.put("/mypage.do", new MypageForm()); //마이페이지 form
+		map.put("/joinOut.do", new JoinOutControl()); //마이페이지 회원탈퇴
 		map.put("/memberModify.do", new MemberModifyControl()); //마이페이지 회원 정보수정
 		map.put("/selectBook.do", new SelectBookForm()); //예약 상세보기 form
 		map.put("/bookStateUpdate.do", new BookStateUpdateControl()); //예약 상세보기 -> 예약상태 수정
 		map.put("/bookList.do", new BookList()); //예약 리스트 form
 		map.put("/bookListControl.do", new BookListControl()); //예약 리스트 기본 control
 		map.put("/newBook.do", new NewBookForm()); //예약 추가 form
+		map.put("/newBookControl.do", new NewBookControl()); //예약 추가 form
 		
 		//준위
 		map.put("/loginForm.do", new LoginForm());
@@ -97,6 +107,8 @@ public class FrontController extends HttpServlet{
 		map.put("/memberJoinType.do", new MemberJoinType());
 		map.put("/userIdCheck.do", new UserIdCheck());
 		map.put("/mailCertification.do", new MailCertification());
+		map.put("/memberJoinControl.do", new MemberJoinControl());
+		map.put("/searchCamp.do", new SearchCamp());
 		
 		//김시인 (23.07.07 - 게시글 리스트)
 		map.put("/boardList.do", new BoardListControl()); //일반 게시글 리스트
@@ -109,6 +121,7 @@ public class FrontController extends HttpServlet{
 		map.put("/replyRemove.do", new ReplyRemoveControl());
 		
 		map.put("/boardSearchList.do", new BoardSearchListControl()); //게시글 검색
+		map.put("/myBoardList.do", new MyBoardListControl()); //내가 쓴 게시글 보기.
 	}
 	
 	@Override

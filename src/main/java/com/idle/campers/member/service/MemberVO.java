@@ -11,4 +11,5 @@ public class MemberVO {
 	private String userTel;
 	private String userAuth; // admin | general | business
 	private String userAddr;
+	private String userState; //true | false
 }
