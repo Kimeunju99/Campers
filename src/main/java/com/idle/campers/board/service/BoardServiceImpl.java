@@ -91,10 +91,10 @@ public class BoardServiceImpl implements BoardService {
 	public int myBoardCnt(String id) {
 		return mapper.myBoardCnt(id);
 	}
+
 	// mypage 정보
 	@Override
 	public List<BoardVO> myBoardList(String id) {
 		return mapper.myBoardList(id);
 	}
-
 }
