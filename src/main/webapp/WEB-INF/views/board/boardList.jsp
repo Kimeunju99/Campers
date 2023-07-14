@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="UTF-8">
 	<title>board/boardList.jsp</title>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
-
 <body>
 
 	<!-- 게시판 본문 -->
@@ -72,6 +69,12 @@
 					<tbody id="boardTbody">
 						<c:forEach var="vo" items="${board}">
 							<tr>
+								<td><c:out value="${vo.brdId}" /></td>
+								<td><a href="boardInfo.do?bid=${vo.brdId}&bwri=${vo.brdWriter}" style="text-decoration:none; color:black;"><c:out value="${vo.brdTitle}" /></a></td>
+								<td><c:out value="${vo.brdWriter}" /></td>
+								<td><c:out value="${vo.brdDate}" /></td>
+								<td><c:out value="${vo.brdRead}" /></td>
+							<tr>
 								<td>
 									<c:out value="${vo.brdId}" />
 								</td>
@@ -110,6 +113,8 @@
 			<br>
 		</div>
 	</div>
+
+
 	<br>
 	<div class="pagination" align="center">
 

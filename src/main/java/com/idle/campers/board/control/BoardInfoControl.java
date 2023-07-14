@@ -14,7 +14,6 @@ public class BoardInfoControl implements Control {
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		
 		String bno = req.getParameter("bid");
-		
 		BoardService boardService = new BoardServiceImpl();
 		BoardVO vo= boardService.selectBoard(Integer.parseInt(bno));
 		

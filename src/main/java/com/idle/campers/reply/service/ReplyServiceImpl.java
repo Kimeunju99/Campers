@@ -38,5 +38,9 @@ public class ReplyServiceImpl implements ReplyService {
 	public boolean deleteReply(int replyId) {
 		return mapper.deleteReply(replyId) == 1;
 	}
-
+	
+	@Override
+	public int myReplyCnt(String id) {
+		return mapper.myReplyCnt(id);
+	}
 }
