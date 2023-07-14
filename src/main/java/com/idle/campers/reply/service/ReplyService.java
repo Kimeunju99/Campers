@@ -13,4 +13,6 @@ public interface ReplyService {
 	public boolean deleteReply(int replyId);
 	
 	public int totalCnt();
+	public int myReplyCnt(String id);
+	
 }

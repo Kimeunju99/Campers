@@ -13,7 +13,7 @@ public class BoardEditFormControl implements Control {
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		
-		String brdId = req.getParameter("bno");
+		String brdId = req.getParameter("bid");
 		BoardService service = new BoardServiceImpl();
 		BoardVO vo = service.selectBoard(Integer.parseInt(brdId));
 		req.setAttribute("brd", vo);

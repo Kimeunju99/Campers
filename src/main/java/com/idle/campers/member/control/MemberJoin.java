@@ -9,7 +9,9 @@ public class MemberJoin implements Control {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
-		
+		String userAuth = req.getParameter("userAuth");
+		System.out.println(userAuth);
+		req.setAttribute("userAuth", userAuth);
 		return "member/memberJoin";
 	}
 

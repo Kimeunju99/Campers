@@ -44,4 +44,9 @@ public class ReplyServiceImpl implements ReplyService {
 		return mapper.getTotalCnt();
 	}
 
+	
+	@Override
+	public int myReplyCnt(String id) {
+		return mapper.myReplyCnt(id);
+	}
 }

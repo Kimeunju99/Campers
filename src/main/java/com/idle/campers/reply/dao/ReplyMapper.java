@@ -15,4 +15,5 @@ public interface ReplyMapper {
 	
 	public int getTotalCnt();
 	
+	public int myReplyCnt(@Param("id")String id);
 }

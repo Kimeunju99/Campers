@@ -73,6 +73,12 @@
 					<tbody id="boardTbody">
 						<c:forEach var="vo" items="${board}">
 							<tr>
+								<td><c:out value="${vo.brdId}" /></td>
+								<td><a href="boardInfo.do?bid=${vo.brdId}&bwri=${vo.brdWriter}" style="text-decoration:none; color:black;"><c:out value="${vo.brdTitle}" /></a></td>
+								<td><c:out value="${vo.brdWriter}" /></td>
+								<td><c:out value="${vo.brdDate}" /></td>
+								<td><c:out value="${vo.brdRead}" /></td>
+							<tr>
 								<td>
 									<c:out value="${vo.brdId}" />
 								</td>
@@ -111,6 +117,8 @@
 			<br>
 		</div>
 	</div>
+
+
 	<br>
 	<div class="pagination" align="center">
 

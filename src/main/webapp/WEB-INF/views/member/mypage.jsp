@@ -13,6 +13,9 @@ li.summery{
  float: left;
  margin: 15px;
 }
+.line{
+	 border: 1px solid #444444;
+}
 </style>
 </head>
 <body>
@@ -57,7 +60,7 @@ li.summery{
 				<li class="summery"><b>대기예약</b><br>${waitCtn }개</li> <!-- 현재 대기된 예약 건수-->
 				<li class="summery"><b>승인예약</b><br>${apprCtn }개</li> <!-- 현재 승인된 예약 건수-->
 				<li class="summery"><b>게시글</b><br>${boardCnt }개</li> <!-- 내가 쓴 게시글 수-->
-				<li class="summery"><b>댓글</b><br>개</li> <!-- 내가 쓴 댓글 수-->
+				<li class="summery"><b>댓글</b><br>${replyCnt }개</li> <!-- 내가 쓴 댓글 수-->
 				<li class="summery"><b>찜</b><br>개</li> <!-- 내가 누른 좋아요(캠핑장) 수-->
 			</ul>
 		</div>
@@ -111,6 +114,26 @@ li.summery{
 		<div class="boardList">
 			<h3>내 게시글</h3>
 			<ul class="boardList"></ul>
+			<table border="1">
+			<thead>
+				<tr style="background-color: rgb(240, 232, 232); border: solid 1px white;" class="line">
+					<th class="line">글번호</th>
+					<th class="line">제목</th>
+					<th class="line">날짜</th>
+					<th class="line">조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="list" items="${list }" begin="0" end="4">	
+				<tr class="line">
+					<td class="line">${list.brdId }</td>
+					<td class="line"><a href="boardInfo.do?bid=${list.brdId }">${list.brdTitle }</a></td>
+					<td class="line">${list.brdDate }</td>
+					<td class="line">${list.brdRead }</td>
+				</tr>
+			</c:forEach>
+			</tbody>
+			</table>
 		</div>
 		
 		<!-- 좋아요(게시글) 모아보기 
