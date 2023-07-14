@@ -71,4 +71,9 @@ public class BoardServiceImpl implements BoardService {
 	public int myBoardCnt(String id) {
 		return mapper.myBoardCnt(id);
 	}
+
+	@Override
+	public List<BoardVO> myBoardList(String writer) {
+		return mapper.myBoardList(writer);
+	}
 }

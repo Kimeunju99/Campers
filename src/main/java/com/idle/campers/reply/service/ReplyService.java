@@ -12,5 +12,5 @@ public interface ReplyService {
 	public boolean updateReply(ReplyVO vo);
 	public boolean deleteReply(int replyId);
 	
-	
+	public int totalCnt();
 }

@@ -35,11 +35,37 @@
 	<br>
 	<div class="replyBody">
 		<h2>댓글창</h2>
+		<div class="writeReply">
+			<ul>
+				<c:choose>
+					<c:when test="${id != null }">
+						<li><input type="text" readonly size="20"
+							value="${board.brdWriter}"></li>
+						<li>: <textarea rows="5" cols="170" style="resize: none"></textarea>
+							<button type="button" id="addRBtn">댓글작성</button>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<input type="text" readonly size="20">
+						<li>: <textarea rows="5" cols="170" style="resize: none"
+								readonly>로그인한 사용자만 이용할 수 있습니다.</textarea>
+							<button type="button" id="addRBtn">댓글작성</button>
+						</li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
 		<ul class="reple">
 			<li><div>
 					<div class="header">
-						<strong>user1</strong> 
-						<small>2023-06-05 15:24</small>
+						<strong>user1</strong> <small>2023-06-05 15:24</small>
+						<c:if test="${id = list.replyer}">
+							<button class="close" style="align: right">&times;</button>
+							<button class="modify" style="align: right">수정</button>
+						</c:if>
+						<c:if test="${id != null && id != list.replyer}">
+							<button class="accuse" style="align: right">🚨</button>
+						</c:if>
 					</div>
 					<p>Good Job!!!!!!!!!!!!</p>
 				</div></li>
@@ -67,27 +93,37 @@
 
 		//댓글부분
 		
+		$('ul').css({
+		border: 'solid 0.5px',
+		padding: '5px',
+		margin: '20px'
+		});
+		
+		$('ul>li').css('list-style', 'none');
+		
 		//댓글 리스트 보여주기
 		const bid = '${board.brdId}';
-		const replyUL = $('reple');
+		const replyUL = $('.reple');
 		
-	
 		function replyFnc(bid){
-			console.log(bid);
-			fetch('/replyList.do?bid='+ bid)
-			.then(function(response){
-				console.log(response);
-				return response.json();
+		let payload = "bid=" + bid;
+		url = '/campers/replyList.do';
+			fetch(url, {
+				method: 'post',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+				},
+				body: payload
 			})
-			.then(function(result){
-				console.log(result);
-			})
-			.catch(function(err){
-				console.error(err);
-			}
+			.then(Response => Response.json())
+			.then(json => viewHTML(json));
 		}
 		
-		replyFnc(bid);
+		function viewHTML(datas){
+			console.log(datas);
+		}
+		
+		
 	</script>
 </body>
 </html>

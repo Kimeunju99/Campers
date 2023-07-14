@@ -26,4 +26,6 @@ public interface BoardService {
 	
 	public int totalCnt(String type);
 	public int myBoardCnt(String id); //내 게시글 카운트
+	
+	public List<BoardVO> myBoardList(String writer);
 }

@@ -26,4 +26,6 @@ public interface BoardMapper {
 	
 	public int getTotalCnt(@Param("type") String type);
 	public int myBoardCnt(@Param("id")String id);
+	
+	public List<BoardVO> myBoardList(@Param("writer") String writer);
 }

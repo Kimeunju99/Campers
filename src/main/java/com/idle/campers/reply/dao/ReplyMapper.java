@@ -13,4 +13,6 @@ public interface ReplyMapper {
 	public int updateReply(ReplyVO vo);
 	public int deleteReply(int replyId);
 	
+	public int getTotalCnt();
+	
 }

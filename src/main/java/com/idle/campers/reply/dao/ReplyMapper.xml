@@ -37,5 +37,9 @@
 		where reply_id = #{replyId}
 	</delete>
 
+	<select id="getTotalCnt" parameterType="int">
+		select count(1) 
+		from tbl_reply
+	</select>
 </mapper>
 

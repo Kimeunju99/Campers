@@ -23,6 +23,7 @@ import com.idle.campers.board.control.BoardListControl;
 import com.idle.campers.book.control.BookList;
 import com.idle.campers.book.control.BookStateUpdateControl;
 import com.idle.campers.board.control.BoardSearchListControl;
+import com.idle.campers.board.control.MyBoardListControl;
 import com.idle.campers.book.control.NewBookForm;
 import com.idle.campers.book.control.SelectBookForm;
 import com.idle.campers.common.Control;
@@ -106,6 +107,7 @@ public class FrontController extends HttpServlet{
 		map.put("/replyRemove.do", new ReplyRemoveControl());
 		
 		map.put("/boardSearchList.do", new BoardSearchListControl()); //게시글 검색
+		map.put("/myBoardList.do", new MyBoardListControl()); //내가 쓴 게시글 보기.
 	}
 	
 	@Override

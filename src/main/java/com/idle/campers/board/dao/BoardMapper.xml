@@ -4,21 +4,22 @@
 	<select id="boardList" resultType="board">
 		select *
 		from (select a.*, rownum as rnum
-             from   (select *
-                     from tbl_board
-                     where brd_type = #{type}
-	<if test="sch  == 'writer'">and BRD_WRITER LIKE '%' || #{keyword} || '%'</if>
-	<if test="sch  == 'title'">and BRD_TITLE LIKE '%' || #{keyword} || '%'</if>
-	<if test="sch  == 'content'">and BRD_CONTENT LIKE '%' || #{keyword} || '%'</if>
-	<if test="sch  == 'wdate'">and brd_date between to_date(#{keyword}, 'yyyy-MM-dd')
-								and TO_CHAR(TO_DATE(#{keyword}, 'yyyy-MM-dd') + INTERVAL '1' DAY, 'YYYY-MM-DD')</if>
-					 order by brd_id desc
+             from   (select b.*, u.user_name
+                     from tbl_board b, tbl_user u
+                     where b.brd_writer = u.user_id
+                     and b.brd_type = #{type}
+	<if test="sch  == 'writer'">and b.BRD_WRITER LIKE '%' || #{keyword} || '%'</if>
+	<if test="sch  == 'title'">and b.BRD_TITLE LIKE '%' || #{keyword} || '%'</if>
+	<if test="sch  == 'content'">and b.BRD_CONTENT LIKE '%' || #{keyword} || '%'</if>
+	<if test="sch  == 'wdate'">AND b.BRD_DATE BETWEEN TO_DATE(#{keyword}, 'yyyy-MM-dd') - INTERVAL '1' DAY
+								AND TO_DATE(#{keyword}, 'yyyy-MM-dd')</if>
+					 order by b.brd_id desc
 					) a
 			
-			) b
+			)
 	<![CDATA[
-		where b.rnum > (#{page} - 1) * 10
-		and     b.rnum <= (#{page} * 10)
+		where	rnum > (#{page} - 1) * 10
+		and     rnum <= (#{page} * 10)
 	]]>
 	</select>
 	
@@ -71,6 +72,13 @@
   	<select id="myBoardCnt">
   		SELECT COUNT(*) board_cnt
   		FROM TBL_BOARD WHERE BRD_WRITER =#{id}
+  	</select>
+  	
+  	<select id="myBoardList">
+  	select *
+	from tbl_board
+	where brd_writer = ${writer}
+	order by 1;
   	</select>
   	
 </mapper>
