@@ -33,4 +33,9 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.updateMember(vo) == 1;
 	}
 
+	@Override
+	public boolean joinout(MemberVO vo) {
+		return mapper.joinout(vo) == 1;
+	}
+
 }

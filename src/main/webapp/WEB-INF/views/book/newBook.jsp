@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>예약하기</h1>
-<form id="bookForm">
+<form id="bookForm" name="bookForm">
 	<table border="1">
 		<tr>
 			<th>업체명</th>
@@ -18,9 +18,9 @@
 		</tr>
 		<tr>
 			<th>방번호</th>
-			<td><input type="text" name="manager" id="manager" value="${RoomId}" readonly></td>
+			<td><input type="text" name="roomId" id="roomId" value="${RoomId}" readonly></td>
 			<th>인원</th>
-			<td><input type="text" name="manager" id="manager" value="${campPersonnel}" readonly></td>
+			<td><input type="text" name="personnel" id="personnel" value="${campPersonnel}" readonly></td>
 		</tr>
 		<tr>
 			<th>일시</th>
@@ -67,7 +67,7 @@
 		</tr>
 		<tr>
 			<td colspan="4" align="center">
-				<button type="submit" id="bookBtn">예약</button>
+				<button type="button" id="bookBtn">예약</button>
 				<button type="button" id="backBtn">뒤로가기</button>
 			</td>
 		</tr>
@@ -75,67 +75,52 @@
 </form>
 
 <script>
-let cost = document.getElementById("cost");
 document.getElementById("backBtn").addEventListener('click', function(e){
 	location.href = document.referrer;
 });//뒤로가기
 
+
+let cost = $("#cost");
 document.getElementById("bookBtn").addEventListener('click', function(e){
-	if(cost.value != null){
-		$.ajax({
-			url: "newBookControl.do",
-			method: 'post',
-			data: $('form[name="bookForm"]').serialize(),
-			success: function(result){
-				alert(result);
-				location.href = "/campers/main.do";
-			},
-			error: function(err){	console.log(err);	}	
-		});//ajax
-	}else{
-		alert('예약 정보를 다 채우지 않았습니다.');
+	if( $('#startDate').val() > $('#endDate').val()){
+		alert('마지막날은 첫날보다 이후의 날이어야 합니다.');
+	}else{	
+		if(cost.val() != ""){
+			$.ajax({
+				url: "newBookControl.do",
+				method: 'post',
+				data: $('form[name="bookForm"]').serialize(),
+				success: function(result){
+					if(result =="true"){
+						alert("예약이 완료되었습니다.");
+						location.href = "/campers/main.do";
+					}else{
+						alert("예약에 실패했습니다.")
+						document.getElementById("bookForm").reset();
+					}
+				},
+				error: function(err){	console.log(err);	}	
+			});//ajax
+		}else{
+			alert('예약 정보를 다 채우지 않았습니다.');
+		}
 	}
 });//예약버튼
 
-let first = document.getElementById("startDate").value;
-let last = document.getElementById("endDate").value;
-
-document.querySelectorAll(".date").forEach(function (item){
-	item.addEventListener('change', function(e){
-		let weekday = 0, weekend = 0 //평일, 주말
-		
-		for(let i=first; i<last; i++){
-			let thatdate = new Date(i);
-			console.log(i, thatdate);
-			if(thatdate.getDay() == 0 || thatdate.getDay() == 6){ //주말
-				weekend++;
-			}else{ //평일
-				weekday++;
-			}
-		}
-		if(first != "" && last != "")
-			cost.value = ((20000 * weekday) + (25000 * weekend));
-			//((${campWeekday} * weekday) + (${campWeekend} * weekend));
-	});//날짜 변동에 따른 가격 동적 변화
-});//시작날과 끝날 input 태그의 value 값이 변함
-
 let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
 let today = new Date();     // 페이지를 로드한 날짜를 저장
-today.setHours(0, 0, 0, 0);    // 비교 편의를 위해 today의 시간을 초기화
+today.setHours(0, 0, 0, 0);    // today의 시간을 초기화
 
 document.querySelectorAll(".Calendar").forEach(function(item){
 	item.addEventListener('DOMContentLoaded', drowCal(item));
 });
-
 //Calendar 작업
-function drowCal(item){
+function drowCal(item){ //item: "table.Calendar"
 	let firstDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth(), 1);     // 이번달 1일
     let lastDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, 0);  // 이번달 마지막날
     let tbody_Calendar = $(item).find("tbody");
-    console.log(item, tbody_Calendar)
-    $(item).find(".calYear").text(nowMonth.getFullYear()); // 연도 숫자 갱신
-    $(item).find(".calMonth").text(leftPad(nowMonth.getMonth() + 1)); // 월 숫자 갱신
-
+    $(item).find(".calYear").text(nowMonth.getFullYear()); // 연도 갱신
+    $(item).find(".calMonth").text(leftPad(nowMonth.getMonth() + 1)); // 월 갱신
    	if(tbody_Calendar.innerHTML != "") { // 이전 출력결과가 남아있는 경우 초기화
         tbody_Calendar.text("");
     }
@@ -160,53 +145,67 @@ function drowCal(item){
         		nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘           
             newDIV.className = "today";
             newDIV.on('click', function () { 
-            	choiceDate(this);
-            	console.log( $(item).find(".date") );
-            	$(item).find($(".date").val(
-            			$(item).find(".calYear").text()+"-"+
-            			$(item).find(".calMonth").text()+"-"+ this.innerText            			
-            	));
+            	dateSet(newDIV);
             });
         }
         else { // 오늘 이후
             newDIV.className = "futureDay";
             newDIV.on('click', function () { 
             	choiceDate(this);
-            	console.log( $(item).find(".date") );
-            	$(item).find($(".date").val(
-            			$(item).find(".calYear").text()+"-"+
-            			$(item).find(".calMonth").text()+"-"+ this.innerText            			
-            	));
+            	dateSet(newDIV);
             });
         }
-		//console.log(newDIV.className);
     }
 }//drowCal
 
-// 날짜 선택
-function choiceDate(newDIV) {
-    if (document.getElementsByClassName("choiceDay")[0]) { // 기존에 선택한 날짜가 있으면
-        document.getElementsByClassName("choiceDay")[0].classList.remove("choiceDay");  // 해당 날짜의 "choiceDay" class 제거
-    }
-    newDIV.classList.add("choiceDay");           // 선택된 날짜에 "choiceDay" class 추가
-}
+function dateSet(pTag){
+	let td = pTag.parent().parent().parent().parent().parent();
+	let selDate = td.find(".calYear").text() + "-" + td.find(".calMonth").text() + "-" + pTag.text();
+	td.find($(".date")).val(selDate); //input 태그에 선택 날짜 저장
+	
+	let first = new Date($("#startDate").val());
+	let last =  new Date($("#endDate").val());
+	let weekday = 0, weekend = 0 //평일, 주말	
 
+	for(let i=first; i<last; i.setDate(i.getDate() + 1)){
+		console.log(i);
+		if(i.getDay() == 0 || i.getDay() == 6){ //주말
+			weekend++;
+		}else{ //평일
+			weekday++;
+		}
+	}
+	if(first != "" && last != "")//startdate와 enddate가 null이 아님
+		cost.val(((20000 * weekday) + (25000 * weekend)));
+		//((${campWeekday} * weekday) + (${campWeekend} * weekend));
+	
+};
+
+function choiceDate(newDIV) {
+    if (document.getElementsByClassName("choiceDay")[0]) {
+        document.getElementsByClassName("choiceDay")[0].classList.remove("choiceDay");
+    }// 기존에 선택한 날짜가 있으면 해당 날짜의 "choiceDay" class 제거
+    newDIV.classList.add("choiceDay"); // 선택된 날짜에 "choiceDay" class 추가
+}// 날짜 선택
+
+
+// 다음달 버튼 클릭
 document.querySelectorAll('.next').forEach(function(item){
 	item.addEventListener('click', nextCalendar);
 });
-document.querySelectorAll('.prev').forEach(function(item){
-	item.addEventListener('click', prevCalendar);
-});
-
-function prevCalendar() {
-    nowMonth = new Date(nowMonth.getFullYear(), nowMonth.getMonth() - 1, nowMonth.getDate());   // 현재 달을 1 감소
-    drowCal(this.parentElement.parentElement.parentElement);    // 달력 다시 생성
-}// 이전달 버튼 클릭
-
 function nextCalendar() {
     nowMonth = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, nowMonth.getDate());   // 현재 달을 1 증가
     drowCal(this.parentElement.parentElement.parentElement);    // 달력 다시 생성
-}// 다음달 버튼 클릭
+}
+
+// 이전달 버튼 클릭
+document.querySelectorAll('.prev').forEach(function(item){
+	item.addEventListener('click', prevCalendar);
+});
+function prevCalendar() {
+    nowMonth = new Date(nowMonth.getFullYear(), nowMonth.getMonth() - 1, nowMonth.getDate());   // 현재 달을 1 감소
+    drowCal(this.parentElement.parentElement.parentElement);    // 달력 다시 생성
+}
 
 // input값이 한자리 숫자인 경우 앞에 '0' 붙혀주는 함수
 function leftPad(value) {
@@ -216,8 +215,6 @@ function leftPad(value) {
     }
     return value;
 }
-
-
 </script>
 </body>
 </html>

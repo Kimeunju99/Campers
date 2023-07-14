@@ -11,6 +11,8 @@ public interface ReplyService {
 	public boolean insertReply(ReplyVO vo);
 	public boolean updateReply(ReplyVO vo);
 	public boolean deleteReply(int replyId);
+	
+	public int totalCnt();
 	public int myReplyCnt(String id);
 	
 }

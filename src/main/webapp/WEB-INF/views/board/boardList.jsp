@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="UTF-8">
 	<title>board/boardList.jsp</title>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
-
 <body>
 
 	<!-- 게시판 본문 -->
@@ -52,9 +49,10 @@
 						<c:forEach var="brd" items="${info}">
 							<tr style="background-color: rgb(240, 232, 232); border: solid 1px white;">
 								<td><span
-										style="background-color: rgb(228, 49, 49); border-radius: 4px; color: rgb(250, 204, 204); padding: 2px; font-size: small">공지</span>
+										style="background-color: rgb(228, 49, 49); border-radius: 4px; 
+										color: rgb(250, 204, 204); padding: 2px; font-size: small">공지</span>
 								</td>
-								<td><a href="boardInfo.do?bid=${brd.brdId}&bwri=${brd.brdWriter}"
+								<td><a href="/campers/boardInfo.do?bid=${brd.brdId}&bwri=${brd.brdWriter}"
 										style="text-decoration: none; color: red;">
 										<c:out value="${brd.brdTitle}" /></a></td>
 								<td>
@@ -81,11 +79,11 @@
 								<td>
 									<c:out value="${vo.brdId}" />
 								</td>
-								<td><a href="boardInfo.do?bid=${vo.brdId}&bwri=${vo.brdWriter}"
+								<td><a href="/campers/boardInfo.do?bid=${vo.brdId}&bwri=${vo.brdWriter}"
 										style="text-decoration: none; color: black;">
 										<c:out value="${vo.brdTitle}" /></a></td>
 								<td>
-									<c:out value="${vo.brdWriter}" />
+									<c:out value="${vo.userName}" />
 								</td>
 								<td>
 									<c:out value="${vo.brdDate}" />
@@ -148,42 +146,7 @@
 			$(location).attr("href", "boardAddForm.do")
 		})
 
-		$('#searchBtn').on('click', function boardSearch() {
-			let sch = $('#sch').val();
-			let keyword = $('#keyword').val();
-			console.log(sch, keyword);
-			let payload = "sch=" + sch + "&keyword=" + keyword;
-			url = "/campers/boardSearchList.do";
-			fetch(url, {
-					method: 'post',
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-					},
-					body: payload
-				}).then(Response => Response.json())
-				.then(json => viewHTML(json));
 
-		})
-
-		function viewHTML(datas) {
-			console.log(datas);
-			let t = '';
-			$('#boardTbody').empty();
-
-			for (let data of datas) {
-				t = `
-			<tr> 
-				<td><c:out value="\${data.brdId}" /></td>
-				<td><a href="boardInfo.do?bid=\${data.brdId}&bwri=\${data.brdWriter}" style="text-decoration:none; color:black;"><c:out value="\${data.brdTitle}" /></a></td>
-				<td><c:out value="\${data.brdWriter}" /></td>
-				<td><c:out value="\${data.brdDate}" /></td>
-				<td><c:out value="\${data.brdRead}" /></td>
-
-			</tr>
-			`;
-				$('#boardTbody').append(t);
-			}
-		}
 		const urlParams = new URL(location.href).searchParams;
 		const type = urlParams.get('type');
 		if(type == 'inform'){
@@ -198,6 +161,43 @@
 		}else {
 			let h2 = $('<h2 />').addClass('py-3 font-bold font-up blue-text').text('자유게시판');
 			$('.col-md-12').append(h2);
+		}
+		
+		
+		$('#searchBtn').on('click', function boardSearch() {
+			let sch = $('#sch').val();
+			let keyword = $('#keyword').val();
+			console.log(sch, keyword);
+			let payload = "sch=" + sch + "&keyword=" + keyword;
+			url = "/campers/boardSearchList.do";
+			fetch(url, {
+					method: 'post',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+					},
+					body: payload
+				}).then(Response => Response.json())
+				.then(json => viewHTML(json));
+		})
+
+		function viewHTML(datas) {
+			console.log(datas);
+			let t = '';
+			$('#boardTbody').empty();
+
+			for (let data of datas) {
+				out = `
+			<tr> 
+				<td><c:out value="\${data.brdId}" /></td>
+				<td><a href="/campers/boardInfo.do?bid=\${data.brdId}&bwri=\${data.brdWriter}" style="text-decoration:none; color:black;"><c:out value="\${data.brdTitle}" /></a></td>
+				<td><c:out value="\${data.brdWriter}" /></td>
+				<td><c:out value="\${data.brdDate}" /></td>
+				<td><c:out value="\${data.brdRead}" /></td>
+
+			</tr>
+			`;
+				$('#boardTbody').append(out);
+			}
 		}
 	</script>
 </body>

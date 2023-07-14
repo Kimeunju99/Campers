@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.idle.campers.common.Control;
+import com.idle.campers.common.PageDTO;
 import com.idle.campers.reply.dao.ReplyVO;
 import com.idle.campers.reply.service.ReplyService;
 import com.idle.campers.reply.service.ReplyServiceImpl;
@@ -23,11 +24,17 @@ public class ReplyListControl implements Control {
 		
 		ObjectMapper mapper = new ObjectMapper();
 
-		String bid = req.getParameter("brdId");
-		System.out.println(bid);
+		String bid = req.getParameter("bid");
+		String page = req.getParameter("page");
+		page = page == null ? "1" : page;
 		List<ReplyVO> list = svc.replyList(Integer.parseInt(bid));
 		
+		int totalCnt = svc.totalCnt();
+		PageDTO dto = new PageDTO(Integer.parseInt(page), totalCnt);
+		
 		map.put("list", list);
+		map.put("page", dto);
+		
 		String str = "Ajax:";
 		
 		try {
