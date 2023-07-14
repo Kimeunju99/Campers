@@ -104,7 +104,7 @@ tr, td {
 			<li><div>
 					<div class="header">
 						<strong>user1</strong> <small>2023-06-05 15:24</small>
-						<c:if test="${id = list.replyer}">
+						<c:if test="${id == list.replyer}">
 							<button class="close" style="align: right">&times;</button>
 							<button class="modify" style="align: right">수정</button>
 						</c:if>
