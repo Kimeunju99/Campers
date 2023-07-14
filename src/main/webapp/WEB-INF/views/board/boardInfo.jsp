@@ -210,15 +210,12 @@ tr, td {
 			.then(json => viewHTML(json));
 		}
 		
-<<<<<<< HEAD
 		function viewHTML(datas){
 			console.log(datas);
 		}
 		
 		
-=======
 		replyFnc(bid);
->>>>>>> branch 'develop' of https://github.com/Kimeunju99/Campers.git
 	</script>
 </body>
 </html>
