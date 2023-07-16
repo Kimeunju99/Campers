@@ -32,6 +32,8 @@ public class BoardEditControl implements Control {
 		String brdtype = multi.getParameter("type");
 		String brdImage = multi.getFilesystemName("img");
 				
+		System.out.println(brdtype);
+		
 		BoardVO vo = new BoardVO();
 		vo.setBrdId(Integer.parseInt(brdNo));
 		vo.setBrdTitle(title);
@@ -41,6 +43,8 @@ public class BoardEditControl implements Control {
 		
 		BoardService boardService = new BoardServiceImpl();
 		boardService.editBoard(vo);
+		
+		req.setAttribute("type", brdtype);
 		
 		return "boardList.do";
 	}

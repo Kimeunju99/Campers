@@ -46,6 +46,11 @@ li.summery{
 		</tr>
 		<tr>
 		<td colspan="2" align="center">
+			<c:choose>
+				<c:when test="${logUser.userAuth != 'admin' }">
+					<input type="button" name="byeBtn" id="byeBtn" value="회원탈퇴">
+				</c:when>
+			</c:choose>
 			<input type="button" name="logoutBtn" id="logoutBtn" value="로그아웃">
 		</td>
 	</tr>
@@ -112,7 +117,7 @@ li.summery{
 		
 		<!-- 내 게시글 모아보기 -->
 		<div class="boardList">
-			<h3>내 게시글</h3>
+			<h3>게시글 목록</h3>
 			<ul class="boardList"></ul>
 			<table border="1">
 			<thead>
@@ -124,7 +129,7 @@ li.summery{
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="list" items="${list }" begin="0" end="4">	
+			<c:forEach var="list" items="${boardList }" begin="0" end="4">	
 				<tr class="line">
 					<td class="line">${list.brdId }</td>
 					<td class="line"><a href="boardInfo.do?bid=${list.brdId }">${list.brdTitle }</a></td>
@@ -136,17 +141,40 @@ li.summery{
 			</table>
 		</div>
 		
-		<!-- 좋아요(게시글) 모아보기 
-		<div class="likeList">
-			<h3>좋아요 한 게시물</h3>
-			<ul class="likeList"></ul>
+		<!-- 사업자의 내 캠프 목록 -->
+		<c:choose >
+		<c:when test="${logUser.userAuth == 'business' }">
+		<div>
+			<h3>내 캠핑장 목록</h3>
+			<ul class="campList"></ul>
+			<table border="1">
+			<thead>
+				<tr>
+					<th >캠핑장 번호</th>
+					<th >캠핑장 이름</th>
+					<th >방 개수</th>
+					<th >좋아요</th>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="list" items="${campList }" begin="0" end="4">	
+				<tr>
+					<td >${list.campId }</td>
+					<td ><a href="boardInfo.do?cid=${list.campId }">${list.campName }</a></td>
+					<td >${list.campRoomCnt }</td>
+					<td >${list.campLike }</td>
+				</tr>
+			</c:forEach>
+			</tbody>
+			</table>
 		</div>
-		-->
+		</c:when>
+		</c:choose>
 	</div>
 </div>
 
 
-<!-- 모달창 -->
+<!-- 정보수정 모달창 -->
 <div class="modifyWindow" style ="display:none;">
 	<p>정보수정</p>
 	<hr>
@@ -194,15 +222,47 @@ li.summery{
 	</form>
 </div>
 
+<!-- 회원탈퇴 모달창 -->
+<div class="byeWindow" style ="display:none;">
+	<p>회원탈퇴</p>
+	<hr>
+	<form name="byeForm" id="byeForm">
+		<table>
+			<tr>
+				<th>탈퇴 시 정보 복구가 불가능합니다.</th>
+				<td><input id="byePw" name="byePw" type="password" placeholder="비밀번호"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+
 
 <script>
 let md = document.querySelector('.modifyWindow');
 let pw = document.getElementById("userPw");
 let npw1 = document.getElementById("userNewPw1");
 let npw2 = document.getElementById("userNewPw2");
-
+	
 	document.getElementById("logoutBtn").addEventListener('click', logoutF);//로그아웃
 	function logoutF(){	document.location.href='logout.do';	};
+	
+	document.getElementById("byeBtn").addEventListener('click', byeF);//회원탈퇴
+	function byeF(){
+		document.querySelector('.byeWindow').style.display = 'block';
+		if($('#byePw').val() == ${logUser.userPw}){
+			$.ajax({
+				url: "joinOut.do",
+				method: "get",
+				success: function(result){
+					if(result == "true"){
+						alert("탈퇴하였습니다.");
+						document.location.href='/campers/main.do';						
+					}
+				},
+				error: function(err){	console.log(err);	}	
+			});
+		}	
+	};
 	
 	document.getElementById("mdfInfo").addEventListener('click', function(e){
 		md.style.display = 'block';

@@ -20,7 +20,6 @@
 	<![CDATA[
 		where	rnum > (#{page} - 1) * 10
 		and     rnum <= (#{page} * 10)
-	
 	]]>
 	</select>
 	

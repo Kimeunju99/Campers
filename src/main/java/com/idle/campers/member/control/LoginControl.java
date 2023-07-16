@@ -25,7 +25,11 @@ public class LoginControl implements Control {
 			String message = "아이디 또는 비밀번호가 일치하지 않습니다.";
 			session.setAttribute("message", message);
 			return "member/loginForm";
-		} else {
+		} else if(vo.getUserState().equals("false")){
+			String message = "탈퇴한 회원입니다.";
+			session.setAttribute("message", message);
+			return "member/loginForm";
+		}else {
 			session.setAttribute("id", vo.getUserId());
 			session.setAttribute("name", vo.getUserName());
 			session.setAttribute("auth", vo.getUserAuth());	

@@ -57,7 +57,6 @@ tr, td {
 					<th>좋아요</th>
 					<td><input type="button" value="♥" id="likeBtn">&nbsp;<span
 						class="likeCount"></span></td>
-
 				</tr>
 
 
@@ -65,22 +64,17 @@ tr, td {
 		</table>
 		<br>
 		<c:if test="${id == board.brdWriter || auth eq 'admin'}">
-			<c:if test="${id == board.brdWriter}">
+		<c:if test="${id == board.brdWriter}">
 				<button type="button" onclick="submit1(this.form);">수정</button>
-			</c:if>
-			<button type="button" onclick="submit2(this.form);">삭제</button>
+		</c:if>
+			<button type="button"  onclick="submit2(this.form);">삭제</button>
 		</c:if>
 		<c:if test="${id != null }">
-			<button type="button">게시글 신고</button>
+			<button type="button" onclick="submit4(this.form);">신고</button>
 		</c:if>
-		<button type="button" onclick="submit3(this.form);">목록</button>
+			<button type="button" onclick="submit3(this.form);">목록</button>
 	</form>
-
-
-	<script>
-
-		function submit1(frm) { 
-			frm.action = "boardEditForm.do?bid="+${board.brdId};
+	
 
 	<!-- 댓글 부분 -->
 	<br>
@@ -129,20 +123,28 @@ tr, td {
 		//if 작성해서 값는 값으면 action값을 바꿀 수 있음.
 
 		function submit1(frm) {
-			frm.action = "boardEdit.do?bid=" + ${board.brdId};
+			frm.action = "boardEditForm.do?bid=" + ${board.brdId};
 			frm.submit();
 			return true;
 
 		}
-
+		
 		function submit2(frm) {
 			frm.action = "boardDelete.do?bid=" + ${board.brdId};
 			frm.submit();
 			return true;
+
+		}
+
+	
+		function submit3(frm) { 
+			frm.action = "boardList.do?type="+"${board.brdType}";
+			frm.submit();
+			return true;	
 		}
 		
-		function submit3(frm) { 
-			frm.action = "boardList.do";
+		function submit4(frm) { 
+			frm.action = "accuseAddForm.do?wri="+"${board.brdWriter}"+"&rid="+"${id}"+"&bno="+"${board.brdId}"+"&title="+"${board.brdTitle}";
 			frm.submit();
 			return true;	
 		}
@@ -193,6 +195,8 @@ tr, td {
 		$('ul>li').css('list-style', 'none');
 		
 		//댓글 리스트 보여주기
+		/*const bid = '${board.brdId}';
+		const replyUL = $('reple');
 		const bid = '${board.brdId}';
 		const replyUL = $('.reple');
 		
@@ -209,6 +213,9 @@ tr, td {
 			.then(Response => Response.json())
 			.then(json => viewHTML(json));
 		}
+		
+		replyFnc(bid);
+		*/
 		
 		function viewHTML(datas){
 			console.log(datas);

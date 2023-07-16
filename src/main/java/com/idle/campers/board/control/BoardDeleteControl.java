@@ -14,6 +14,7 @@ public class BoardDeleteControl implements Control {
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		
 		String brdId = req.getParameter("bid");
+		String brdtype = req.getParameter("type");
 		BoardService boardService = new BoardServiceImpl();
 		boardService.deleteBoard(Integer.parseInt(brdId));
 		

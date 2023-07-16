@@ -4,28 +4,32 @@
 	
 	<!-- 아이디 제한 리스트 -->
 	<select id="AccuseList">
-		select * from tbl_accuse;
+		SELECT * FROM TBL_ACCUSE;
 	</select>
 	
 	<!-- 아이디 제한 유저 아이디 정보 -->
 	<select id="AccuseSelectOne" resultType="com.idle.campers.accuse.dao.AccuseVO">
-		select * from tbl_accuse where accuse_userid = #{userId}
+		SELECT * FROM TBL_ACCUSE WHERE ACCUSE_USERID = #{accuseUserId}
 	</select>
 	
 	<!-- 아이디 제한 추가 -->
 	<insert id="AccuseInsert">
-		insert into tbl_accuse (accuse_brd, accuse_reply, accuse_date, accuse_report, accuse_content, accuse_state, accuse_result, accuse_rdate, accuse_userId)
-		values(#{accuseBrd},#{reply},#{accuseDate},#{accuseReport},#{accuseContent},#{accuseState},#{accuseResult},#{accuseRdate},#{accuseUserId})
+		INSERT INTO TBL_ACCUSE (ACCUSE_BRD, ACCUSE_REPLY, ACCUSE_DATE, ACCUSE_REPORT, ACCUSE_CONTENT, ACCUSE_STATE, ACCUSE_RESULT, ACCUSE_RDATE, ACCUSE_USERID)
+		VALUES(#{accuseBrd},#{reply},#{accuseDate},#{accuseReport},#{accuseContent},#{accuseState},#{accuseResult},#{accuseRdate},#{accuseUserId})
 	</insert>
 	
 	<!-- 아이디 제한 수정 -->
 	<update id="AccuseUpdate">
-	
+		UPDATE TBL_ACCUSE
+		SET ACCUSE_STATE = #{accuseState},
+		ACCUSE_RESULT = #{accuseResult},
+		ACCUSE_RDATE = #{accuseRdate}
+		WHERE ACCUSE_USERID = #{accuseUserId}
 	</update>
 	
 	<!-- 아이디 제한 삭제 -->
 	<delete id="AccuseDelete">
-		delete from tbl_accuse where accuse_userid = #{accuseUserId}
+		DELETE FROM TBL_ACCUSE WHERE ACCUSE_USERID = #{accuseUserId}
 	</delete>
 	
 </mapper>
