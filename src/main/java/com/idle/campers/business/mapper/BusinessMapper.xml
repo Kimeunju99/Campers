@@ -33,9 +33,21 @@
 		DELETE * FROM TBL_CAMP
 		WHERE CAMP_NAME = #{campName}
 	</delete>
+
 	<select id="selectCamp" parameterType="int">
 		SELECT * FROM TBL_CAMP
 		WHERE CAMP_ID = #{campId}
 	</select>
+
+	
+	<select id="bestCampList" parameterType="com.idle.campers.business.service.BusinessVO">
+	<![CDATA[
+		SELECT * FROM (
+    		SELECT * FROM TBL_CAMP ORDER BY CAMP_LIKE DESC
+		) WHERE  ROWNUM <4;
+	]]>
+	</select>
+
+
 
 </mapper>

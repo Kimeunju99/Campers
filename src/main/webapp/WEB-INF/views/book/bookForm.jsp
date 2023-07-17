@@ -5,55 +5,56 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/form.css"/>
 <script src="js/jquery-3.7.0.min.js"></script>
 </head>
 <body>
+<div id="container">
 <h1>예약 상세정보</h1>
 <form id="bookForm"> <!-- action="bookModify.do" -->
 	<table border="1">
 		<tr>
 			<th>예약번호</th>
-			<td colspan="2"><input type="text" name="bookId" id="bookId" value="${book.bookId}" readonly></td>
+			<td colspan="2" class="readonly">${book.bookId}</td>
 			<th>예약일</th>
-			<td colspan="2"><input type="date" name="bookDate" id="bookDate" value="${book.bookDate}" readonly></td>
+			<td colspan="2" class="readonly" id="bookDate">${book.bookDate}</td>
 		</tr>
 		<tr>
 			<th>업체명</th>
-			<td><input type="text" name="manager" id="manager" value="${manager.userName}" readonly></td>
+			<td class="readonly" id="manager">${manager.userName}</td>
 			<th>업체번호</th>
-			<td><input type="text" name="managerTel" id="managerTel" value="${manager.userTel }" readonly></td>
+			<td class="readonly" id="managerTel">${manager.userTel }</td>
 			<th>예약 현황</th>
-			<td><input type="text" name="state" id="state" readonly
-			value=<c:if test="${book.bookState  == 'wait'}">대기</c:if>
+			<td class="readonly" id="state">
+				<c:if test="${book.bookState  == 'wait'}">대기</c:if>
 				<c:if test="${book.bookState == 'approval'}">승인</c:if>
 				<c:if test="${book.bookState == 'expire'}">만료</c:if>
-				<c:if test="${book.bookState == 'cancle'}">취소</c:if>>
-				</td>
+				<c:if test="${book.bookState == 'cancle'}">취소</c:if>
+			</td>
 		</tr>
 		<tr>
 			<th>주소</th>
-			<td colspan="5"><textarea cols="80%" rows="1" style="resize: none;" 
-			name="addr" id="addr" readonly>${book.bookCampId}</textarea></td>
+			<td colspan="5" id="addr" class="readonly">${book.bookCampId}</td>
 		</tr>
 		<tr>
 			<th>예약자</th>
-			<td><input type="text"  name="client" id="client" readonly value="${client.userName}"></td>
+			<td class="readonly" id="client" >${client.userName}</td>
 			<th>예약자 번호</th>
-			<td><input type="text"  name="clientTel" id="clientTel" readonly value="${client.userTel }"></td>
+			<td class="readonly" id="clientTel" >${client.userTel }</td>
 			<th>예약인원</th>
-			<td><input type="text"  name="personnel" id="personnel" readonly value="${book.bookPersonnel}"></td>
+			<td class="readonly" id="personnel" >${book.bookPersonnel}</td>
 		</tr>
 		<tr>
 			<th>호수</th>
-			<td><textarea style="resize: none;" rows="1" name="roomId" id="roomId" readonly>${book.bookRoomId}</textarea></td>
+			<td id="roomId">${book.bookRoomId}</td>
 			<th>체크인</th>
-			<td><input type="date" name="sDate" id="sDate" value="${book.bookStartDate}" readonly></td>
+			<td class="readonly" id="sDate">${book.bookStartDate}"</td>
 			<th>체크아웃</th>
-			<td><input type="date" name="dDate" id="dDate" value="${book.bookEndDate}" readonly></td>
+			<td class="readonly" id="dDate">${book.bookEndDate}</td>
 		</tr>
 		<tr>
 			<th>가격</th>
-			<td><textarea style="resize: none;" rows="1"  name="cost" id="cost" readonly>${book.bookCost}</textarea></td>
+			<td class="readonly" id="cost">${book.bookCost}</td>
 			<td colspan="4" align="center">
 				<button type="button" id="stateBtn">예약취소</button>
 				<button type="button" id="backBtn">뒤로가기</button>
@@ -61,6 +62,7 @@
 		</tr>
 	</table>
 </form>
+</div>
 
 <script>
 let state = ""; //예약 상태 관리

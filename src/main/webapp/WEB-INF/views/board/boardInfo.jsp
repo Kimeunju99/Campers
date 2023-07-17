@@ -378,6 +378,29 @@ tr, td {
 		margin: '20px'
 		});
 		
+
+		$('ul>li').css('list-style', 'none');
+		
+		//댓글 리스트 보여주기
+		const bid = '${board.brdId}';
+		const replyUL = $('.reple');
+		
+		function replyFnc(bid){
+		let payload = "bid=" + bid;
+		url = '/campers/replyList.do';
+			fetch(url, {
+				method: 'post',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+				},
+				body: payload
+			})
+			.then(Response => Response.json())
+			.then(json => viewHTML(json));
+		}
+		
+
+
 		replyUL.css('list-style', 'none');
 		
 		

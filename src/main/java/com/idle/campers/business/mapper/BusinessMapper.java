@@ -16,5 +16,10 @@ public interface BusinessMapper {
 	
 	public int updateCamp(BusinessVO vo);
 
+
 	public BusinessVO selectCamp(int campId);
+
+	
+	
+
 }

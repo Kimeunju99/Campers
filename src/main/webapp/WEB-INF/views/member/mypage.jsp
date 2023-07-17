@@ -4,24 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/mypage.css"/>
 <script src="js/jquery-3.7.0.min.js"></script>
-<style>
-li{
- list-style-type: none;
-}
-li.summery{
- float: left;
- margin: 15px;
-}
-.line{
-	 border: 1px solid #444444;
-}
-</style>
 </head>
 <body>
 <!-- ----------------김은주: MYPAGE ----------------------- -->
 <!-- link= mypage.do -> MypageForm.class -->
-<div>
+<div id="container">
 	<!-- 개인 정보창 -->
 	<div id="userInfo" class="userInfo">
 		<p id="infoName"><c:out value="${logUser.userName }" />님</p>
@@ -48,10 +37,10 @@ li.summery{
 		<td colspan="2" align="center">
 			<c:choose>
 				<c:when test="${logUser.userAuth != 'admin' }">
-					<input type="button" name="byeBtn" id="byeBtn" value="회원탈퇴">
+					<button type="button" class="infoBtn" name="byeBtn" id="byeBtn">회원탈퇴</button>
 				</c:when>
 			</c:choose>
-			<input type="button" name="logoutBtn" id="logoutBtn" value="로그아웃">
+			<button type="button"  class="infoBtn" name="logoutBtn" id="logoutBtn">로그아웃</button>
 		</td>
 	</tr>
 		</table>
@@ -60,8 +49,8 @@ li.summery{
 	<div id="userAction" class="userAction">
 		<h2>MY PAGE</h2>
 		<!-- 요약창: 예약n건 | 작성 게시글 n개 | 좋아요 n개 | 댓글 n개 -->
-		<div class="summery">
-			<ul class="summery">
+		<div class="summery actionView" id="summery">
+			<ul id="summeryUl" class="summery">
 				<li class="summery"><b>대기예약</b><br>${waitCtn }개</li> <!-- 현재 대기된 예약 건수-->
 				<li class="summery"><b>승인예약</b><br>${apprCtn }개</li> <!-- 현재 승인된 예약 건수-->
 				<li class="summery"><b>게시글</b><br>${boardCnt }개</li> <!-- 내가 쓴 게시글 수-->
@@ -71,9 +60,9 @@ li.summery{
 		</div>
 		
 		<!-- 예약 리스트 -->
-		<div class="bookList">
+		<div class="bookList actionView" id="bookList">
 			<h3><a href="/campers/bookList.do">예약 목록</a></h3>
-			<table class="bookList" border="1">
+			<table class="bookList">
 				<c:choose >
 					<c:when test="${logUser.userAuth == 'general' }">
 						<thead align="center"><tr>
@@ -116,25 +105,24 @@ li.summery{
 		</div>
 		
 		<!-- 내 게시글 모아보기 -->
-		<div class="boardList">
+		<div  class="boardList actionView" id="boardList">
 			<h3>게시글 목록</h3>
-			<ul class="boardList"></ul>
-			<table border="1">
+			<table>
 			<thead>
-				<tr style="background-color: rgb(240, 232, 232); border: solid 1px white;" class="line">
-					<th class="line">글번호</th>
-					<th class="line">제목</th>
-					<th class="line">날짜</th>
-					<th class="line">조회수</th>
+				<tr>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>날짜</th>
+					<th>조회수</th>
 				</tr>
 			</thead>
 			<tbody>
 			<c:forEach var="list" items="${boardList }" begin="0" end="4">	
-				<tr class="line">
-					<td class="line">${list.brdId }</td>
-					<td class="line"><a href="boardInfo.do?bid=${list.brdId }">${list.brdTitle }</a></td>
-					<td class="line">${list.brdDate }</td>
-					<td class="line">${list.brdRead }</td>
+				<tr onclick="location.href='/campers/boardInfo.do?bid=${list.brdId }'">
+					<td>${list.brdId }</td>
+					<td>${list.brdTitle }</td>
+					<td>${list.brdDate }</td>
+					<td>${list.brdRead }</td>
 				</tr>
 			</c:forEach>
 			</tbody>
@@ -144,10 +132,10 @@ li.summery{
 		<!-- 사업자의 내 캠프 목록 -->
 		<c:choose >
 		<c:when test="${logUser.userAuth == 'business' }">
-		<div>
+		<div  class="campList actionView" id="campList">
 			<h3>내 캠핑장 목록</h3>
 			<ul class="campList"></ul>
-			<table border="1">
+			<table>
 			<thead>
 				<tr>
 					<th >캠핑장 번호</th>
@@ -176,70 +164,75 @@ li.summery{
 
 <!-- 정보수정 모달창 -->
 <div class="modifyWindow" style ="display:none;">
-	<p>정보수정</p>
-	<hr>
-	<form name="modifyForm" id="modifyForm">
-		<table>
-			<tr>
-				<th>이름</th>
-				<td><input id="userName" name="userName" type="text" value="${logUser.userName }"></td>
-			</tr>
-			<tr>
-				<th>전화번호</th>
-				<td><input id="userTel" name="userTel" type="text" value="${logUser.userTel }"></td>
-			</tr>
-			<tr>
-				<th>E-MAIL</th>
-				<td><input id="userEmail" name="userEmail" type="text" value="${logUser.userEmail }"></td>
-			</tr>
-			<tr>
-				<th>주소</th>
-				<td><input id="userAddr" name="userAddr" type="text" value="${logUser.userAddr }"></td>
-			</tr>
-			<tr>
-				<th>현재 비밀번호</th>
-				<td><input id="userPw" name="userPw" type="password" placeholder="현재 비밀번호"></td>
-			</tr>
-			<tr>
-				<th>새 비밀번호</th>
-				<td><input id="userNewPw1" name="userNewPw1" type="password" placeholder="새 비밀번호"></td>
-			</tr>
-			<tr>
-				<th>새 비밀번호 확인</th>
-				<td><input id="userNewPw2" name="userNewPw2" type="password" placeholder="새 비밀번호 확인">
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2"><p id="checkPw" style ="color:red;">비밀번호가 일치하지 않습니다.</p></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-					<button type="button" name="saveBtn" id="saveBtn">저장</button>
-					<button type="button" class="closeBtn">취소</button>
-				</td>
-			</tr>
-		</table>
-	</form>
+	<div>
+		<p>정보수정</p>
+		<hr>
+		<form name="modifyForm" id="modifyForm">
+			<table>
+				<tr>
+					<th>이름</th>
+					<td><input id="userName" name="userName" type="text" value="${logUser.userName }"></td>
+				</tr>
+				<tr>
+					<th>전화번호</th>
+					<td><input id="userTel" name="userTel" type="text" value="${logUser.userTel }"></td>
+				</tr>
+				<tr>
+					<th>E-MAIL</th>
+					<td><input id="userEmail" name="userEmail" type="text" value="${logUser.userEmail }"></td>
+				</tr>
+				<tr>
+					<th>주소</th>
+					<td><input id="userAddr" name="userAddr" type="text" value="${logUser.userAddr }"></td>
+				</tr>
+				<tr>
+					<th>현재 비밀번호</th>
+					<td><input id="userPw" name="userPw" type="password" placeholder="현재 비밀번호"></td>
+				</tr>
+				<tr>
+					<th>새 비밀번호</th>
+					<td><input id="userNewPw1" name="userNewPw1" type="password" placeholder="새 비밀번호"></td>
+				</tr>
+				<tr>
+					<th>새 비밀번호 확인</th>
+					<td><input id="userNewPw2" name="userNewPw2" type="password" placeholder="새 비밀번호 확인">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><p id="checkPw" style ="color:red;">비밀번호가 일치하지 않습니다.</p></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<button type="button" name="saveBtn" id="saveBtn">저장</button>
+						<button type="button" class="closeBtn" onclick=closeBtnF()>취소</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </div>
 
 <!-- 회원탈퇴 모달창 -->
 <div class="byeWindow" style ="display:none;">
-	<p>회원탈퇴</p>
-	<hr>
-	<form name="byeForm" id="byeForm">
-		<table>
-			<tr>
-				<th>탈퇴 시 정보 복구가 불가능합니다.</th>
-			</tr>
-			<tr>
-				<td><input id="byePw" name="byePw" type="password" placeholder="비밀번호"></td>
-			</tr>
-			<tr><td>
-				<button id="joinOut">탈퇴하기</button>
-			</td>
-			</tr>
-		</table>
-	</form>
+	<div>
+		<p>회원탈퇴</p>
+		<hr>
+		<form name="byeForm" id="byeForm">
+			<table>
+				<tr>
+					<th style="color:red">탈퇴 시 정보 복구가 불가능합니다.</th>
+				</tr>
+				<tr>
+					<td><input id="byePw" name="byePw" type="password" placeholder="비밀번호"></td>
+				</tr>
+				<tr><td>
+					<button id="joinOut">탈퇴하기</button>
+					<button id="cancle" class="closeBtn" onclick=closeBtnF()>취소</button>
+				</td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </div>
 
 
@@ -252,7 +245,7 @@ let npw2 = document.getElementById("userNewPw2");
 	document.getElementById("logoutBtn").addEventListener('click', logoutF);//로그아웃
 	function logoutF(){	document.location.href='logout.do';	};
 	
-	document.getElementById("byeBtn").addEventListener('click', e => document.querySelector('.byeWindow').style.display = 'block' });
+	document.getElementById("byeBtn").addEventListener('click', e => document.querySelector('.byeWindow').style.display = 'block' );
 	document.getElementById("byeBtn").addEventListener('click', function (e){
 		if($('#byePw').val() == ${logUser.userPw}){
 			$.ajax({
@@ -308,12 +301,13 @@ let npw2 = document.getElementById("userNewPw2");
 		
 	});//사용자 정보 수정
 	
-	document.querySelector("button.closeBtn").addEventListener('click', function(e){
+	function closeBtnF(e){
 		pw.value = "";
 		npw1.value = "";
 		npw2.value = "";
+		$('#byePw').val("");
 		md.style.display = 'none';
-	});//모달창 닫기
+	};//모달창 닫기
 
 </script>
 </body>
