@@ -77,33 +77,50 @@ tr, td {
 
 
 	<!-- 댓글 부분 -->
+
 	<br>
 	<div class="replyBody">
 		<h2>댓글창</h2>
 		<div class="writeReply">
-			<ul>
-				<c:choose>
-					<c:when test="${id != null }">
-						<li><input type="text" id="replyer" readonly size="20"
-							value="${id}"></li>
-						<li>: <textarea rows="5" cols="170" id="reply"
-								style="resize: none"></textarea>
-							<button type="button" id="addRBtn">댓글작성</button>
-						</li>
-					</c:when>
-					<c:otherwise>
-						<input type="text" readonly size="20">
-						<li>: <textarea rows="5" cols="170" style="resize: none"
-								readonly>로그인한 사용자만 이용할 수 있습니다.</textarea>
-							<button type="button" id="addRBtn">댓글작성</button>
-						</li>
-					</c:otherwise>
-				</c:choose>
-			</ul>
-		</div>
-		<ul class="reple">
+			<div class="container mt-5 mb-5">
+				<div class="d-flex justify-content-center row">
+					<div class="d-flex flex-column col-md-8">
 
-		</ul>
+						<div class="coment-bottom bg-white p-2 px-4">
+							<div class="d-flex flex-row add-comment-section mt-4 mb-4">
+								<c:choose>
+									<c:when test="${id != null }">
+										<input type="hidden" id="replyer" readonly size="20" value="${id}">
+										:<textarea rows="5" cols="170" id="reply" style="resize: none; margin: 3px" class="form-control mr-3"
+											placeholder="내용을 입력하세요."></textarea>
+										<button type="button" id="addRBtn" style="margin: 3px">작성하기</button>
+									</c:when>
+									<c:otherwise>
+										<input type="text" readonly size="20" style="height: 10px">
+										:<textarea rows="5" cols="170" id="reply"
+											style="resize: none; margin: 3px" class="form-control mr-3" readonly>
+											로그인한 사용자만 이용할 수 있습니다.</textarea>
+										<button type="button" id="addRBtn" style="margin: 3px">작성하기</button>
+									</c:otherwise>
+								</c:choose>
+
+							</div>
+						</div>
+						<ul class="reple">
+							<div class="commented-section mt-2">
+								<div class="d-flex flex-row align-items-center commented-user">
+									<h5 class="mr-2">Corey oates</h5>
+									<span class="dot mb-1"></span><span class="mb-1 ml-2">4
+										hours ago</span>
+								</div>
+								<div class="comment-text-sm">
+									<p class="content">\${reply.reply}</p>
+								
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 
@@ -241,14 +258,14 @@ tr, td {
 		    
 		    str += `
 		                <p class="content">\${reply.reply}</p>
-		            </div>
-		        </li>
+		                </div>
+						</div>
 		    `;
 			
 			return str;
 		}
 		
-		const bid = '${board.brdId}';
+		bid = '${board.brdId}';
 		const replyUL = $('.reple');
 		
 		function replyFnc(bid){

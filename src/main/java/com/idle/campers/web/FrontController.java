@@ -23,36 +23,44 @@ import com.idle.campers.board.control.BoardInfoControl;
 import com.idle.campers.board.control.BoardLikeControl;
 import com.idle.campers.board.control.BoardLikeCountControl;
 import com.idle.campers.board.control.BoardListControl;
+import com.idle.campers.board.control.BoardSearchListControl;
 import com.idle.campers.book.control.BookList;
 import com.idle.campers.book.control.BookListControl;
 import com.idle.campers.book.control.BookStateUpdateControl;
 import com.idle.campers.book.control.NewBookControl;
-import com.idle.campers.board.control.BoardSearchListControl;
 import com.idle.campers.book.control.NewBookForm;
 import com.idle.campers.book.control.SelectBookForm;
+import com.idle.campers.business.control.AddCampControl;
+import com.idle.campers.business.control.CampAddFormControl;
+import com.idle.campers.business.control.CampDeleteListControl;
+import com.idle.campers.business.control.CampInfoFormControl;
+import com.idle.campers.business.control.CampSelectListControl;
 import com.idle.campers.camp.control.SearchCamp;
 import com.idle.campers.common.Control;
+import com.idle.campers.manager.control.AjaxManagerSearchListControl;
+import com.idle.campers.manager.control.ManagerDeleteControl;
+import com.idle.campers.manager.control.ManagerInfoControl;
+import com.idle.campers.manager.control.ManagerModifyFormControl;
+import com.idle.campers.manager.control.ManagerModifyInfoControl;
+import com.idle.campers.manager.control.ManagerSelectListControl;
 import com.idle.campers.member.control.FindMemberId;
 import com.idle.campers.member.control.JoinOutControl;
 import com.idle.campers.member.control.LoginControl;
-import com.idle.campers.member.control.MypageForm;
-import com.idle.campers.member.control.ResetMemberPassword;
-import com.idle.campers.member.control.UserIdCheck;
-import com.idle.campers.member.control.MemberJoinType;
 import com.idle.campers.member.control.LoginForm;
 import com.idle.campers.member.control.LogoutControl;
 import com.idle.campers.member.control.MailCertification;
-
 import com.idle.campers.member.control.MemberJoin;
 import com.idle.campers.member.control.MemberJoinControl;
-
-
+import com.idle.campers.member.control.MemberJoinType;
 import com.idle.campers.member.control.MemberModifyControl;
+import com.idle.campers.member.control.MypageForm;
+import com.idle.campers.member.control.ResetMemberPassword;
+import com.idle.campers.member.control.UserIdCheck;
 import com.idle.campers.reply.control.ReplyAddControl;
+import com.idle.campers.reply.control.ReplyControl;
 import com.idle.campers.reply.control.ReplyListControl;
 import com.idle.campers.reply.control.ReplyModifyControl;
 import com.idle.campers.reply.control.ReplyRemoveControl;
-import com.idle.campers.reply.control.ReplyControl;
 
 
 
@@ -91,24 +99,21 @@ public class FrontController extends HttpServlet{
 		map.put("/bookListControl.do", new BookListControl()); //예약 리스트 기본 control
 		map.put("/newBook.do", new NewBookForm()); //예약 추가 form
 		map.put("/newBookControl.do", new NewBookControl()); //예약 추가 form
+
 		
 		//준위
-		map.put("/loginForm.do", new LoginForm());
-		map.put("/loginControl.do", new LoginControl());
-		map.put("/logout.do", new LogoutControl());
-		map.put("/memberJoin.do", new MemberJoin());
-		map.put("/findMemberId.do", new FindMemberId());
-		map.put("/resetMemberPassword.do", new ResetMemberPassword());
-		map.put("/loginForm.do", new LoginForm());
-		map.put("/loginControl.do", new LoginControl());
-		map.put("/logout.do", new LogoutControl());
-		map.put("/resetMemberPassword.do", new ResetMemberPassword());
-		map.put("/memberJoinType.do", new MemberJoinType());
-		map.put("/userIdCheck.do", new UserIdCheck());
-		map.put("/mailCertification.do", new MailCertification());
+		map.put("/loginForm.do", new LoginForm());	//로그인폼 jsp
+		map.put("/loginControl.do", new LoginControl()); 
+		map.put("/findMemberId.do", new FindMemberId());	//id찾기
+		map.put("/resetMemberPassword.do", new ResetMemberPassword());	//비밀번호 초기화
+		map.put("/logout.do", new LogoutControl());	//로그아웃
+		map.put("/memberJoinType.do", new MemberJoinType());	//회원가입-유저타입 선택 페이지
+		map.put("/memberJoin.do", new MemberJoin());	//회원가입form
 		map.put("/memberJoinControl.do", new MemberJoinControl());
-		map.put("/searchCamp.do", new SearchCamp());
-		
+		map.put("/userIdCheck.do", new UserIdCheck());	//id체크
+		map.put("/mailCertification.do", new MailCertification());	//메일발송
+		map.put("/searchCamp.do", new SearchCamp());	//캠핑장 검색
+
 		//김시인 (23.07.07 - 게시글 리스트)
 		map.put("/boardList.do", new BoardListControl()); //일반 게시글 리스트
 		map.put("/boardSearchList.do", new BoardSearchListControl()); //게시글 검색
@@ -120,6 +125,20 @@ public class FrontController extends HttpServlet{
 		map.put("/replyRemove.do", new ReplyRemoveControl());
 		
 		map.put("/boardSearchList.do", new BoardSearchListControl()); //게시글 검색
+		
+		//강민호
+		map.put("/managerSelectList.do", new ManagerSelectListControl());
+		map.put("/ajaxManagerSearchList.do", new AjaxManagerSearchListControl());
+		map.put("/managerModifyInfo.do", new ManagerModifyInfoControl());
+		map.put("/managerModifyForm.do", new ManagerModifyFormControl());
+		map.put("/managerInfoControl.do", new ManagerInfoControl());
+		map.put("/managerDelete.do", new ManagerDeleteControl());
+		
+		map.put("/addCamp.do", new AddCampControl());
+		map.put("/campAddForm.do", new CampAddFormControl());
+		map.put("/campSelectList.do", new CampSelectListControl());
+		map.put("/campInfoFormControl.do", new CampInfoFormControl());
+		map.put("/campDeleteList.do", new CampDeleteListControl());
 	}
 	
 	@Override
@@ -131,15 +150,21 @@ public class FrontController extends HttpServlet{
 		
 		Control control = map.get(page);
 		String viewPage = control.exec(req, resp);
+		System.out.println(viewPage);
 		if(!viewPage.endsWith(".do")) {
 			if(viewPage.startsWith("Ajax:")) {
 				resp.setContentType("text/html; charset=UTF-8");
 				resp.getWriter().append(viewPage.substring(5));
 				return;
 			}
-			viewPage += ".tiles";
-			RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);
-			dispatcher.forward(req, resp);
+			
+			if(viewPage.contains(".do?")) {
+				resp.sendRedirect(viewPage);
+			}else {
+				viewPage += ".tiles";
+				RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);
+				dispatcher.forward(req, resp);
+			}
 		}else {
 			resp.sendRedirect(viewPage);
 		}

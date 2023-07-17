@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>board/boardList.jsp</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<!--  
+<link href="css/pagination.css" rel="stylesheet" />
+-->
 </head>
 <body>
 
@@ -48,10 +51,10 @@
 					<!--Table body-->
 					<tbody>
 						<c:forEach var="brd" items="${info}">
-							<tr	style="background-color: rgb(240, 232, 232); border: solid 1px white;">
+							<tr	style="background-color: rgb(247, 244, 222); border: solid 1px white;">
 								<td><span style="background-color: rgb(228, 49, 49); border-radius: 4px; color: rgb(250, 204, 204); padding: 2px; font-size: small">공지</span>
 									</td>
-								<td><a href="boardInfo.do?bid=${brd.brdId}" style="text-decoration: none; color: red;"> <c:out
+								<td><a href="boardInfo.do?bid=${brd.brdId}" style="text-decoration: none; color: black;"> <c:out
 											value="${brd.brdTitle}" /></a></td>
 								<td><c:out value="${brd.brdWriter}" /></td>
 								<td><c:out value="${brd.brdDate}" /></td>
@@ -86,17 +89,30 @@
 						<option value="title">제목</option>
 						<option value="content">내용</option>
 						<option value="wdate">작성일</option>
-					</select> <input type="text" id="keyword" name="keyword"
-						style="height: 25px">
-					<button type="button" id="searchBtn"
-						style="height: 25px; background-color: white; border: solid 0.5px; border-color: rgb(172, 178, 185);">검색</button>
+					</select> <input type="text" id="keyword" name="keyword" style="height: 25px">
+					<button type="button" id="searchBtn">검색</button>
 				</form>
 			</div>
 			<br>
 		</div>
 	</div>
 
-
+<!--  
+<div id="app" class="container">  
+<ul class="page">
+    <li class="page__btn"><span class="material-icons"><</span></li>
+    <li class="page__numbers"> 1</li>
+    <li class="page__numbers active">2</li>
+    <li class="page__numbers">3</li>
+    <li class="page__numbers">4</li>
+    <li class="page__numbers">5</li>
+    <li class="page__numbers">6</li>
+    <li class="page__dots">...</li>
+    <li class="page__numbers"> 10</li>
+    <li class="page__btn"><span class="material-icons">></span></li>
+  </ul>
+</div>
+-->
 	<br>
 	<div class="pagination" align="center">
 
@@ -153,7 +169,7 @@
 			fetch(url, {
 					method: 'post',
 					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;'
 					},
 					body: payload
 				}).then(response => response.json())
