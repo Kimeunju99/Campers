@@ -207,23 +207,7 @@
 		viewMap();	// 맵 생성
 	}
 	
-
-	// 메인 검색을 이용해서 접근
-	let getMain = '${getMain}';
-	if (getMain == 'getMain'){
-		let paramSido = '${locationSido}';
-		let paramKeyword = '${keyWord}';
-		let paramCampName = '${campName}';
-		
-		$('#locationSido').val("강원도").attr('selected', 'selected');
-		console.log($("#locationSido").val());
-		
-	}
-
-	
 //-------------------------------------------------------------------------------------------
-
-
 
 function viewMap(){	// 화면에 지도 표시
 	// 지도의 중심 좌표

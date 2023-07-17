@@ -37,4 +37,6 @@ public interface BoardMapper {
 	public int myBoardCnt(@Param("id")String id);
 	
 	public List<BoardVO> myBoardList(@Param("id")String id);
+	
+	public List<BoardVO> MainPageboardList();	//메인페이지 출력용
 }

@@ -91,21 +91,17 @@ public class FrontController extends HttpServlet{
 		map.put("/newBookControl.do", new NewBookControl()); //예약 추가 form
 		
 		//준위
-		map.put("/loginForm.do", new LoginForm());
-		map.put("/loginControl.do", new LoginControl());
-		map.put("/logout.do", new LogoutControl());
-		map.put("/memberJoin.do", new MemberJoin());
-		map.put("/findMemberId.do", new FindMemberId());
-		map.put("/resetMemberPassword.do", new ResetMemberPassword());
-		map.put("/loginForm.do", new LoginForm());
-		map.put("/loginControl.do", new LoginControl());
-		map.put("/logout.do", new LogoutControl());
-		map.put("/resetMemberPassword.do", new ResetMemberPassword());
-		map.put("/memberJoinType.do", new MemberJoinType());
-		map.put("/userIdCheck.do", new UserIdCheck());
-		map.put("/mailCertification.do", new MailCertification());
+		map.put("/loginForm.do", new LoginForm());	//로그인폼 jsp
+		map.put("/loginControl.do", new LoginControl()); 
+		map.put("/findMemberId.do", new FindMemberId());	//id찾기
+		map.put("/resetMemberPassword.do", new ResetMemberPassword());	//비밀번호 초기화
+		map.put("/logout.do", new LogoutControl());	//로그아웃
+		map.put("/memberJoinType.do", new MemberJoinType());	//회원가입-유저타입 선택 페이지
+		map.put("/memberJoin.do", new MemberJoin());	//회원가입form
+		map.put("/userIdCheck.do", new UserIdCheck());	//id체크
+		map.put("/mailCertification.do", new MailCertification());	//메일발송
 		map.put("/memberJoinControl.do", new MemberJoinControl());
-		map.put("/searchCamp.do", new SearchCamp());
+		map.put("/searchCamp.do", new SearchCamp());	//캠핑장 검색
 		
 		//김시인 (23.07.07 - 게시글 리스트)
 		map.put("/boardList.do", new BoardListControl()); //일반 게시글 리스트

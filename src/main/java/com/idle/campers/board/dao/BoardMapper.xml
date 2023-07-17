@@ -20,10 +20,15 @@
 	<![CDATA[
 		where	rnum > (#{page} - 1) * 10
 		and     rnum <= (#{page} * 10)
-			) b
+	]]>
+	</select>
+	
+	<select id="MainPageboardList" resultType="board">
 	<![CDATA[
-		where b.rnum > (#{page} - 1) * 10
-		and     b.rnum <= (#{page} * 10)
+		SELECT * FROM (
+    		SELECT * FROM TBL_BOARD WHERE BRD_TYPE != 'INFORM' ORDER BY BRD_DATE
+		)
+		WHERE ROWNUM < 6
 	]]>
 	</select>
 	
