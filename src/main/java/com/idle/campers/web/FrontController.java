@@ -133,15 +133,21 @@ public class FrontController extends HttpServlet{
 		
 		Control control = map.get(page);
 		String viewPage = control.exec(req, resp);
+		System.out.println(viewPage);
 		if(!viewPage.endsWith(".do")) {
 			if(viewPage.startsWith("Ajax:")) {
 				resp.setContentType("text/html; charset=UTF-8");
 				resp.getWriter().append(viewPage.substring(5));
 				return;
 			}
-			viewPage += ".tiles";
-			RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);
-			dispatcher.forward(req, resp);
+			
+			if(viewPage.contains(".do?")) {
+				resp.sendRedirect(viewPage);
+			}else {
+				viewPage += ".tiles";
+				RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);
+				dispatcher.forward(req, resp);
+			}
 		}else {
 			resp.sendRedirect(viewPage);
 		}

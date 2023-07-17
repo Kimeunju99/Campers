@@ -7,8 +7,31 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
+
+input, textarea {
+	height: 50px;
+	border-radius: 10px;
+}
+
+
+#all {
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+	color: #008481;
+}
+
+input {
+	width: 50%;
+}
+
 select{
-  width: 150px; 
+  width: 50%; 
   padding: .8em .5em;
   font-family: inherit;  
   background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
@@ -17,6 +40,7 @@ select{
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  border-radius: 15px;
 }
 
 #btn1{
@@ -56,7 +80,8 @@ select{
 </head>
 <body>
 	<br>
-	<h3>수정 페이지</h3>
+	<div id="all">
+	<h2>글쓰기</h2>
     <form action="boardEdit.do" method="post" enctype="multipart/form-data"> 
     <input type="hidden" name="bid" value="${brd.brdId }" >
     	<table class="table">
@@ -67,6 +92,7 @@ select{
 		            	</c:if>
                     		<option value="normal">자유게시판</option>
                     	    <option value="review">방문자 리뷰</option>
+                    	    <option value="tip">팁 공유</option>
                </select></td>
              </tr>	
     		<tr>
@@ -87,5 +113,6 @@ select{
                 <button id="btn2" type="reset">초기화</button>
             </div>	
     </form>
+    </div>
 </body>
 </html>
