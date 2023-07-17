@@ -5,19 +5,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/tableList.css"/>
 <script src="js/jquery-3.7.0.min.js"></script>
 </head>
 <body>
 <!-- 예약 리스트: 사용자=>userId=client / 사업자=>userId=>manager / 관리자=>모든예약정보를 볼 수 있으나 예약상태 변경 불가 -->
+<div id="container">
 <div class="bookList">
 	<h1>예약목록</h1>
-	<table id="bookTable" border="1">
+	<table id="bookTable">
 		<thead align="center"><tr>
 			<th>예약일시</th><th>업체명</th><th>호실</th><th>가격</th><th>예약자명</th><th>날짜</th><th>예약상태</th>
 		</tr></thead>
 		<tbody align="center" id="bookTdoby"></tbody>
 	</table>
 	<button type="button" id="backBtn">뒤로가기</button>
+</div>
 </div>
 	
 <script type="text/javascript">
