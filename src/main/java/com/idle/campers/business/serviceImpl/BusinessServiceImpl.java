@@ -26,9 +26,9 @@ public class BusinessServiceImpl implements BusinessService{
 	}
 
 	@Override
-	public List<BusinessVO> campSelectList() {
+	public List<BusinessVO> campSelectList(String id) {
 		// TODO Auto-generated method stub
-		return map.campSelectList();
+		return map.campSelectList(id);
 	}
 
 	@Override
@@ -41,6 +41,11 @@ public class BusinessServiceImpl implements BusinessService{
 	public boolean updateCamp(BusinessVO vo) {
 		// TODO Auto-generated method stub
 		return map.updateCamp(vo) == 1;
+	}
+
+	@Override
+	public BusinessVO selectCamp(int campId) {
+		return map.selectCamp(campId);
 	}
 	
 	

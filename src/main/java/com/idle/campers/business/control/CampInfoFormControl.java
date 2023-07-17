@@ -16,16 +16,13 @@ public class CampInfoFormControl implements Control {
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		// TODO Auto-generated method stub
-		String name = req.getParameter("name");
+		String cid = req.getParameter("cid");
 		BusinessService svc = new BusinessServiceImpl();
-		BusinessVO vo = svc.infoCamp(name);
-		
-		String id = req.getParameter("rid");
-		System.out.println(id);
+		BusinessVO vo = svc.selectCamp(Integer.parseInt(cid));
 		RoomService service = new RoomServiceImpl();
-		RoomVO rvo = service.infoRoom(Integer.parseInt(id));
-		
-		req.setAttribute("name", vo);
+		RoomVO rvo = service.infoRoom(Integer.parseInt(cid));
+		System.out.println(cid);
+		req.setAttribute("cid", vo);
 		req.setAttribute("rid", rvo);
 		
 		return "business/infoCamp";

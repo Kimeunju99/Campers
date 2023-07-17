@@ -12,7 +12,7 @@ public class BusinessVO {
 	private String campLocation;
 	private String campInfo;
 	private int campLike;
-	private String campImg;
+	private String campImage;
 	private String campName;
 	private int campRoomcnt;
 }
