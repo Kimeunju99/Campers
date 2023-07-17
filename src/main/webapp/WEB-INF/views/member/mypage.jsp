@@ -230,7 +230,13 @@ li.summery{
 		<table>
 			<tr>
 				<th>탈퇴 시 정보 복구가 불가능합니다.</th>
+			</tr>
+			<tr>
 				<td><input id="byePw" name="byePw" type="password" placeholder="비밀번호"></td>
+			</tr>
+			<tr><td>
+				<button id="joinOut">탈퇴하기</button>
+			</td>
 			</tr>
 		</table>
 	</form>
@@ -249,6 +255,8 @@ let npw2 = document.getElementById("userNewPw2");
 	document.getElementById("byeBtn").addEventListener('click', byeF);//회원탈퇴
 	function byeF(){
 		document.querySelector('.byeWindow').style.display = 'block';
+	document.getElementById("byeBtn").addEventListener('click', e => document.querySelector('.byeWindow').style.display = 'block' });
+	document.getElementById("byeBtn").addEventListener('click', function (e){
 		if($('#byePw').val() == ${logUser.userPw}){
 			$.ajax({
 				url: "joinOut.do",
@@ -261,8 +269,8 @@ let npw2 = document.getElementById("userNewPw2");
 				},
 				error: function(err){	console.log(err);	}	
 			});
-		}	
-	};
+		}
+	});	
 	
 	document.getElementById("mdfInfo").addEventListener('click', function(e){
 		md.style.display = 'block';

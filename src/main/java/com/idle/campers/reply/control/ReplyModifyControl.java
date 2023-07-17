@@ -20,14 +20,14 @@ public class ReplyModifyControl implements Control {
 		
 		ObjectMapper mapper = new ObjectMapper();
 
-		String rno = req.getParameter("rno");
-		String reply = req.getParameter("reply");
+		String rid = req.getParameter("rid");
+		String reply = req.getParameter("modiReply");
 
 		vo.setReply(reply);
-		vo.setBrdId(Integer.parseInt(rno));
+		vo.setBrdId(Integer.parseInt(rid));
 
 		if(svc.updateReply(vo)) {
-			vo = svc.replyOne(Integer.parseInt(rno));
+			vo = svc.replyOne(Integer.parseInt(rid));
 		}
 		
 		String str = "Ajax:";

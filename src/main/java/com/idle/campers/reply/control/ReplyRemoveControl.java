@@ -3,6 +3,8 @@ package com.idle.campers.reply.control;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.idle.campers.common.Control;
 import com.idle.campers.reply.dao.ReplyVO;
 import com.idle.campers.reply.service.ReplyService;
@@ -14,11 +16,19 @@ public class ReplyRemoveControl implements Control {
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		ReplyService svc = new ReplyServiceImpl();
 
-		String rno = req.getParameter("rno");
+		String rid = req.getParameter("rid");
 
-		svc.deleteReply(Integer.parseInt(rno));
+		boolean result = svc.deleteReply(Integer.parseInt(rid));
 
-		return null;
+		String str = "Ajax:";
+		
+		if(result) {
+			str += "1";
+		}else {
+			str += "0";
+		}
+		
+		return str;
 	}
 
 }

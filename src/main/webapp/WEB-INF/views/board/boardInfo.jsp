@@ -64,17 +64,17 @@ tr, td {
 		</table>
 		<br>
 		<c:if test="${id == board.brdWriter || auth eq 'admin'}">
-		<c:if test="${id == board.brdWriter}">
+			<c:if test="${id == board.brdWriter}">
 				<button type="button" onclick="submit1(this.form);">수정</button>
-		</c:if>
-			<button type="button"  onclick="submit2(this.form);">삭제</button>
+			</c:if>
+			<button type="button" onclick="submit2(this.form);">삭제</button>
 		</c:if>
 		<c:if test="${id != null }">
 			<button type="button" onclick="submit4(this.form);">신고</button>
 		</c:if>
-			<button type="button" onclick="submit3(this.form);">목록</button>
+		<button type="button" onclick="submit3(this.form);">목록</button>
 	</form>
-	
+
 
 	<!-- 댓글 부분 -->
 	<br>
@@ -84,9 +84,10 @@ tr, td {
 			<ul>
 				<c:choose>
 					<c:when test="${id != null }">
-						<li><input type="text" readonly size="20"
-							value="${board.brdWriter}"></li>
-						<li>: <textarea rows="5" cols="170" style="resize: none"></textarea>
+						<li><input type="text" id="replyer" readonly size="20"
+							value="${id}"></li>
+						<li>: <textarea rows="5" cols="170" id="reply"
+								style="resize: none"></textarea>
 							<button type="button" id="addRBtn">댓글작성</button>
 						</li>
 					</c:when>
@@ -101,19 +102,7 @@ tr, td {
 			</ul>
 		</div>
 		<ul class="reple">
-			<li><div>
-					<div class="header">
-						<strong>user1</strong> <small>2023-06-05 15:24</small>
-						<c:if test="${id = list.replyer}">
-							<button class="close" style="align: right">&times;</button>
-							<button class="modify" style="align: right">수정</button>
-						</c:if>
-						<c:if test="${id != null && id != list.replyer}">
-							<button class="accuse" style="align: right">🚨</button>
-						</c:if>
-					</div>
-					<p>Good Job!!!!!!!!!!!!</p>
-				</div></li>
+
 		</ul>
 	</div>
 
@@ -185,44 +174,171 @@ tr, td {
 
 
 		//댓글부분
+		function searchList(){
+			let li = $('.liReply');
+			Array.from(li).forEach(function(tag){
+				let rid = tag.dataset.rid
+				fetch('/campers/getReply.do?rid='+rid)
+				.then(response => response.json())
+				.then(function(result){
+				})
+				.catch(function(err){
+					console.error(err);
+				})
+			})
+				
+			
+		}
 		
-		$('ul').css({
+		
+		$('#addRBtn').on('click', function(){
+			let reply = $('#reply').val();
+			let replyer = $('#replyer').val();
+			let bid = ${board.brdId};
+			if(reply === null){
+				alert('내용이 비어있습니다.');
+			}else{
+				
+			console.log(reply, replyer, bid);
+			fetch('/campers/replyAdd.do',{
+				method: 'post',
+				headers:{
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;' 	
+				},
+				body: 'reply=' + reply + '&replyer=' + replyer + '&bid=' + bid
+			})
+			.then(response => response.json())
+			.then(result => {
+				replyFnc(bid); 
+				$('#reply').val('');
+			})
+			.catch(err => console.error(err))
+			}
+		})
+		
+		
+		
+			
+		function makeList(reply={}){
+			let id = '${id}';
+			let str = '';
+			str += `
+		        <li class="liReply" data-rid=\${reply.replyId}>
+		            <div>
+		                <div class="header">
+		                    <strong>\${reply.replyer}</strong>
+		                    <small>\${reply.replyDate}</small>
+		                </div>`;
+		     
+		    if (id == reply.replyer) { // 댓글 작성자인 경우
+		        str += `
+		                <button type="button" class="closeBtn" onclick="closeFnc(this)">&times;</button>
+		                <button type="button" class="modifyBtn" onclick="modifyFnc(this)">수정</button>`;
+		    } else if (id != null) { // 로그인한 사용자이지만 댓글 작성자가 아닌 경우
+		        str += `
+		                <button class="accuse" style="align: right">신고</button>`;
+		    }
+		    
+		    str += `
+		                <p class="content">\${reply.reply}</p>
+		            </div>
+		        </li>
+		    `;
+			
+			return str;
+		}
+		
+		const bid = '${board.brdId}';
+		const replyUL = $('.reple');
+		
+		function replyFnc(bid){
+			
+			fetch('/campers/replyList.do?bid='+ bid)
+				.then(function(response){
+					return response.json(); 
+				})
+			.then(function(result){ 
+			console.log(result); 
+			
+			$('.reple').empty();
+			for(let reply of result.list){
+			    replyUL.append(makeList(reply)); 
+			}
+			searchList()
+		})
+			.catch(function(err){ 
+			console.error(err); 
+			});
+		}
+	replyFnc(bid); 
+		
+	$('ul').css({
 		border: 'solid 0.5px',
 		padding: '5px',
 		margin: '20px'
 		});
 		
-		$('ul>li').css('list-style', 'none');
+		replyUL.css('list-style', 'none');
 		
-		//댓글 리스트 보여주기
-		/*const bid = '${board.brdId}';
-		const replyUL = $('reple');
-		const bid = '${board.brdId}';
-		const replyUL = $('.reple');
+		function modifyFnc(e){
+			let reply = $(e).nextAll('.content').text();
+			let rid = $(e).closest('.liReply').data('rid');
+			
+			$(reply).empty();
+			let textarea = $('<textarea />').val(reply);
+			let btnModi = $('<button />').text('확인').addClass('complete');
+			$(e).nextAll('.content').remove();
+			$(e).replaceWith(textarea);
+			textarea.after(btnModi);
+			
+			btnModi.on('click', function(){
+				let modiReply = textarea.val();
+				console.log(modiReply);
+				fetch('/campers/replyModify.do', {
+					method: 'post',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;' 
+					},
+					body: 'rid=' + rid + '&reply=' + modiReply
+				})
+				.then(response => response.json())
+				.then(result => {
+					console.log(result);
+					$(textarea).remove();
+					$(btnModi).remove();
+					
+					//alert('수정되었습니다.');
+				})
+				.catch(err=>console.error(err));
+			})
+			
+		}
 		
-		function replyFnc(bid){
-		let payload = "bid=" + bid;
-		url = '/campers/replyList.do';
-			fetch(url, {
+		
+		function closeFnc(e){
+			let rid = $(e).closest('.liReply').data('rid');
+			let check = confirm('정말로 삭제하시겠습니까?');
+			if(check){
+				
+			fetch('/campers/replyRemove.do', {
 				method: 'post',
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;' 
 				},
-				body: payload
+				body: 'rid=' + rid
 			})
-			.then(Response => Response.json())
-			.then(json => viewHTML(json));
+			.then(response => response.json())
+			.then(result => { 
+				alert('성공적으로 삭제되었습니다.');
+				replyFnc(bid); 
+			})
+			.catch(err => console.error(err))
+			}else{
+				
+			}
+			
 		}
-		
-		replyFnc(bid);
-		*/
-		
-		function viewHTML(datas){
-			console.log(datas);
-		}
-		
-		
-		replyFnc(bid);
+	
 	</script>
 </body>
 </html>

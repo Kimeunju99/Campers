@@ -20,11 +20,11 @@ public class ReplyAddControl implements Control {
 		
 		ObjectMapper mapper = new ObjectMapper();
 
-		String bno = req.getParameter("bno");
+		String bid = req.getParameter("bid");
 		String rep = req.getParameter("reply");
 		String wri = req.getParameter("replyer");
 		
-		vo.setBrdId(Integer.parseInt(bno));
+		vo.setBrdId(Integer.parseInt(bid));
 		vo.setReply(rep);
 		vo.setReplyer(wri);
 		
