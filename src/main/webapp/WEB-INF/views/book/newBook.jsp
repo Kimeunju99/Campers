@@ -12,15 +12,15 @@
 	<table border="1">
 		<tr>
 			<th>업체명</th>
-			<td><input type="text" name="manager" id="manager" value="${campOwner}" readonly></td>
+			<td><input type="text" name="manager" id="manager" value="${camp.campOwner}" readonly></td>
 			<th>주소</th>
-			<td><input type="text" name="addr" id="addr" value="${campAddr}" readonly></td>
+			<td><input type="text" name="addr" id="addr" value="${camp.campAddr}" readonly></td>
 		</tr>
 		<tr>
 			<th>방번호</th>
-			<td><input type="text" name="roomId" id="roomId" value="${RoomId}" readonly></td>
+			<td><input type="text" name="roomId" id="roomId" value="${camp.RoomId}" readonly></td>
 			<th>인원</th>
-			<td><input type="text" name="personnel" id="personnel" value="${campPersonnel}" readonly></td>
+			<td><input type="text" name="personnel" id="personnel" value="${camp.campPersonnel}" readonly></td>
 		</tr>
 		<tr>
 			<th>일시</th>
@@ -92,7 +92,7 @@ document.getElementById("bookBtn").addEventListener('click', function(e){
 				data: $('form[name="bookForm"]').serialize(),
 				success: function(result){
 					if(result =="true"){
-						alert("예약이 완료되었습니다.");
+						alert("예약이 완료되었습니다. 예약 확인은 마이페이지에서 가능합니다.");
 						location.href = "/campers/main.do";
 					}else{
 						alert("예약에 실패했습니다.")
@@ -176,8 +176,7 @@ function dateSet(pTag){
 		}
 	}
 	if(first != "" && last != "")//startdate와 enddate가 null이 아님
-		cost.val(((20000 * weekday) + (25000 * weekend)));
-		//((${campWeekday} * weekday) + (${campWeekend} * weekend));
+		cost.val(((${camp.campWeekday} * weekday) + (${camp.campWeekend} * weekend)));
 	
 };
 

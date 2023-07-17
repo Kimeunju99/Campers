@@ -55,7 +55,7 @@
 				<li class="summery"><b>승인예약</b><br>${apprCtn }개</li> <!-- 현재 승인된 예약 건수-->
 				<li class="summery"><b>게시글</b><br>${boardCnt }개</li> <!-- 내가 쓴 게시글 수-->
 				<li class="summery"><b>댓글</b><br>${replyCnt }개</li> <!-- 내가 쓴 댓글 수-->
-				<li class="summery"><b>찜</b><br>개</li> <!-- 내가 누른 좋아요(캠핑장) 수-->
+				<li class="summery"><b>찜</b><br>${likeCnt }개</li> <!-- 내가 누른 좋아요(캠핑장) 수-->
 			</ul>
 		</div>
 		
@@ -165,7 +165,7 @@
 <!-- 정보수정 모달창 -->
 <div class="modifyWindow" style ="display:none;">
 	<div>
-		<p>정보수정</p>
+		<h3>정보수정</h3>
 		<hr>
 		<form name="modifyForm" id="modifyForm">
 			<table>
@@ -215,7 +215,7 @@
 <!-- 회원탈퇴 모달창 -->
 <div class="byeWindow" style ="display:none;">
 	<div>
-		<p>회원탈퇴</p>
+		<h3>회원탈퇴</h3>
 		<hr>
 		<form name="byeForm" id="byeForm">
 			<table>
@@ -247,7 +247,7 @@ let npw2 = document.getElementById("userNewPw2");
 	
 	document.getElementById("byeBtn").addEventListener('click', e => document.querySelector('.byeWindow').style.display = 'block' );
 	document.getElementById("byeBtn").addEventListener('click', function (e){
-		if($('#byePw').val() == ${logUser.userPw}){
+		if($('#byePw').val() == '${logUser.userPw}'){
 			$.ajax({
 				url: "joinOut.do",
 				method: "get",

@@ -12,11 +12,12 @@ import com.idle.campers.board.service.BoardServiceImpl;
 import com.idle.campers.book.service.BookService;
 import com.idle.campers.book.service.BookServiceImpl;
 import com.idle.campers.book.service.BookVO;
+import com.idle.campers.business.service.BusinessService;
+import com.idle.campers.business.serviceImpl.BusinessServiceImpl;
 import com.idle.campers.common.Control;
 import com.idle.campers.member.service.MemberService;
 import com.idle.campers.member.service.MemberServiceImpl;
 import com.idle.campers.member.service.MemberVO;
-import com.idle.campers.reply.dao.ReplyVO;
 import com.idle.campers.reply.service.ReplyService;
 import com.idle.campers.reply.service.ReplyServiceImpl;
 
@@ -38,7 +39,8 @@ public class MypageForm implements Control {
 		boardListProcess(memVo, req, resp);
 		//댓글 --- 개수
 		replyProcess(memVo, req, resp);
-		
+		//찜 -- 개수
+		likeProcess(memVo, req, resp);
 		if(memVo.getUserAuth().equals("business")) {//사업자일 경우
 			campProcess(memVo, req, resp);//캠프 관리
 		}
@@ -79,6 +81,11 @@ public class MypageForm implements Control {
 		req.setAttribute("boardList", boardList);
 	}
 	
+	public void likeProcess(MemberVO memVo, HttpServletRequest req, HttpServletResponse resp) {
+		BusinessService service = new BusinessServiceImpl();
+		int likeCnt = service.myLikeCnt(memVo.getUserId()); 
+		req.setAttribute("likeCnt", likeCnt);
+	}
 	public void campProcess(MemberVO memVo, HttpServletRequest req, HttpServletResponse resp) {
 		
 	}
