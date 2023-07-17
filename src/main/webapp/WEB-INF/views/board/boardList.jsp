@@ -156,13 +156,14 @@
 						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 					},
 					body: payload
-				}).then(Response => Response.json())
-				.then(json => viewHTML(json));
+				}).then(response => response.json())
+				.then(json => viewHTML(json))
+				.catch(error => console.error(error));
 		})
 
 		function viewHTML(datas) {
 			console.log(datas);
-			let t = '';
+			let out = '';
 			$('#boardTbody').empty();
 
 			for (let data of datas) {

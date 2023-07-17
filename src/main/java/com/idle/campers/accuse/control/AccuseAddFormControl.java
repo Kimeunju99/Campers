@@ -3,6 +3,9 @@ package com.idle.campers.accuse.control;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.idle.campers.accuse.dao.AccuseVO;
+import com.idle.campers.accuse.service.AccuseService;
+import com.idle.campers.accuse.service.AccuseServiceImpl;
 import com.idle.campers.common.Control;
 
 public class AccuseAddFormControl implements Control {
@@ -13,14 +16,28 @@ public class AccuseAddFormControl implements Control {
 		String writer = req.getParameter("wri");
 		String reportId = req.getParameter("rid");
 		String title = req.getParameter("title");
-		int brdId = Integer.parseInt(req.getParameter("bno"));
+		int brdId = Integer.parseInt(req.getParameter("bid"));
+		int accuseContent = Integer.parseInt(req.getParameter("content"));
 		
-		req.setAttribute("writer", writer);
-		req.setAttribute("reportId", reportId);
-		req.setAttribute("brdId", brdId);
-		req.setAttribute("title", title);
+		AccuseVO vo = new AccuseVO();
+		vo.setAccuseUserId(writer);
+		vo.setAccuseReport(reportId);
+		vo.setAccuseTitle(title);
+		vo.setAccuseBrd(brdId);
+		vo.setAccuseContent(accuseContent);
 		
-		return "accuse/accuseAdd";
+		String isTrue = "";
+		
+		AccuseService service = new AccuseServiceImpl();
+		if(service.InsertAccuse(vo)) {
+			isTrue = "true";
+		} else {
+			isTrue = "false";
+		}
+		
+		
+		
+		return "Ajax:"+isTrue;
 	}
 
 }

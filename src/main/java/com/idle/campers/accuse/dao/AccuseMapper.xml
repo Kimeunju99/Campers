@@ -14,8 +14,8 @@
 	
 	<!-- 아이디 제한 추가 -->
 	<insert id="AccuseInsert">
-		INSERT INTO TBL_ACCUSE (ACCUSE_BRD, ACCUSE_REPLY, ACCUSE_DATE, ACCUSE_REPORT, ACCUSE_CONTENT, ACCUSE_STATE, ACCUSE_RESULT, ACCUSE_RDATE, ACCUSE_USERID)
-		VALUES(#{accuseBrd},#{reply},#{accuseDate},#{accuseReport},#{accuseContent},#{accuseState},#{accuseResult},#{accuseRdate},#{accuseUserId})
+		INSERT INTO TBL_ACCUSE (ACCUSE_ID ,ACCUSE_BRD, ACCUSE_REPLY, ACCUSE_REPORT, ACCUSE_CONTENT, ACCUSE_STATE, ACCUSE_RESULT, ACCUSE_RDATE, ACCUSE_USERID, ACCUSE_TITLE)
+		VALUES(accuse_seq.nextval,#{accuseBrd},#{reply},#{accuseReport},#{accuseContent},#{accuseState},#{accuseResult},#{accuseRdate},#{accuseUserId}, #{accuseTitle})
 	</insert>
 	
 	<!-- 아이디 제한 수정 -->
