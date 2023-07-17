@@ -8,16 +8,16 @@ public interface BusinessMapper {
 
 	public int addCamp(BusinessVO vo);
 	
-	public List<BusinessVO> campSelectList();
+	public List<BusinessVO> campSelectList(String id);
 	
 	public BusinessVO infoCamp(String campName);
 	public int deleteCamp(String campName);
 	
 	public int updateCamp(BusinessVO vo);
 
-	//mypage
 	public BusinessVO selectCamp(int campId);
-	
+
 	public int myLikeCnt(String userId);
 	
+
 }

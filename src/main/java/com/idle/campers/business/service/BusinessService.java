@@ -7,14 +7,14 @@ public interface BusinessService {
 	public boolean addCamp(BusinessVO vo);
 	
 	public BusinessVO infoCamp(String campName);
+	public BusinessVO selectCamp(int campId);
 	
-	public List<BusinessVO> campSelectList();
+	public List<BusinessVO> campSelectList(String id);
 	
 	public int deleteCamp(String campName);
 	
 	public boolean updateCamp(BusinessVO vo);
 	
 	//mypage
-	public BusinessVO selectCamp(int campId);
 	public int myLikeCnt(String userId);
 }

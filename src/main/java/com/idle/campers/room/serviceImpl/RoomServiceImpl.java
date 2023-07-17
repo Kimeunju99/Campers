@@ -1,5 +1,7 @@
 package com.idle.campers.room.serviceImpl;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.idle.campers.common.DataSource;
@@ -18,15 +20,21 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	@Override
-	public RoomVO infoRoom(int roomId) {
+	public RoomVO infoRoom(int campId) {
 		// TODO Auto-generated method stub
-		return map.infoRoom(roomId);
+		return map.infoRoom(campId);
 	}
 
 	@Override
 	public int deleteRoom(int roomId) {
 		// TODO Auto-generated method stub
 		return map.deleteRoom(roomId);
+	}
+
+	@Override
+	public List<RoomVO> roomSelectList() {
+		// TODO Auto-generated method stub
+		return map.roomSelectList();
 	}
 
 	

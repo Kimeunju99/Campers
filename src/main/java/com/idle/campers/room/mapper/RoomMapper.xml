@@ -22,14 +22,19 @@
 	
 	<select id="infoRoom"  resultType="com.idle.campers.room.service.RoomVO">
 		SELECT * FROM ROOM
-		WHERE ROOM_ID = #{roomId}
+		WHERE ROOM_CAMPID = #{campId}
 	</select>
 
 	<delete id="deleteRoom" parameterType="com.idle.campers.room.service.RoomVO">
 		DELETE * FROM ROOM
 		WHERE ROOM_ID = #{roomId}
 	</delete>
-
+	
+	<select id="roomSelectList" resultType="com.idle.campers.room.service.RoomVO">
+		SELECT * FROM ROOM
+		WHERE ROOM_MANAGER = #{id}
+	</select>
+	
 
 
 

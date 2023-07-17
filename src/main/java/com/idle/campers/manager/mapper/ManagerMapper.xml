@@ -19,7 +19,7 @@
 			<if test="userName != null">USER_NAME = #{userName},</if>
 			<if test="userEmail != null">USER_EMAIL = #{userEmail},</if>
 			<if test="userTel != null">USER_TEL = #{userTel},</if>
-			<if test="userAddr != null">USER_ADDR = #{userAddr}</if>
+			<if test="userAddr != null">USER_ADDR = #{userAddr},</if>
 			<if test="userAuth != null">USER_AUTH = #{userAuth}</if>
 		</set>
 		WHERE USER_ID = #{userId}

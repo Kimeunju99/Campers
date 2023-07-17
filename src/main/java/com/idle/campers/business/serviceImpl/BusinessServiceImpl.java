@@ -23,9 +23,8 @@ public class BusinessServiceImpl implements BusinessService{
 		return map.infoCamp(campName);
 	}
 
-	@Override
-	public List<BusinessVO> campSelectList() {
-		return map.campSelectList();
+	public List<BusinessVO> campSelectList(String id) {
+		return map.campSelectList(id);
 	}
 
 	@Override
