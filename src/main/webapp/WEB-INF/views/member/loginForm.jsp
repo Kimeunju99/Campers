@@ -17,15 +17,16 @@
 			  <input type="password" id="userPw" name="userPw" class="input-linetype" value="user01">
 			</label>
 			<p class="forgot-pass" onclick=find()>아이디/비밀번호를 잊으셨나요?</p><br>
+			<p>${message }</p>
+			<br>
 			<button type="button" class="fb-btn" onclick="location.href ='memberJoinType.do'">회원가입</button>
 			<button type="submit" class="submit">로그인</button>
-			<p>${message }</p>
 		</form>
 
 		<div id="findInfo" name="findInfo" style="display: none;">
 			<hr><br>
-			<button class="simple-btn" id="searchId" name="searchId" onclick=searchId()>아이디 찾기</button>
-			<button class="simple-btn" id="searchPw" name="searchPw" onclick=searchPw()>비밀번호 찾기</button>
+			<input value="아이디 찾기" type="button" class="simple-btn" id="searchId" name="searchId" onclick=searchId()>
+			<input value="비밀번호 찾기" type="button" class="simple-btn" id="searchPw" name="searchPw" onclick=searchPw()>
 			<br><br>
 			<form action="" id="findMember" name="findMember">
 				<label>
@@ -41,12 +42,12 @@
 				</div>
 				
 				<label>
-					<span>아이디</span>
+					<span>이메일</span>
 					<input type="email" id="userEmail" name="userEmail" class="input-linetype">
 				</label>
 				<br><br>
 				<p id="findMsg"></p>
-				
+				<br>
 				<input type="button" id="search" value="getId" onclick=findMemberIdPw()>
 				<br><br>
 			</form>
@@ -56,7 +57,18 @@
 </div>
 
 <script type="text/javascript">
-
+	$('button').css('margin', 'auto 15px 30px 15px')
+	$('#search').css('color', '#008481')
+				.css('font-size', '15px')
+				.css('cursor', 'pointer')
+				.css('border', '2px solid #91C3CE')
+				.css('margin', 'auto')
+				.css('width', '100px')
+				.css('height', '36px')
+				.css('border-radius', '30px')
+				.css('background', 'none');
+	
+	
 	$('p').css('display', 'inline-block');
 	
 	function searchId(){

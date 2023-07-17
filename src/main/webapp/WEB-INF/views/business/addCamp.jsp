@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 	<table border = "1" class = "table">
 		<tr>
 			<th>사업자 이름</th>
-			<td align="center"><input type = "text" name = "cowner"></td>
+			<td align="center"><input type = "text" name = "cowner" value = "${id}"></td>
 		</tr>	
 		<tr>
 			<th>캠핑장 이름</th>
@@ -34,9 +35,9 @@
 			<th>이미지</th>
 			<td align="center"><input type = "file" name = "img" ></td>
 		</tr>
-		<tr>
+		<tr id="room_tr">
 			<th>방 갯수</th>
-			<td align="center"><input type = "text" name = "ccnt" ></td>
+			<td align="center"><input type = "text" name = "ccnt" onblur = 'onblur()' /></td>
 		</tr>
 		<tr>
 			<th>방 번호</th>
@@ -67,6 +68,64 @@
 	</table>
 </form>
 </body>
-<script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js">
+	function onblur(e){
+		let cnt = document.getElementById("room_cnt").value;
+	 	let room_tr =  document.getElementById("room_tr").value;
+	 	let txt = "";
+	 	for(let i=0; i<cnt; i++){
+	 		txt += `<tr>
+	 			<th>방 번호</th>
+	 			<td align="center"><input type = "text" name = "rid"></td>
+	 			</tr>	
+	 			<tr>
+	 				<th>방 이름</th>
+	 				<td align="center"><input type = "text" name = "rname"></td>
+	 			</tr>
+	 			<tr>
+	 				<th>평일 가격</th>
+	 				<td align="center"><input type = "text" name = "rweekday"></td>
+	 			</tr>
+	 			<tr>
+	 				<th>주말 가격</th>
+	 				<td align="center"><input type = "text" name = "rweekend"></td>
+	 			</tr>
+	 			<tr>
+	 				<th>수용 인원</th>
+	 				<td align="center"><input type = "text" name = "rpersonnel"></td>
+	 			</tr>`;
+	 	}
+	 	room_tr.appendChild(txt);
+	}
+
+
+// document.getElementById("room_cnt").addEventListener('change', function(e){
+// 	let cnt = document.getElementById("room_cnt").value;
+// 	let room_tr =  document.getElementById("room_tr").value;
+// 	let txt = "";
+// 	for(let i=0; i<cnt; i++){
+// 		txt += `<tr>
+// 			<th>방 번호</th>
+// 			<td align="center"><input type = "text" name = "rid"></td>
+// 			</tr>	
+// 			<tr>
+// 				<th>방 이름</th>
+// 				<td align="center"><input type = "text" name = "rname"></td>
+// 			</tr>
+// 			<tr>
+// 				<th>평일 가격</th>
+// 				<td align="center"><input type = "text" name = "rweekday"></td>
+// 			</tr>
+// 			<tr>
+// 				<th>주말 가격</th>
+// 				<td align="center"><input type = "text" name = "rweekend"></td>
+// 			</tr>
+// 			<tr>
+// 				<th>수용 인원</th>
+// 				<td align="center"><input type = "text" name = "rpersonnel"></td>
+// 			</tr>`;
+// 	}
+// 	room_tr.appendChild(txt);
+// });
 </script>
 </html>

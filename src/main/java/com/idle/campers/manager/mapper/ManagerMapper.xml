@@ -23,6 +23,7 @@
 			<if test="userAuth != null">USER_AUTH = #{userAuth},</if>
 			<if test="userActivation != null">USER_ACTIVATION = #{userActivation},</if>
 			<if test="accuseState != null">USER_ACCUSE_STATE = 1</if>
+			<if test="userAuth != null">USER_AUTH = #{userAuth}</if>
 		</set>
 		WHERE USER_ID = #{userId}
 	</update>

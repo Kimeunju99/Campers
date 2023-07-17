@@ -347,8 +347,8 @@ tr, td {
 		}
 		
 		bid = '${board.brdId}';
-		const replyUL = $('.reple');
-		
+		replyUL = $('.reple');
+
 		function replyFnc(bid){
 			
 			fetch('/campers/replyList.do?bid='+ bid)
