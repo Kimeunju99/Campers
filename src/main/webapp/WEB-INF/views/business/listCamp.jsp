@@ -30,7 +30,7 @@
 				<tbody>
 					<c:forEach items="${list }" var="l">
 						<tr>
-							<td align="center"><a href="CampInfoFormControl.do?name=${l.campName}&id=${l.roomId}">${l.campName }</a></td>
+							<td align="center"><a href="CampInfoFormControl.do?name=${l.campName}&rid=${l.roomId}">${l.campName }</a></td>
 							<td>${l.campAddr }</td>
 							<td align="center">${l.campLocation }</td>
 							<td align="center">${l.campImg }</td>

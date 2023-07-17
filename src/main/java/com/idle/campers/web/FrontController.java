@@ -23,37 +23,45 @@ import com.idle.campers.board.control.BoardInfoControl;
 import com.idle.campers.board.control.BoardLikeControl;
 import com.idle.campers.board.control.BoardLikeCountControl;
 import com.idle.campers.board.control.BoardListControl;
+import com.idle.campers.board.control.BoardSearchListControl;
+import com.idle.campers.board.control.MyBoardListControl;
 import com.idle.campers.book.control.BookList;
 import com.idle.campers.book.control.BookListControl;
 import com.idle.campers.book.control.BookStateUpdateControl;
 import com.idle.campers.book.control.NewBookControl;
-import com.idle.campers.board.control.BoardSearchListControl;
-import com.idle.campers.board.control.MyBoardListControl;
 import com.idle.campers.book.control.NewBookForm;
 import com.idle.campers.book.control.SelectBookForm;
+import com.idle.campers.business.control.AddCampControl;
+import com.idle.campers.business.control.CampAddFormControl;
+import com.idle.campers.business.control.CampDeleteListControl;
+import com.idle.campers.business.control.CampInfoFormControl;
+import com.idle.campers.business.control.CampSelectListControl;
 import com.idle.campers.camp.control.SearchCamp;
 import com.idle.campers.common.Control;
+import com.idle.campers.manager.control.AjaxManagerSearchListControl;
+import com.idle.campers.manager.control.ManagerDeleteControl;
+import com.idle.campers.manager.control.ManagerInfoControl;
+import com.idle.campers.manager.control.ManagerModifyFormControl;
+import com.idle.campers.manager.control.ManagerModifyInfoControl;
+import com.idle.campers.manager.control.ManagerSelectListControl;
 import com.idle.campers.member.control.FindMemberId;
 import com.idle.campers.member.control.JoinOutControl;
 import com.idle.campers.member.control.LoginControl;
-import com.idle.campers.member.control.MypageForm;
-import com.idle.campers.member.control.ResetMemberPassword;
-import com.idle.campers.member.control.UserIdCheck;
-import com.idle.campers.member.control.MemberJoinType;
 import com.idle.campers.member.control.LoginForm;
 import com.idle.campers.member.control.LogoutControl;
 import com.idle.campers.member.control.MailCertification;
-
 import com.idle.campers.member.control.MemberJoin;
 import com.idle.campers.member.control.MemberJoinControl;
-
-
+import com.idle.campers.member.control.MemberJoinType;
 import com.idle.campers.member.control.MemberModifyControl;
+import com.idle.campers.member.control.MypageForm;
+import com.idle.campers.member.control.ResetMemberPassword;
+import com.idle.campers.member.control.UserIdCheck;
 import com.idle.campers.reply.control.ReplyAddControl;
+import com.idle.campers.reply.control.ReplyControl;
 import com.idle.campers.reply.control.ReplyListControl;
 import com.idle.campers.reply.control.ReplyModifyControl;
 import com.idle.campers.reply.control.ReplyRemoveControl;
-import com.idle.campers.reply.control.ReplyControl;
 
 
 
@@ -122,6 +130,20 @@ public class FrontController extends HttpServlet{
 		
 		map.put("/boardSearchList.do", new BoardSearchListControl()); //게시글 검색
 		map.put("/myBoardList.do", new MyBoardListControl()); //내가 쓴 게시글 보기.
+		
+		//강민호
+		map.put("/managerSelectList.do", new ManagerSelectListControl());
+		map.put("/ajaxManagerSearchList.do", new AjaxManagerSearchListControl());
+		map.put("/managerModifyInfo.do", new ManagerModifyInfoControl());
+		map.put("/managerModifyForm.do", new ManagerModifyFormControl());
+		map.put("/managerInfoControl.do", new ManagerInfoControl());
+		map.put("/managerDelete.do", new ManagerDeleteControl());
+		
+		map.put("/addCamp.do", new AddCampControl());
+		map.put("/campAddForm.do", new CampAddFormControl());
+		map.put("/campSelectList.do", new CampSelectListControl());
+		map.put("/campInfoFormControl.do", new CampInfoFormControl());
+		map.put("/campDeleteList.do", new CampDeleteListControl());
 	}
 	
 	@Override

@@ -20,13 +20,13 @@ public class CampInfoFormControl implements Control {
 		BusinessService svc = new BusinessServiceImpl();
 		BusinessVO vo = svc.infoCamp(name);
 		
-		String id = req.getParameter("id");
+		String id = req.getParameter("rid");
 		System.out.println(id);
 		RoomService service = new RoomServiceImpl();
 		RoomVO rvo = service.infoRoom(Integer.parseInt(id));
 		
 		req.setAttribute("name", vo);
-		req.setAttribute("id", rvo);
+		req.setAttribute("rid", rvo);
 		
 		return "business/infoCamp";
 	}
