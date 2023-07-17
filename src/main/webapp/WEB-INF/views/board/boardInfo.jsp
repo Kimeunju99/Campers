@@ -11,6 +11,33 @@
 <title>Insert title here</title>
 <style type="text/css" >
 
+button:hover {
+	color: green;
+	background-color: skyblue;
+}
+
+button {
+  border: 2px solid #91C3CE;
+  outline: none;
+  background: none;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+button {
+  display: inline-block;
+  margin: auto;
+  width: 100px;
+  height: 36px;
+  border-radius: 30px;
+  color: #008481;
+  font-size: 15px;
+  cursor: pointer;
+  border: 2px solid #91C3CE;
+  outline: none;
+  background: none;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
 #container{
 
 margin: 0 auto;
@@ -94,7 +121,7 @@ tr, td {
 			<br><br>
 		</c:if>
 		<p>${board.brdContent}</p>
-		<div style="border:  solid 1px; width: 120px; border-radius: 30px; color: pink; display: inline-block; margin: 0 5px;  float: left;">
+		<div style="border: 2px solid #91C3CE; width: 140px; border-radius: 30px; color: #008481; display: inline-block; margin: 0 5px;  float: left;">
 			<button type="button" id="likeBtn">좋아요&nbsp;
 			<i class="fa-solid fa-heart fa-beat fa-xs" style="color: #f00054;"></i></button>
 			<span class="likeCount"></span>

@@ -8,6 +8,32 @@
 <title>Insert title here</title>
 <style>
 
+button:hover {
+	color: green;
+	background-color: skyblue;
+}
+
+button {
+  border: 2px solid #91C3CE;
+  outline: none;
+  background: none;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+button {
+  display: inline-block;
+  margin: auto;
+  width: 100px;
+  height: 36px;
+  border-radius: 30px;
+  color: #008481;
+  font-size: 15px;
+  cursor: pointer;
+  border: 2px solid #91C3CE;
+  outline: none;
+  background: none;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
 
 input, textarea {
 	height: 50px;
@@ -43,39 +69,7 @@ select{
   border-radius: 15px;
 }
 
-#btn1{
-  border: 0;
-  outline: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 100px;
-  font-size: 15px;
-  margin: 30px;
-  box-shadow: 3px 3px 3px rgb(109, 109, 109), -3px -3px 3px rgb(237, 237, 237);
-  transition: 0.3s;
-}
-#btn2{
-  border: 0;
-  outline: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 100px;
-  font-size: 12px;
-  margin: 30px;
-  box-shadow: 3px 3px 3px rgb(109, 109, 109), -3px -3px 3px rgb(237, 237, 237);
-  transition: 0.3s;
-}
 
-#btn_group{
-	
-	background-color: rgba(0,0,0,0);
-	color: skyblue;
-	padding: 5px;
-}
-#btn_group button:hover{
-	color:white;
-	background-color: skyblue;
-}
 </style>
 </head>
 <body>
