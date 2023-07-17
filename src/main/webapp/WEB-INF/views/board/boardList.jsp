@@ -51,7 +51,7 @@
 							<tr	style="background-color: rgb(240, 232, 232); border: solid 1px white;">
 								<td><span style="background-color: rgb(228, 49, 49); border-radius: 4px; color: rgb(250, 204, 204); padding: 2px; font-size: small">공지</span>
 									</td>
-								<td><a href="boardInfo.do?bid=${brd.brdId}&bwri=${brd.brdWriter}" style="text-decoration: none; color: red;"> <c:out
+								<td><a href="boardInfo.do?bid=${brd.brdId}" style="text-decoration: none; color: red;"> <c:out
 											value="${brd.brdTitle}" /></a></td>
 								<td><c:out value="${brd.brdWriter}" /></td>
 								<td><c:out value="${brd.brdDate}" /></td>
@@ -65,7 +65,7 @@
 							<tr>
 								<td><c:out value="${vo.brdId}" /></td>
 								<td><a
-									href="/campers/boardInfo.do?bid=${vo.brdId}&bwri=${vo.brdWriter}"
+									href="/campers/boardInfo.do?bid=${vo.brdId}"
 									style="text-decoration: none; color: black;"> <c:out
 											value="${vo.brdTitle}" /></a></td>
 								<td><c:out value="${vo.userName}" /></td>
@@ -156,13 +156,14 @@
 						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 					},
 					body: payload
-				}).then(Response => Response.json())
-				.then(json => viewHTML(json));
+				}).then(response => response.json())
+				.then(json => viewHTML(json))
+				.catch(error => console.error(error));
 		})
 
 		function viewHTML(datas) {
 			console.log(datas);
-			let t = '';
+			let out = '';
 			$('#boardTbody').empty();
 
 			for (let data of datas) {

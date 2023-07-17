@@ -97,15 +97,16 @@ tr, td {
 		<div style="border:  solid 1px; width: 120px; border-radius: 30px; color: pink; display: inline-block; margin: 0 5px;  float: left;">
 			<button type="button" id="likeBtn">좋아요&nbsp;
 			<i class="fa-solid fa-heart fa-beat fa-xs" style="color: #f00054;"></i></button>
-			<span class="likeCount"></span></td>
+			<span class="likeCount"></span>
 		</div>
 		<br>
+
 		<div style="display: inline-block; margin: 0 5px;  float: right;">
 			<c:if test="${id != null }">
 				<button type="button" class="reportIn">신고</button>
 			</c:if>
 				<button type="button" onclick="submit3(this.form);">목록</button>
-		</div>
+		</div>	
 	</form>
 			<div class="recontainer">
 				<div class="remodal">
@@ -133,9 +134,10 @@ tr, td {
 			<ul>
 				<c:choose>
 					<c:when test="${id != null }">
-						<li><input type="text" readonly size="20"
-							value="${board.brdWriter}"></li>
-						<li>: <textarea rows="5" cols="170" style="resize: none"></textarea>
+						<li><input type="text" id="replyer" readonly size="20"
+							value="${id}"></li>
+						<li>: <textarea rows="5" cols="170" id="reply"
+								style="resize: none"></textarea>
 							<button type="button" id="addRBtn">댓글작성</button>
 						</li>
 					</c:when>
@@ -163,6 +165,7 @@ tr, td {
 					</div>
 					<p>Good Job!!!!!!!!!!!!</p>
 				</div></li>
+
 		</ul>
 	</div>
 
@@ -269,45 +272,90 @@ tr, td {
 
 
 		//댓글부분
+		$('#addRBtn').on('click', function(){
+			let reply = $('#reply').val();
+			let replyer = $('#replyer').val();
+			let bid = ${board.brdId};
+			console.log(reply, replyer, bid);
+			fetch('/campers/replyAdd.do',{
+				method: 'post',
+				headers:{
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;' 	
+				},
+				body: 'reply=' + reply + '&replyer=' + replyer + '&bid=' + bid
+			})
+			.then(response => response.json())
+			.then(result => {
+				replyFnc(bid); 
+			})
+			.catch(err => console.error(err))
+		})
 		
-		$('ul').css({
+			
+		function makeList(reply={}){
+			let id = '${id}';
+			let str = '';
+			str += `
+		        <li data-rno=\${reply.replyId}>
+		            <div>
+		                <div class="header">
+		                    <strong>\${reply.replyer}</strong>
+		                    <small>\${reply.replyDate}</small>
+		                </div>`;
+		     
+		    if (id == reply.replyer) { // 댓글 작성자인 경우
+		        str += `
+		                <button class="close" style="align: right">&times;</button>
+		                <button class="modify" style="align: right">수정</button>`;
+		    } else if (id != null) { // 로그인한 사용자이지만 댓글 작성자가 아닌 경우
+		        str += `
+		                <button class="accuse" style="align: right">신고</button>`;
+		    }
+		    
+		    str += `
+		                <p>\${reply.reply}</p>
+		            </div>
+		        </li>
+		    `;
+			
+			return str;
+		}
+		
+		const bid = '${board.brdId}';
+		const replyUL = $('.reple');
+		
+		function replyFnc(bid){
+			
+			fetch('/campers/replyList.do?bid='+ bid)
+				.then(function(response){
+					console.log(response);
+					return response.json(); 
+				})
+			.then(function(result){ 
+			console.log(result); 
+			
+			$('.reple').empty();
+			for(let reply of result.list){
+			    replyUL.append(makeList(reply)); 
+			}
+		})
+			.catch(function(err){ 
+			console.error(err); 
+			});
+		}
+	replyFnc(bid); 
+		
+	$('ul').css({
 		border: 'solid 0.5px',
 		padding: '5px',
 		margin: '20px'
 		});
 		
-		$('ul>li').css('list-style', 'none');
-		
-		//댓글 리스트 보여주기
-		/*const bid = '${board.brdId}';
-		const replyUL = $('reple');
-		const bid = '${board.brdId}';
-		const replyUL = $('.reple');
-		
-		function replyFnc(bid){
-		let payload = "bid=" + bid;
-		url = '/campers/replyList.do';
-			fetch(url, {
-				method: 'post',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-				},
-				body: payload
-			})
-			.then(Response => Response.json())
-			.then(json => viewHTML(json));
-		}
-		
-		replyFnc(bid);
-		*/
-		
-		function viewHTML(datas){
-			console.log(datas);
-		}
+		replyUL.css('list-style', 'none');
 		
 		
+
 		//replyFnc(bid);
-		
 		
 		
 	</script>
