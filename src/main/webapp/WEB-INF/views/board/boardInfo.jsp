@@ -6,17 +6,83 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://kit.fontawesome.com/38655e7b9d.js" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
+<style type="text/css" >
+
+button:hover {
+	color: green;
+	background-color: skyblue;
+}
+
+button {
+  border: 2px solid #91C3CE;
+  outline: none;
+  background: none;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+button {
+  display: inline-block;
+  margin: auto;
+  width: 100px;
+  height: 36px;
+  border-radius: 30px;
+  color: #008481;
+  font-size: 15px;
+  cursor: pointer;
+  border: 2px solid #91C3CE;
+  outline: none;
+  background: none;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+#container{
+
+margin: 0 auto;
+width: 1000px;
+
+}
+#likeBtn{
+	background-color: white;
+	border: none;
+}
+
 tr, td {
 	border: 1px solid #444444;
 }
+.recontainer {
+	position: absolute;
+	top: 30%;
+	left: 30%;
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: antiquewhite;
+	border-radius: 80px;
+}
+.remodal{
+	top: 30%;
+	left: 30%;
+	display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 15px;
+  padding: 50px;
+  border: 1px solid antiquewhite;
+  border-radius: 80px;
+}
+
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
 </head>
 <body>
+<div id="container">
 	<br>
 	<c:choose>
 		<c:when test="${board.brdType == 'normal' }">
@@ -34,53 +100,58 @@ tr, td {
 	</c:choose>
 	<hr>
 	<form action="" name="myFrm" method="post">
+		
+		<h3 style="text-align: left;">${board.brdTitle}<br></h3>
+		<p style="text-align: left;">작성자: ${board.brdWriter}</p>
+		<p style="text-align: left;">작성날짜: ${board.brdDate}</p>
+		<p style="text-align: right;">조회수: ${board.brdRead}</p>
+			<div style="display: inline-block; margin: 0 5px;  float: right;">
+				<c:if test="${id == board.brdWriter || auth eq 'admin'}">
+				<c:if test="${id == board.brdWriter}">
+					<button type="button" onclick="submit1(this.form);">수정</button>
+				</c:if>
+					<button type="button"  onclick="submit2(this.form);">삭제</button>
+				</c:if>
+			</div>
+			<br>
+		<h3 style="padding: 2px; margin: 0.5em 0em; color: #000000; border-bottom: 8px #E68900 double; font-weight: bold;" data-ke-size="size23"></h3>
+		<p data-ke-size="size16">&nbsp;</p>
 		<c:if test="${board.brdImage != null }">
 			<img width="250px" src="images/${board.brdImage }">
+			<br><br>
 		</c:if>
-		<table border="1" width="600">
-			<tbody>
-				<tr border="1" width="450" height="50" align="left">
-					<td>제목: ${board.brdTitle}</td>
-					<td>작성자: ${board.brdWriter}</td>
-				</tr>
-				<tr width="70" height="70" align="left">
-					<td border="1">내용: ${board.brdContent}</td>
-				</tr>
-
-				<tr width="70" height="70" align="left">
-					<td>작성날짜: ${board.brdDate}</td>
-				</tr>
-				<tr width="70" height="70" align="left">
-					<td>조회수: ${board.brdRead}</td>
-				</tr>
-				<tr width="70" height="70" align="left">
-					<th>좋아요</th>
-					<td><input type="button" value="♥" id="likeBtn">&nbsp;<span
-						class="likeCount"></span></td>
-
-				</tr>
-
-
-			</tbody>
-		</table>
+		<p>${board.brdContent}</p>
+		<div style="border: 2px solid #91C3CE; width: 140px; border-radius: 30px; color: #008481; display: inline-block; margin: 0 5px;  float: left;">
+			<button type="button" id="likeBtn">좋아요&nbsp;
+			<i class="fa-solid fa-heart fa-beat fa-xs" style="color: #f00054;"></i></button>
+			<span class="likeCount"></span>
+		</div>
 		<br>
-		<c:if test="${id == board.brdWriter || auth eq 'admin'}">
-			<c:if test="${id == board.brdWriter}">
-				<button type="button" onclick="submit1(this.form);">수정</button>
+
+		<div style="display: inline-block; margin: 0 5px;  float: right;">
+			<c:if test="${id != null }">
+				<button type="button" class="reportIn">신고</button>
 			</c:if>
-			<button type="button" onclick="submit2(this.form);">삭제</button>
-		</c:if>
-		<c:if test="${id != null }">
-			<button type="button">게시글 신고</button>
-		</c:if>
-		<button type="button" onclick="submit3(this.form);">목록</button>
+				<button type="button" onclick="submit3(this.form);">목록</button>
+		</div>	
 	</form>
-
-
-	<script>
-
-		function submit1(frm) { 
-			frm.action = "boardEditForm.do?bid="+${board.brdId};
+			<div class="recontainer">
+				<div class="remodal">
+				<h3>게시물 신고</h3>
+					<select name="content" id="content">
+						<option value="1">음란물 입니다.</option>
+						<option value="2">불법정보를 포함하고 있습니다.</option>
+						<option value="3">청소년에게 유해한 내용입니다.</option>
+						<option value="4">욕설/생명경시/혐오/차별적 표현입니다.</option>
+						<option value="5">개인정보 노출 게시물입니다.</option>
+						<option value="6">불쾌한 표현이 있습니다.</option>
+					</select>
+					<div>
+						<button id="reportBtn">확인</button>
+						<button class="reportCloseBtn">닫기</button>
+					</div>
+				</div>
+			</div>
 
 	<!-- 댓글 부분 -->
 	<br>
@@ -90,9 +161,10 @@ tr, td {
 			<ul>
 				<c:choose>
 					<c:when test="${id != null }">
-						<li><input type="text" readonly size="20"
-							value="${board.brdWriter}"></li>
-						<li>: <textarea rows="5" cols="170" style="resize: none"></textarea>
+						<li><input type="text" id="replyer" readonly size="20"
+							value="${id}"></li>
+						<li>: <textarea rows="5" cols="170" id="reply"
+								style="resize: none"></textarea>
 							<button type="button" id="addRBtn">댓글작성</button>
 						</li>
 					</c:when>
@@ -120,32 +192,54 @@ tr, td {
 					</div>
 					<p>Good Job!!!!!!!!!!!!</p>
 				</div></li>
+
 		</ul>
 	</div>
 
-
+</div>
 
 	<script type="text/javascript">
+
 		//if 작성해서 값는 값으면 action값을 바꿀 수 있음.
 
 		function submit1(frm) {
-			frm.action = "boardEdit.do?bid=" + ${board.brdId};
+			frm.action = "boardEditForm.do?bid=" + ${board.brdId};
 			frm.submit();
 			return true;
 
-		}
-
-		function submit2(frm) {
-			frm.action = "boardDelete.do?bid=" + ${board.brdId};
-			frm.submit();
-			return true;
 		}
 		
+		function submit2(frm) {
+			frm.action = "boardDelete.do?bid=" + ${board.brdId} + "&type=" + "${board.brdType}";
+			frm.submit();
+			return true;
+
+		}
+
 		function submit3(frm) { 
-			frm.action = "boardList.do";
+			frm.action = "boardList.do?type="+"${board.brdType}";
 			frm.submit();
 			return true;	
 		}
+		
+		
+		// 게시글 신고 모달창
+		const reportIn = document.querySelector('.reportIn');
+		const recontainer = document.querySelector('.recontainer');
+		const reportCloseBtn = document.querySelector('.reportCloseBtn');
+
+		reportIn.addEventListener('click',()=>{
+			recontainer.style.display = 'flex';
+			reportIn.style.display = 'none';
+		})
+		
+		reportCloseBtn.addEventListener('click', ()=>{
+			recontainer.style.display = 'none';
+			reportIn.style.display = 'flex';
+		})
+
+		
+
 		
 		$('#likeBtn').on("click",function() {
 			$.ajax({
@@ -166,6 +260,28 @@ tr, td {
 		})
 	
 
+		$('#reportBtn').on("click",function() {
+			let rcontent = document.querySelector('#content').value;
+			$.ajax({
+				url: "accuseAddForm.do",
+				method: "POST",
+				data: {
+					wri: '${board.brdWriter}',
+					rid: '${id}',
+					title: '${board.brdTitle}',
+					bid: ${board.brdId},
+					content: rcontent
+				},
+				success: function(result) {
+					if(result == "true") {
+						alert('정상적으로 신고 되었습니다.');
+						location.href = document.referrer
+					} else {
+						alert('신고 중 오류 발생했습니다.');
+					}
+				},
+			})
+		})
 
 	function recCount() {
 		$.ajax({
@@ -183,13 +299,86 @@ tr, td {
 
 
 		//댓글부분
+		$('#addRBtn').on('click', function(){
+			let reply = $('#reply').val();
+			let replyer = $('#replyer').val();
+			let bid = ${board.brdId};
+			console.log(reply, replyer, bid);
+			fetch('/campers/replyAdd.do',{
+				method: 'post',
+				headers:{
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;' 	
+				},
+				body: 'reply=' + reply + '&replyer=' + replyer + '&bid=' + bid
+			})
+			.then(response => response.json())
+			.then(result => {
+				replyFnc(bid); 
+			})
+			.catch(err => console.error(err))
+		})
 		
-		$('ul').css({
+			
+		function makeList(reply={}){
+			let id = '${id}';
+			let str = '';
+			str += `
+		        <li data-rno=\${reply.replyId}>
+		            <div>
+		                <div class="header">
+		                    <strong>\${reply.replyer}</strong>
+		                    <small>\${reply.replyDate}</small>
+		                </div>`;
+		     
+		    if (id == reply.replyer) { // 댓글 작성자인 경우
+		        str += `
+		                <button class="close" style="align: right">&times;</button>
+		                <button class="modify" style="align: right">수정</button>`;
+		    } else if (id != null) { // 로그인한 사용자이지만 댓글 작성자가 아닌 경우
+		        str += `
+		                <button class="accuse" style="align: right">신고</button>`;
+		    }
+		    
+		    str += `
+		                <p>\${reply.reply}</p>
+		            </div>
+		        </li>
+		    `;
+			
+			return str;
+		}
+		
+		const bid = '${board.brdId}';
+		const replyUL = $('.reple');
+		
+		function replyFnc(bid){
+			
+			fetch('/campers/replyList.do?bid='+ bid)
+				.then(function(response){
+					console.log(response);
+					return response.json(); 
+				})
+			.then(function(result){ 
+			console.log(result); 
+			
+			$('.reple').empty();
+			for(let reply of result.list){
+			    replyUL.append(makeList(reply)); 
+			}
+		})
+			.catch(function(err){ 
+			console.error(err); 
+			});
+		}
+	replyFnc(bid); 
+		
+	$('ul').css({
 		border: 'solid 0.5px',
 		padding: '5px',
 		margin: '20px'
 		});
 		
+
 		$('ul>li').css('list-style', 'none');
 		
 		//댓글 리스트 보여주기
@@ -211,6 +400,14 @@ tr, td {
 		}
 		
 
+
+		replyUL.css('list-style', 'none');
+		
+		
+
+		//replyFnc(bid);
+		
+		
 	</script>
 </body>
 </html>

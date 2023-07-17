@@ -7,8 +7,57 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
+button:hover {
+	color: green;
+	background-color: skyblue;
+}
+
+button {
+  border: 2px solid #91C3CE;
+  outline: none;
+  background: none;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+button {
+  display: inline-block;
+  margin: auto;
+  width: 100px;
+  height: 36px;
+  border-radius: 30px;
+  color: #008481;
+  font-size: 15px;
+  cursor: pointer;
+  border: 2px solid #91C3CE;
+  outline: none;
+  background: none;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+input, textarea {
+	height: 50px;
+	border-radius: 10px;
+}
+
+
+#all {
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+	color: #008481;
+}
+
+input {
+	width: 50%;
+}
+
 select{
-  width: 150px; 
+  width: 50%; 
   padding: .8em .5em;
   font-family: inherit;  
   background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
@@ -17,46 +66,16 @@ select{
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  border-radius: 15px;
 }
 
-#btn1{
-  border: 0;
-  outline: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 100px;
-  font-size: 15px;
-  margin: 30px;
-  box-shadow: 3px 3px 3px rgb(109, 109, 109), -3px -3px 3px rgb(237, 237, 237);
-  transition: 0.3s;
-}
-#btn2{
-  border: 0;
-  outline: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 100px;
-  font-size: 12px;
-  margin: 30px;
-  box-shadow: 3px 3px 3px rgb(109, 109, 109), -3px -3px 3px rgb(237, 237, 237);
-  transition: 0.3s;
-}
 
-#btn_group{
-	
-	background-color: rgba(0,0,0,0);
-	color: skyblue;
-	padding: 5px;
-}
-#btn_group button:hover{
-	color:white;
-	background-color: skyblue;
-}
 </style>
 </head>
 <body>
 	<br>
-	<h3>수정 페이지</h3>
+	<div id="all">
+	<h2>글쓰기</h2>
     <form action="boardEdit.do" method="post" enctype="multipart/form-data"> 
     <input type="hidden" name="bid" value="${brd.brdId }" >
     	<table class="table">
@@ -67,6 +86,7 @@ select{
 		            	</c:if>
                     		<option value="normal">자유게시판</option>
                     	    <option value="review">방문자 리뷰</option>
+                    	    <option value="tip">팁 공유</option>
                </select></td>
              </tr>	
     		<tr>
@@ -87,5 +107,6 @@ select{
                 <button id="btn2" type="reset">초기화</button>
             </div>	
     </form>
+    </div>
 </body>
 </html>

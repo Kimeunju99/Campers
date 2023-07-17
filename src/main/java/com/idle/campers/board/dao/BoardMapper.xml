@@ -8,7 +8,7 @@
                      from tbl_board b, tbl_user u
                      where b.brd_writer = u.user_id
                      and b.brd_type = #{type}
-	<if test="sch  == 'writer'">and b.BRD_WRITER LIKE '%' || #{keyword} || '%'</if>
+	<if test="sch  == 'writer'">and u.user_name LIKE '%' || #{keyword} || '%'</if>
 	<if test="sch  == 'title'">and b.BRD_TITLE LIKE '%' || #{keyword} || '%'</if>
 	<if test="sch  == 'content'">and b.BRD_CONTENT LIKE '%' || #{keyword} || '%'</if>
 	<if test="sch  == 'wdate'">AND b.BRD_DATE BETWEEN TO_DATE(#{keyword}, 'yyyy-MM-dd') - INTERVAL '1' DAY

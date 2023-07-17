@@ -9,7 +9,11 @@ public interface AccuseMapper {
 	
 	public List<AccuseVO> AccuseList ();
 	
-	public AccuseVO AccuseSelectOne(String userId);
+	public AccuseVO AccuseSelectOne(String accuseUserId);
 	
-	public int AccuseInsert();
+	public int AccuseInsert(AccuseVO vo);
+	
+	public int AccuseUpdate(AccuseVO vo);
+	
+	public int AccuseDelete(String accuseUserId);
 }
