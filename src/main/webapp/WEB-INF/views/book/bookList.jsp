@@ -34,26 +34,36 @@ function initRow(){ //유저 권한 정보에 따른 행 출력
 		method: 'get',
 		success: function(result){
 			console.log(result); //json: list<BookVO>
-			let txt = '';
-			for(let data of result){
-				txt += `
-					<tr onclick="location.href='/campers/selectBook.do?book=\${data.bookId}'">
-						<td>\${data.bookDate }</td><td>\${data.bookManager }</td><td>\${data.bookRoomId }</td>
-						<td>\${data.bookCost }</td><td>\${data.bookClient }</td>
-						<td><c:out value="\${data.bookStartDate +' ~ '+ data.bookEndDate}"></c:out></td>
-						<c:if test="\${data.bookState  == 'wait'}"><td>대기</td></c:if>
-						<c:if test="\${data.bookState == 'approval'}"><td>승인</td></c:if>
-						<c:if test="\${data.bookState == 'expire'}"><td>만료</td></c:if>
-						<c:if test="\${data.bookState == 'cancle'}"><td>취소</td></c:if>
-					</tr>
-				`;
-				tbody.innerHTML = txt;
+			let list = JSON.parse(result)
+			for(let data of list){
+				let txt = '<tr onclick="location.href=\'/campers/selectBook.do?book='+data.bookId+'\'">'
+						+'<td>' + dateParse(data.bookDate) +'</td><td>'+data.bookManager+'</td><td>'+data.bookRoomId  +
+						'</td><td>'+data.bookCost+'</td><td>'+data.bookClient +'</td><td>'
+						+ dateParse(data.bookStartDate) + ' ~ ' + dateParse(data.bookEndDate)+'</td>'
+						
+						if(data.bookState == 'wait')
+							txt +='<td>대기</td>'
+						if(data.bookState == 'approval')
+							txt +='<td>승인</td>'
+						if(data.bookState == 'expire')
+							txt +='<td>만료</td>'
+						if(data.bookState == 'cancle')
+							txt +='<td>취소</td>'
+							
+				txt += '</tr>';
+				tbody.innerHTML += txt;
 			}//for
+			
 		}, //success
 		error: function(err){	console.log(err);	}
 	});
 }
 
+function dateParse(dateP){
+	let date = new Date(dateP);
+	let dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+	return dateStr;
+}
 </script>
 </body>
 </html>

@@ -11,6 +11,7 @@ public class MemberVO {
 	private String userTel;
 	private String userAuth; // admin | general | business
 	private String userAddr;
+	private String userState; //true | false
 	public String getUserId() {
 		return userId;
 	}
@@ -53,6 +54,14 @@ public class MemberVO {
 	public void setUserAddr(String userAddr) {
 		this.userAddr = userAddr;
 	}
+	public String getUserState() {
+		return userState;
+	}
+	public void setUserState(String userState) {
+		this.userState = userState;
+	}
+	
+	
 }
 
 

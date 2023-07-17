@@ -14,6 +14,7 @@ import com.idle.campers.book.service.BookVO;
 import com.idle.campers.common.Control;
 import com.idle.campers.member.service.MemberVO;
 
+
 public class BookListControl implements Control {
 
 	@Override
@@ -23,7 +24,7 @@ public class BookListControl implements Control {
 		BookService service = new BookServiceImpl();
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<BookVO> list =  service.bookList(logUser.getUserId(), logUser.getUserAuth(), null); //권한에 따른 예약 리스트
-		
+		//System.out.println(logUser +", "+ list);
 		String json ="";
 		try {
 			json = objectMapper.writeValueAsString(list);

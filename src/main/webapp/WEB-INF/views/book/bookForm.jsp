@@ -19,9 +19,9 @@
 		</tr>
 		<tr>
 			<th>업체명</th>
-			<td><input type="text" name="manager" id="manager" value="${book.bookManager}" readonly></td>
+			<td><input type="text" name="manager" id="manager" value="${manager.userName}" readonly></td>
 			<th>업체번호</th>
-			<td><input type="text" name="managerTel" id="managerTel" value="업체전화번호" readonly></td>
+			<td><input type="text" name="managerTel" id="managerTel" value="${manager.userTel }" readonly></td>
 			<th>예약 현황</th>
 			<td><input type="text" name="state" id="state" readonly
 			value=<c:if test="${book.bookState  == 'wait'}">대기</c:if>
@@ -37,9 +37,9 @@
 		</tr>
 		<tr>
 			<th>예약자</th>
-			<td><input type="text"  name="client" id="client" readonly value="${book.bookClient}"></td>
+			<td><input type="text"  name="client" id="client" readonly value="${client.userName}"></td>
 			<th>예약자 번호</th>
-			<td><input type="text"  name="clientTel" id="clientTel" readonly value="예약자전화번호"></td>
+			<td><input type="text"  name="clientTel" id="clientTel" readonly value="${client.userTel }"></td>
 			<th>예약인원</th>
 			<td><input type="text"  name="personnel" id="personnel" readonly value="${book.bookPersonnel}"></td>
 		</tr>
@@ -56,7 +56,7 @@
 			<td><textarea style="resize: none;" rows="1"  name="cost" id="cost" readonly>${book.bookCost}</textarea></td>
 			<td colspan="4" align="center">
 				<button type="button" id="stateBtn">예약취소</button>
-				<button type="button" id="backBtn">HOME</button>
+				<button type="button" id="backBtn">뒤로가기</button>
 			</td>
 		</tr>
 	</table>
@@ -68,7 +68,7 @@ let togleBtn = document.getElementById("stateBtn");
 //뒤로가기
 document.getElementById("backBtn").addEventListener('click', backF);
 function backF(e){
-	location.href="/campers/main.do";
+	location.href= document.referrer;
 }
 
 //예약 상태 버튼 display

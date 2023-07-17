@@ -44,5 +44,4 @@ public class BookServiceImpl implements BookService {
 	public int stateCount(BookVO vo) {
 		return mapper.stateCount(vo);
 	}
-
 }

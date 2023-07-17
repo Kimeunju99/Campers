@@ -9,4 +9,5 @@ public interface MemberMapper {
 	public MemberVO findMember(@Param("userName")String name, @Param("userEmail")String email, @Param("userId")String id);	//아이디 비밀번호 찾기용
 	public int insertMember(MemberVO vo);
 	public int updateMember(MemberVO vo);
+	public int joinout(MemberVO vo);
 }

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="js/jquery-3.7.0.min.js"></script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +13,20 @@
 <header class="bg-dark py-5">
     <div class="container px-5">
         <div class="row gx-5 align-items-center justify-content-center">
-            <div class="col-lg-8 col-xl-7 col-xxl-6">
+            <div class="col-lg-8 col-xl-7 col-xxl-6" style="background-color: lightgrey;">
                 <div class="my-5 text-center text-xl-start">
-                <form>
-                    <p class="lead fw-normal text-white-50 mb-4" align="center">캠핑장 검색</p>
-                    <input type="text" id="campSearch" name="campSearch">
-                    <button type="submit" id="search" name="search" class="btn btn-primary btn-lg px-4 me-sm-3">search</button>
+                <form align="center" action="searchCamp.do" id="campSearchForm">
+                	<input type="text" name="getMain" value="getMain" readonly style="display: none;">
+				    지역명 
+					<select id="locationSido" name="locationSido">
+						<option value="locationAll">전체</option>
+					</select>
+					키워드 
+					<select id="keyWord" name="keyWord">
+						<option value="keywordAll">전체</option>
+					</select><br>
+					시설명 <input type="text" id="campName" name="campName" width="200px">
+                    <button type="submit">검색</button>
                 </form>
                 </div>
             </div>
@@ -116,3 +127,39 @@
         </aside>
     </div>
 </section>
+
+<script>
+
+	//캠핑장 검색시 사용되는 select의 option 생성
+	let arrSido = new Set();
+	let arrKeyword = new Set();
+	
+	$.ajax({
+		type: "get",
+		url: "https://api.odcloud.kr/api/15111395/v1/uddi:8c528230-eda4-4d83-855a-bee73605e49f?page=1&perPage=64&serviceKey=ijjFxtQ421IxkCgrbClzoUeKkPef8dZ86r2uQ7mftWOavlMJzJAto4fcAeqS0L2qRNWhva5XsR9FYf5RMD1rlg%3D%3D",
+		data: JSON,
+		success: function(data) {
+			for(let i=0; i<data.data.length; i++){	//select가 되는 값 중복되지 않게 넣기
+				arrSido.add(data.data[i]['시도 명칭']);
+				
+				let str = data.data[i]['카테고리3'];
+				let arry = str.split(',');
+				for(let j=0; j<arry.length; j++){
+					arrKeyword.add(arry[j]);
+				}
+			}
+			for(let item of arrSido){
+				let sidoList = "<option value=\"" + item + "\">" + item + "</option>"
+				$('#locationSido').append(sidoList)
+			}
+			for(let item of arrKeyword){
+				let keywordList = "<option value=\"" + item + "\">" + item + "</option>"
+				$('#keyWord').append(keywordList)
+			}
+		},
+		error: function(e){
+			console.log(e)
+		}
+	})
+	
+</script>
