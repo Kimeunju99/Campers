@@ -59,7 +59,7 @@ public class AddCampControl implements Control {
 		vo.setCampAddr(addr);
 		vo.setCampLocation(location);
 		vo.setCampInfo(info);
-		vo.setCampImg(img);
+		vo.setCampImage(img);
 		vo.setCampRoomcnt(Integer.parseInt(cnt));
 		
 		String str = null;

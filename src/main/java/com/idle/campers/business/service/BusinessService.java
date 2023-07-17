@@ -13,4 +13,6 @@ public interface BusinessService {
 	public int deleteCamp(String campName);
 	
 	public boolean updateCamp(BusinessVO vo);
+	
+	public List<BusinessVO> bestCampList();
 }

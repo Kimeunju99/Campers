@@ -348,8 +348,8 @@ tr, td {
 			return str;
 		}
 		
-		const bid = '${board.brdId}';
-		const replyUL = $('.reple');
+		bid = '${board.brdId}';
+		replyUL = $('.reple');
 		
 		function replyFnc(bid){
 			
@@ -382,8 +382,8 @@ tr, td {
 		$('ul>li').css('list-style', 'none');
 		
 		//댓글 리스트 보여주기
-		const bid = '${board.brdId}';
-		const replyUL = $('.reple');
+		bid = '${board.brdId}';
+		replyUL = $('.reple');
 		
 		function replyFnc(bid){
 		let payload = "bid=" + bid;

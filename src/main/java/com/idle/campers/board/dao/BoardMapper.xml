@@ -26,7 +26,7 @@
 	<select id="MainPageboardList" resultType="board">
 	<![CDATA[
 		SELECT * FROM (
-    		SELECT * FROM TBL_BOARD WHERE BRD_TYPE != 'INFORM' ORDER BY BRD_DATE
+    		SELECT * FROM TBL_BOARD WHERE BRD_TYPE != 'INFORM' ORDER BY BRD_DATE DESC
 		)
 		WHERE ROWNUM < 6
 	]]>

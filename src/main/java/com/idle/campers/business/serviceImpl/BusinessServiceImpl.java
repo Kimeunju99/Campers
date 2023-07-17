@@ -42,6 +42,12 @@ public class BusinessServiceImpl implements BusinessService{
 		// TODO Auto-generated method stub
 		return map.updateCamp(vo) == 1;
 	}
+
+	@Override
+	public List<BusinessVO> bestCampList() {
+		// 메인에 노출시킬 캠핑장 순위 리스트
+		return map.bestCampList();
+	}
 	
 	
 	
