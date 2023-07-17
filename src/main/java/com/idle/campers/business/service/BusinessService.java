@@ -13,4 +13,8 @@ public interface BusinessService {
 	public int deleteCamp(String campName);
 	
 	public boolean updateCamp(BusinessVO vo);
+	
+	//mypage
+	public BusinessVO selectCamp(int campId);
+	public int myLikeCnt(String userId);
 }

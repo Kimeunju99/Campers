@@ -41,5 +41,15 @@
 	]]>
 	</select>
 
-
+	
+	<!-- mypage -->
+	<select id="selectCamp" parameterType="com.idle.campers.business.service.BusinessVO">
+		SELECT * FROM TBL_CAMP
+		WHERE CAMP_ID = #{campId}
+	</select>
+	<select id="myLikeCnt" parameterType="String">
+		SELECT count(*) FROM TBL_CMP_LIKE
+		WHERE USER_ID = #{userId}
+	</select>
+	
 </mapper>

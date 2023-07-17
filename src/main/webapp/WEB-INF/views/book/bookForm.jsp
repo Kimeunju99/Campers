@@ -12,18 +12,34 @@
 <div id="container">
 <h1>예약 상세정보</h1>
 <form id="bookForm"> <!-- action="bookModify.do" -->
-	<table border="1">
+	<table>
 		<tr>
 			<th>예약번호</th>
-			<td colspan="2" class="readonly">${book.bookId}</td>
+			<td class="readonly">${book.bookId}</td>
 			<th>예약일</th>
-			<td colspan="2" class="readonly" id="bookDate">${book.bookDate}</td>
+			<td class="readonly" id="bookDate">${book.bookDate}</td>
 		</tr>
 		<tr>
 			<th>업체명</th>
 			<td class="readonly" id="manager">${manager.userName}</td>
-			<th>업체번호</th>
+			<th>업체 전화번호</th>
 			<td class="readonly" id="managerTel">${manager.userTel }</td>
+		</tr>
+		<tr>
+			<th>주소</th>
+			<td id="addr" class="readonly">${book.bookCampId}</td>
+			<th>호수</th>
+			<td id="roomId">${book.bookRoomId}</td>
+		</tr>
+		<tr>
+			<th>예약자</th>
+			<td class="readonly" id="client" >${client.userName}</td>
+			<th>예약자 전화번호</th>
+			<td class="readonly" id="clientTel" >${client.userTel }</td>
+		</tr>
+		<tr>
+			<th>예약인원</th>
+			<td class="readonly" id="personnel" >${book.bookPersonnel}</td>
 			<th>예약 현황</th>
 			<td class="readonly" id="state">
 				<c:if test="${book.bookState  == 'wait'}">대기</c:if>
@@ -33,29 +49,15 @@
 			</td>
 		</tr>
 		<tr>
-			<th>주소</th>
-			<td colspan="5" id="addr" class="readonly">${book.bookCampId}</td>
-		</tr>
-		<tr>
-			<th>예약자</th>
-			<td class="readonly" id="client" >${client.userName}</td>
-			<th>예약자 번호</th>
-			<td class="readonly" id="clientTel" >${client.userTel }</td>
-			<th>예약인원</th>
-			<td class="readonly" id="personnel" >${book.bookPersonnel}</td>
-		</tr>
-		<tr>
-			<th>호수</th>
-			<td id="roomId">${book.bookRoomId}</td>
 			<th>체크인</th>
-			<td class="readonly" id="sDate">${book.bookStartDate}"</td>
+			<td class="readonly" id="sDate">${book.bookStartDate}</td>
 			<th>체크아웃</th>
 			<td class="readonly" id="dDate">${book.bookEndDate}</td>
 		</tr>
 		<tr>
 			<th>가격</th>
 			<td class="readonly" id="cost">${book.bookCost}</td>
-			<td colspan="4" align="center">
+			<td colspan="2" align="right">
 				<button type="button" id="stateBtn">예약취소</button>
 				<button type="button" id="backBtn">뒤로가기</button>
 			</td>

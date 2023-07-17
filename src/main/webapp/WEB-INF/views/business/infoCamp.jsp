@@ -54,6 +54,7 @@
 				</tr>
 			</tbody>
 		</table>
+			<button onclick="location.href='/campers/newBook.do?cid=${camp.campId }'">예약</button>
 			<button class="btn btn-primary" type="button" onclick="submit1(this.form);">수정</button>
 			<button class="btn btn-warning" type="button" onclick="submit2(this.form);">삭제</button>
 	</form>

@@ -11,10 +11,13 @@ public interface BusinessMapper {
 	public List<BusinessVO> campSelectList();
 	
 	public BusinessVO infoCamp(String campName);
-	
 	public int deleteCamp(String campName);
 	
 	public int updateCamp(BusinessVO vo);
+
+	//mypage
+	public BusinessVO selectCamp(int campId);
 	
+	public int myLikeCnt(String userId);
 	
 }

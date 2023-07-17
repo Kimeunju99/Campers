@@ -15,34 +15,37 @@ public class BusinessServiceImpl implements BusinessService{
 	
 	@Override
 	public boolean addCamp(BusinessVO vo) {
-		// TODO Auto-generated method stub
 		return map.addCamp(vo) == 1;
 	}
 
 	@Override
 	public BusinessVO infoCamp(String campName) {
-		// TODO Auto-generated method stub
 		return map.infoCamp(campName);
 	}
 
 	@Override
 	public List<BusinessVO> campSelectList() {
-		// TODO Auto-generated method stub
 		return map.campSelectList();
 	}
 
 	@Override
 	public int deleteCamp(String campName) {
-		// TODO Auto-generated method stub
 		return map.deleteCamp(campName);
 	}
 
 	@Override
 	public boolean updateCamp(BusinessVO vo) {
-		// TODO Auto-generated method stub
 		return map.updateCamp(vo) == 1;
 	}
+
+	@Override
+	public BusinessVO selectCamp(int campId) {
+		return map.selectCamp(campId);
+	}
 	
-	
+	@Override
+	public int myLikeCnt(String userId){
+		return map.myLikeCnt(userId);
+	}
 	
 }

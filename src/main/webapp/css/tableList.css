@@ -1,8 +1,9 @@
 @charset "UTF-8";
 #container{
-	width: 1000px;
 	margin: 0 auto;
+	width: 1000px;
 }
+
 table{
 	margin: 0;
 	width: 100%;
@@ -12,17 +13,22 @@ table{
 	display: table;
 	text-align: center;
 }
-
-
-button {
-	float: right;
-	background-color: white;
-	margin: 10px auto;
-	width: 100px;	height: 36px;
-	border-radius: 30px;
-	font-size: 15px;
-	cursor: pointer;
+table th{
+	background-color: lightgray;
+	padding: 10px 5px;
+	width: 170px;
 }
+table tr{
+	border-bottom: 1px solid black;
+}
+button{
+	display: inline-block;
+	margin: 10px;
+}
+table td :nth-child(2n-1){
+	border-right: 1px solid black;
+}
+
 button:hover{
 	color: orange;
 }
