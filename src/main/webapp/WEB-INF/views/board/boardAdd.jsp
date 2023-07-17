@@ -98,7 +98,7 @@ select {
 								<option value="tip">팁 공유</option>
 					</select></td>
 				</tr>
-		
+					
 				<tr>
 					<td><input type="text" name="title" placeholder="제목을 입력하세요"></td>
 				</tr>

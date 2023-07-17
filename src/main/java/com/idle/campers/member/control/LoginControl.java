@@ -29,6 +29,10 @@ public class LoginControl implements Control {
 			String message = "탈퇴한 회원입니다.";
 			session.setAttribute("message", message);
 			return "member/loginForm";
+		} else if(vo.getUserActivation().equals("정지")){
+			String message = "정지된 회원입니다.";
+			session.setAttribute("message", message);
+			return "member/loginForm";
 		}else {
 			session.setAttribute("id", vo.getUserId());
 			session.setAttribute("name", vo.getUserName());

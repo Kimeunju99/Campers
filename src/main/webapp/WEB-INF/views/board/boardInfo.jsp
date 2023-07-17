@@ -296,7 +296,7 @@ tr, td {
 	recCount();
 
 
-		//댓글부분
+		 //댓글부분
 		$('#addRBtn').on('click', function(){
 			let reply = $('#reply').val();
 			let replyer = $('#replyer').val();
@@ -346,7 +346,7 @@ tr, td {
 			return str;
 		}
 		
-		const bid = '${board.brdId}';
+		bid = '${board.brdId}';
 		const replyUL = $('.reple');
 		
 		function replyFnc(bid){
@@ -368,6 +368,7 @@ tr, td {
 			console.error(err); 
 			});
 		}
+		
 	replyFnc(bid); 
 		
 	$('ul').css({
@@ -376,12 +377,32 @@ tr, td {
 		margin: '20px'
 		});
 		
-		replyUL.css('list-style', 'none');
+
+		$('ul>li').css('list-style', 'none');
 		
+		//댓글 리스트 보여주기
+		bid = '${board.brdId}';
+		replyUL = $('.reple');
+		
+		function replyFnc(bid){
+		let payload = "bid=" + bid;
+		url = '/campers/replyList.do';
+			fetch(url, {
+				method: 'post',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+				},
+				body: payload
+			})
+			.then(Response => Response.json())
+			.then(json => viewHTML(json));
+		}
 		
 
-		//replyFnc(bid);
+
+		replyUL.css('list-style', 'none');
 		
+
 	</script>
 </body>
 </html>

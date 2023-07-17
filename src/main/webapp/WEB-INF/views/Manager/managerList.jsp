@@ -48,9 +48,7 @@
 							<td align="center">${l.userTel }</td>
 							<td>${l.userAddr }</td>
 							<td align="center">${l.userAuth }</td>
-							<td><select>
-							
-							</select></td>
+							<td align="center">${l.userActivation }</td>
 						</tr>
 					</c:forEach>
 				</tbody>

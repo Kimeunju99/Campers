@@ -3,6 +3,10 @@
 <mapper namespace="com.idle.campers.accuse.dao.AccuseMapper">
 	
 	<!-- 아이디 제한 리스트 -->
+	<!-- <select id="AccuseList" resultType="com.idle.campers.accuse.dao.AccuseVO">
+		SELECT * FROM TBL_ACCUSE
+	</select> -->
+	
 	<select id="AccuseList" resultType="com.idle.campers.accuse.dao.AccuseVO">
 		SELECT * FROM TBL_ACCUSE
 	</select>
@@ -21,9 +25,9 @@
 	<!-- 아이디 제한 수정 -->
 	<update id="AccuseUpdate">
 		UPDATE TBL_ACCUSE
-		SET ACCUSE_STATE = #{accuseState},
+		SET ACCUSE_STATE = 1,
 		ACCUSE_RESULT = #{accuseResult},
-		ACCUSE_RDATE = #{accuseRdate}
+		ACCUSE_RDATE = sysdate
 		WHERE ACCUSE_USERID = #{accuseUserId}
 	</update>
 	

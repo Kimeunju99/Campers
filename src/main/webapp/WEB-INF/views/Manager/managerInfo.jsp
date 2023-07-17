@@ -37,6 +37,23 @@
 					<td>권한</td>
 					<td><input type="text" name="userAuth" value="${user.userAuth }"></td>
 				</tr>
+				<tr>
+					<td>계정상태</td>
+						<td><select name="accuse">
+							<option value="활성화">활성화</option>
+							<option value="비활성화">비활성화</option>
+							<option value="정지">정지</option>
+						</select></td>
+				</tr>
+				<tr>
+					<td>정지기간</td>
+						<td><select name="result">
+							<option value="반려">반려</option>
+							<option value="1개월정지">1개월정지</option>
+							<option value="2개월정지">2개월정지</option>
+							<option value="영구정지">영구정지</option>
+						</select></td>
+				</tr>
 			</tbody>
 		</table>
 			<button class="btn btn-primary" type="button" onclick="submit1(this.form);">수정</button>

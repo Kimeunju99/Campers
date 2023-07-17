@@ -15,4 +15,6 @@ public interface BusinessMapper {
 	public int deleteCamp(String campName);
 	
 	public int updateCamp(BusinessVO vo);
+	
+	
 }

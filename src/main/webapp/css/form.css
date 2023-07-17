@@ -1,0 +1,14 @@
+@charset "UTF-8";
+#container{
+	margin: 0 auto;
+	width: 1000px;
+}
+.readonly{
+	border:none;
+}
+table{
+	border:1px solid black;
+}
+table th{
+	text-align: right;
+}

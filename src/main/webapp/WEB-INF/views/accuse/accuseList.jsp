@@ -18,7 +18,7 @@
 				<!-- Grid column -->
 				<div class="col-md-12" align="left"
 					style="padding-left: 100px; padding-top: 15px; padding-bottom: 0;">
-					<h2>게시판 관리</h2><br>
+					<h2>신고 관리</h2><br>
 				</div>
 				<br> <br>
 				<!-- Grid column -->
@@ -49,7 +49,7 @@
 								<td><c:out value="${vo.accuseBrd}" /></td>
 								<td><a href="/campers/boardInfo.do?bid=${vo.accuseBrd}" style="text-decoration: none; color: black;"> 
 								<c:out value="${vo.accuseTitle}" /></a></td>
-								<td><c:out value="${vo.accuseUserId}" /></td>
+								<td><a href="managerInfoControl.do?id=${vo.accuseUserId }"><c:out value="${vo.accuseUserId}" /></a></td>
 								<td><c:out value="${vo.accuseDate}" /></td>
 								<td><c:out value="${vo.accuseReport}" /></td>
 								<td><c:out value="${vo.accuseContent}" /></td>

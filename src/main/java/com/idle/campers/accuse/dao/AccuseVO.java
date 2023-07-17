@@ -33,4 +33,6 @@ public class AccuseVO {
 	
 	private String accuseUserId;
 	
+	private int userAccuse;
+	
 }

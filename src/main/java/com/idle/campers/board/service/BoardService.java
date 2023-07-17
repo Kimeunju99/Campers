@@ -33,4 +33,6 @@ public interface BoardService {
 	public int myBoardCnt(String id); //내 게시글 카운트
 	
 	public List<BoardVO> myBoardList(String id);
+	
+	public List<BoardVO> MainPageboardList();
 }
