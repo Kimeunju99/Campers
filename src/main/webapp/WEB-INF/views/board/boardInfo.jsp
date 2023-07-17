@@ -230,12 +230,10 @@ tr, td {
 
 		reportIn.addEventListener('click',()=>{
 			recontainer.style.display = 'flex';
-			reportIn.style.display = 'none';
 		})
 		
 		reportCloseBtn.addEventListener('click', ()=>{
 			recontainer.style.display = 'none';
-			reportIn.style.display = 'flex';
 		})
 
 		
@@ -383,7 +381,6 @@ tr, td {
 		
 
 		//replyFnc(bid);
-		
 		
 	</script>
 </body>

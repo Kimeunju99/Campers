@@ -91,11 +91,11 @@ select {
 				<tr>
 					<td><select name="type">
 							<c:if test="${auth eq 'admin'}">
-								<input type="text" value="inform">공지사항
+								<option value="inform">공지사항</option>
 		            		</c:if>
-							<option value="normal">자유게시판</option>
-							<option value="review">방문자 리뷰</option>
-							<option value="tip">팁 공유</option>
+								<option value="normal">자유게시판</option>
+								<option value="review">방문자 리뷰</option>
+								<option value="tip">팁 공유</option>
 					</select></td>
 				</tr>
 		

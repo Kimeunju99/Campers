@@ -36,6 +36,7 @@
 						<th width="200">전화번호</th>
 						<th width="200">주소</th>
 						<th width="200">권한</th>
+						<th width="200">계정상태</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -47,6 +48,9 @@
 							<td align="center">${l.userTel }</td>
 							<td>${l.userAddr }</td>
 							<td align="center">${l.userAuth }</td>
+							<td><select>
+							
+							</select></td>
 						</tr>
 					</c:forEach>
 				</tbody>

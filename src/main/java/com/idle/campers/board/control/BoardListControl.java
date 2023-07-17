@@ -23,8 +23,6 @@ public class BoardListControl implements Control {
 		BoardVO vo = new BoardVO();
 		vo.setBrdType(type);
 		
-		System.out.println(type);
-		
 		int totalCnt = svc.totalCnt(type);
 		PageDTO dto = new PageDTO(Integer.parseInt(page), totalCnt);
 		String sch = req.getParameter("sch");

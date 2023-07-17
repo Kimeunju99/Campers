@@ -3,8 +3,8 @@
 <mapper namespace="com.idle.campers.accuse.dao.AccuseMapper">
 	
 	<!-- 아이디 제한 리스트 -->
-	<select id="AccuseList">
-		SELECT * FROM TBL_ACCUSE;
+	<select id="AccuseList" resultType="com.idle.campers.accuse.dao.AccuseVO">
+		SELECT * FROM TBL_ACCUSE
 	</select>
 	
 	<!-- 아이디 제한 유저 아이디 정보 -->
