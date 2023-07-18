@@ -6,7 +6,8 @@
 
 body {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  background: #ededed;
+  background: #f6f1e5;
+  /* background: #F0EADA; */
 }
 
 ul {
@@ -282,38 +283,91 @@ label span {
 }
 .camp-list-items {
   width: 100%;
-  height: 750px;
-  background-color: #91C3CE;
+  height: 800px;
+  background-color: #000000;
 }
 
 .campImage {
   background-size: cover;
-  width: 70%;
+  width: 100%;
   height: 100%;
   float: left;
   background-repeat: no-repeat;
 }
+
+.campImage::before  {
+  opacity: 0.5;
+  background-color: #000000;
+  position: absolute;
+}
+
 .campInfo {
   margin: auto;
+  float: auto;
+  width: 100%;
+  height: 100%;
+  float: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  text-align: center;
+}
+
+.campInfo-text{
+  margin-top: 400px;
+  display: inline-block;
 }
 
 #list-slide-btn {
-  float: right;
   background-repeat: no-repeat;
+}
+
+#list-slide-btn img {
+  width: 70px;
+  height: 70px;
+}
+
+#list-slide-btn img:nth-child(1){
+  margin-top: 365px;
+  margin-left: 20px;
+  float: left;
+}
+
+#list-slide-btn img:nth-child(2){
+  margin-top: 365px;
+  margin-right: 20px;
+  float: right;
 }
 
 #main-container {
   display: flex;
-  height: 300px;
+  height: 500px;
 }
 
 .container-items {
   margin: auto;
   text-align: center;
+  background-color: #fff;
+  height: 350px;
+  border-radius: 30px;
+  padding: 30px;
 }
 
 #Main-boardList {
-  width: 50%;
+  width: 45%;
+}
+
+#Main-boardList table {
+  width: 100%;
+  border-top: 1px solid #bababa;
+  border-collapse: collapse;
+}
+#Main-boardList th, #Main-boardList td {
+  border-bottom: 1px solid #bababa;
+  padding: 5px;
+}
+
+#iconList {
+  padding-top: 70px;
 }
 
 .main-icon {
@@ -356,6 +410,11 @@ label span {
   background-color: #fff;
   border-radius: 30px;
   text-align: center;
+}
+
+.joinType div img{
+  height: 180px;
+  width: 180px;
 }
 
 #join-form-div {

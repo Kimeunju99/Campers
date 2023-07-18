@@ -26,7 +26,10 @@ public class BusinessServiceImpl implements BusinessService{
 	public List<BusinessVO> campSelectList(String id) {
 		return map.campSelectList(id);
 	}
-
+	public List<BusinessVO> campListAll(){
+		return map.campListAll();
+	} //모든 캠프 리스트 일반사용자 예약 용도
+	
 	@Override
 	public int deleteCamp(String campName) {
 		return map.deleteCamp(campName);

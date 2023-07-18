@@ -47,7 +47,10 @@
 		) WHERE  ROWNUM <4
 	]]>
 	</select>
-
+	
+	<select id="campListAll" resultType="com.idle.campers.business.service.BusinessVO">
+		SELECT * FROM TBL_CAMP 
+	</select>
 	
 	<!-- mypage -->
 	<select id="myLikeCnt" parameterType="String">

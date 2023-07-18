@@ -33,9 +33,11 @@ public class CampModifyControl implements Control {
 		}
 
 			String campName = multi.getParameter("campName");
+			String campInfo = multi.getParameter("campInfo");
 			String campAddr = multi.getParameter("campAddr");
 			String campImage = multi.getFilesystemName("campImg");
 			String campRoomcnt = multi.getParameter("campRoomcnt");
+			String campOwner = multi.getParameter("campOwner");
 
 			String roomId = multi.getParameter("roomId");
 			String roomName = multi.getParameter("roomName");
@@ -45,9 +47,11 @@ public class CampModifyControl implements Control {
 
 			BusinessVO vo = new BusinessVO();
 			vo.setCampName(campName);
+			vo.setCampInfo(campInfo);
 			vo.setCampAddr(campAddr);
 			vo.setCampImage(campImage);
 			vo.setCampRoomcnt(Integer.parseInt(campRoomcnt));
+			vo.setCampOwner(campOwner);
 			BusinessService svc = new BusinessServiceImpl();
 
 			RoomVO rvo = new RoomVO();
