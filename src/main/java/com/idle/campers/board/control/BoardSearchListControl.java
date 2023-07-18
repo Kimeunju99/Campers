@@ -23,12 +23,8 @@ public class BoardSearchListControl implements Control {
 		ObjectMapper mapper = new ObjectMapper();
 
 		String page = req.getParameter("page");
-		page = page == null ? "1" : page;
+		page = (page == null)? "1" : page;
 		String type = req.getParameter("type");
-		
-		BoardVO vo = new BoardVO();
-
-		vo.setBrdType(type);
 
 		int totalCnt = svc.totalCnt(type);
 		PageDTO dto = new PageDTO(Integer.parseInt(page), totalCnt);
@@ -37,7 +33,8 @@ public class BoardSearchListControl implements Control {
 		String keyword = req.getParameter("keyword");
 		System.out.println(sch);
 		System.out.println(keyword);
-
+		System.out.println(page);
+		System.out.println(type+"=========================");
 		list = svc.boardList(Integer.parseInt(page), sch, keyword, type);
 		req.setAttribute("page", dto);
 

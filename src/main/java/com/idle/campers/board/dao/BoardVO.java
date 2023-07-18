@@ -21,5 +21,6 @@ public class BoardVO {
 	private int brdRead;
 	private int brdInquiry;
 	private String userName;
+	private String page;
 	
 }

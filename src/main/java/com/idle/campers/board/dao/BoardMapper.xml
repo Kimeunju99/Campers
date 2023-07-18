@@ -12,8 +12,8 @@
 	<if test="sch  == 'writer'">and u.user_name LIKE '%' || #{keyword} || '%'</if>
 	<if test="sch  == 'title'">and b.BRD_TITLE LIKE '%' || #{keyword} || '%'</if>
 	<if test="sch  == 'content'">and b.BRD_CONTENT LIKE '%' || #{keyword} || '%'</if>
-	<if test="sch  == 'wdate'">AND b.BRD_DATE BETWEEN TO_DATE(#{keyword}, 'yyyy-MM-dd') - INTERVAL '1' DAY
-								AND TO_DATE(#{keyword}, 'yyyy-MM-dd')</if>
+	<if test="sch  == 'wdate'">AND b.BRD_DATE BETWEEN TO_DATE(#{keyword})
+								AND TO_DATE(#{keyword}) + INTERVAL '1' DAY </if>
 					 order by b.brd_id desc
 					) a
 			

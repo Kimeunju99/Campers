@@ -7,9 +7,9 @@
 <meta charset="UTF-8">
 <title>board/boardList.jsp</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<!--  
+ 
 <link href="css/pagination.css" rel="stylesheet" />
--->
+
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 				<!-- Grid column -->
 				<div class="col-md-12" align="left"
 					style="padding-left: 100px; padding-top: 15px; padding-bottom: 0;">
-
+					<input type="hidden" name="type" value="${param.type}">
 				</div>
 
 				<div align="right" style="padding-right: 150px;">
@@ -95,47 +95,31 @@
 			</div>
 			<br>
 		</div>
-	</div>
+	
 
-<!--  
-<div id="app" class="container">  
-<ul class="page">
-    <li class="page__btn"><span class="material-icons"><</span></li>
-    <li class="page__numbers"> 1</li>
-    <li class="page__numbers active">2</li>
-    <li class="page__numbers">3</li>
-    <li class="page__numbers">4</li>
-    <li class="page__numbers">5</li>
-    <li class="page__numbers">6</li>
-    <li class="page__dots">...</li>
-    <li class="page__numbers"> 10</li>
-    <li class="page__btn"><span class="material-icons">></span></li>
-  </ul>
-</div>
--->
-	<br>
-	<div class="pagination" align="center">
-
+<div id="app" class="container" align="center">  
+	<ul class="page">
 		<c:if test="${page.prev}">
-			<a href="boardList.do?type=${t}&page=${page.startPage - 1}">«</a>
+	    <li class="page__btn"><span class="material-icons"><a href="boardList.do?type=${t}&page=${page.startPage - 1}">«</a></span></li>		
 		</c:if>
 		<c:forEach begin="${page.startPage}" end="${page.endPage}" var="i">
-
 			<c:choose>
 				<c:when test="${i == curPage}">
-					<a href="boardList.do?type=${t}&page=${i}" class="active"> <c:out
-							value="${i}" /></a>
+					<li class="page__numbers active"><span>
+					<a id="act" href="boardList.do?type=${t}&page=${i}"><c:out value="${i}" /></a></span>
+					</li>
 				</c:when>
 				<c:otherwise>
-					<a href="boardList.do?type=${t}&page=${i}"> <c:out value="${i}" /></a>
+					<li class="page__numbers"><a href="boardList.do?type=${t}&page=${i}" style="text-decoration: none;"> <c:out value="${i}" /></a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-		<c:if test="${page.next}">
-			<a href="boardList.do?type=${t}&page=${page.endPage + 1}">»</a>
-		</c:if>
-
-	</div>
+	    <c:if test="${page.next}">
+	    <li class="page__btn"><span class="material-icons"><a href="boardList.do?type=${t}&page=${page.endPage + 1}">»</a></span></li>
+	    </c:if>
+  </ul>
+</div>
+</div>
 
 	<script type="text/javascript">
 		$('#addBtn').click(function () {
@@ -146,25 +130,26 @@
 		const urlParams = new URL(location.href).searchParams;
 		const type = urlParams.get('type');
 		if(type == 'inform'){
-			let h2 = $('<h2 />').addClass('py-3 font-bold font-up blue-text').text('공지');
+			let h2 = $('<h2 id=type/>').addClass('py-3 font-bold font-up blue-text').text('공지');
 			$('.col-md-12').append(h2);
 		}else if(type == 'tip'){
-			let h2 = $('<h2 />').addClass('py-3 font-bold font-up blue-text').text('팁 공유');
+			let h2 = $('<h2 id=type/>').addClass('py-3 font-bold font-up blue-text').text('팁 공유');
 			$('.col-md-12').append(h2);
 		}else if(type == 'review'){
-			let h2 = $('<h2 />').addClass('py-3 font-bold font-up blue-text').text('리뷰');
+			let h2 = $('<h2 id=type/>').addClass('py-3 font-bold font-up blue-text').text('리뷰');
 			$('.col-md-12').append(h2);
-		}else {
-			let h2 = $('<h2 />').addClass('py-3 font-bold font-up blue-text').text('자유게시판');
+		}else if(type == 'normal'){
+			let h2 = $('<h2 id=type/>').addClass('py-3 font-bold font-up blue-text').text('자유게시판');
 			$('.col-md-12').append(h2);
 		}
 		
 		
 		$('#searchBtn').on('click', function boardSearch() {
 			let sch = $('#sch').val();
+			let type = urlParams.get('type');
 			let keyword = $('#keyword').val();
 			console.log(sch, keyword);
-			let payload = "sch=" + sch + "&keyword=" + keyword;
+			let payload = "sch=" + sch + "&keyword=" + keyword + "&type=" + type;
 			url = "/campers/boardSearchList.do";
 			fetch(url, {
 					method: 'post',

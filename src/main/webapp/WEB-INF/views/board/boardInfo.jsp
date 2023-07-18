@@ -9,74 +9,7 @@
 <script src="https://kit.fontawesome.com/38655e7b9d.js" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css" >
-
-button:hover {
-	color: green;
-	background-color: skyblue;
-}
-
-button {
-  border: 2px solid #91C3CE;
-  outline: none;
-  background: none;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-}
-
-button {
-  display: inline-block;
-  margin: auto;
-  width: 100px;
-  height: 36px;
-  border-radius: 30px;
-  color: #008481;
-  font-size: 15px;
-  cursor: pointer;
-  border: 2px solid #91C3CE;
-  outline: none;
-  background: none;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-}
-
-#container{
-
-margin: 0 auto;
-width: 1000px;
-
-}
-#likeBtn{
-	background-color: white;
-	border: none;
-}
-
-tr, td {
-	border: 1px solid #444444;
-}
-.recontainer {
-	position: absolute;
-	top: 30%;
-	left: 30%;
-	display: none;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	background-color: antiquewhite;
-	border-radius: 80px;
-}
-.remodal{
-	top: 30%;
-	left: 30%;
-	display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  row-gap: 15px;
-  padding: 50px;
-  border: 1px solid antiquewhite;
-  border-radius: 80px;
-}
-
-</style>
+<link href="css/boardInfo.css" rel="stylesheet" />
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
@@ -155,32 +88,30 @@ tr, td {
 
 	<!-- 댓글 부분 -->
 	<br>
-	<div class="replyBody">
-		<h2>댓글창</h2>
-		<div class="writeReply">
-			<ul>
-				<c:choose>
-					<c:when test="${id != null }">
-						<li><input type="text" id="replyer" readonly size="20"
-							value="${id}"></li>
-						<li>: <textarea rows="5" cols="170" id="reply"
-								style="resize: none"></textarea>
-							<button type="button" id="addRBtn">댓글작성</button>
-						</li>
-					</c:when>
-					<c:otherwise>
-						<input type="text" readonly size="20">
-						<li>: <textarea rows="5" cols="170" style="resize: none"
-								readonly>로그인한 사용자만 이용할 수 있습니다.</textarea>
-							<button type="button" id="addRBtn">댓글작성</button>
-						</li>
-					</c:otherwise>
-				</c:choose>
-			</ul>
+	<div class="container mt-5 mb-5">
+		<div class="d-flex justify-content-center row">
+			<div class="d-flex flex-column">
+					<div class="coment-bottom bg-white p-2 px-4 pb-3" style="border-radius: 10px;">
+	<p id="ti">Comment</p>
+						<div class="d-flex flex-row add-comment-section mt-4 mb-4">
+							<c:choose>
+								<c:when test="${id != null}">
+									<input type="hidden" id="replyer" readonly size="20" value="${id}">
+									<textarea class="form-control mr-3 ml-2" rows="3" cols="170" id="reply" style="resize: none" placeholder="내용을 입력해주세요."></textarea>
+									<button id="addRBtn" type="button" style="margin: 5px">작성</button>
+								</c:when>
+								<c:otherwise>
+									<textarea rows="3" cols="170" style="resize: none" readonly>로그인한 사용자만 이용할 수 있습니다.</textarea>
+									<button id="addRBtn" type="button" style="padding:5px; margin:5px" disabled>작성</button>
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<ul class="reple">
+						
+						</ul>
+					</div>
+			</div>
 		</div>
-		<ul class="reple">
-		
-		</ul>
 	</div>
 
 </div>
@@ -222,8 +153,6 @@ tr, td {
 		reportCloseBtn.addEventListener('click', ()=>{
 			recontainer.style.display = 'none';
 		})
-
-		
 
 		
 		$('#likeBtn').on("click",function() {
@@ -337,15 +266,20 @@ tr, td {
 		                <div class="header">
 		                    <strong>\${reply.replyer}</strong>
 		                    <small>\${reply.replyDate}</small>
+		                    `;
+		    if(reply.replyModify == 'modify'){
+		    str += `
+		    	<small style="color: grey; font-size: 8px">수정됨</small>
+		    	`;
+		    }
+		    str += `
 		                </div>`;
 		     
 		    if (id == reply.replyer) { // 댓글 작성자인 경우
 		        str += `
 		                <button type="button" class="closeBtn" onclick="closeFnc(this)">&times;</button>
 		                <button type="button" class="modifyBtn" onclick="modifyFnc(this)">수정</button>`;
-		    }else{
-		    }
-		    	
+		    }		    	
 		    
 		    str += `
 		                <p class="content">\${reply.reply}</p>
@@ -380,15 +314,6 @@ tr, td {
 		}
 		replyFnc(bid); 
 		
-	$('ul').css({
-		border: 'solid 0.5px',
-		padding: '5px',
-		margin: '20px'
-		});
-		
-		replyUL.css('list-style', 'none');
-	
-		
 		function modifyFnc(e){
 			let reply = $(e).next('.content').text();
 			let rid = $(e).closest('.liReply').data('rid');
@@ -415,8 +340,9 @@ tr, td {
 					let targetLI = $('.reple li[data-rid="'+rid+'"]');
 					targetLI.append(reply);
 			        textarea.remove();
-				alert('수정되었습니다.');
-			
+			        btnModi.remove();
+					alert('수정되었습니다.');
+					
 			})
 			.catch(err=>console.error(err));
 			

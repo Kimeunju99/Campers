@@ -102,4 +102,9 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> MainPageboardList() {
 		return mapper.MainPageboardList();
 	}
+
+	@Override
+	public List<BoardVO> boardList() {
+		return mapper.boardList();
+	}
 }
