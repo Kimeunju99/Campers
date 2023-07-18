@@ -3,8 +3,8 @@
 <mapper namespace="com.idle.campers.business.mapper.BusinessMapper">
 
 	<insert id="addCamp" parameterType="com.idle.campers.business.service.BusinessVO">
-		insert into tbl_camp(CAMP_ID, CAMP_OWNER, CAMP_NAME, CAMP_ADDR, CAMP_LOCATION, CAMP_INFO, CAMP_IMAGE, CAMP_ROOMCNT)
-		values (CAMP_SEQ.NEXTVAL, #{campOwner}, #{campName}, #{campAddr}, #{campLocation}, #{campInfo}, #{campImage}, #{campRoomcnt})
+		insert into tbl_camp(CAMP_ID, CAMP_OWNER, CAMP_NAME, CAMP_ADDR, CAMP_INFO, CAMP_IMAGE, CAMP_ROOMCNT)
+		values (CAMP_SEQ.NEXTVAL, #{campOwner}, #{campName}, #{campAddr}, #{campInfo}, #{campImage}, #{campRoomcnt})
 	</insert>
 	
 	<update id="updateCamp" parameterType="com.idle.campers.business.service.BusinessVO">
@@ -12,21 +12,16 @@
 		<set>
 			<if test="CAMP_NAME != null">CAMP_NAME = #{campName}</if>
 			<if test="CAMP_ADDR != null">CAMP_ADDR = #{campAddr}</if>
-			<if test="CAMP_LOCATION != null">CAMP_LOCATION = #{campLocation}</if>
 			<if test="CAMP_INFO != null">CAMP_INFO = #{campInfo}</if>
 			<if test="CAMP_IMAGE != null">CAMP_IMAGE = #{campImage}</if>
 		</set>
 		where CAMP_OWNER = #{campOwner}
 	</update>
 	
-	<select id="infoCamp" parameterType="com.idle.campers.business.service.BusinessVO">
-		SELECT * FROM TBL_CAMP
-		WHERE CAMP_NAME = #{campName}
-	</select>
 	
 	<select id="campSelectList" resultType="com.idle.campers.business.service.BusinessVO">
 		SELECT * FROM TBL_CAMP
-		WHERE CAMP_OWNER = #{id}
+		WHERE CAMP_OWNER = #{id} ORDER BY 1 DESC
 	</select>
 	
 	<delete id="deleteCamp" parameterType="com.idle.campers.business.service.BusinessVO">
@@ -34,9 +29,11 @@
 		WHERE CAMP_NAME = #{campName}
 	</delete>
 
-	<select id="selectCamp" parameterType="int">
+	<select id="selectCamp">
 		SELECT * FROM TBL_CAMP
-		WHERE CAMP_ID = #{campId}
+		<if test="campId > 0"> WHERE CAMP_ID = #{campId} </if>
+		<if test="campOwner != null ">WHERE CAMP_Owner = #{campOwner} </if>
+		<if test="campAddr != null "> AND CAMP_Addr = #{campAddr} </if>
 	</select>
 
 	
@@ -57,5 +54,26 @@
 		SELECT count(*) FROM TBL_CMP_LIKE
 		WHERE USER_ID = #{userId}
 	</select>
+	
+	<!-- 로그인 유저가 좋아요를 눌렀는가 -->
+	<select id="likeCampCheck"  resultType="int">
+  		select count(*) from tbl_cmp_like where cmp_id = #{campId} and user_Id = #{userId}
+  	</select>
+	
+  	<!-- 게시글 추천 -->
+  	<insert id="likeCampUpdate" >
+  		insert into tbl_cmp_like values(#{campId},#{userId})
+  	</insert>
+  	
+  	<!-- 게시글 추천 취소 -->
+  	<delete id="likeCampDelete" >
+  		delete from tbl_cmp_like where cmp_id = #{campId} and user_Id = #{userId}
+  	</delete>
+
+  	<!-- 게시글 추천수 -->
+  	<select id="campLikeCount">
+  		select count(*) from tbl_cmp_like where cmp_id = #{campId}
+  	</select>
+
 
 </mapper>

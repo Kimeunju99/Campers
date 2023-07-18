@@ -10,7 +10,7 @@ import com.idle.campers.business.service.BusinessVO;
 import com.idle.campers.business.serviceImpl.BusinessServiceImpl;
 import com.idle.campers.common.Control;
 
-public class CampSelectListControl implements Control {
+public class CampListForm implements Control {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {

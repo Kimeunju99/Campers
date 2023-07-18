@@ -24,9 +24,8 @@
                         <li><a class="dropdown-item" id="share" href="boardList.do?type=tip">팁공유</a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
-
 				<c:if test="${empty id}">
+                <li class="nav-item dropdown">
                 	<li class="nav-item"><a class="nav-link" href="loginForm.do">로그인</a></li>
 				</c:if>
 				<c:if test="${not empty id}">

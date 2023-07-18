@@ -10,6 +10,7 @@
 <div id="container">
 	<h1>예약하기</h1>	
 	<form id="bookForm" name="bookForm">
+	<input type="hidden" name="campId" id="campId" value="${camp.campId}" readonly>
 		<table border="1">
 			<tr>
 				<th>업체명</th>
@@ -19,9 +20,9 @@
 			</tr>
 			<tr>
 				<th>방번호</th>
-				<td><input type="text" name="roomId" id="roomId" value="${room.RoomId}" readonly></td>
+				<td><input type="text" name="roomId" id="roomId" value="${room.roomId}" readonly></td>
 				<th>인원</th>
-				<td><input type="text" name="personnel" id="personnel" value="${room.campPersonnel}" readonly></td>
+				<td><input type="text" name="personnel" id="personnel" value="${room.roomPersonnel}" readonly></td>
 			</tr>
 			<tr>
 				<th>일시</th>
