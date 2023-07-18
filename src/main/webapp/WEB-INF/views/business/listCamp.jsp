@@ -6,36 +6,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/listCamp.css"/>
 </head>
 <body>
 	<div id="container">
 		<div>
-			<h1>예약 가능 캠핑장 현황</h1>
+			<h3>예약 가능 캠핑장 현황</h3><hr>
 		</div>
-		<div>
-			<table>
-				<thead>
+		
+		<c:forEach items="${list }" var="l">
+			<div id="camp-list-all-div" onclick="location.href='/campers/campInfoFormControl.do?cid=${l.campId}'">
+				<div class="img-div">
+					<img src="images/${l.campImage }" width="200px">
+				</div>
+				
+				<table>
 					<tr>
-						<th>이미지</th>
-						<th>캠핑장 이름</th>
-						<th>주소</th>
-						<th>방 개수</th>
-						<th>찜 개수</th>
+						<th>캠핑장 이름</th><td colspan="3">${l.campName }</td>
 					</tr>
-				</thead>
-				<tbody id="tbody">
-					<c:forEach items="${list }" var="l">
-						<tr onclick="location.href='/campers/campInfoFormControl.do?cid=${l.campId}'">
-							<td><img src="images/${l.campImage }" width="200px"></td>
-							<td>${l.campName }</td>
-							<td>${l.campAddr }</td>
-							<td>${l.campRoomcnt }</td>
-							<td>${l.campLike }</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
+					<tr>
+						<th>캠핑장 특징</th><td colspan="3">${l.campInfo }</td>
+					</tr>
+					<tr>
+						<th>주소</th><td colspan="3">${l.campAddr }</td>
+					</tr>
+					<tr>
+						<th>방 개수</th><td>${l.campRoomcnt }</td><th>좋아요</th><td>${l.campLike }</td>
+					</tr>
+				</table><br>
+			</div>
+		</c:forEach>
+		
 	</div>
 </body>
 </html>

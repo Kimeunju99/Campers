@@ -12,37 +12,44 @@ import com.idle.campers.room.service.RoomVO;
 public class RoomServiceImpl implements RoomService{
 	private SqlSession sqlSession = DataSource.getInstance().openSession(true); //auto커밋하라고 true
 	private RoomMapper map = sqlSession.getMapper(RoomMapper.class);
+
+	public List<RoomVO> roomList(int campId){
+		return map.roomList(campId);
+	}
 	
 	@Override
 	public boolean addRoom(RoomVO vo) {
-		// TODO Auto-generated method stub
 		return map.addRoom(vo) == 1;
 	}
 
 	@Override
-	public RoomVO infoRoom(int campId) {
-		// TODO Auto-generated method stub
-		return map.infoRoom(campId);
+	public RoomVO infoRoom(int campId, int roomId) {
+		return map.selectRoom(campId, roomId);
 	}
 
 	@Override
-	public int deleteRoom(int roomId) {
-		// TODO Auto-generated method stub
-		return map.deleteRoom(roomId);
+	public int deleteRoom(RoomVO vo) {
+		return map.deleteRoom(vo);
 	}
 
 	@Override
 	public List<RoomVO> roomSelectList() {
-		// TODO Auto-generated method stub
 		return map.roomSelectList();
 	}
 
 	@Override
 	public int updateRoom(RoomVO vo) {
-		// TODO Auto-generated method stub
 		return map.updateRoom(vo);
 	}
 
-	
+	@Override
+	public RoomVO infoRoom(int campId) {
+		return null;
+	}
+
+	@Override
+	public int deleteRoom(int roomId) {
+		return 0;
+	}
 	
 }

@@ -63,11 +63,11 @@ button:hover{
 	color: #008481;
 }
 
-ul{
+.summery ul{
 	margin:0;
 }
 
-li{
+.summery li{
 	list-style-type: none;
 	float: left;
 	margin-left: 50px;

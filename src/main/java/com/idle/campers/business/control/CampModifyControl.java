@@ -1,9 +1,8 @@
 package com.idle.campers.business.control;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 import com.idle.campers.business.service.BusinessService;
 import com.idle.campers.business.service.BusinessVO;
@@ -19,7 +18,6 @@ public class CampModifyControl implements Control {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
 		String savePath = req.getServletContext().getRealPath("/images");
 		int maxSize = 2048 * 2048 * 10;
 		String enc = "UTF-8";
@@ -28,7 +26,6 @@ public class CampModifyControl implements Control {
 		try {
 			multi = new MultipartRequest(req, savePath, maxSize, enc, new DefaultFileRenamePolicy());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

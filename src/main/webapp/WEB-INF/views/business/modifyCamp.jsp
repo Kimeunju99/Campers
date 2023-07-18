@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>수정화면</h3>
-	<form action="campModify.do" method = "post">
-		<table class="table">
+<h3>캠핑장 정보 수정</h3>
+	<form>
+		<table>
 			<tr>
 				<th>아이디</th>
 				<td><input readonly name = "id" value="${user.userId}"></td>
@@ -41,6 +41,5 @@
 			</tr>
 		</table>
 	</form>
-
 </body>
 </html>

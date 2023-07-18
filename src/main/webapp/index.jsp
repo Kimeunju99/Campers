@@ -5,33 +5,41 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Campers Main</title>
+        <title>Campers</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="images/icon/1_icon.png" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/indexStyles.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+
+      <style>
+        #index {
+          background-image: url( "images/icon/index.jpg" );
+          width: 100%;
+          height: 100%;
+          background-size: cover;
+          position: relative;
+        }
+
+        #main-page-logo {
+          background-image: url( "images/icon/index-image.png" );
+          background-size: cover;
+          position: absolute;
+          width: 400px;
+          height: 400px;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border: 10px solid white;
+          padding: 20px;
+          opacity: 0.9;
+        }
+
+      </style>
+
     </head>
     <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="main.do">Campers Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Page Content-->
-
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/indexScripts.js"></script>
+		<div id="index">
+			<div id="main-page-logo" onclick="location.href ='main.do'"></div>
+		</div>
     </body>
 </html>

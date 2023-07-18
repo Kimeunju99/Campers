@@ -37,6 +37,9 @@
 		<h3 style="text-align: left;">${board.brdTitle}<br></h3>
 		<p style="text-align: left;">작성자: ${board.brdWriter}</p>
 		<p style="text-align: left;">작성날짜: ${board.brdDate}</p>
+		<c:if test="${board.brdType == 'review' }">
+			<p style="text-align: left;">캠핑장 주소: <c:out value="${board.brdAddr}"></c:out></p>
+		</c:if>
 		<p style="text-align: right;">조회수: ${board.brdRead}</p>
 			<div style="display: inline-block; margin: 0 5px;  float: right;">
 				<c:if test="${id == board.brdWriter || auth eq 'admin'}">
@@ -72,12 +75,12 @@
 				<div class="remodal">
 				<h3>게시물 신고</h3>
 					<select name="content" id="content">
-						<option value="1">음란물 입니다.</option>
-						<option value="2">불법정보를 포함하고 있습니다.</option>
-						<option value="3">청소년에게 유해한 내용입니다.</option>
-						<option value="4">욕설/생명경시/혐오/차별적 표현입니다.</option>
-						<option value="5">개인정보 노출 게시물입니다.</option>
-						<option value="6">불쾌한 표현이 있습니다.</option>
+						<option value="음란물">음란물 입니다.</option>
+						<option value="불법정보">불법정보를 포함하고 있습니다.</option>
+						<option value="유해한 내용">청소년에게 유해한 내용입니다.</option>
+						<option value="욕성,비방">욕설/생명경시/혐오/차별적 표현입니다.</option>
+						<option value="개인정보 노출">개인정보 노출 게시물입니다.</option>
+						<option value="불쾌한 표현">불쾌한 표현이 있습니다.</option>
 					</select>
 					<div>
 						<button id="reportBtn">확인</button>
@@ -291,6 +294,7 @@
 		}
 		
 		bid = '${board.brdId}';
+
 		const replyUL = $('.reple');
 		
 		function replyFnc(bid){
@@ -313,7 +317,7 @@
 			});
 		}
 		replyFnc(bid); 
-		
+
 		function modifyFnc(e){
 			let reply = $(e).next('.content').text();
 			let rid = $(e).closest('.liReply').data('rid');
@@ -350,7 +354,6 @@
 			});
 		}
 		
-		
 		function closeFnc(e){
 			let rid = $(e).closest('.liReply').data('rid');
 			let check = confirm('정말로 삭제하시겠습니까?');
@@ -374,7 +377,7 @@
 			}
 			
 		}
-	
+
 	</script>
 </body>
 </html>

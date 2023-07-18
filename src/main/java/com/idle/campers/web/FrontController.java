@@ -25,6 +25,7 @@ import com.idle.campers.board.control.BoardLikeControl;
 import com.idle.campers.board.control.BoardLikeCountControl;
 import com.idle.campers.board.control.BoardListControl;
 import com.idle.campers.board.control.BoardSearchListControl;
+import com.idle.campers.board.control.MyBoardList;
 import com.idle.campers.book.control.BookList;
 import com.idle.campers.book.control.BookListControl;
 import com.idle.campers.book.control.BookStateUpdateControl;
@@ -35,8 +36,12 @@ import com.idle.campers.business.control.AddCampControl;
 import com.idle.campers.business.control.CampAddFormControl;
 import com.idle.campers.business.control.CampDeleteListControl;
 import com.idle.campers.business.control.CampInfoFormControl;
+import com.idle.campers.business.control.CampLikeControl;
+import com.idle.campers.business.control.CampLikeCountControl;
+import com.idle.campers.business.control.CampModifyForm;
+import com.idle.campers.business.control.MyCampList;
+import com.idle.campers.business.control.CampListForm;
 import com.idle.campers.business.control.CampModifyControl;
-import com.idle.campers.business.control.CampSelectListControl;
 import com.idle.campers.camp.control.SearchCamp;
 import com.idle.campers.common.Control;
 import com.idle.campers.manager.control.AjaxManagerSearchListControl;
@@ -103,7 +108,10 @@ public class FrontController extends HttpServlet{
 		map.put("/bookListControl.do", new BookListControl()); //예약 리스트 기본 control
 		map.put("/newBook.do", new NewBookForm()); //예약 추가 form
 		map.put("/newBookControl.do", new NewBookControl()); //예약 추가 form
-
+		map.put("/myCampList.do", new MyCampList()); //내 캠프 목록 form
+		map.put("/myBoard.do", new MyBoardList()); //내 게시글 목록 form
+		map.put("/campLike.do", new CampLikeControl()); //좋아요 버튼
+		map.put("/campLikeCount.do", new CampLikeCountControl()); //좋아요 후 값 변경
 		
 		//준위
 		map.put("/loginForm.do", new LoginForm());	//로그인폼 jsp
@@ -137,13 +145,14 @@ public class FrontController extends HttpServlet{
 		map.put("/managerModifyForm.do", new ManagerModifyFormControl());
 		map.put("/managerInfoControl.do", new ManagerInfoControl());
 		map.put("/managerDelete.do", new ManagerDeleteControl());
-		
 		map.put("/addCamp.do", new AddCampControl());
 		map.put("/campAddForm.do", new CampAddFormControl());
-		map.put("/campSelectList.do", new CampSelectListControl());
+		map.put("/campSelectList.do", new CampListForm());
 		map.put("/campInfoFormControl.do", new CampInfoFormControl());
 		map.put("/campDeleteList.do", new CampDeleteListControl());
-		map.put("/campModify.do", new CampModifyControl());
+		//
+		map.put("/campModify.do", new CampModifyForm());
+		map.put("/campModifyControl.do", new CampModifyControl());
 	}
 	
 	@Override

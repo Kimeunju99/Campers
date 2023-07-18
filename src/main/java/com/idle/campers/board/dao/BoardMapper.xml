@@ -24,6 +24,10 @@
 	]]>
 	</select>
 	
+	<select id="latestBoard">
+		SELECT MAX(BRD_ID) AS BRD_ID FROM TBL_BOARD WHERE BRD_WRITER = #{brdWriter}
+	</select>
+	
 	<select id="MainPageboardList" resultType="board">
 	<![CDATA[
 		SELECT * FROM (
