@@ -57,7 +57,7 @@
 				<td class="tdName"><span class="redtext">* </span>이메일</td>
 				<td class="tdVal">
 					<input type="text" class="inputValue" id="userEmail" name="userEmail" size="10">@
-					<input type="text" class="inputValue" id="userEmail2" name="userEmail2" size="10" readonly>
+					<input type="text" class="inputValue" id="userEmail2" name="userEmail2" size="10" readonly value="naver.com">
 					<select id="selectMail" onchange=mailDomain()>
 						<option value="naver.com">naver.com</option>
 						<option value="gmail.com">gmail.com</option>
