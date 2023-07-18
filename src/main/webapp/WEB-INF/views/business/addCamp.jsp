@@ -12,27 +12,26 @@
 <h2>캠핑장 등록 화면</h2>
 <form name="addCampForm">
 	<input type = "hidden" id="cowner" name = "cowner" value = "${id}">
-	
-	<table border = "1" class = "table">
+	<table>
 		<thead>
 			<tr>
 				<th>캠핑장 이름</th>
-				<td colspan="3"><input type = "text" name="cname" id="cname"></td>
+				<td colspan="3"><input type="text" name="cname" id="cname"></td>
 				<th>이미지</th>
-				<td  colspan="3"><input type = "file" name="img" id="img"></td>
+				<td  colspan="3"><input type="file" name="img" id="img"></td>
 				<th>방 갯수</th>
-				<td><input type = "text" name="ccnt" id="ccnt"></td>
+				<td><input type="number" name="ccnt" id="ccnt"></td>
 			</tr>
 			<tr>
 				<th>캠핑장 주소</th>
-				<td colspan="9"><input type = "text" name="caddr" id="caddr"></td>
+				<td colspan="9"><input type="text" name="caddr" id="caddr"></td>
 			</tr>
 			<tr>
-				<th>캠핑장 정보</th>
-				<td colspan="9"><input type = "text" name="cinfo" id="cinfo"></td>
+				<th>캠핑장 정보 및 소개글</th>
+				<td colspan="9"><input type="text" name="cinfo" id="cinfo"></td>
 			</tr>
 		</thead>
-		<tbody id="tdoby"></tbody>
+		<tbody id="tbody"></tbody>
 	</table>
 	
 	<input type="button" id="sub" value = "등록" >
@@ -43,14 +42,21 @@
 
 <script>
 document.getElementById("sub").addEventListener('click', function(e){
-	if( ( $('#cname').val() || $('#img').val() || $('#ccnt').val() ||
-			$('#caddr').val() || $('#cinfo').val() ) == ""){
+	if( (( $('#cname').val() || $('#ccnt').val() ||
+			$('#caddr').val() || $('#cinfo').val() ) == "") || $('#img').val() == null){
 		alert("빈칸을 모두 채워주세요.");
 	}else{//널이 아니면 실행
+		var form = $('form[name="addCampForm"]')[0];
+		var formData = new FormData(form);
+		//formData.append("objList", objList);
+		console.log(formData);
 		$.ajax({
 			url: "addCamp.do",
 			method: 'post',
-			data: $('form[name="addCampForm"]').serialize(),
+			data: formData,
+			processData: false,
+            contentType: false,
+            enctype:'multipart/form-data',
 			success: function(result){
 				if(result =="true"){
 					alert("등록이 완료되었습니다. 확인은 마이페이지에서 가능합니다.");
@@ -65,21 +71,21 @@ document.getElementById("sub").addEventListener('click', function(e){
 	}
 });//등록 버튼
 	
-	
 document.getElementById("ccnt").addEventListener('change', function(e){
-	$('#tdoby').html("");
+	$('#tbody').html("");
 	let cnt = document.getElementById("ccnt").value;
  	for(let i=0;i<cnt;i++){
  		let tr = $('<tr/>').html(
- 				'<th>방 번호</th><td><input type="text" id="roomCnt'+i+'"></td>'+
-				'<th>방 이름</th><td colspan="3"><input type="text" id="roomName'+i+'"></td>'+
-				'<th>평일 가격</th><td><input type="text" id="roomWeekday'+i+'"></td>'+
-				'<th>주말 가격</th><td><input type="text" id="roomWeekend'+i+'"></td>'+
-				'<th>수용 인원</th><td><input type="text" id="roomPersonnel'+i+'"></td>'
+ 				'<th>방 번호</th><td><input type="text" name="roomNo'+i+'"></td>'+
+				'<th>방 이름</th><td colspan="3"><input type="text" name="roomName'+i+'"></td>'+
+				'<th>평일 가격</th><td><input type="text" name="roomWeekday'+i+'"></td>'+
+				'<th>주말 가격</th><td><input type="text" name="roomWeekend'+i+'"></td>'+
+				'<th>수용 인원</th><td><input type="text" name="roomPersonnel'+i+'"></td>'
  		);
-		$('#tdoby').append(tr);
+		$('#tbody').append(tr);
  	}
-});
+});//방 정보 입력 칸 출력
+
 </script>
 </body>
 </html>

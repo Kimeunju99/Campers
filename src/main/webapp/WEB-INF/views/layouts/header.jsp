@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container px-5">
         <a class="navbar-brand" href="main.do">Campers</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -24,9 +24,8 @@
                         <li><a class="dropdown-item" id="share" href="boardList.do?type=tip">팁공유</a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
-
 				<c:if test="${empty id}">
+                <li class="nav-item dropdown">
                 	<li class="nav-item"><a class="nav-link" href="loginForm.do">로그인</a></li>
 				</c:if>
 				<c:if test="${not empty id}">

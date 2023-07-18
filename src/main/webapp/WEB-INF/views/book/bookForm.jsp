@@ -117,6 +117,7 @@ togleBtn.addEventListener('click', function(e){
 		},
 		success: function(result){
 			alert(result);
+			
 		},
 		error: function(err){	console.log(err);	}	
 	});

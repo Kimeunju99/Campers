@@ -35,4 +35,6 @@ public interface BoardService {
 	public List<BoardVO> myBoardList(String id);
 	
 	public List<BoardVO> MainPageboardList();
+	
+	public BoardVO boardLatest(String writer);
 }

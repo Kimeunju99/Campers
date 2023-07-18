@@ -6,7 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="js/jquery-3.7.0.min.js"></script>
 <style>
+
+#reviewSel{
+	margin: 0 auto;
+	width: 740px;
+}
+
 
 button:hover {
 	color: green;
@@ -89,7 +96,7 @@ select {
 		<form action="boardAdd.do" method="post" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
-					<td><select name="type">
+					<td><select name="type" id="select">
 							<c:if test="${auth eq 'admin'}">
 								<option value="inform">공지사항</option>
 		            		</c:if>
@@ -98,7 +105,15 @@ select {
 								<option value="tip">팁 공유</option>
 					</select></td>
 				</tr>
-					
+				<tr id="trr">
+					<td>
+						<select id="reviewSel" style="display:none" name="campList">
+							<c:forEach var="business" items="${business }">
+								<option value="${business.campAddr }"> 주소:${business.campAddr } / 이름:${business.campName }</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
 				<tr>
 					<td><input type="text" name="title" placeholder="제목을 입력하세요"></td>
 				</tr>
@@ -120,5 +135,13 @@ select {
 		</form>
 	</div>
 </div>
+<script type="text/javascript">
+	document.getElementById("select").addEventListener('change', function(e){
+		if(document.getElementById("select").value =='review')
+			document.getElementById("reviewSel").style.display = 'block';
+		else
+			document.getElementById("reviewSel").style.display = 'none';
+	});
+</script>
 </body>
 </html>

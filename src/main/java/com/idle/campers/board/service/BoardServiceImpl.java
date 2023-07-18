@@ -102,4 +102,10 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> MainPageboardList() {
 		return mapper.MainPageboardList();
 	}
+	
+	@Override
+	public BoardVO boardLatest(String writer) {
+
+		return mapper.latestBoard(writer);
+	}
 }
