@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="js/jquery-3.7.0.min.js"></script>
-
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="css/mainPage.css"/>
+<script src="js/jquery-3.7.0.min.js"></script>
 <title>Insert title here</title>
 </head>
+<body>
 <!-- Header-->
 <div id="best-camp">
 	<div id="camp-list-all">
 		<c:forEach var="camp" items="${campList}">
-			<div class="camp-list-items" onclick="">
+			<div class="camp-list-items">
 				<div class="campImage" style="background-image: url(images/${camp.campImage});">
 
 					<div id="list-slide-btn">
@@ -22,9 +22,10 @@
 					</div>
 					<div class="campInfo">
 						<div class="campInfo-text">
-							<h3>${camp.campName}</h3>
+							<h3>${camp.campName}</h3><br>
 							<p>${camp.campInfo}</p>
 							<p>${camp.campAddr}</p>
+							<p><a href="campInfoFormControl.do?cid=${camp.campId}">▶ 캠핑장 예약하기</a></p>
 						</div>
 					</div>
 					
@@ -38,7 +39,6 @@
 <!-- CampVO List 받아오기 -->
 <script>
 
-	
 //배너 슬라이드------------------------------------------------------
 
 	let campIndex = 0;	//현재 슬라이드 인덱스
@@ -47,12 +47,10 @@
 	//item의 width
 	let listItems = document.querySelector('.camp-list-items');
 	let width = listItems.offsetWidth - 20;
-	console.log("요소의 길이: " + width);
 
 	let list = document.querySelector('#camp-list-all');
 
 	function pageLefe(){
-		console.log("왼쪽 클릭")
 		campIndex--;
 		campIndex = campIndex < 0 ? 0 : campIndex;
 		
@@ -60,7 +58,6 @@
 	}
 	
 	function pageRight(){
-		console.log("오른쪽 클릭")
 		campIndex++;
 		campIndex = campIndex >= listIndex ? listIndex - 1 : campIndex;
 		
@@ -77,16 +74,13 @@
 		<div class="main-icon" onclick="location.href ='searchCamp.do'">
 			<img src="images/icon/search.png" class="icon-images"> <span>캠핑장 검색</span>
 		</div>
-		<div class="main-icon" onclick="location.href ='searchCamp.do'">
-			<!-- 링크 주소 변경 필요 -->
+		<div class="main-icon" onclick="location.href ='campSelectList.do'">
 			<img src="images/icon/3.png" class="icon-images"> <span>캠핑장 예약</span>
 		</div>
-		<div class="main-icon" onclick="location.href ='searchCamp.do'">
-			<!-- 링크 주소 변경 필요 -->
+		<div class="main-icon" onclick="location.href ='boardList.do?type=review'">
 			<img src="images/icon/review.png" class="icon-images"> <span>캠핑장 리뷰</span>
 		</div>
-		<div class="main-icon" onclick="location.href ='searchCamp.do'">
-			<!-- 링크 주소 변경 필요 -->
+		<div class="main-icon" onclick="location.href ='boardList.do?type=normal'">
 			<img src="images/icon/4.png" class="icon-images"> <span>게시판 목록</span>
 		</div>
 	</div>
@@ -141,3 +135,5 @@
 <script type="text/javascript">
 	$('table').css('width', '100%');
 </script>
+</body>
+</html>

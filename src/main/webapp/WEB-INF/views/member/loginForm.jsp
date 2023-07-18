@@ -75,12 +75,16 @@
 		$('#findMsg').text("");
 		$('.formInputId').css('display', 'none');
 		$('#search').val("getId");
+		$('#searchId').css('color', '#F36300');
+		$('#searchPw').css('color', '#008481');
 	}
 
 	function searchPw(){
 		$('#findMsg').text("");
 		$('.formInputId').css('display', 'block');
 		$('#search').val("getPassword");
+		$('#searchId').css('color', '#008481');
+		$('#searchPw').css('color', '#F36300');
 	}
 	
 	function find(){

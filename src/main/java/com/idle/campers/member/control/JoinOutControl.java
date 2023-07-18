@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.common.util.concurrent.ForwardingService;
 import com.idle.campers.common.Control;
 import com.idle.campers.member.service.MemberService;
 import com.idle.campers.member.service.MemberServiceImpl;
@@ -22,6 +23,7 @@ public class JoinOutControl implements Control {
 			session.invalidate();
 			result = "true";
 		};
+		
 		return "Ajax:" + result;
 	}
 
