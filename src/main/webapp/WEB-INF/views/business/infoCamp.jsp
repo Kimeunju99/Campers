@@ -51,7 +51,7 @@
 				</tr>
 				<tr>
 					<td>수용 인원</td>
-					<td><input type="text" name="roomPresonnel" value="${rid.roomPresonnel}"></td>
+					<td><input type="text" name="roomPersonnel" value="${rid.roomPersonnel}"></td>
 				</tr>
 			</tbody>
 		</table>

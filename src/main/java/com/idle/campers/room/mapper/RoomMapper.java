@@ -12,4 +12,6 @@ public interface RoomMapper {
 	public int deleteRoom(int RoomId);
 	
 	public List<RoomVO> roomSelectList();
+	
+	public int updateRoom(RoomVO vo);
 }

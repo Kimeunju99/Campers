@@ -36,6 +36,7 @@ import com.idle.campers.business.control.AddCampControl;
 import com.idle.campers.business.control.CampAddFormControl;
 import com.idle.campers.business.control.CampDeleteListControl;
 import com.idle.campers.business.control.CampInfoFormControl;
+import com.idle.campers.business.control.CampModifyControl;
 import com.idle.campers.business.control.CampSelectListControl;
 import com.idle.campers.camp.control.SearchCamp;
 import com.idle.campers.common.Control;
@@ -144,6 +145,7 @@ public class FrontController extends HttpServlet{
 		map.put("/campSelectList.do", new CampSelectListControl());
 		map.put("/campInfoFormControl.do", new CampInfoFormControl());
 		map.put("/campDeleteList.do", new CampDeleteListControl());
+		map.put("/campModify.do", new CampModifyControl());
 	}
 	
 	@Override

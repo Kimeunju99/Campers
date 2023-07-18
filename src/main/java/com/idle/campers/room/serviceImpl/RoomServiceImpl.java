@@ -37,6 +37,12 @@ public class RoomServiceImpl implements RoomService{
 		return map.roomSelectList();
 	}
 
+	@Override
+	public int updateRoom(RoomVO vo) {
+		// TODO Auto-generated method stub
+		return map.updateRoom(vo);
+	}
+
 	
 	
 }
