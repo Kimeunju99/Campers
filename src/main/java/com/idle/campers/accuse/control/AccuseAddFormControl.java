@@ -17,7 +17,7 @@ public class AccuseAddFormControl implements Control {
 		String reportId = req.getParameter("rid");
 		String title = req.getParameter("title");
 		int brdId = Integer.parseInt(req.getParameter("bid"));
-		int accuseContent = Integer.parseInt(req.getParameter("content"));
+		String accuseContent = req.getParameter("content");
 		
 		AccuseVO vo = new AccuseVO();
 		vo.setAccuseUserId(writer);

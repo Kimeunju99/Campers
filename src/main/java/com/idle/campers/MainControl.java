@@ -11,6 +11,7 @@ import com.idle.campers.board.service.BoardServiceImpl;
 import com.idle.campers.business.service.BusinessService;
 import com.idle.campers.business.service.BusinessVO;
 import com.idle.campers.business.serviceImpl.BusinessServiceImpl;
+//github.com/Kimeunju99/Campers.git
 import com.idle.campers.common.Control;
 
 public class MainControl implements Control {

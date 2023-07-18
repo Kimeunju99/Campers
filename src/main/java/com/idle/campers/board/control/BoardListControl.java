@@ -19,14 +19,15 @@ public class BoardListControl implements Control {
 		
 		String page = req.getParameter("page");
 		String type = req.getParameter("type");
+		String sch = req.getParameter("sch");
+		String keyword = req.getParameter("keyword");
 		page = page == null ? "1" : page;
 		BoardVO vo = new BoardVO();
 		vo.setBrdType(type);
 		
 		int totalCnt = svc.totalCnt(type);
 		PageDTO dto = new PageDTO(Integer.parseInt(page), totalCnt);
-		String sch = req.getParameter("sch");
-		String keyword = req.getParameter("keyword");
+		
 		
 		List<BoardVO> list = svc.boardList(Integer.parseInt(page), sch, keyword, type);
 		

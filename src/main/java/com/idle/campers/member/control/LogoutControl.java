@@ -13,7 +13,7 @@ public class LogoutControl implements Control {
 		// TODO Auto-generated method stub
 		HttpSession session = req.getSession();
 		session.invalidate();
-		return "main/main";
+		return "main.do";
 	}
 
 }

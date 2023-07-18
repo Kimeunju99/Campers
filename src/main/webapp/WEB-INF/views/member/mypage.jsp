@@ -234,17 +234,16 @@
 	</div>
 </div>
 
-
 <script>
 let md = document.querySelector('.modifyWindow');
 let pw = document.getElementById("userPw");
 let npw1 = document.getElementById("userNewPw1");
 let npw2 = document.getElementById("userNewPw2");
 
-
 	function campAddF(e){
 		document.location.href='campAddForm.do';
 	};
+	
 	document.getElementById("logoutBtn").addEventListener('click', logoutF);//로그아웃
 	function logoutF(){	document.location.href='logout.do';	};
 	
@@ -258,7 +257,7 @@ let npw2 = document.getElementById("userNewPw2");
 				success: function(result){
 					if(result == "true"){
 						alert("탈퇴하였습니다.");
-						document.location.href='/campers/main.do';
+						document.location.href='/campers/main.do';						
 					}
 				},
 				error: function(err){	console.log(err);	}	
@@ -302,7 +301,6 @@ let npw2 = document.getElementById("userNewPw2");
 			alert('비밀번호는 필수값입니다.');
 			pw.focus();
 		}
-		
 	});//사용자 정보 수정
 	
 	function closeBtnF(e){
@@ -312,7 +310,6 @@ let npw2 = document.getElementById("userNewPw2");
 		$('#byePw').val("");
 		md.style.display = 'none';
 	};//모달창 닫기
-
 </script>
 </body>
 </html>

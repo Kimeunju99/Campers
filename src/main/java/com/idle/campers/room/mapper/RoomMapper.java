@@ -13,4 +13,11 @@ public interface RoomMapper {
 	public int addRoom(RoomVO vo);
 	public int deleteRoom(RoomVO vo);
 	
+	public RoomVO infoRoom(int campId);
+	
+	public int deleteRoom(int RoomId);
+	
+	public List<RoomVO> roomSelectList();
+	
+	public int updateRoom(RoomVO vo);
 }

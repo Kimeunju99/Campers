@@ -179,20 +179,7 @@ tr, td {
 			</ul>
 		</div>
 		<ul class="reple">
-			<li><div>
-					<div class="header">
-						<strong>user1</strong> <small>2023-06-05 15:24</small>
-						<c:if test="${id == list.replyer}">
-							<button class="close" style="align: right">&times;</button>
-							<button class="modify" style="align: right">수정</button>
-						</c:if>
-						<c:if test="${id != null && id != list.replyer}">
-							<button class="accuse" style="align: right">🚨</button>
-						</c:if>
-					</div>
-					<p>Good Job!!!!!!!!!!!!</p>
-				</div></li>
-
+		
 		</ul>
 	</div>
 
@@ -295,12 +282,32 @@ tr, td {
 	};
 	recCount();
 
-
-		 //댓글부분
+		//댓글부분
+		function searchList(){
+			let li = $('.liReply');
+			Array.from(li).forEach(function(tag){
+				let rid = tag.dataset.rid
+				fetch('/campers/getReply.do?rid='+rid)
+				.then(response => response.json())
+				.then(function(result){
+				})
+				.catch(function(err){
+					console.error(err);
+				})
+			})
+				
+			
+		}
+		
+		
 		$('#addRBtn').on('click', function(){
 			let reply = $('#reply').val();
 			let replyer = $('#replyer').val();
 			let bid = ${board.brdId};
+			if(reply === null){
+				alert('내용이 비어있습니다.');
+			}else{
+				
 			console.log(reply, replyer, bid);
 			fetch('/campers/replyAdd.do',{
 				method: 'post',
@@ -312,16 +319,20 @@ tr, td {
 			.then(response => response.json())
 			.then(result => {
 				replyFnc(bid); 
+				$('#reply').val('');
 			})
 			.catch(err => console.error(err))
+			}
 		})
+		
+		
 		
 			
 		function makeList(reply={}){
 			let id = '${id}';
 			let str = '';
 			str += `
-		        <li data-rno=\${reply.replyId}>
+		        <li class="liReply" data-rid=\${reply.replyId}>
 		            <div>
 		                <div class="header">
 		                    <strong>\${reply.replyer}</strong>
@@ -330,46 +341,44 @@ tr, td {
 		     
 		    if (id == reply.replyer) { // 댓글 작성자인 경우
 		        str += `
-		                <button class="close" style="align: right">&times;</button>
-		                <button class="modify" style="align: right">수정</button>`;
-		    } else if (id != null) { // 로그인한 사용자이지만 댓글 작성자가 아닌 경우
-		        str += `
-		                <button class="accuse" style="align: right">신고</button>`;
+		                <button type="button" class="closeBtn" onclick="closeFnc(this)">&times;</button>
+		                <button type="button" class="modifyBtn" onclick="modifyFnc(this)">수정</button>`;
+		    }else{
 		    }
+		    	
 		    
 		    str += `
-		                <p>\${reply.reply}</p>
-		            </div>
-		        </li>
+		                <p class="content">\${reply.reply}</p>
+		                </div>
+						</div>
 		    `;
 			
 			return str;
 		}
 		
 		bid = '${board.brdId}';
-		replyUL = $('.reple');
-
+		const replyUL = $('.reple');
+		
 		function replyFnc(bid){
 			
 			fetch('/campers/replyList.do?bid='+ bid)
 				.then(function(response){
-					console.log(response);
 					return response.json(); 
 				})
 			.then(function(result){ 
-			console.log(result); 
+				console.log(result); 
 			
-			$('.reple').empty();
-			for(let reply of result.list){
-			    replyUL.append(makeList(reply)); 
-			}
-		})
+				$('.reple').empty();
+				for(let reply of result.list){
+			   	 	replyUL.append(makeList(reply)); 
+				}
+				searchList()
+			})
 			.catch(function(err){ 
-			console.error(err); 
+				console.error(err); 
 			});
 		}
-		
-	replyFnc(bid); 
+		replyFnc(bid); 
 		
 	$('ul').css({
 		border: 'solid 0.5px',
@@ -377,32 +386,69 @@ tr, td {
 		margin: '20px'
 		});
 		
-
-		$('ul>li').css('list-style', 'none');
+		replyUL.css('list-style', 'none');
+	
 		
-		//댓글 리스트 보여주기
-		bid = '${board.brdId}';
-		replyUL = $('.reple');
-		
-		function replyFnc(bid){
-		let payload = "bid=" + bid;
-		url = '/campers/replyList.do';
-			fetch(url, {
+		function modifyFnc(e){
+			let reply = $(e).next('.content').text();
+			let rid = $(e).closest('.liReply').data('rid');
+			$(e).next('.content').empty();
+			let textarea = $('<textarea />').text(reply);
+			let btnModi = $('<button />').text('확인').addClass('complete');
+			
+			$('.reple li[data-rid="'+rid+'"]').append(textarea);
+			$('.modifyBtn').replaceWith(btnModi);
+			
+			$('button.complete').on('click', function(){
+				let modiReply = textarea.val();
+				reply = modiReply;
+				fetch('/campers/replyModify.do', {
 				method: 'post',
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;' 
 				},
-				body: payload
+				body: 'rid=' + rid + '&reply=' + reply
+				})
+				.then(response => response.json())
+				.then(result => {
+					console.log(result.reply);
+					let targetLI = $('.reple li[data-rid="'+rid+'"]');
+					targetLI.append(reply);
+			        textarea.remove();
+				alert('수정되었습니다.');
+			
 			})
-			.then(Response => Response.json())
-			.then(json => viewHTML(json));
+			.catch(err=>console.error(err));
+			
+		
+			});
 		}
 		
-
-
-		replyUL.css('list-style', 'none');
 		
-
+		function closeFnc(e){
+			let rid = $(e).closest('.liReply').data('rid');
+			let check = confirm('정말로 삭제하시겠습니까?');
+			if(check){
+				
+			fetch('/campers/replyRemove.do', {
+				method: 'post',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;' 
+				},
+				body: 'rid=' + rid
+			})
+			.then(response => response.json())
+			.then(result => { 
+				alert('성공적으로 삭제되었습니다.');
+				replyFnc(bid); 
+			})
+			.catch(err => console.error(err))
+			}else{
+				
+			}
+			
+		}
+	
 	</script>
 </body>
 </html>

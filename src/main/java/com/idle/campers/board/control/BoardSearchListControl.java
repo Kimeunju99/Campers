@@ -37,10 +37,9 @@ public class BoardSearchListControl implements Control {
 		String keyword = req.getParameter("keyword");
 		System.out.println(sch);
 		System.out.println(keyword);
-		req.setAttribute("page", dto);
 
 		list = svc.boardList(Integer.parseInt(page), sch, keyword, type);
-		System.out.println(list);
+		req.setAttribute("page", dto);
 
 		String str = "Ajax:";
 

@@ -32,5 +32,24 @@ public class RoomServiceImpl implements RoomService{
 		return map.deleteRoom(vo);
 	}
 
+	@Override
+	public List<RoomVO> roomSelectList() {
+		return map.roomSelectList();
+	}
+
+	@Override
+	public int updateRoom(RoomVO vo) {
+		return map.updateRoom(vo);
+	}
+
+	@Override
+	public RoomVO infoRoom(int campId) {
+		return null;
+	}
+
+	@Override
+	public int deleteRoom(int roomId) {
+		return 0;
+	}
 	
 }

@@ -1,0 +1,118 @@
+.joinType {
+  display: flex;
+  text-align: center;
+  justify-content: center
+}
+
+.joinType div{
+  width: 500px;
+  height: 250px;
+  margin: 40px;
+  background-color: #fff;
+  border-radius: 30px;
+  text-align: center;
+}
+
+.joinType div img{
+  height: 180px;
+  width: 180px;
+}
+
+#join-form-div {
+  overflow: hidden;
+  position: relative;
+  width: 900px;
+  height: auto;
+  margin: auto;
+  margin-top: 40px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 30px;
+}
+
+#join-form-div form table tr{
+  height: 65px;
+}
+
+.redtext{
+  color: red;
+}
+
+.note {
+  color: dimgray;
+  font-size: 12px;
+}
+
+.tdName {
+  width: 150px;
+  text-align: right;
+  padding: 10px;
+}
+
+.tdVal {
+  width: 520px;
+  border-bottom: 1px;
+}
+
+
+.inputValCheck{
+  display: none;
+  width: 50px;
+}
+
+input {
+  border: none;
+}
+
+.inputValue {
+  border: 1px solid rgba(0,0,0,0.4);
+  border-radius: 3px;
+  margin: 2px;
+}
+
+.inputBtn {
+  background: none;
+  border: 1px solid #FCA175;
+  border-radius: 8px;
+  width: 80px;
+  color: #FCA175;
+}
+
+.inputBtn:hover {
+  background-color: #FCA175;
+  border: 1px solid #FCA175;
+  border-radius: 8px;
+  width: 80px;
+  color: #fff;
+}
+
+#submit-btn {
+  background-color: #FCA175;
+  border: 1px solid #FCA175;
+  border-radius: 8px;
+  width: 80px;
+  color: #fff;
+}
+
+#submit-btn:hover {
+  background-color: #FAC670;
+  border-radius: 8px;
+  width: 80px;
+  color: #fff;
+}
+
+#reset-btn {
+  background: none;
+  border: 1px solid #008481;
+  border-radius: 8px;
+  width: 80px;
+  color: #008481;
+}
+
+#reset-btn:hover {
+  background-color: #008481;
+  border: 1px solid #008481;
+  border-radius: 8px;
+  width: 80px;
+  color: #fff;
+}

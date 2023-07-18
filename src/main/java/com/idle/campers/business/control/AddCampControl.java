@@ -1,9 +1,6 @@
 package com.idle.campers.business.control;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,7 +28,7 @@ public class AddCampControl implements Control {
 
 		BusinessService campSV = new BusinessServiceImpl();
 		RoomService roomSV = new RoomServiceImpl();
-		
+	
 		// 캠핑장 등록 정보
 		String name = multi.getParameter("cname");
 		String owner = multi.getParameter("cowner");
@@ -39,7 +36,7 @@ public class AddCampControl implements Control {
 		String info = multi.getParameter("cinfo");
 		String img = multi.getFilesystemName("img");
 		int cnt = Integer.parseInt(multi.getParameter("ccnt"));
-		
+
 		BusinessVO vo = new BusinessVO();
 		vo.setCampName(name);
 		vo.setCampOwner(owner);
@@ -47,9 +44,7 @@ public class AddCampControl implements Control {
 		vo.setCampInfo(info);
 		vo.setCampImage(img);
 		vo.setCampRoomcnt(cnt);
-		
 		String str = null;
-		
 		if(campSV.addCamp(vo)) {
 			BusinessVO camp = campSV.selectCamp(-1, owner, addr);
 			//룸 정보
@@ -69,7 +64,6 @@ public class AddCampControl implements Control {
 		} else {
 			str = "false";
 		}
-		
 		return "Ajax:" + str;
 	}
 

@@ -10,4 +10,11 @@ public interface RoomService {
 		
 	public int deleteRoom(RoomVO vo);
 	
+	public RoomVO infoRoom(int campId);
+	
+	public int deleteRoom(int roomId);
+	
+	public List<RoomVO> roomSelectList();
+	
+	public int updateRoom(RoomVO vo);
 }

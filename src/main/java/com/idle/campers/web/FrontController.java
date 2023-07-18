@@ -2,7 +2,6 @@ package com.idle.campers.web;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -27,10 +26,6 @@ import com.idle.campers.board.control.BoardLikeCountControl;
 import com.idle.campers.board.control.BoardListControl;
 import com.idle.campers.board.control.BoardSearchListControl;
 import com.idle.campers.board.control.MyBoardList;
-import com.idle.campers.board.control.MyBoardListControl;
-import com.idle.campers.board.dao.BoardVO;
-import com.idle.campers.board.service.BoardService;
-import com.idle.campers.board.service.BoardServiceImpl;
 import com.idle.campers.book.control.BookList;
 import com.idle.campers.book.control.BookListControl;
 import com.idle.campers.book.control.BookStateUpdateControl;
@@ -142,7 +137,6 @@ public class FrontController extends HttpServlet{
 		map.put("/replyRemove.do", new ReplyRemoveControl());
 		
 		map.put("/boardSearchList.do", new BoardSearchListControl()); //게시글 검색
-		map.put("/myBoardList.do", new MyBoardListControl()); //내가 쓴 게시글 보기.
 		
 		//강민호
 		map.put("/managerSelectList.do", new ManagerSelectListControl());
@@ -151,7 +145,6 @@ public class FrontController extends HttpServlet{
 		map.put("/managerModifyForm.do", new ManagerModifyFormControl());
 		map.put("/managerInfoControl.do", new ManagerInfoControl());
 		map.put("/managerDelete.do", new ManagerDeleteControl());
-		
 		map.put("/addCamp.do", new AddCampControl());
 		map.put("/campAddForm.do", new CampAddFormControl());
 		map.put("/campSelectList.do", new CampListForm());
