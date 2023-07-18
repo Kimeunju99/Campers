@@ -33,7 +33,7 @@
 	</c:choose>
 	<hr>
 	<form action="" name="myFrm" method="post">
-		
+		<div id="box">
 		<h3 style="text-align: left;">${board.brdTitle}<br></h3>
 		<p style="text-align: left;">작성자: ${board.brdWriter}</p>
 		<p style="text-align: left;">작성날짜: ${board.brdDate}</p>
@@ -63,7 +63,7 @@
 			<span class="likeCount"></span>
 		</div>
 		<br>
-
+	</div>
 		<div style="display: inline-block; margin: 0 5px;  float: right;">
 			<c:if test="${id != null }">
 				<button type="button" class="reportIn">신고</button>
@@ -71,6 +71,7 @@
 				<button type="button" onclick="submit3(this.form);">목록</button>
 		</div>	
 	</form>
+		
 			<div class="recontainer">
 				<div class="remodal">
 				<h3>게시물 신고</h3>
@@ -278,7 +279,7 @@
 		    str += `
 		                </div>`;
 		     
-		    if (id == reply.replyer) { // 댓글 작성자인 경우
+		    if (id == reply.replyer || ${auth eq 'admin'}) { // 댓글 작성자인 경우
 		        str += `
 		                <button type="button" class="closeBtn" onclick="closeFnc(this)">&times;</button>
 		                <button type="button" class="modifyBtn" onclick="modifyFnc(this)">수정</button>`;
@@ -319,39 +320,46 @@
 		replyFnc(bid); 
 
 		function modifyFnc(e){
+
 			let reply = $(e).next('.content').text();
 			let rid = $(e).closest('.liReply').data('rid');
+
 			$(e).next('.content').empty();
-			let textarea = $('<textarea />').text(reply);
+
+			let textarea = $('<textarea rows="3" cols="90" style="resize: none" />').text(reply);
 			let btnModi = $('<button />').text('확인').addClass('complete');
-			
+
 			$('.reple li[data-rid="'+rid+'"]').append(textarea);
+			btnModi.addClass('btnModi');
 			$('.modifyBtn').replaceWith(btnModi);
-			
 			$('button.complete').on('click', function(){
+
 				let modiReply = textarea.val();
 				reply = modiReply;
 				fetch('/campers/replyModify.do', {
-				method: 'post',
-				headers: {
+					method: 'post',
+					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;' 
-				},
-				body: 'rid=' + rid + '&reply=' + reply
+					},
+					body: 'rid=' + rid + '&reply=' + reply
 				})
 				.then(response => response.json())
 				.then(result => {
 					console.log(result.reply);
+					let modifyBtn = $('<button />').text('수정').addClass('modifyBtn').on('click', function() {
+					      modifyFnc(this);
+					    });
 					let targetLI = $('.reple li[data-rid="'+rid+'"]');
+					 $('.reple li[data-rid="'+rid+'"]').find('.header').append(modifyBtn);
+
 					targetLI.append(reply);
 			        textarea.remove();
 			        btnModi.remove();
 					alert('수정되었습니다.');
-					
 			})
 			.catch(err=>console.error(err));
-			
-		
 			});
+
 		}
 		
 		function closeFnc(e){
