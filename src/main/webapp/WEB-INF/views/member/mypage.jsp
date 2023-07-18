@@ -35,11 +35,12 @@
 		</tr>
 		<tr>
 		<td colspan="2" align="center">
-			<c:choose>
-				<c:when test="${logUser.userAuth != 'admin' }">
-					<button type="button" class="infoBtn" name="byeBtn" id="byeBtn">회원탈퇴</button>
-				</c:when>
-			</c:choose>
+			<c:if test="${logUser.userAuth != 'admin' }">
+				<button type="button" class="infoBtn" name="byeBtn" id="byeBtn">회원탈퇴</button>
+			</c:if>
+			<c:if test="${logUser.userAuth == 'business' }">
+				<button type="button" class="infoBtn" name="addCampBtn" id="addCampBtn">캠핑장 등록</button>
+			</c:if>
 			<button type="button"  class="infoBtn" name="logoutBtn" id="logoutBtn">로그아웃</button>
 		</td>
 	</tr>
@@ -130,34 +131,32 @@
 		</div>
 		
 		<!-- 사업자의 내 캠프 목록 -->
-		<c:choose >
-		<c:when test="${logUser.userAuth == 'business' }">
-		<div  class="campList actionView" id="campList">
-			<h3>내 캠핑장 목록</h3>
-			<ul class="campList"></ul>
-			<table>
-			<thead>
-				<tr>
-					<th >캠핑장 번호</th>
-					<th >캠핑장 이름</th>
-					<th >방 개수</th>
-					<th >좋아요</th>
-				</tr>
-			</thead>
-			<tbody>
-			<c:forEach var="list" items="${campList }" begin="0" end="4">	
-				<tr>
-					<td >${list.campId }</td>
-					<td ><a href="boardInfo.do?cid=${list.campId }">${list.campName }</a></td>
-					<td >${list.campRoomCnt }</td>
-					<td >${list.campLike }</td>
-				</tr>
-			</c:forEach>
-			</tbody>
-			</table>
-		</div>
-		</c:when>
-		</c:choose>
+		<c:if test="${logUser.userAuth == 'business' }">
+			<div  class="campList actionView" id="campList">
+				<h3>내 캠핑장 목록</h3>
+				<ul class="campList"></ul>
+				<table>
+				<thead>
+					<tr>
+						<th>캠핑장 번호</th>
+						<th>캠핑장 이름</th>
+						<th>방 개수</th>
+						<th>좋아요</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="list" items="${campList }" begin="0" end="4">	
+						<tr onclick="location.href='/campers/campInfoFormControl.do?cid=${list.campId }'">
+							<td>${list.campId }</td>
+							<td><a>${list.campName }</a></td>
+							<td>${list.campRoomcnt }</td>
+							<td>${list.campLike }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+				</table>
+			</div>
+		</c:if>
 	</div>
 </div>
 
@@ -241,12 +240,16 @@ let md = document.querySelector('.modifyWindow');
 let pw = document.getElementById("userPw");
 let npw1 = document.getElementById("userNewPw1");
 let npw2 = document.getElementById("userNewPw2");
-	
+
+	document.getElementById("addCampBtn").addEventListener('click', function(e){
+		document.location.href='campAddForm.do';
+	});
 	document.getElementById("logoutBtn").addEventListener('click', logoutF);//로그아웃
 	function logoutF(){	document.location.href='logout.do';	};
 	
-	document.getElementById("byeBtn").addEventListener('click', e => document.querySelector('.byeWindow').style.display = 'block' );
-	document.getElementById("byeBtn").addEventListener('click', function (e){
+	document.getElementById("byeBtn").addEventListener('click', 
+			e => document.querySelector('.byeWindow').style.display = 'block' );
+	document.getElementById("joinOut").addEventListener('click', function (e){
 		if($('#byePw').val() == '${logUser.userPw}'){
 			$.ajax({
 				url: "joinOut.do",

@@ -7,79 +7,76 @@
 <script src="js/jquery-3.7.0.min.js"></script>
 </head>
 <body>
-<h1>예약하기</h1>
-<form id="bookForm" name="bookForm">
-	<table border="1">
-		<tr>
-			<th>업체명</th>
-			<td><input type="text" name="manager" id="manager" value="${camp.campOwner}" readonly></td>
-			<th>주소</th>
-			<td><input type="text" name="addr" id="addr" value="${camp.campAddr}" readonly></td>
-		</tr>
-		<tr>
-			<th>방번호</th>
-			<td><input type="text" name="roomId" id="roomId" value="${camp.RoomId}" readonly></td>
-			<th>인원</th>
-			<td><input type="text" name="personnel" id="personnel" value="${camp.campPersonnel}" readonly></td>
-		</tr>
-		<tr>
-			<th>일시</th>
-			<td>
-				<div><table class="Calendar">
-	     			<thead><tr>
-			        	<td class="prev" style="cursor:pointer;">&#60;</td>
-			            <td colspan="5">
-			            	<span class="calYear" id="calYear"></span>년
-	                		<span class="calMonth" id="calMonth"></span>월
-			            </td>
-			            <td class="next"  style="cursor:pointer;">&#62;</td>
-			        </tr>
-			        <tr>
-			            <td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>
-			        </tr></thead>
-			    	<tbody></tbody>
-			    </table></div>
-			    <input type="date" class="date" name="startDate" id="startDate" readonly>
-			</td>
-			<th>~</th>
-			<td>
-				<div><table class="Calendar">
-			     	<thead><tr>
-			        	<td class="prev" style="cursor:pointer;">&#60;</td>
-			            <td colspan="5">
-			            	<span class="calYear" id="calYear"></span>년
-	                		<span class="calMonth" id="calMonth"></span>월
-			            </td>
-			            <td class="next" style="cursor:pointer;">&#62;</td>
-			        </tr>
-			        <tr>
-			            <td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>
-			        </tr></thead>
-			    	<tbody></tbody>
-			    </table></div>
-			    <input type="date" class="date" name="endDate" id="endDate" readonly>
-			</td>
-		</tr>
-		<tr>
-			<th>가격</th><td><input type="text" name="cost" id="cost" readonly></td>
-			<th>예약자</th>
-			<td><input type="text" name="client" id="client" value="${logUser.userId}" readonly></td>
-		</tr>
-		<tr>
-			<td colspan="4" align="center">
-				<button type="button" id="bookBtn">예약</button>
-				<button type="button" id="backBtn">뒤로가기</button>
-			</td>
-		</tr>
-	</table>
-</form>
+<div id="container">
+	<h1>예약하기</h1>	
+	<form id="bookForm" name="bookForm">
+		<table border="1">
+			<tr>
+				<th>업체명</th>
+				<td><input type="text" name="manager" id="manager" value="${camp.campOwner}" readonly></td>
+				<th>주소</th>
+				<td><input type="text" name="addr" id="addr" value="${camp.campAddr}" readonly></td>
+			</tr>
+			<tr>
+				<th>방번호</th>
+				<td><input type="text" name="roomId" id="roomId" value="${room.RoomId}" readonly></td>
+				<th>인원</th>
+				<td><input type="text" name="personnel" id="personnel" value="${room.campPersonnel}" readonly></td>
+			</tr>
+			<tr>
+				<th>일시</th>
+				<td>
+					<div><table class="Calendar">
+		     			<thead><tr>
+				        	<td class="prev" style="cursor:pointer;">&#60;</td>
+				            <td colspan="5">
+				            	<span class="calYear" id="calYear"></span>년
+		                		<span class="calMonth" id="calMonth"></span>월
+				            </td>
+				            <td class="next"  style="cursor:pointer;">&#62;</td>
+				        </tr>
+				        <tr>
+				            <td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>
+				        </tr></thead>
+				    	<tbody></tbody>
+				    </table></div>
+				    <input type="date" class="date" name="startDate" id="startDate" readonly>
+				</td>
+				<th>~</th>
+				<td>
+					<div><table class="Calendar">
+				     	<thead><tr>
+				        	<td class="prev" style="cursor:pointer;">&#60;</td>
+				            <td colspan="5">
+				            	<span class="calYear" id="calYear"></span>년
+		                		<span class="calMonth" id="calMonth"></span>월
+				            </td>
+				            <td class="next" style="cursor:pointer;">&#62;</td>
+				        </tr>
+				        <tr>
+				            <td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>
+				        </tr></thead>
+				    	<tbody></tbody>
+				    </table></div>
+				    <input type="date" class="date" name="endDate" id="endDate" readonly>
+				</td>
+			</tr>
+			<tr>
+				<th>가격</th><td><input type="text" name="cost" id="cost" readonly></td>
+				<th>예약자</th>
+				<td><input type="text" name="client" id="client" value="${logUser.userId}" readonly></td>
+			</tr>
+			<tr>
+				<td colspan="4" align="center">
+					<button type="button" id="bookBtn">예약</button>
+					<button type="button" id="backBtn" onclick="history.back()">뒤로가기</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
 
 <script>
-document.getElementById("backBtn").addEventListener('click', function(e){
-	location.href = document.referrer;
-});//뒤로가기
-
-
 let cost = $("#cost");
 document.getElementById("bookBtn").addEventListener('click', function(e){
 	if( $('#startDate').val() > $('#endDate').val()){
@@ -176,7 +173,7 @@ function dateSet(pTag){
 		}
 	}
 	if(first != "" && last != "")//startdate와 enddate가 null이 아님
-		cost.val(((${camp.campWeekday} * weekday) + (${camp.campWeekend} * weekend)));
+		cost.val(((${room.roomWeekday} * weekday) + (${room.roomWeekend} * weekend)));
 	
 };
 

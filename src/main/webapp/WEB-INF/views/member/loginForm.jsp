@@ -10,11 +10,11 @@
 			<h2>CAMPERS 회원님 반갑습니다!</h2>
 			<label>
 			  <span>아이디</span>
-			  <input type="text" id="userId" name="userId" class="input-linetype" value="user01">
+			  <input type="text" id="userId" name="userId" class="input-linetype" value="business01">
 			</label>
 			<label>
 			  <span>비밀번호</span>
-			  <input type="password" id="userPw" name="userPw" class="input-linetype" value="user01">
+			  <input type="password" id="userPw" name="userPw" class="input-linetype" value="FixNb2wg7V">
 			</label>
 			<p class="forgot-pass" onclick=find()>아이디/비밀번호를 잊으셨나요?</p><br>
 			<p>${message }</p>
