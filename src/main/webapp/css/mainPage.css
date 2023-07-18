@@ -1,0 +1,175 @@
+/* 폰트------------------------------------------------------------------- */
+@font-face {
+  font-family: 'TheJamsil5Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'EliceDigitalBaeum-Bd';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum-Bd.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumSquareNeo-Variable';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* mainDiv 관련---------------------------------------------------------------------------- */
+
+#best-camp {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 800px;
+  margin: auto;
+  background: #fff;
+}
+#camp-list-all{
+  display: flex;
+  transition: .3s ease-out;
+  width: 300%;
+}
+.camp-list-items {
+  width: 100%;
+  height: 800px;
+  background-color: #000000;
+}
+
+.campImage {
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  float: left;
+  background-repeat: no-repeat;
+}
+
+.campImage::before  {
+  opacity: 0.5;
+  background-color: #000000;
+  position: absolute;
+}
+
+.campInfo {
+  margin: auto;
+  float: auto;
+  width: 100%;
+  height: 100%;
+  float: auto;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  text-align: center;
+}
+
+.campInfo-text{
+  margin: 70px 40px;
+  text-align: right;
+  float: right;
+}
+
+.campInfo-text h3 {
+  font-family: EliceDigitalBaeum-Bd;
+  font-size: 45px;
+}
+
+.campInfo-text p {
+  font-family: NanumSquareNeo-Variable;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.campInfo-text a {
+  text-decoration: none;
+  color: #fff;
+}
+
+#list-slide-btn {
+  background-repeat: no-repeat;
+}
+
+#list-slide-btn img {
+  width: 70px;
+  height: 70px;
+}
+
+#list-slide-btn img:nth-child(1){
+  margin-top: 365px;
+  margin-left: 20px;
+  float: left;
+}
+
+#list-slide-btn img:nth-child(2){
+  margin-top: 365px;
+  margin-right: 20px;
+  float: right;
+}
+
+#main-container {
+  display: flex;
+  height: 500px;
+}
+
+.container-items {
+  margin: auto;
+  text-align: center;
+  background-color: #fff;
+  height: 350px;
+  border-radius: 30px;
+  padding: 30px;
+}
+
+#Main-boardList {
+  width: 45%;
+}
+
+#Main-boardList table {
+  width: 100%;
+  border-top: 1px solid #bababa;
+  border-collapse: collapse;
+}
+#Main-boardList th, #Main-boardList td {
+  border-bottom: 1px solid #bababa;
+  padding: 5px;
+}
+
+#iconList {
+  padding-top: 70px;
+}
+
+.main-icon {
+  display: inline-block;
+  border-radius: 10px;
+  margin: 10px;
+  width: 120px;
+  height: 120px;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.main-icon:hover {
+  background-color: #eee;
+}
+
+.icon-images {
+  width: 70%;
+  height: 70%;
+  display: block;
+  margin: 10px auto auto;
+}
+
+.public-input-type {
+  border: none;
+  outline: none;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  display: block;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  text-align: center;
+  background: none;
+}

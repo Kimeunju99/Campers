@@ -21,6 +21,7 @@ public class CampInfoFormControl implements Control {
 		BusinessVO vo = svc.selectCamp(Integer.parseInt(cid));
 		RoomService service = new RoomServiceImpl();
 		RoomVO rvo = service.infoRoom(Integer.parseInt(cid));
+		
 		System.out.println(cid);
 		req.setAttribute("cid", vo);
 		req.setAttribute("rid", rvo);

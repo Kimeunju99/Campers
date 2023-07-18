@@ -1,40 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/searchMap.css"/>
 <script src="js/jquery-3.7.0.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2323fd290c2578022ec9ddc839994259"></script>
+</head>
+<body>
 
-<h4>캠핑장 검색</h4>
+<div id="search-camp-all-div">
+	
+	<div>
+		<h4>캠핑장 검색</h4><br>
+		<table id="search-user-input">
+			<tr>
+				<th>지역명</th>
+				<td>
+					<select id="locationSido" name="locationSido">
+					<option value="locationAll">전체</option>
+					</select>
+				</td>
+				<th>키워드</th>
+				<td>
+					<select id="keyWord" name="keyWord">
+					<option value="keywordAll">전체</option>
+					</select>
+				</td>
+				<th rowspan="2">
+					<input type="button" value="검색" onclick="searchList()" id="map-search-btn">
+				</th>
+			</tr>
+			<tr>
+				<th>시설명</th>
+				<td colspan="3">
+					<input type="text" class="search-camp-input" id="campName" name="campName" width="200px">
+				</td>
+			</tr>
+		</table>
 
-<div>
-	지역명 
-	<select id="locationSido" name="locationSido">
-		<option value="locationAll">전체</option>
-	</select>
-	키워드 
-	<select id="keyWord" name="keyWord">
-		<option value="keywordAll">전체</option>
-	</select><br>
-	시설명 <input type="text" id="campName" name="campName" width="200px">
-	<input type="button" value="검색" onclick="searchList()">
+	</div><hr><br>
+	
+	<div id="contents-div">
+		<!-- 지도 -->
+		<div class="search-camp" id="map">
+		
+		</div>
+		
+		<!-- 조회목록 -->
+		<div class="search-camp" id="mainDiv" style="overflow:auto;">
+		
+		</div>
+	</div>
+
 </div>
 
-<!-- 지도 -->
-<div id="map" style="width:600px; height:800px;">
-
-</div>
-
-<!-- 조회목록 -->
-<div id="mainDiv" style="overflow:scroll; width:500px; height:800px;">
-
-</div>
 
 <script>
 //-------------------------------------------------------------------------------------------
 
-	$('#map').css('display', 'inline-block');
-	$('#mainDiv').css('display', 'inline-block');
-	
 	let campData;	//ajax로 불러온 모든 캠핑장의 데이터 저장
 	let searchCampList = new Set();	//검색된 캠핑장의 데이터를 저장
 	let arrSido = new Set();
@@ -171,7 +197,7 @@
 	function makeList(){	// 검색된 리스트 생성하기
 		for(let item of searchCampList){
 
-			let add = "<div class=\"campInfo\"><div  class=\"campInfoName\"><b>" + item['시설명'] +"</b></div>"
+			let add = "<div class=\"search-camp-inform\"><div  class=\"search-camp-inform-name\"><b>" + item['시설명'] +"</b></div>"
 				add += "<table><tr><th>카테고리</th><td>" + item['카테고리3'] + "</td></tr>";
 				add += "<tr><th>운영기간</th><td>" + item['봄 운영 여부'] + ", " + item['여름 운영 여부'] + ", " + item['가을 운영 여부'] + ", " + item['겨울 운영 여부'] + "</td></tr>";
 				add += "<tr><th>운영일</th><td>" + item['평일 운영 여부'] + ", " + item['주말 운영 여부'] + "</td></tr>";
@@ -182,10 +208,6 @@
 				
 				$('#mainDiv').append(add)
 		}
-		$('th').css('width', '100px');
-		$('td').css('width', '400px');
-		$('.campInfo').css('padding', '10px');
-		$('.campInfoName').css('background-color', 'lightgrey');
 	}
 	
 	function SearchListView(){	// 겸색 결과 표시
@@ -241,7 +263,7 @@ function viewMap(){	// 화면에 지도 표시
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 	    mapOption = { 
 	        center: new kakao.maps.LatLng(avrLat, avrLot), // 지도의 중심좌표
-	        level: 13 // 지도의 확대 레벨 (기본:4, 전국:13)
+	        level: 12 // 지도의 확대 레벨 (기본:4, 전국:13)
 	    };
 	
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -312,3 +334,5 @@ function viewMap(){	// 화면에 지도 표시
 }
 
 </script>
+</body>
+</html>

@@ -8,7 +8,7 @@
 </head>
 <body>
 <h3>수정화면</h3>
-	<form action="managerModifyInfo.do" method = "post">
+	<form action="campModify.do" method = "post">
 		<table class="table">
 			<tr>
 				<th>아이디</th>

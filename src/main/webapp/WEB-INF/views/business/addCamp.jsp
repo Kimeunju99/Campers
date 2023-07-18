@@ -9,7 +9,7 @@
 </head>
 <body>
 <div>
-<h2>캠핑장 등록 화면.</h2>
+<h2>캠핑장 등록 화면</h2>
 <form name="addCampForm">
 	<input type = "hidden" id="cowner" name = "cowner" value = "${id}">
 	
