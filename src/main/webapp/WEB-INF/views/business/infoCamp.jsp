@@ -30,6 +30,32 @@
 			<tbody id="tbody">
 			<!-- foreach 룸 반복 -->
 				<tr>
+					<td>이미지</td>
+					<td><input type="file" name="campImg" value="${cid.campImage}"></td>
+				</tr>
+				<tr>
+					<td>방 갯수</td>
+					<td><input type="text" name="campRoomcnt" value="${cid.campRoomcnt}"></td>
+				</tr>
+				<tr>
+					<td>방 번호</td>
+					<td><input type="text" name="roomId" value="${rid.roomId}"></td>
+				</tr>
+				<tr>
+					<td>방 이름</td>
+					<td><input type="text" name="roomName" value="${rid.roomName}"></td>
+				</tr>
+				<tr>
+					<td>평일 가격</td>
+					<td><input type="text" name="roomWeekday" value="${rid.roomWeekday}"></td>
+				</tr>
+				<tr>
+					<td>주말 가격</td>
+					<td><input type="text" name="roomWeekend" value="${rid.roomWeekend}"></td>
+				</tr>
+				<tr>
+					<td>수용 인원</td>
+					<td><input type="text" name="roomPersonnel" value="${rid.roomPersonnel}"></td>
 					<th>방 번호</th>
 					<td>${rid.roomId}</td>
 					<th>수용 인원</th>

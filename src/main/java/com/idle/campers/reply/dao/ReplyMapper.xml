@@ -17,7 +17,7 @@
 	</select>
 
 	<insert id="insertReply" parameterType="reply">
-		<selectKey>
+		<selectKey keyProperty="replyId" resultType="int" order="BEFORE">
 			select reply_seq.nextval
 			from dual
 		</selectKey>

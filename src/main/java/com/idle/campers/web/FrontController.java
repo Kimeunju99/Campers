@@ -25,7 +25,6 @@ import com.idle.campers.board.control.BoardLikeControl;
 import com.idle.campers.board.control.BoardLikeCountControl;
 import com.idle.campers.board.control.BoardListControl;
 import com.idle.campers.board.control.BoardSearchListControl;
-import com.idle.campers.board.control.MyBoardListControl;
 import com.idle.campers.book.control.BookList;
 import com.idle.campers.book.control.BookListControl;
 import com.idle.campers.book.control.BookStateUpdateControl;
@@ -36,6 +35,7 @@ import com.idle.campers.business.control.AddCampControl;
 import com.idle.campers.business.control.CampAddFormControl;
 import com.idle.campers.business.control.CampDeleteListControl;
 import com.idle.campers.business.control.CampInfoFormControl;
+import com.idle.campers.business.control.CampModifyControl;
 import com.idle.campers.business.control.CampSelectListControl;
 import com.idle.campers.camp.control.SearchCamp;
 import com.idle.campers.common.Control;
@@ -129,7 +129,6 @@ public class FrontController extends HttpServlet{
 		map.put("/replyRemove.do", new ReplyRemoveControl());
 		
 		map.put("/boardSearchList.do", new BoardSearchListControl()); //게시글 검색
-		map.put("/myBoardList.do", new MyBoardListControl()); //내가 쓴 게시글 보기.
 		
 		//강민호
 		map.put("/managerSelectList.do", new ManagerSelectListControl());
@@ -144,6 +143,7 @@ public class FrontController extends HttpServlet{
 		map.put("/campSelectList.do", new CampSelectListControl());
 		map.put("/campInfoFormControl.do", new CampInfoFormControl());
 		map.put("/campDeleteList.do", new CampDeleteListControl());
+		map.put("/campModify.do", new CampModifyControl());
 	}
 	
 	@Override

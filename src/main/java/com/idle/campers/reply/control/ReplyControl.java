@@ -16,11 +16,11 @@ public class ReplyControl implements Control {
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		ReplyService svc = new ReplyServiceImpl();
 
-		String rno = req.getParameter("rno");
+		String rid = req.getParameter("rid");
 		
 		ObjectMapper mapper = new ObjectMapper();
 
-		ReplyVO vo = svc.replyOne(Integer.parseInt(rno));
+		ReplyVO vo = svc.replyOne(Integer.parseInt(rid));
 		
 		String str = "Ajax:";
 		

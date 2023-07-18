@@ -247,10 +247,23 @@ let npw2 = document.getElementById("userNewPw2");
 	document.getElementById("logoutBtn").addEventListener('click', logoutF);//로그아웃
 	function logoutF(){	document.location.href='logout.do';	};
 	
+<<<<<<< HEAD
+<<<<<<< HEAD
+	document.getElementById("byeBtn").addEventListener('click', byeF);//회원탈퇴
+	function byeF(){
+		document.querySelector('.byeWindow').style.display = 'block';
+	document.getElementById("byeBtn").addEventListener('click', e => document.querySelector('.byeWindow').style.display = 'block' });
+=======
+	document.getElementById("byeBtn").addEventListener('click', e => document.querySelector('.byeWindow').style.display = 'block' );
+>>>>>>> branch 'develop' of https://github.com/Kimeunju99/Campers.git
+	document.getElementById("byeBtn").addEventListener('click', function (e){
+		if($('#byePw').val() == ${logUser.userPw}){
+=======
 	document.getElementById("byeBtn").addEventListener('click', 
 			e => document.querySelector('.byeWindow').style.display = 'block' );
 	document.getElementById("joinOut").addEventListener('click', function (e){
 		if($('#byePw').val() == '${logUser.userPw}'){
+>>>>>>> branch 'develop' of https://github.com/Kimeunju99/Campers.git
 			$.ajax({
 				url: "joinOut.do",
 				method: "get",

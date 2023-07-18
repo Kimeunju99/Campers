@@ -18,9 +18,7 @@ public class BoardDeleteControl implements Control {
 		BoardService boardService = new BoardServiceImpl();
 		boardService.deleteBoard(Integer.parseInt(brdId));
 		
-		System.out.println(brdtype);
-		
-		return "boardList.do?type="+ brdtype;
+		return "boardList.do";
 	}
 
 }
