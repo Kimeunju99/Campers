@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>
+	<div id="container">
 		<div>
 			<h1>예약 가능 캠핑장 현황</h1>
 		</div>
@@ -23,7 +23,7 @@
 						<th>찜 개수</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="tbody">
 					<c:forEach items="${list }" var="l">
 						<tr onclick="location.href='/campers/campInfoFormControl.do?cid=${l.campId}'">
 							<td><img src="images/${l.campImage }" width="200px"></td>

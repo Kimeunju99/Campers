@@ -8,15 +8,17 @@
 	</insert>
 	
 	<update id="updateCamp" parameterType="com.idle.campers.business.service.BusinessVO">
-		update tbl_camp
+		UPDATE TBL_CAMP
 		<set>
 			<if test="CAMP_NAME != null">CAMP_NAME = #{campName}</if>
 			<if test="CAMP_ADDR != null">CAMP_ADDR = #{campAddr}</if>
 <!-- 			<if test="CAMP_LOCATION != null">CAMP_LOCATION = #{campLocation}</if> -->
 			<if test="CAMP_INFO != null">CAMP_INFO = #{campInfo}</if>
 			<if test="CAMP_IMAGE != null">CAMP_IMAGE = #{campImage}</if>
+			<if test="CAMP_ROOMCNT != null">CAMP_ROOMCNT = #{campRoomcnt}</if>
+			
 		</set>
-		where CAMP_OWNER = #{campOwner}
+		where CAMP_ID = #{campId}
 	</update>
 	
 	<select id="infoCamp" parameterType="com.idle.campers.business.service.BusinessVO">

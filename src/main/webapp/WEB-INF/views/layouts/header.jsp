@@ -39,6 +39,9 @@
                         	<li><a class="dropdown-item" href="managerSelectList.do">회원 관리</a></li>
                         	<li><a class="dropdown-item" href="accuseList.do">신고 관리</a></li>
 						</c:if>
+						<c:if test="${auth eq 'business'}">
+                        	<li><a class="dropdown-item" href="campAddForm.do">캠핑장 등록</a></li>
+						</c:if>
                         <li><a class="dropdown-item" href="logout.do">로그아웃</a></li>
                     </ul>
                 </li>

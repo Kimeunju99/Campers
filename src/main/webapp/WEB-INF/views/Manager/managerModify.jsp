@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+
+</style>
 </head>
 <body>
 <h3>수정화면</h3>
