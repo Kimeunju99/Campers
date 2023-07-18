@@ -41,6 +41,9 @@
 		WHERE CAMP_ID = #{campId}
 	</select>
 
+	<select id="ListCamp" resultType="com.idle.campers.business.service.BusinessVO">
+		select * from tbl_camp
+	</select>
 	
 	<select id="bestCampList" parameterType="com.idle.campers.business.service.BusinessVO">
 	<![CDATA[

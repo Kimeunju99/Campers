@@ -22,4 +22,5 @@ public interface BusinessMapper {
 
 	public List<BusinessVO> bestCampList();	// 메인에 노출시킬 캠핑장 리스트 순위
 
+	public List<BusinessVO> ListCamp();
 }

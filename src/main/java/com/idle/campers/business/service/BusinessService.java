@@ -19,4 +19,6 @@ public interface BusinessService {
 	public List<BusinessVO> bestCampList();
 	//mypage
 	public int myLikeCnt(String userId);
+	
+	public List<BusinessVO> campList();
 }

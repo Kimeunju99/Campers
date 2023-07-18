@@ -55,5 +55,9 @@ public class BusinessServiceImpl implements BusinessService{
 	public int myLikeCnt(String userId){
 		return map.myLikeCnt(userId);
 	}
-	
+	@Override
+	public List<BusinessVO> campList() {
+		// TODO Auto-generated method stub
+		return map.ListCamp();
+	}
 }
