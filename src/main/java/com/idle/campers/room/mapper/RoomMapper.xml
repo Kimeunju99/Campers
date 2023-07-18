@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.idle.campers.room.mapper.RoomMapper">
+
+	<insert id="addRoom" parameterType="com.idle.campers.room.service.RoomVO">
+		INSERT INTO ROOM (ROOM_ID, ROOM_CAMPID, ROOM_MANAGER, ROOM_NAME, ROOM_WEEKDAY, ROOM_WEEKEND, ROOM_PERSONNEL)
+		VALUES (#{roomId}, #{roomCampid}, #{roomManager}, #{roomName}, #{roomWeekday}, #{roomWeekend}, #{roomPersonnel})
+	</insert>
+
+	<update id="updateRoom" parameterType="com.idle.campers.room.service.RoomVO">
+		update room
+		<set>
+			<if test="roomId != null">ROOM_ID = #{roomId},</if>
+			<if test="roomCampid != null">ROOM_CAMPID = #{roomCampid}</if>
+			<if test="roomName != null">ROOM_NAME = #{roomName}</if>
+			<if test="roomWeekday != null">ROOM_WEEKDAY = #{roomWeekday}</if>
+			<if test="roomWeekend != null">ROOM_WEEKEND = #{roomWeekend}</if>
+			<if test="roomPersonnel != null">ROOM_PERSONNEL = #{roomPersonnel}</if>
+		</set>
+		where ROOM_ID = #{roomId}
+	</update>
+	
+	<select id="infoRoom"  resultType="com.idle.campers.room.service.RoomVO">
+		SELECT * FROM ROOM
+		WHERE ROOM_CAMPID = #{campId}
+	</select>
+
+	<delete id="deleteRoom" parameterType="com.idle.campers.room.service.RoomVO">
+		DELETE * FROM ROOM
+		WHERE ROOM_ID = #{roomId}
+	</delete>
+	
+	<select id="roomSelectList" resultType="com.idle.campers.room.service.RoomVO">
+		SELECT * FROM ROOM
+		WHERE ROOM_MANAGER = #{id}
+	</select>
+	
+
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.idle.campers.business.mapper.BusinessMapper">
+
+	<insert id="addCamp" parameterType="com.idle.campers.business.service.BusinessVO">
+		insert into tbl_camp(CAMP_ID, CAMP_OWNER, CAMP_NAME, CAMP_ADDR, CAMP_LOCATION, CAMP_INFO, CAMP_IMAGE, CAMP_ROOMCNT)
+		values (CAMP_SEQ.NEXTVAL, #{campOwner}, #{campName}, #{campAddr}, #{campLocation}, #{campInfo}, #{campImage}, #{campRoomcnt})
+	</insert>
+	
+	<update id="updateCamp" parameterType="com.idle.campers.business.service.BusinessVO">
+		update tbl_camp
+		<set>
+			<if test="CAMP_NAME != null">CAMP_NAME = #{campName}</if>
+			<if test="CAMP_ADDR != null">CAMP_ADDR = #{campAddr}</if>
+			<if test="CAMP_LOCATION != null">CAMP_LOCATION = #{campLocation}</if>
+			<if test="CAMP_INFO != null">CAMP_INFO = #{campInfo}</if>
+			<if test="CAMP_IMAGE != null">CAMP_IMAGE = #{campImage}</if>
+		</set>
+		where CAMP_OWNER = #{campOwner}
+	</update>
+	
+	<select id="infoCamp" parameterType="com.idle.campers.business.service.BusinessVO">
+		SELECT * FROM TBL_CAMP
+		WHERE CAMP_NAME = #{campName}
+	</select>
+	
+	<select id="campSelectList" resultType="com.idle.campers.business.service.BusinessVO">
+		SELECT * FROM TBL_CAMP
+		WHERE CAMP_OWNER = #{id} order by CAMP_ID desc
+	</select>
+	
+	<select id="campListAll" resultType="com.idle.campers.business.service.BusinessVO">
+		SELECT * FROM TBL_CAMP 
+	</select>
+	
+	<delete id="deleteCamp" parameterType="com.idle.campers.business.service.BusinessVO">
+		DELETE * FROM TBL_CAMP
+		WHERE CAMP_NAME = #{campName}
+	</delete>
+
+	<select id="selectCamp" parameterType="int">
+		SELECT * FROM TBL_CAMP
+		WHERE CAMP_ID = #{campId}
+	</select>
+
+	
+	<select id="bestCampList" parameterType="com.idle.campers.business.service.BusinessVO">
+	<![CDATA[
+		SELECT * FROM (
+    		SELECT * FROM TBL_CAMP ORDER BY CAMP_LIKE DESC
+		) WHERE  ROWNUM <4
+	]]>
+	</select>
+
+	
+	<!-- mypage -->
+	<select id="myLikeCnt" parameterType="String">
+		SELECT count(*) FROM TBL_CMP_LIKE
+		WHERE USER_ID = #{userId}
+	</select>
+
+</mapper>

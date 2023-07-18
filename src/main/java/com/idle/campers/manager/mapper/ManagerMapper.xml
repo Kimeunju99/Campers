@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.idle.campers.manager.mapper.ManagerMapper">
+	
+	<select id="selectMemberList" resultType="com.idle.campers.manager.service.ManagerVO">
+		 SELECT * FROM TBL_USER
+		 <if test="key == 'userId'"> WHERE LOWER (USER_ID) LIKE LOWER('%' ||  #{val} || '%')</if>
+		 <if test="key == 'userName'"> WHERE LOWER (USER_NAME) LIKE  LOWER('%' ||  #{val} || '%')</if>
+		 <if test="key == 'userEmail'"> WHERE LOWER (USER_EMAIL) LIKE  LOWER('%' ||  #{val} || '%')</if>
+		 <if test="key == 'userTel'"> WHERE LOWER(USER_TEL) LIKE LOWER('%' || #{val} || '%') </if>
+		 <if test="key == 'userAddr'"> WHERE LOWER(USER_ADDR) LIKE LOWER('%' || #{val} || '%') </if>
+		 <if test="key == 'userAuth'"> WHERE LOWER(USER_AUTH) LIKE LOWER('%' || #{val} || '%') </if>
+		 <if test="key == 'all'"> WHERE 1 = 1</if>
+	</select>
+
+	<update id="updateMember" parameterType="com.idle.campers.manager.service.ManagerVO">
+		UPDATE TBL_USER
+		<set>
+			<if test="userName != null">USER_NAME = #{userName},</if>
+			<if test="userEmail != null">USER_EMAIL = #{userEmail},</if>
+			<if test="userTel != null">USER_TEL = #{userTel},</if>
+			<if test="userAddr != null">USER_ADDR = #{userAddr},</if>
+			<if test="userAuth != null">USER_AUTH = #{userAuth},</if>
+			<if test="userActivation != null">USER_ACTIVATION = #{userActivation},</if>
+			<if test="accuseState != null">USER_ACCUSE_STATE = 1</if>
+			<if test="userAuth != null">USER_AUTH = #{userAuth}</if>
+		</set>
+		WHERE USER_ID = #{userId}
+	</update>
+	<delete id="deleteMember">
+		DELETE FROM TBL_USER
+		WHERE USER_ID = #{userId}
+	</delete>
+	
+	<select id="infoMember" resultType="com.idle.campers.manager.service.ManagerVO">
+		SELECT * FROM TBL_USER
+		WHERE USER_ID = #{userId}
+	</select>
+	
+	
+	
+	
+</mapper>
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -37,6 +37,11 @@ public class AccuseServiceImpl implements AccuseService {
 	public boolean DeleteAccuse(String accuseUserId) {
 		return mapper.AccuseDelete(accuseUserId) == 1;
 	}
+
+	@Override
+	public int totalCnt(String type) {
+		return 0;
+	}
 	
 	
 	

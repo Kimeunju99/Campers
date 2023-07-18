@@ -22,7 +22,7 @@
 				</div>
 
 				<div align="right" style="padding-right: 150px;">
-					<c:if test="${id != null }">
+					<c:if test="${id != null && logUser.userActivation != '비활성화' }">
 						<button type="button" id="addBtn" value="write"
 							style="background-color: white; border: solid 0.5px; border-color: rgb(172, 178, 185);">글쓰기</button>
 					</c:if>
@@ -156,13 +156,14 @@
 						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 					},
 					body: payload
-				}).then(Response => Response.json())
-				.then(json => viewHTML(json));
+				}).then(response => response.json())
+				.then(json => viewHTML(json))
+				.catch(error => console.error(error));
 		})
 
 		function viewHTML(datas) {
 			console.log(datas);
-			let t = '';
+			let out = '';
 			$('#boardTbody').empty();
 
 			for (let data of datas) {

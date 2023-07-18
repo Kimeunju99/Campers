@@ -1,15 +1,19 @@
 package com.idle.campers.test;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Properties;
+import java.util.List;
 
-
-import com.idle.campers.member.service.MemberService;
-import com.idle.campers.member.service.MemberServiceImpl;
-import com.idle.campers.member.service.MemberVO;
+import com.idle.campers.board.dao.BoardVO;
+import com.idle.campers.business.service.BusinessService;
+import com.idle.campers.business.service.BusinessVO;
+import com.idle.campers.business.serviceImpl.BusinessServiceImpl;
 
 public class test {
 	public static void main(String[] args) {
-
+		BusinessService svc = new BusinessServiceImpl();
+		List<BusinessVO> list = svc.bestCampList();
+		
+		for(BusinessVO vo : list) {
+			System.out.println(vo);
+		}
 	}
 }

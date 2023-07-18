@@ -13,7 +13,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">캠핑장</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
                         <li><a class="dropdown-item" href="searchCamp.do">검색</a></li>
-                        <li><a class="dropdown-item" href="blog-post.html">예약</a></li>
+                        <li><a class="dropdown-item" href="campSelectList.do">예약</a></li>
                         <li><a class="dropdown-item" href="blog-post.html">리뷰</a></li>
                     </ul>
                 </li>
@@ -38,8 +38,8 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
                         <li><a class="dropdown-item" href="mypage.do">마이페이지</a></li>
                         <c:if test="${auth eq 'admin'}">
-                        	<li><a class="dropdown-item" href="#">회원 관리</a></li>
-                        	<li><a class="dropdown-item" href="#">게시판 관리</a></li>
+                        	<li><a class="dropdown-item" href="managerSelectList.do">회원 관리</a></li>
+                        	<li><a class="dropdown-item" href="accuseList.do">신고 관리</a></li>
 						</c:if>
                         <li><a class="dropdown-item" href="logout.do">로그아웃</a></li>
                     </ul>

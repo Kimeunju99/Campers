@@ -11,6 +11,9 @@ import javax.servlet.http.HttpSession;
 import com.idle.campers.book.service.BookService;
 import com.idle.campers.book.service.BookServiceImpl;
 import com.idle.campers.book.service.BookVO;
+import com.idle.campers.business.service.BusinessService;
+import com.idle.campers.business.service.BusinessVO;
+import com.idle.campers.business.serviceImpl.BusinessServiceImpl;
 import com.idle.campers.common.Control;
 
 public class NewBookControl implements Control {
@@ -22,9 +25,11 @@ public class NewBookControl implements Control {
 		BookVO book = new BookVO();
 		book.setBookCampId(Integer.parseInt(req.getParameter("campId")));
 		book.setBookRoomId(Integer.parseInt(req.getParameter("roomId")));
-		
-		//TODO: 매니저 유저 아이디 받아오기
-		book.setBookManager(null);
+
+		//매니저 아이디 받아오기
+		BusinessService busSV = new BusinessServiceImpl();
+		BusinessVO business = busSV.selectCamp(Integer.parseInt(req.getParameter("campId")));
+		book.setBookManager(business.getCampOwner());
 		
 		book.setBookClient((String)session.getAttribute("id"));
 		book.setBookPersonnel(Integer.parseInt(req.getParameter("personnel")));

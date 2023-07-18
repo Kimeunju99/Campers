@@ -1,9 +1,6 @@
 eclipse.preferences.version=1
-<<<<<<< HEAD
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/webapp/css/mypage.css=UTF-8
 encoding//src/test/java=UTF-8
-encoding//src/test/resources=UTF-8
-=======
->>>>>>> branch 'develop' of https://github.com/Kimeunju99/Campers.git
 encoding/<project>=UTF-8

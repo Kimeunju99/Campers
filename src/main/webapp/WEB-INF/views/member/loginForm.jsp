@@ -3,52 +3,72 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="js/jquery-3.7.0.min.js"></script>
 
-<div>
-	<div>
+
+<div class="cont">
+	<div class="form sign-in">
 		<form action="loginControl.do" id="loginForm" name="loginForm">
-			<h4>로그인</h4>
-			<p>아이디</p>
-			<input type="text" id="userId" name="userId" value="user01">
-			<br>
-			<p>비밀번호</p>
-			<input type="password" id="userPw" name="userPw" value="user01">
-			<br><br>
-			<input type="submit" value="로그인">
+			<h2>CAMPERS 회원님 반갑습니다!</h2>
+			<label>
+			  <span>아이디</span>
+			  <input type="text" id="userId" name="userId" class="input-linetype" value="business01">
+			</label>
+			<label>
+			  <span>비밀번호</span>
+			  <input type="password" id="userPw" name="userPw" class="input-linetype" value="FixNb2wg7V">
+			</label>
+			<p class="forgot-pass" onclick=find()>아이디/비밀번호를 잊으셨나요?</p><br>
 			<p>${message }</p>
-			<br><br>
-		</form>
-	</div>
-	<div>
-		<input type="button" onclick=location.href="memberJoinType.do" value="회원가입">
-		<input type="button" onclick=find() value="아이디/비밀번호 찾기">
-		<br><br>
-	</div>
-	<hr>
-	<div id="findInfo" name="findInfo" style="display: none;">
-		<button id="searchId" name="searchId" onclick=searchId()>아이디 찾기</button>
-		<button id="searchPw" name="searchPw" onclick=searchPw()>비밀번호 찾기</button>
-		<br><br>
-		<form action="" id="findMember" name="findMember">
-			<p>이름</p>
-			<input type="text" id="userName" name="userName">
 			<br>
-			<div class="formInputId" style="display: none;">
-				<p>아이디</p>
-				<input type="text" id="memberId" name="memberId">
-				<br>
-			</div>
-			<p>이메일</p>
-			<input type="email" id="userEmail" name="userEmail">
-			<br><br>
-			<p id="findMsg"></p>
-			
-			<input type="button" id="search" value="getId" onclick=findMemberIdPw()>
+			<button type="button" class="fb-btn" onclick="location.href ='memberJoinType.do'">회원가입</button>
+			<button type="submit" class="submit">로그인</button>
 		</form>
+
+		<div id="findInfo" name="findInfo" style="display: none;">
+			<hr><br>
+			<input value="아이디 찾기" type="button" class="simple-btn" id="searchId" name="searchId" onclick=searchId()>
+			<input value="비밀번호 찾기" type="button" class="simple-btn" id="searchPw" name="searchPw" onclick=searchPw()>
+			<br><br>
+			<form action="" id="findMember" name="findMember">
+				<label>
+				  <span>이름</span>
+ 				  <input type="text" id="userName" name="userName" class="input-linetype">
+				</label>
+
+				<div class="formInputId" style="display: none;">
+					<label>
+						<span>아이디</span>
+						<input type="text" id="memberId" name="memberId" class="input-linetype">
+					</label>
+				</div>
+				
+				<label>
+					<span>이메일</span>
+					<input type="email" id="userEmail" name="userEmail" class="input-linetype">
+				</label>
+				<br><br>
+				<p id="findMsg"></p>
+				<br>
+				<input type="button" id="search" value="getId" onclick=findMemberIdPw()>
+				<br><br>
+			</form>
+		</div>
+		
 	</div>
-	
 </div>
 
 <script type="text/javascript">
+	$('button').css('margin', 'auto 15px 30px 15px')
+	$('#search').css('color', '#008481')
+				.css('font-size', '15px')
+				.css('cursor', 'pointer')
+				.css('border', '2px solid #91C3CE')
+				.css('margin', 'auto')
+				.css('width', '100px')
+				.css('height', '36px')
+				.css('border-radius', '30px')
+				.css('background', 'none');
+	
+	
 	$('p').css('display', 'inline-block');
 	
 	function searchId(){
