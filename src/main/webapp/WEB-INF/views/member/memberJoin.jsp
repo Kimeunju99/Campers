@@ -6,11 +6,12 @@
 
 <!------------------------------------------------------ 0712수정 ------------------------------------------------------>
 
-<h4>회원가입</h4>
-<div>
+<div id="join-form-div">
+	<h5>회원가입</h5>
+	<hr>
 	<form action="memberJoinControl.do" id="form" method="post">
 		<input type="text" class="inputValCheck" id="userAuth" name="userAuth" value="${userAuth}" readonly>
-		<table border="1px">
+		<table>
 			<tr>
 				<td class="tdName"><span class="redtext">* </span>아이디</td>
 				<td class="tdVal">
@@ -100,17 +101,6 @@
 		
 
 <script>
-	$('tr').css('height', '40px')
-	$('.redtext').css('color','red');
-	$('.note').css('color', 'dimgray');
-	$('.note').css('font-size', '12px');
-	$('.tdName').css('width','120px');
-	$('.tdName').css('text-align', 'right');
-	$('.tdName').css('padding-right', '10px');
-	$('.tdVal').css('width','520px')
-	$('.inputValCheck').css('display','none');
-	$('.inputValCheck').css('width','40px');
-	
 	function checkField(){	// 필수 필드값 확인
 		if($('#checkedId').val() == "false"){
 			alert("아이디 중복체크를 하지 않았습니다.")

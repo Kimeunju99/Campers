@@ -9,7 +9,7 @@
 #userInfo{
 	box-sizing: border-box;
 	background-color: white;
-	border: 1px solid black;	border-radius: 30px;
+	border-radius: 30px;
 	overflow:auto; 	float: left;
 	margin-top: 20%;
 	width: 300px;
@@ -22,7 +22,12 @@
 .userInfo{
 	padding: 10px;	width: 300px;
 }/*userInfo div 안 크기 */
-
+#infoTbl tr{
+	border-bottom: 1px solid gray;
+}
+#infoTbl tr:nth-last-child(1){
+	border-bottom: 0px;
+}
 #infoTbl th{
 	text-align: right;
 }
@@ -55,7 +60,7 @@ button {
 	cursor: pointer;
 }
 button:hover{
-	color: orange;
+	color: #008481;
 }
 
 ul{
@@ -71,26 +76,33 @@ li{
 .actionView{
 	box-sizing: border-box;
 	overflow:auto; 	float: left;
-	border: 1px solid black;	border-radius: 30px;
+	border-radius: 30px;
 	width:650px;
-	margin: 15px 0px 15px 20px; padding: 20px;
+	margin: 15px 0px 15px 20px; padding: 30px;
+	background-color: white;
 }/* 개별 div */
 
 .actionView table{
 	margin: 0;
 	width: 100%;
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
 	display: table;
 	text-align: center;
+}
+.actionView thead{
+border-bottom: 1px solid gray;
+	color: #008481;
+}
+.actionView tbody tr:hover{
+	color: orange;
 }
 a{
 	text-decoration-line: none;
 	color: black;
 }
 a:hover{
-	color: orange;
+	color: #008481;
 }
 a:active{
 	text-decoration-line: none;
@@ -117,11 +129,21 @@ a:active{
 	padding: 20px;
 	width: 450px;
 }
-
 .modifyWindow th{
 	text-align: right;
+	padding-right: 10px;
 }
 
+.modifyWindow input {
+	margin-top: 5px;
+	padding-bottom: 5px;
+	font-size: 16px;
+	border: none;
+	outline: none;
+ 	 background: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+	text-align: center;
+  }
 
 /*탈퇴 모달창*/
 .byeWindow{
@@ -152,3 +174,13 @@ a:active{
 .byeWindow form{
 	margin-top: 20px;
 }
+.byeWindow input {
+	margin-top: 5px; margin-bottom: 5px;
+	padding-bottom: 5px;
+	font-size: 16px;
+	border: none;
+	outline: none;
+ 	 background: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+	text-align: center;
+  }

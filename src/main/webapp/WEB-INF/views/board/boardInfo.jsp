@@ -236,9 +236,6 @@ tr, td {
 		        str += `
 		                <button type="button" class="closeBtn" onclick="closeFnc(this)">&times;</button>
 		                <button type="button" class="modifyBtn" onclick="modifyFnc(this)">수정</button>`;
-		    } else if (id != null) { // 로그인한 사용자이지만 댓글 작성자가 아닌 경우
-		        str += `
-		                <button class="accuse" style="align: right">신고</button>`;
 		    }
 		    
 		    str += `

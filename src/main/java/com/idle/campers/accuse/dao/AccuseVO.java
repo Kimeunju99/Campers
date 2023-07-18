@@ -2,6 +2,9 @@ package com.idle.campers.accuse.dao;
 
 import java.sql.Date;
 
+import lombok.Data;
+
+@Data
 public class AccuseVO {
 	
 	private int accuseId;
@@ -9,6 +12,8 @@ public class AccuseVO {
 	private int accuseBrd;
 	
 	private int reply;
+	
+	private String accuseTitle;
 	
 	private Date accuseDate;
 	
@@ -23,5 +28,7 @@ public class AccuseVO {
 	private Date accuseRdate;
 	
 	private String accuseUserId;
+	
+	private int userAccuse;
 	
 }

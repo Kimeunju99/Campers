@@ -1,6 +1,5 @@
 package com.idle.campers.business.control;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,14 +14,10 @@ public class CampSelectListControl implements Control {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
 		BusinessService svc = new BusinessServiceImpl();
-		List<BusinessVO> CampList = new ArrayList<>();
-		
-		CampList = svc.campSelectList();
+		List<BusinessVO> CampList = svc.campListAll();
 		req.setAttribute("list", CampList);
-		
-		
+
 		return "business/listCamp";
 	}
 

@@ -15,4 +15,6 @@ public interface AccuseService {
 	public boolean UpdateAccuse(AccuseVO vo);
 	
 	public boolean DeleteAccuse(String accuseUserId);
+	
+	public int totalCnt(String type);
 }

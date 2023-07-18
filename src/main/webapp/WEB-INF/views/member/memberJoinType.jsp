@@ -5,23 +5,18 @@
 
 <h3>회원 유형 선택</h3>
 <div class="joinType">
-	<div class="general">
-		<h4>일반</h4>
-		<button class="getGeneral" value="general" onclick=getUserAuth()>일반회원 가입하기</button>
+	<div class="general" onclick=getUserAuth()>
+		<img src="images/icon/Gjoin.png">									<!-- 이미지 소스 넣기 -->
+		<h3>일반 회원 가입</h3>
 	</div>
-	<div class="business">
-		<h4>업체</h4>
-		<button class="getBusiness" value="business" onclick=getUserAuth()>비지니스 계정 가입하기</button>
+	<div class="business" onclick=getUserAuth()>
+		<img src="images/icon/Bjoin.png">									<!-- 이미지 소스 넣기 -->
+		<h3>업체 회원 가입</h3>
 	</div>
 </div>
 
 <script>
 	let userAuth = ""
-
-	$('.joinType').children().css('width','250px');
-	$('.joinType').children().css('height','250px');
-	$('.joinType').children().css('display','inline-block');
-	$('.joinType').children().css('margin','10px');
 	
 	function getUserAuth(){
 		userAuth = $(event.target).val();

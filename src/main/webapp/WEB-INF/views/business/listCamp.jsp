@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,43 +8,34 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div align="center">
+	<div>
 		<div>
-			<h1>내 캠핑장 현황</h1>
+			<h1>예약 가능 캠핑장 현황</h1>
 		</div>
 		<div>
-			<table border="1">
+			<table>
 				<thead>
 					<tr>
-						<th width="200">캠핑장 이름</th>
-						<th width="200">주소</th>
-						<th width="200">위치</th>
-						<th width="200">이미지</th>
-						<th width="200">방 갯수</th>
-						<th width="200">방 번호</th>
-						<th width="200">방 이름</th>
-						<th width="200">평일 가격</th>
-						<th width="200">주말 가격</th>
-						<th width="200">수용 인원</th>
+						<th>이미지</th>
+						<th>캠핑장 이름</th>
+						<th>주소</th>
+						<th>방 개수</th>
+						<th>찜 개수</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${list }" var="l">
-						<tr>
-							<td align="center"><a href="CampInfoFormControl.do?name=${l.campName}&rid=${l.roomId}">${l.campName }</a></td>
+						<tr onclick="location.href='/campers/campInfoFormControl.do?cid=${l.campId}'">
+							<td><img src="images/${l.campImage }" width="200px"></td>
+							<td>${l.campName }</td>
 							<td>${l.campAddr }</td>
-							<td align="center">${l.campLocation }</td>
-							<td align="center">${l.campImg }</td>
-							<td align="center">${l.campRoomcnt }</td>
-							<td align="center">${l.roomId }</td>
-							<td align="center">${l.roomName }</td>
-							<td align="center">${l.roomWeekday }</td>
-							<td align="center">${l.roomWeekend }</td>
-							<td align="center">${l.roomPersonnel }</td>
+							<td>${l.campRoomcnt }</td>
+							<td>${l.campLike }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
+	</div>
 </body>
 </html>

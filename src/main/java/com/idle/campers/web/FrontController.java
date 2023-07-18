@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.idle.campers.MainControl;
 import com.idle.campers.accuse.control.AccuseAddFormControl;
+import com.idle.campers.accuse.control.AccuseListControl;
 import com.idle.campers.board.control.BoardAddControl;
 import com.idle.campers.board.control.BoardAddFormControl;
 import com.idle.campers.board.control.BoardDeleteControl;
@@ -34,6 +35,7 @@ import com.idle.campers.business.control.AddCampControl;
 import com.idle.campers.business.control.CampAddFormControl;
 import com.idle.campers.business.control.CampDeleteListControl;
 import com.idle.campers.business.control.CampInfoFormControl;
+import com.idle.campers.business.control.CampModifyControl;
 import com.idle.campers.business.control.CampSelectListControl;
 import com.idle.campers.camp.control.SearchCamp;
 import com.idle.campers.common.Control;
@@ -85,8 +87,10 @@ public class FrontController extends HttpServlet{
 		map.put("/boardInfo.do", new BoardInfoControl());
 		map.put("/boardLike.do", new BoardLikeControl());
 		map.put("/boardLikeCount.do", new BoardLikeCountControl());
+		
 		// 손석연 - user 신고 기능
 		map.put("/accuseAddForm.do", new AccuseAddFormControl());
+		map.put("/accuseList.do", new AccuseListControl());
 		
 		
 		//은주
@@ -139,6 +143,7 @@ public class FrontController extends HttpServlet{
 		map.put("/campSelectList.do", new CampSelectListControl());
 		map.put("/campInfoFormControl.do", new CampInfoFormControl());
 		map.put("/campDeleteList.do", new CampDeleteListControl());
+		map.put("/campModify.do", new CampModifyControl());
 	}
 	
 	@Override

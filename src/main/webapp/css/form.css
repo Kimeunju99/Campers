@@ -3,12 +3,29 @@
 	margin: 0 auto;
 	width: 1000px;
 }
-.readonly{
-	border:none;
-}
+
 table{
-	border:1px solid black;
+	margin: 0;
+	width: 100%;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+	display: table;
+	text-align: center;
 }
 table th{
 	text-align: right;
+	background-color: lightgray;
+	padding: 10px 5px;
+	width: 170px;
+}
+table tr{
+	border-bottom: 1px solid black;
+}
+button{
+	display: inline-block;
+	margin: 10px;
+}
+table td :nth-child(2n-1){
+	border-right: 1px solid black;
 }

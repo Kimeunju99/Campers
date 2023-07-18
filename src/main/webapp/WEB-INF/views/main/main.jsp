@@ -12,22 +12,31 @@
 <!-- Header-->
 <div id="best-camp">
 	<div id="camp-list-all">
-		<div class="camp-list-items">1번</div>
-		<div class="camp-list-items">2번</div>
-		<div class="camp-list-items">3번</div>
-	</div>
-	
+		<c:forEach var="camp" items="${campList}">
+			<div class="camp-list-items" onclick="">
+				<div class="campImage" style="background-image: url(images/${camp.campImage});">
 
-	<div id="list-slide-btn">
-		<button onclick="pageLefe()">◁</button>
-		<button onclick="pageRight()">▷</button>
+					<div id="list-slide-btn">
+						<img src="images/icon/Lbutton.png" onclick="pageLefe()">
+						<img src="images/icon/Rbutton.png" onclick="pageRight()">
+					</div>
+					<div class="campInfo">
+						<div class="campInfo-text">
+							<h3>${camp.campName}</h3>
+							<p>${camp.campInfo}</p>
+							<p>${camp.campAddr}</p>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</c:forEach>
 	</div>
 
 </div>
 
 <!-- CampVO List 받아오기 -->
 <script>
-//	$('.campImage').css('background-image', ` url('images/캠핑10.jpg')`)
 
 	
 //배너 슬라이드------------------------------------------------------
@@ -37,7 +46,7 @@
 
 	//item의 width
 	let listItems = document.querySelector('.camp-list-items');
-	let width = listItems.clientWidth;
+	let width = listItems.offsetWidth - 20;
 	console.log("요소의 길이: " + width);
 
 	let list = document.querySelector('#camp-list-all');
@@ -57,80 +66,78 @@
 		
 		list.style.marginLeft = '-' + (width * campIndex) + 'px' ;
 	}
+
 </script>
 
 
-<div class="iconList">
-	<div class="main-icon" onclick="location.href ='searchCamp.do'">
-		<img src="images/icon/2.png" class="icon-images"> <span>캠핑장
-			검색</span>
+
+<div id="main-container">
+	<div id="iconList" class="container-items">
+		<h4>바로가기</h4><br>
+		<div class="main-icon" onclick="location.href ='searchCamp.do'">
+			<img src="images/icon/search.png" class="icon-images"> <span>캠핑장 검색</span>
+		</div>
+		<div class="main-icon" onclick="location.href ='searchCamp.do'">
+			<!-- 링크 주소 변경 필요 -->
+			<img src="images/icon/3.png" class="icon-images"> <span>캠핑장 예약</span>
+		</div>
+		<div class="main-icon" onclick="location.href ='searchCamp.do'">
+			<!-- 링크 주소 변경 필요 -->
+			<img src="images/icon/review.png" class="icon-images"> <span>캠핑장 리뷰</span>
+		</div>
+		<div class="main-icon" onclick="location.href ='searchCamp.do'">
+			<!-- 링크 주소 변경 필요 -->
+			<img src="images/icon/4.png" class="icon-images"> <span>게시판 목록</span>
+		</div>
 	</div>
-	<div class="main-icon" onclick="location.href ='searchCamp.do'">
-		<!-- 링크 주소 변경 필요 -->
-		<img src="images/icon/3.png" class="icon-images"> <span>캠핑장
-			예약</span>
-	</div>
-	<div class="main-icon" onclick="location.href ='searchCamp.do'">
-		<!-- 링크 주소 변경 필요 -->
-		<img src="images/icon/4.png" class="icon-images"> <span>캠핑장
-			리뷰</span>
-	</div>
-	<div class="main-icon" onclick="location.href ='searchCamp.do'">
-		<!-- 링크 주소 변경 필요 -->
-		<img src="images/icon/5.png" class="icon-images"> <span>캠핑
-			팁</span>
+	
+	<div id="Main-boardList" class="container-items">
+		<h4>Campers story</h4><br>
+		<table>
+			<thead>
+				<tr>
+					<th scope="row">글번호</th>
+					<th class="th-lg"><a>제목</a></th>
+					<th class="th-lg">작성자</th>
+					<th class="th-lg">작성일</th>
+					<th class="th-lg">조회수</th>
+				</tr>
+			</thead>
+			<!--Table head-->
+			
+			<!--Table body-->
+			<tbody>
+				<c:forEach var="brd" items="${informList}">
+					<tr>
+						<td><span
+							style="background-color: rgb(228, 49, 49); border-radius: 4px; color: rgb(250, 204, 204); padding: 2px; font-size: small">공지</span>
+						</td>
+						<td><a
+							href="/campers/boardInfo.do?bid=${brd.brdId}&bwri=${brd.brdWriter}"
+							style="text-decoration: none; color: red;"> <c:out
+									value="${brd.brdTitle}" /></a></td>
+						<td><c:out value="${brd.brdWriter}" /></td>
+						<td><c:out value="${brd.brdDate}" /></td>
+						<td><c:out value="${brd.brdRead}" /></td>
+					<tr>
+				</c:forEach>
+							<c:forEach var="brd" items="${list}">
+					<tr>
+						<td><c:out value="${brd.brdId}" /></td>
+						<td><a
+							href="/campers/boardInfo.do?bid=${brd.brdId}&bwri=${brd.brdWriter}"
+							style="text-decoration: none; color: black;"> <c:out
+									value="${brd.brdTitle}" /></a></td>
+						<td><c:out value="${brd.brdWriter}" /></td>
+						<td><c:out value="${brd.brdDate}" /></td>
+						<td><c:out value="${brd.brdRead}" /></td>
+					<tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </div>
-
-<div class="Main-boardList">
-	<h4>Campers story</h4>
-	<table>
-		<thead>
-			<tr>
-				<th scope="row">글번호</th>
-				<th class="th-lg"><a>제목</a></th>
-				<th class="th-lg">작성자</th>
-				<th class="th-lg">작성일</th>
-				<th class="th-lg">조회수</th>
-			</tr>
-		</thead>
-		<!--Table head-->
-		
-		<!--Table body-->
-		<tbody>
-			<c:forEach var="brd" items="${informList}">
-				<tr
-					style="background-color: rgb(240, 232, 232); border: solid 1px white;">
-					<td><span
-						style="background-color: rgb(228, 49, 49); border-radius: 4px; color: rgb(250, 204, 204); padding: 2px; font-size: small">공지</span>
-					</td>
-					<td><a
-						href="/campers/boardInfo.do?bid=${brd.brdId}&bwri=${brd.brdWriter}"
-						style="text-decoration: none; color: red;"> <c:out
-								value="${brd.brdTitle}" /></a></td>
-					<td><c:out value="${brd.brdWriter}" /></td>
-					<td><c:out value="${brd.brdDate}" /></td>
-					<td><c:out value="${brd.brdRead}" /></td>
-				<tr>
-			</c:forEach>
-						<c:forEach var="brd" items="${list}">
-				<tr>
-					<td>
-					</td>
-					<td><a
-						href="/campers/boardInfo.do?bid=${brd.brdId}&bwri=${brd.brdWriter}"
-						style="text-decoration: none; color: black;"> <c:out
-								value="${brd.brdTitle}" /></a></td>
-					<td><c:out value="${brd.brdWriter}" /></td>
-					<td><c:out value="${brd.brdDate}" /></td>
-					<td><c:out value="${brd.brdRead}" /></td>
-				<tr>
-			</c:forEach>
-		</tbody>
-	</table>
-</div>
-
 
 <script type="text/javascript">
-	
+	$('table').css('width', '100%');
 </script>

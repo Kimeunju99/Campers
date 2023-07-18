@@ -16,4 +16,6 @@ public interface AccuseMapper {
 	public int AccuseUpdate(AccuseVO vo);
 	
 	public int AccuseDelete(String accuseUserId);
+	
+	public int getTotalCnt(@Param("type") String type);
 }

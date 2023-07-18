@@ -8,13 +8,12 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#">판매</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">캠핑장</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
                         <li><a class="dropdown-item" href="searchCamp.do">검색</a></li>
-                        <li><a class="dropdown-item" href="blog-post.html">예약</a></li>
-                        <li><a class="dropdown-item" href="blog-post.html">리뷰</a></li>
+                        <li><a class="dropdown-item" href="campSelectList.do">예약</a></li>
+                        <li><a class="dropdown-item" href="boardList.do?type=review">리뷰</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -22,7 +21,6 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
                         <li><a class="dropdown-item" id="information" href="boardList.do?type=inform">공지사항</a></li>
                         <li><a class="dropdown-item" id= "free" href="boardList.do?type=normal">자유게시판</a></li>
-                        <li><a class="dropdown-item" id= "experience" href="boardList.do?type=review">리뷰</a></li>
                         <li><a class="dropdown-item" id="share" href="boardList.do?type=tip">팁공유</a></li>
                     </ul>
                 </li>
@@ -39,7 +37,7 @@
                         <li><a class="dropdown-item" href="mypage.do">마이페이지</a></li>
                         <c:if test="${auth eq 'admin'}">
                         	<li><a class="dropdown-item" href="managerSelectList.do">회원 관리</a></li>
-                        	<li><a class="dropdown-item" href="#">게시판 관리</a></li>
+                        	<li><a class="dropdown-item" href="accuseList.do">신고 관리</a></li>
 						</c:if>
                         <li><a class="dropdown-item" href="logout.do">로그아웃</a></li>
                     </ul>

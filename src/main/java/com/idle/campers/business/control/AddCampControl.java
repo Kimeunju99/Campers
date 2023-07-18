@@ -23,10 +23,10 @@ public class AddCampControl implements Control {
 		String savePath = req.getServletContext().getRealPath("/images");
 		int maxSize = 2048 * 2048 * 10;
 		String enc = "UTF-8";
-		
+
 		MultipartRequest multi = null;
 		try {
-			multi = new MultipartRequest(req, savePath, maxSize, enc, new DefaultFileRenamePolicy() );
+			multi = new MultipartRequest(req, savePath, maxSize, enc, new DefaultFileRenamePolicy());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,42 +39,42 @@ public class AddCampControl implements Control {
 		String info = multi.getParameter("cinfo");
 		String img = multi.getFilesystemName("img");
 		String cnt = multi.getParameter("ccnt");
-		//룸 정보
+		// 룸 정보
 		String rid = multi.getParameter("rid");
 		String rname = multi.getParameter("rname");
 		String rweekday = multi.getParameter("rweekday");
 		String rweekend = multi.getParameter("rweekend");
 		String rpersonnel = multi.getParameter("rpersonnel");
-		
+
 		RoomVO rvo = new RoomVO();
 		rvo.setRoomId(Integer.parseInt(rid));
 		rvo.setRoomName(rname);
 		rvo.setRoomWeekday(Integer.parseInt(rweekday));
 		rvo.setRoomWeekend(Integer.parseInt(rweekend));
 		rvo.setRoomPersonnel(Integer.parseInt(rpersonnel));
-		
+
 		BusinessVO vo = new BusinessVO();
 		vo.setCampName(name);
 		vo.setCampOwner(owner);
 		vo.setCampAddr(addr);
 		vo.setCampLocation(location);
 		vo.setCampInfo(info);
-		vo.setCampImg(img);
+		vo.setCampImage(img);
 		vo.setCampRoomcnt(Integer.parseInt(cnt));
-		
+
 		String str = null;
-		
+
 		BusinessService service = new BusinessServiceImpl();
 		RoomService roomService = new RoomServiceImpl();
 		roomService.addRoom(rvo);
-		
-		if(service.addCamp(vo)) {
+
+		if (service.addCamp(vo)) {
 			req.setAttribute("message", "등록이 완료되었습니다.");
 			str = "business/message";
 		} else {
 			str = "campAddForm.do";
 		}
-		
+
 		return str;
 	}
 
