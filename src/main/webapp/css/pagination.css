@@ -6,11 +6,20 @@
   --greyDark: #2d4848;
 }
 
-.page__numbers active {
+#act span{
   color: #ffffff;
   background-color: #23adad;
   font-weight: 800;
   border: 1px solid #23adad;
+}
+
+.cbody{
+  background-color: white;
+  border-radius: 50px;
+  margin: 20px 20px 20px 20px;
+}
+#table{
+  background-color: white;
 }
 
 body {
@@ -128,7 +137,6 @@ ul {
 }
 
 thead{
-  border: solid 0.4px bisque;
   border-radius: 5px;
 }
 

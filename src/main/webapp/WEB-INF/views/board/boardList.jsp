@@ -15,16 +15,15 @@
 
 	<!-- 게시판 본문 -->
 	<div class="card">
-		<div class="card-body">
+		<div class="cbody">
 			<!-- Grid row -->
 			<div class="row">
 				<!-- Grid column -->
-				<div class="col-md-12" align="left"
+				<div id="bodyM" class="col-md-12" align="left"
 					style="padding-left: 100px; padding-top: 15px; padding-bottom: 0;">
-					<input type="hidden" name="type" value="${param.type}">
 				</div>
 
-				<div align="right" style="padding-right: 150px;">
+				<div id="bodyT" align="right" style="padding-right: 150px;">
 					<c:if test="${id != null && logUser.userActivation != '비활성화' }">
 						<button type="button" id="addBtn" value="write"
 							style="background-color: white; border: solid 0.5px; border-color: rgb(172, 178, 185);">글쓰기</button>
@@ -36,7 +35,7 @@
 			<!-- Grid row -->
 			<!--Table-->
 			<div style="padding-right: 150px; padding-left: 150px;">
-				<table class="table table-hover table-responsive mb-0">
+				<table class="table table-hover table-responsive mb-0" id="table">
 					<!--Table head-->
 					<thead>
 						<tr>
@@ -105,8 +104,8 @@
 		<c:forEach begin="${page.startPage}" end="${page.endPage}" var="i">
 			<c:choose>
 				<c:when test="${i == curPage}">
-					<li class="page__numbers active"><span>
-					<a id="act" href="boardList.do?type=${t}&page=${i}"><c:out value="${i}" /></a></span>
+					<li id="act"><span>
+					<a href="boardList.do?type=${t}&page=${i}"><c:out value="${i}" /></a></span>
 					</li>
 				</c:when>
 				<c:otherwise>
