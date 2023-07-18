@@ -21,10 +21,11 @@ public class ReplyModifyControl implements Control {
 		ObjectMapper mapper = new ObjectMapper();
 
 		String rid = req.getParameter("rid");
-		String reply = req.getParameter("modiReply");
-
+		String reply = req.getParameter("reply");
+		System.out.println(rid);
+		System.out.println(reply);
 		vo.setReply(reply);
-		vo.setBrdId(Integer.parseInt(rid));
+		vo.setReplyId(Integer.parseInt(rid));
 
 		if(svc.updateReply(vo)) {
 			vo = svc.replyOne(Integer.parseInt(rid));

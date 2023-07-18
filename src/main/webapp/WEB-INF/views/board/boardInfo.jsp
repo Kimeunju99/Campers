@@ -80,48 +80,33 @@ tr, td {
 
 	<br>
 	<div class="replyBody">
-		<h2>댓글창</h2>
+		<h2>Comment</h2>
 		<div class="writeReply">
-			<div class="container mt-5 mb-5">
-				<div class="d-flex justify-content-center row">
-					<div class="d-flex flex-column col-md-8">
-
-						<div class="coment-bottom bg-white p-2 px-4">
-							<div class="d-flex flex-row add-comment-section mt-4 mb-4">
-								<c:choose>
-									<c:when test="${id != null }">
-										<input type="hidden" id="replyer" readonly size="20" value="${id}">
-										:<textarea rows="5" cols="170" id="reply" style="resize: none; margin: 3px" class="form-control mr-3"
-											placeholder="내용을 입력하세요."></textarea>
-										<button type="button" id="addRBtn" style="margin: 3px">작성하기</button>
-									</c:when>
-									<c:otherwise>
-										<input type="text" readonly size="20" style="height: 10px">
-										:<textarea rows="5" cols="170" id="reply"
-											style="resize: none; margin: 3px" class="form-control mr-3" readonly>
-											로그인한 사용자만 이용할 수 있습니다.</textarea>
-										<button type="button" id="addRBtn" style="margin: 3px">작성하기</button>
-									</c:otherwise>
-								</c:choose>
-
-							</div>
-						</div>
-						<ul class="reple">
-							<div class="commented-section mt-2">
-								<div class="d-flex flex-row align-items-center commented-user">
-									<h5 class="mr-2">Corey oates</h5>
-									<span class="dot mb-1"></span><span class="mb-1 ml-2">4
-										hours ago</span>
-								</div>
-								<div class="comment-text-sm">
-									<p class="content">\${reply.reply}</p>
-								
-						</ul>
-					</div>
-				</div>
-			</div>
+			<ul>
+				<c:choose>
+					<c:when test="${id != null }">
+						<li><input type="text" id="replyer" readonly size="20"
+							value="${id}"></li>
+						<li>: <textarea rows="5" cols="170" id="reply"
+								style="resize: none"></textarea>
+							<button type="button" id="addRBtn">댓글작성</button>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<input type="text" readonly size="20">
+						<li>: <textarea rows="5" cols="170" style="resize: none"
+								readonly>로그인한 사용자만 이용할 수 있습니다.</textarea>
+							<button type="button" id="addRBtn">댓글작성</button>
+						</li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
 		</div>
+		<ul class="reple">
+			
+		</ul>
 	</div>
+
 
 
 
@@ -275,19 +260,19 @@ tr, td {
 					return response.json(); 
 				})
 			.then(function(result){ 
-			console.log(result); 
+				console.log(result); 
 			
-			$('.reple').empty();
-			for(let reply of result.list){
-			    replyUL.append(makeList(reply)); 
-			}
-			searchList()
-		})
+				$('.reple').empty();
+				for(let reply of result.list){
+			   	 	replyUL.append(makeList(reply)); 
+				}
+				searchList()
+			})
 			.catch(function(err){ 
-			console.error(err); 
+				console.error(err); 
 			});
 		}
-	replyFnc(bid); 
+		replyFnc(bid); 
 		
 	$('ul').css({
 		border: 'solid 0.5px',
@@ -296,39 +281,41 @@ tr, td {
 		});
 		
 		replyUL.css('list-style', 'none');
+	
 		
 		function modifyFnc(e){
-			let reply = $(e).nextAll('.content').text();
+			let reply = $(e).next('.content').text();
 			let rid = $(e).closest('.liReply').data('rid');
-			
-			$(reply).empty();
-			let textarea = $('<textarea />').val(reply);
+			$(e).next('.content').empty();
+			let textarea = $('<textarea />');
 			let btnModi = $('<button />').text('확인').addClass('complete');
-			$(e).nextAll('.content').remove();
-			$(e).replaceWith(textarea);
-			textarea.after(btnModi);
 			
-			btnModi.on('click', function(){
+			$('.reple li[data-rid="'+rid+'"]').append(textarea);
+			$('.modifyBtn').replaceWith(btnModi);
+			
+			$('button.complete').on('click', function(){
 				let modiReply = textarea.val();
-				console.log(modiReply);
+				reply = modiReply;
 				fetch('/campers/replyModify.do', {
-					method: 'post',
-					headers: {
+				method: 'post',
+				headers: {
 						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;' 
-					},
-					body: 'rid=' + rid + '&reply=' + modiReply
+				},
+				body: 'rid=' + rid + '&reply=' + reply
 				})
 				.then(response => response.json())
 				.then(result => {
-					console.log(result);
-					$(textarea).remove();
-					$(btnModi).remove();
-					
-					//alert('수정되었습니다.');
-				})
-				.catch(err=>console.error(err));
-			})
+					console.log(result.reply);
+					let targetLI = $('.reple li[data-rid="'+rid+'"]');
+					targetLI.append(reply);
+			        textarea.remove();
+				alert('수정되었습니다.');
 			
+			})
+			.catch(err=>console.error(err));
+			
+		
+			});
 		}
 		
 		
