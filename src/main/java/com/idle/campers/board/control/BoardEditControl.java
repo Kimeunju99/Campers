@@ -46,7 +46,7 @@ public class BoardEditControl implements Control {
 		
 		req.setAttribute("type", brdtype);
 		
-		return "boardList.do";
+		return "boardList.do?type="+ brdtype;
 	}
 
 }

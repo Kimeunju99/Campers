@@ -31,4 +31,5 @@ public class AccuseVO {
 	
 	private int userAccuse;
 	
+	private Date accuseCleardate;
 }

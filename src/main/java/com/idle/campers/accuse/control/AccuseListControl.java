@@ -22,7 +22,7 @@ public class AccuseListControl implements Control {
 		AccuseVO vo = new AccuseVO();
 		AccuseService service = new AccuseServiceImpl();
 		List<AccuseVO> list = service.ListAccuse();
-		
+		System.out.println(list);
 		req.setAttribute("list", list);
 		
 		return "accuse/accuseList";

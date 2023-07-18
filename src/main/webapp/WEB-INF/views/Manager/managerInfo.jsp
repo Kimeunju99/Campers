@@ -98,8 +98,9 @@ tr:last-child td:last-child {
 					<td align="center">정지기간</td>
 					<td><select name="result">
 							<option value="반려">반려</option>
-							<option value="1개월정지">1개월정지</option>
-							<option value="2개월정지">2개월정지</option>
+							<option value="1개월">1개월정지</option>
+							<option value="2개월">2개월정지</option>
+							<option value="3개월">3개월정지</option>
 							<option value="영구정지">영구정지</option>
 					</select></td>
 				</tr>
