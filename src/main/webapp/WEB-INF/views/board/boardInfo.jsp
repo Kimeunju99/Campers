@@ -230,12 +230,10 @@ tr, td {
 
 		reportIn.addEventListener('click',()=>{
 			recontainer.style.display = 'flex';
-			reportIn.style.display = 'none';
 		})
 		
 		reportCloseBtn.addEventListener('click', ()=>{
 			recontainer.style.display = 'none';
-			reportIn.style.display = 'flex';
 		})
 
 		
@@ -298,7 +296,7 @@ tr, td {
 	recCount();
 
 
-		//댓글부분
+		 //댓글부분
 		$('#addRBtn').on('click', function(){
 			let reply = $('#reply').val();
 			let replyer = $('#replyer').val();
@@ -350,7 +348,7 @@ tr, td {
 		
 		bid = '${board.brdId}';
 		replyUL = $('.reple');
-		
+
 		function replyFnc(bid){
 			
 			fetch('/campers/replyList.do?bid='+ bid)
@@ -370,6 +368,7 @@ tr, td {
 			console.error(err); 
 			});
 		}
+		
 	replyFnc(bid); 
 		
 	$('ul').css({
@@ -403,11 +402,7 @@ tr, td {
 
 		replyUL.css('list-style', 'none');
 		
-		
 
-		//replyFnc(bid);
-		
-		
 	</script>
 </body>
 </html>

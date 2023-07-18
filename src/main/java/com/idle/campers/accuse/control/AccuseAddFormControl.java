@@ -34,9 +34,6 @@ public class AccuseAddFormControl implements Control {
 		} else {
 			isTrue = "false";
 		}
-		
-		
-		
 		return "Ajax:"+isTrue;
 	}
 

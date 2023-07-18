@@ -39,7 +39,7 @@
                         <li><a class="dropdown-item" href="mypage.do">마이페이지</a></li>
                         <c:if test="${auth eq 'admin'}">
                         	<li><a class="dropdown-item" href="managerSelectList.do">회원 관리</a></li>
-                        	<li><a class="dropdown-item" href="#">게시판 관리</a></li>
+                        	<li><a class="dropdown-item" href="accuseList.do">신고 관리</a></li>
 						</c:if>
                         <li><a class="dropdown-item" href="logout.do">로그아웃</a></li>
                     </ul>

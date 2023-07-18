@@ -6,6 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.idle.campers.accuse.dao.AccuseVO;
+import com.idle.campers.accuse.service.AccuseService;
+import com.idle.campers.accuse.service.AccuseServiceImpl;
 import com.idle.campers.common.Control;
 import com.idle.campers.manager.service.ManagerService;
 import com.idle.campers.manager.service.ManagerVO;
@@ -21,6 +24,9 @@ public class ManagerModifyInfoControl implements Control {
 		String userName = req.getParameter("userName");
 		String userTel = req.getParameter("userTel");
 		String userAddr = req.getParameter("userAddr");
+		String accuse = req.getParameter("accuse");
+		
+		String result = req.getParameter("result");
 		
 		System.out.println(userId + "/ "+ userEmail);
 		
@@ -30,7 +36,17 @@ public class ManagerModifyInfoControl implements Control {
 		vo.setUserName(userName);
 		vo.setUserTel(userTel);
 		vo.setUserAddr(userAddr);
+		vo.setUserActivation(accuse);
+		
+		AccuseVO vo1 = new AccuseVO();
+		vo1.setAccuseUserId(userId);
+		vo1.setAccuseResult(result);
+		AccuseService svc = new AccuseServiceImpl();
+		svc.UpdateAccuse(vo1);
+		
 		ManagerService service = new ManagerServiceImpl();
+		
+		
 		
 		if(service.updateMember(vo)) {
 		return "managerSelectList.do";

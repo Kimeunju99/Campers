@@ -27,7 +27,9 @@ public interface BoardService {
 	public int likeBoardCheck(int bid, String id); // LIKE 중복 게시물 확인
 	
 	public List<BoardVO> topInfoList();
+	
 	public int totalCnt(String type);
+	
 	public int myBoardCnt(String id); //내 게시글 카운트
 	
 	public List<BoardVO> myBoardList(String id);

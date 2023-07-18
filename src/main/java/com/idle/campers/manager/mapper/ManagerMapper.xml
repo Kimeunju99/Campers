@@ -20,11 +20,13 @@
 			<if test="userEmail != null">USER_EMAIL = #{userEmail},</if>
 			<if test="userTel != null">USER_TEL = #{userTel},</if>
 			<if test="userAddr != null">USER_ADDR = #{userAddr},</if>
+			<if test="userAuth != null">USER_AUTH = #{userAuth},</if>
+			<if test="userActivation != null">USER_ACTIVATION = #{userActivation},</if>
+			<if test="accuseState != null">USER_ACCUSE_STATE = 1</if>
 			<if test="userAuth != null">USER_AUTH = #{userAuth}</if>
 		</set>
 		WHERE USER_ID = #{userId}
 	</update>
-	
 	<delete id="deleteMember">
 		DELETE FROM TBL_USER
 		WHERE USER_ID = #{userId}

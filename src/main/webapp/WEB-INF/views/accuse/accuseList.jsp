@@ -18,14 +18,7 @@
 				<!-- Grid column -->
 				<div class="col-md-12" align="left"
 					style="padding-left: 100px; padding-top: 15px; padding-bottom: 0;">
-
-				</div>
-
-				<div align="right" style="padding-right: 150px;">
-					<c:if test="${id != null && logUser.userActivation != '비활성화' }">
-						<button type="button" id="addBtn" value="write"
-							style="background-color: white; border: solid 0.5px; border-color: rgb(172, 178, 185);">글쓰기</button>
-					</c:if>
+					<h2>신고 관리</h2><br>
 				</div>
 				<br> <br>
 				<!-- Grid column -->
@@ -37,41 +30,30 @@
 					<!--Table head-->
 					<thead>
 						<tr>
-							<th scope="row">글번호</th>
-							<th class="th-lg"><a>제목</a></th>
-							<th class="th-lg">작성자</th>
-							<th class="th-lg">작성일</th>
-							<th class="th-lg">조회수</th>
+							<th>번호</th>
+							<th>글번호</th>
+							<th>글제목</th>
+							<th>신고된 아이디</th>
+							<th>신고 접수 날짜</th>
+							<th>신고자</th>
+							<th>신고유형</th>
+							<th>접수상태</th>
 						</tr>
 					</thead>
 					<!--Table head-->
 					<!--Table body-->
-					<tbody>
-						<c:forEach var="brd" items="${info}">
-							<tr	style="background-color: rgb(240, 232, 232); border: solid 1px white;">
-								<td><span style="background-color: rgb(228, 49, 49); border-radius: 4px; color: rgb(250, 204, 204); padding: 2px; font-size: small">공지</span>
-									</td>
-								<td><a href="boardInfo.do?bid=${brd.brdId}" style="text-decoration: none; color: red;"> <c:out
-											value="${brd.brdTitle}" /></a></td>
-								<td><c:out value="${brd.brdWriter}" /></td>
-								<td><c:out value="${brd.brdDate}" /></td>
-								<td><c:out value="${brd.brdRead}" /></td>
-								
-							<tr>
-						</c:forEach>
-					</tbody>
 					<tbody id="boardTbody">
-						<c:forEach var="vo" items="${board}">
+						<c:forEach var="vo" items="${list}">
 							<tr>
-								<td><c:out value="${vo.brdId}" /></td>
-								<td><a
-									href="/campers/boardInfo.do?bid=${vo.brdId}"
-									style="text-decoration: none; color: black;"> <c:out
-											value="${vo.brdTitle}" /></a></td>
-								<td><c:out value="${vo.userName}" /></td>
-								<td><c:out value="${vo.brdDate}" /></td>
-								<td><c:out value="${vo.brdRead}" /></td>
-
+								<td><c:out value="${vo.accuseId}" /></td>
+								<td><c:out value="${vo.accuseBrd}" /></td>
+								<td><a href="/campers/boardInfo.do?bid=${vo.accuseBrd}" style="text-decoration: none; color: black;"> 
+								<c:out value="${vo.accuseTitle}" /></a></td>
+								<td><a href="managerInfoControl.do?id=${vo.accuseUserId }"><c:out value="${vo.accuseUserId}" /></a></td>
+								<td><c:out value="${vo.accuseDate}" /></td>
+								<td><c:out value="${vo.accuseReport}" /></td>
+								<td><c:out value="${vo.accuseContent}" /></td>
+								<td><c:out value="${vo.accuseState}" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -122,26 +104,6 @@
 	</div>
 
 	<script type="text/javascript">
-		$('#addBtn').click(function () {
-			$(location).attr("href", "boardAddForm.do")
-		})
-
-
-		const urlParams = new URL(location.href).searchParams;
-		const type = urlParams.get('type');
-		if(type == 'inform'){
-			let h2 = $('<h2 />').addClass('py-3 font-bold font-up blue-text').text('공지');
-			$('.col-md-12').append(h2);
-		}else if(type == 'tip'){
-			let h2 = $('<h2 />').addClass('py-3 font-bold font-up blue-text').text('팁 공유');
-			$('.col-md-12').append(h2);
-		}else if(type == 'review'){
-			let h2 = $('<h2 />').addClass('py-3 font-bold font-up blue-text').text('리뷰');
-			$('.col-md-12').append(h2);
-		}else {
-			let h2 = $('<h2 />').addClass('py-3 font-bold font-up blue-text').text('자유게시판');
-			$('.col-md-12').append(h2);
-		}
 		
 		
 		$('#searchBtn').on('click', function boardSearch() {

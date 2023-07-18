@@ -13,5 +13,6 @@ public class ManagerVO {
 	private String userTel;
 	private String userAuth;
 	private String userAddr;
-	
+	private String userActivation; // 게시글 신고 계정 상태
+	private int accuseState; // 신고 처리 상황
 }
