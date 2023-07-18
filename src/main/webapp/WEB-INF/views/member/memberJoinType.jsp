@@ -6,11 +6,11 @@
 <h3>회원 유형 선택</h3>
 <div class="joinType">
 	<div class="general" onclick=getUserAuth()>
-		<img src="images/icon/">									<!-- 이미지 소스 넣기 -->
+		<img src="images/icon/Gjoin.png">									<!-- 이미지 소스 넣기 -->
 		<h3>일반 회원 가입</h3>
 	</div>
 	<div class="business" onclick=getUserAuth()>
-		<img src="images/icon/">									<!-- 이미지 소스 넣기 -->
+		<img src="images/icon/Bjoin.png">									<!-- 이미지 소스 넣기 -->
 		<h3>업체 회원 가입</h3>
 	</div>
 </div>
