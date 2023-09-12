@@ -43,7 +43,7 @@ public class MailCertification implements Control {
 		
 		Session session = Session.getInstance(prop, new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new  PasswordAuthentication("asdsadg002@gmail.com","isuirzukaikmwgxp");
+				return new  PasswordAuthentication("email","password");
 			}
 		});
 		
@@ -52,7 +52,7 @@ public class MailCertification implements Control {
 		String content = "인증번호: " + mailStr;
 		Message message = new MimeMessage(session);
 		try {
-			message.setFrom(new InternetAddress("asdsadg002@gmail.com", "Campers", "utf-8"));
+			message.setFrom(new InternetAddress("email", "Campers", "utf-8"));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
 			message.setSubject(title);
 			message.setContent(content, "text/html; charset=utf-8");
