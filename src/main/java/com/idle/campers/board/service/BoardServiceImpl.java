@@ -104,11 +104,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> boardList() {
-		return mapper.boardList();
-	}
-	
-	@Override
 	public BoardVO boardLatest(String writer) {
 
 		return mapper.latestBoard(writer);
