@@ -28,7 +28,7 @@ public class NewBookControl implements Control {
 
 		//매니저 아이디 받아오기
 		BusinessService busSV = new BusinessServiceImpl();
-		BusinessVO business = busSV.selectCamp(Integer.parseInt(req.getParameter("campId")));
+		BusinessVO business = busSV.selectCamp(Integer.parseInt(req.getParameter("campId")),null,null);
 		book.setBookManager(business.getCampOwner());
 		
 		book.setBookClient((String)session.getAttribute("id"));
@@ -37,12 +37,12 @@ public class NewBookControl implements Control {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
 		Date sDate =null, eDate=null;
-		try {
-			sDate = (Date) sdf.parse(req.getParameter("startDate"));
-			eDate = (Date) sdf.parse(req.getParameter("endDate"));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		
+		System.out.println(req.getParameter("startDate") + ","+ eDate);
+		
+		sDate = Date.valueOf(req.getParameter("startDate"));
+		eDate = Date.valueOf(req.getParameter("endDate"));
+		
 		book.setBookStartDate(sDate);
 		book.setBookEndDate(eDate);
 		

@@ -1,5 +1,7 @@
 package com.idle.campers.member.control;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,7 +33,7 @@ public class MemberJoinControl implements Control {
 		
 		MemberService service = new MemberServiceImpl();
 		if ( service.insertMember(vo)) {
-			return "main/main";
+			return "member/loginForm";
 		} else {
 			return "member/memberJoinType";
 		}

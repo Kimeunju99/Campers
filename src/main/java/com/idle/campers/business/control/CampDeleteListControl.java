@@ -15,14 +15,7 @@ public class CampDeleteListControl implements Control {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
-		String name = req.getParameter("name");
-		BusinessService svc = new BusinessServiceImpl();
-		svc.deleteCamp(name);
 		
-		String id = req.getParameter("id");
-		RoomService service = new RoomServiceImpl();
-		service.infoRoom(Integer.parseInt(id));
 		
 		return "campSelectList.do";
 	}

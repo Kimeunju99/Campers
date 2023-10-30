@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/memberJoin.css"/>
 <script src="js/jquery-3.7.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-<!------------------------------------------------------ 0712수정 ------------------------------------------------------>
+</head>
+<body>
 
 <div id="join-form-div">
 	<h5>회원가입</h5>
@@ -15,8 +20,8 @@
 			<tr>
 				<td class="tdName"><span class="redtext">* </span>아이디</td>
 				<td class="tdVal">
-					<input type="text" class="inputValue" id="userId" name="userId" size="10" minlength="6" onkeydown=inputNotKor(this)>
-					<input type="button" class="inputBtn" id="ckId" name="ckId" onclick=checkId() value="중복체크">
+					<input type="text" class="inputValue" id="userId" name="userId" minlength="6" onkeydown=inputNotKor(this)>
+					<input type="button" class="inputBtn" id="ckId" name="ckId" onclick=checkId() value="중복체크"><br>
 					<span class="note" id="noteId">아이디는 최소 6자 이상으로 영문, 숫자만 사용 가능합니다.</span>
 					<input type="text" class="inputValCheck" id="checkedId" value="false" disabled>
 				</td>
@@ -24,7 +29,7 @@
 			<tr>
 				<td class="tdName"><span class="redtext">* </span>비밀번호</td>
 				<td class="tdVal">
-					<input type="password" class="inputValue" id="userPw" name="userPw" minlength="8" size="14" onchange=passwordCheck()>
+					<input type="password" class="inputValue" id="userPw" name="userPw" minlength="8" size="14" onchange=passwordCheck()><br>
 					<span class="note" id="notePw"> 비밀번호는 최소 8자 입니다.</span>
 					<input type="text" class="inputValCheck" id="checkedPw" value="false" disabled>
 				</td>
@@ -32,7 +37,7 @@
 			<tr>
 				<td class="tdName">비밀번호 확인</td>
 				<td class="tdVal">
-					<input type="password" class="inputValue" id="userPwCk" name="userPwCk" minlength="8" size="14" onchange=samePassword()>
+					<input type="password" class="inputValue" id="userPwCk" name="userPwCk" minlength="8" size="14" onchange=samePassword()><br>
 					<span class="note" id="notePassword"></span>
 					<input type="text" class="inputValCheck" id="checkedPassword" value="false" disabled>
 				</td>
@@ -52,7 +57,7 @@
 				<td class="tdName"><span class="redtext">* </span>이메일</td>
 				<td class="tdVal">
 					<input type="text" class="inputValue" id="userEmail" name="userEmail" size="10">@
-					<input type="text" class="inputValue" id="userEmail2" name="userEmail2" size="10" readonly>
+					<input type="text" class="inputValue" id="userEmail2" name="userEmail2" size="10" readonly value="naver.com">
 					<select id="selectMail" onchange=mailDomain()>
 						<option value="naver.com">naver.com</option>
 						<option value="gmail.com">gmail.com</option>
@@ -60,7 +65,7 @@
 						<option value="nate.com">nate.com</option>
 						<option value="etc">직접입력</option>
 					</select>
-					<input type="button" class="inputBtn" id="ckEmail" name="ckEmail" onclick=checkEmail() value="메일인증">
+					<input type="button" class="inputBtn" id="ckEmail" name="ckEmail" onclick=checkEmail() value="메일인증"><br>
 					<span class="note" id="noteMail"></span>
 					<input type="text" class="inputValCheck" id="checkedEmail" value="false" disabled>
 				</td>
@@ -69,7 +74,7 @@
 				<td class="tdName">인증번호</td>
 				<td class="tdVal">
 					<input type="text" class="inputValue" id="number" name="number" size="8">
-					<input type="button" class="inputBtn" onclick=numberCheck() value="인증">
+					<input type="button" class="inputBtn" onclick=numberCheck() value="인증"><br>
 					<span class="note" id="noteNumber"></span>
 					<input type="text" class="inputValCheck" id="checkedEmailNum" value="false" disabled>
 			</tr>
@@ -84,17 +89,17 @@
 			<tr>
 				<td class="tdName">주소</td>
 				<td class="tdVal">
-					<input type="text" class="inputValue" id="userAddr" name="userAddr" size="20"  placeholder="주소"><br>
+					<input type="text" class="inputValue" id="userAddr" name="userAddr" size="31"  placeholder="주소"><br>
 					<input type="text" class="inputValue" id="userAddr2" name="userAddr2" size="10" placeholder="상세주소">
-					<input type="text" class="inputValue" id="userAddr3" name="userAddr3" size="16" placeholder="참고항목">
-					<input type="button" onclick="sample6_execDaumPostcode()" value="주소검색">
+					<input type="text" class="inputValue" id="userAddr3" name="userAddr3" size="15" placeholder="참고항목">
+					<input type="button" class="inputBtn" onclick="sample6_execDaumPostcode()" value="주소검색">
 				</td>
 			</tr>
 		</table>
-		<div><span class="redtext">* </span>는 필수 정보입니다.</div>
+		<div><br><span class="redtext">* </span>는 필수 정보입니다.</div>
 		<div>
-			<input type="button" value="가입하기" onclick=checkField() >
-			<input type="reset" value="다시작성">
+			<input id="submit-btn" type="button" value="가입하기" onclick=checkField() >
+			<input id="reset-btn" type="reset" value="다시작성">
 		</div>
 	</form>
 </div>
@@ -288,3 +293,5 @@
     }
 
 </script>
+</body>
+</html>

@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/form.css"/>
+<link rel="stylesheet" href="css/newBook.css"/>
 <script src="js/jquery-3.7.0.min.js"></script>
 </head>
 <body>
@@ -117,6 +118,7 @@ togleBtn.addEventListener('click', function(e){
 		},
 		success: function(result){
 			alert(result);
+			
 		},
 		error: function(err){	console.log(err);	}	
 	});

@@ -7,21 +7,23 @@
 <meta charset="UTF-8">
 <title>board/boardList.jsp</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+ 
+<link href="css/pagination.css" rel="stylesheet" />
+
 </head>
 <body>
 
 	<!-- 게시판 본문 -->
 	<div class="card">
-		<div class="card-body">
+		<div class="cbody">
 			<!-- Grid row -->
 			<div class="row">
 				<!-- Grid column -->
-				<div class="col-md-12" align="left"
+				<div id="bodyM" class="col-md-12" align="left"
 					style="padding-left: 100px; padding-top: 15px; padding-bottom: 0;">
-
 				</div>
 
-				<div align="right" style="padding-right: 150px;">
+				<div id="bodyT" align="right" style="padding-right: 150px;">
 					<c:if test="${id != null && logUser.userActivation != '비활성화' }">
 						<button type="button" id="addBtn" value="write"
 							style="background-color: white; border: solid 0.5px; border-color: rgb(172, 178, 185);">글쓰기</button>
@@ -33,7 +35,7 @@
 			<!-- Grid row -->
 			<!--Table-->
 			<div style="padding-right: 150px; padding-left: 150px;">
-				<table class="table table-hover table-responsive mb-0">
+				<table class="table table-hover table-responsive mb-0" id="table">
 					<!--Table head-->
 					<thead>
 						<tr>
@@ -48,10 +50,10 @@
 					<!--Table body-->
 					<tbody>
 						<c:forEach var="brd" items="${info}">
-							<tr	style="background-color: rgb(240, 232, 232); border: solid 1px white;">
+							<tr	style="background-color: rgb(247, 244, 222); border: solid 1px white;">
 								<td><span style="background-color: rgb(228, 49, 49); border-radius: 4px; color: rgb(250, 204, 204); padding: 2px; font-size: small">공지</span>
 									</td>
-								<td><a href="boardInfo.do?bid=${brd.brdId}" style="text-decoration: none; color: red;"> <c:out
+								<td><a href="boardInfo.do?bid=${brd.brdId}" style="text-decoration: none; color: black;"> <c:out
 											value="${brd.brdTitle}" /></a></td>
 								<td><c:out value="${brd.brdWriter}" /></td>
 								<td><c:out value="${brd.brdDate}" /></td>
@@ -63,15 +65,15 @@
 					<tbody id="boardTbody">
 						<c:forEach var="vo" items="${board}">
 							<tr>
-								<td><c:out value="${vo.brdId}" /></td>
-								<td><a
-									href="/campers/boardInfo.do?bid=${vo.brdId}"
-									style="text-decoration: none; color: black;"> <c:out
-											value="${vo.brdTitle}" /></a></td>
+								<td>
+									<c:out value="${vo.brdId}" />
+								</td>
+								<td><a href="/campers/boardInfo.do?bid=${vo.brdId}&bwri=${vo.brdWriter}" style="text-decoration: none; color: black;">
+									<c:out value="${vo.brdTitle}" /></a></td>
 								<td><c:out value="${vo.userName}" /></td>
 								<td><c:out value="${vo.brdDate}" /></td>
 								<td><c:out value="${vo.brdRead}" /></td>
-
+								
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -86,40 +88,37 @@
 						<option value="title">제목</option>
 						<option value="content">내용</option>
 						<option value="wdate">작성일</option>
-					</select> <input type="text" id="keyword" name="keyword"
-						style="height: 25px">
-					<button type="button" id="searchBtn"
-						style="height: 25px; background-color: white; border: solid 0.5px; border-color: rgb(172, 178, 185);">검색</button>
+					</select> <input type="text" id="keyword" name="keyword" style="height: 25px">
+					<button type="button" id="searchBtn">검색</button>
 				</form>
 			</div>
 			<br>
 		</div>
-	</div>
+	
 
-
-	<br>
-	<div class="pagination" align="center">
-
+<div id="app" class="container" align="center">  
+	<ul class="page">
 		<c:if test="${page.prev}">
-			<a href="boardList.do?type=${t}&page=${page.startPage - 1}">«</a>
+	    <li class="page__btn"><span class="material-icons"><a href="boardList.do?type=${t}&page=${page.startPage - 1}">«</a></span></li>		
 		</c:if>
 		<c:forEach begin="${page.startPage}" end="${page.endPage}" var="i">
-
 			<c:choose>
 				<c:when test="${i == curPage}">
-					<a href="boardList.do?type=${t}&page=${i}" class="active"> <c:out
-							value="${i}" /></a>
+					<li id="act"><span>
+					<a href="boardList.do?type=${t}&page=${i}"><c:out value="${i}" /></a></span>
+					</li>
 				</c:when>
 				<c:otherwise>
-					<a href="boardList.do?type=${t}&page=${i}"> <c:out value="${i}" /></a>
+					<li class="page__numbers"><a href="boardList.do?type=${t}&page=${i}" style="text-decoration: none;"> <c:out value="${i}" /></a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-		<c:if test="${page.next}">
-			<a href="boardList.do?type=${t}&page=${page.endPage + 1}">»</a>
-		</c:if>
-
-	</div>
+	    <c:if test="${page.next}">
+	    <li class="page__btn"><span class="material-icons"><a href="boardList.do?type=${t}&page=${page.endPage + 1}">»</a></span></li>
+	    </c:if>
+  </ul>
+</div>
+</div>
 
 	<script type="text/javascript">
 		$('#addBtn').click(function () {
@@ -130,30 +129,31 @@
 		const urlParams = new URL(location.href).searchParams;
 		const type = urlParams.get('type');
 		if(type == 'inform'){
-			let h2 = $('<h2 />').addClass('py-3 font-bold font-up blue-text').text('공지');
+			let h2 = $('<h2 id=type/>').addClass('py-3 font-bold font-up blue-text').text('공지');
 			$('.col-md-12').append(h2);
 		}else if(type == 'tip'){
-			let h2 = $('<h2 />').addClass('py-3 font-bold font-up blue-text').text('팁 공유');
+			let h2 = $('<h2 id=type/>').addClass('py-3 font-bold font-up blue-text').text('팁 공유');
 			$('.col-md-12').append(h2);
 		}else if(type == 'review'){
-			let h2 = $('<h2 />').addClass('py-3 font-bold font-up blue-text').text('리뷰');
+			let h2 = $('<h2 id=type/>').addClass('py-3 font-bold font-up blue-text').text('리뷰');
 			$('.col-md-12').append(h2);
-		}else {
-			let h2 = $('<h2 />').addClass('py-3 font-bold font-up blue-text').text('자유게시판');
+		}else if(type == 'normal'){
+			let h2 = $('<h2 id=type/>').addClass('py-3 font-bold font-up blue-text').text('자유게시판');
 			$('.col-md-12').append(h2);
 		}
 		
 		
 		$('#searchBtn').on('click', function boardSearch() {
 			let sch = $('#sch').val();
+			let type = urlParams.get('type');
 			let keyword = $('#keyword').val();
 			console.log(sch, keyword);
-			let payload = "sch=" + sch + "&keyword=" + keyword;
+			let payload = "sch=" + sch + "&keyword=" + keyword + "&type=" + type;
 			url = "/campers/boardSearchList.do";
 			fetch(url, {
 					method: 'post',
 					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;'
 					},
 					body: payload
 				}).then(response => response.json())
@@ -171,7 +171,7 @@
 			<tr> 
 				<td><c:out value="\${data.brdId}" /></td>
 				<td><a href="/campers/boardInfo.do?bid=\${data.brdId}&bwri=\${data.brdWriter}" style="text-decoration:none; color:black;"><c:out value="\${data.brdTitle}" /></a></td>
-				<td><c:out value="\${data.brdWriter}" /></td>
+				<td><c:out value="\${data.userName}" /></td>
 				<td><c:out value="\${data.brdDate}" /></td>
 				<td><c:out value="\${data.brdRead}" /></td>
 

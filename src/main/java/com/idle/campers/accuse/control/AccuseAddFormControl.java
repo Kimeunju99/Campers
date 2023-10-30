@@ -17,7 +17,10 @@ public class AccuseAddFormControl implements Control {
 		String reportId = req.getParameter("rid");
 		String title = req.getParameter("title");
 		int brdId = Integer.parseInt(req.getParameter("bid"));
-		int accuseContent = Integer.parseInt(req.getParameter("content"));
+		String accuseContent = req.getParameter("content");
+		String accuseResult = req.getParameter("result");
+		
+		System.out.println(title);
 		
 		AccuseVO vo = new AccuseVO();
 		vo.setAccuseUserId(writer);
@@ -25,6 +28,7 @@ public class AccuseAddFormControl implements Control {
 		vo.setAccuseTitle(title);
 		vo.setAccuseBrd(brdId);
 		vo.setAccuseContent(accuseContent);
+		vo.setAccuseResult(accuseResult);
 		
 		String isTrue = "";
 		

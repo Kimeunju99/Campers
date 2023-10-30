@@ -2,28 +2,24 @@ package com.idle.campers.accuse.dao;
 
 import java.sql.Date;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 
+@Data
 public class AccuseVO {
 	
 	private int accuseId;
-	
-	private String accuseTitle;
 	
 	private int accuseBrd;
 	
 	private int reply;
 	
+	private String accuseTitle;
+	
 	private Date accuseDate;
 	
 	private String accuseReport;
 	
-	private int accuseContent;
+	private String accuseContent;
 	
 	private int accuseState;
 	
@@ -73,11 +69,11 @@ public class AccuseVO {
 		this.accuseReport = accuseReport;
 	}
 
-	public int getAccuseContent() {
+	public String getAccuseContent() {
 		return accuseContent;
 	}
 
-	public void setAccuseContent(int accuseContent) {
+	public void setAccuseContent(String accuseContent) {
 		this.accuseContent = accuseContent;
 	}
 
@@ -113,8 +109,14 @@ public class AccuseVO {
 		this.accuseUserId = accuseUserId;
 	}
 	
-	
-	
+	public Date getAccuseCleardate() {
+		return accuseCleardate;
+	}
+
+	public void setAccuseCleardate(Date accuseCleardate) {
+		this.accuseCleardate = accuseCleardate;
+	}
+
 	public String getAccuseTitle() {
 		return accuseTitle;
 	}
@@ -135,4 +137,5 @@ public class AccuseVO {
 
 	private int userAccuse;
 	
+	private Date accuseCleardate;
 }

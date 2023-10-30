@@ -1,10 +1,21 @@
 package com.idle.campers.member.control;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.idle.campers.accuse.dao.AccuseVO;
+import com.idle.campers.accuse.service.AccuseService;
+import com.idle.campers.accuse.service.AccuseServiceImpl;
 import com.idle.campers.common.Control;
+import com.idle.campers.manager.service.ManagerService;
+import com.idle.campers.manager.service.ManagerVO;
+import com.idle.campers.manager.serviceImpl.ManagerServiceImpl;
 import com.idle.campers.member.service.MemberService;
 import com.idle.campers.member.service.MemberServiceImpl;
 import com.idle.campers.member.service.MemberVO;
@@ -39,9 +50,43 @@ public class LoginControl implements Control {
 			session.setAttribute("auth", vo.getUserAuth());	
 			session.setAttribute("logUser", vo);	
 		}
+		//손석연 비활성화 활성화 시키기
+		if(vo.getUserActivation().equals("비활성화")) {
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy/MM/dd");
+			
+			AccuseService accuseService = new AccuseServiceImpl();
+			AccuseVO accuseVO = accuseService.clearDay(vo.getUserId());
+			
+			LocalDate accusedDate = LocalDate.now();
+			
+			Date clearDate = accuseVO.getAccuseCleardate();
+			
+			String DateClear = simpleDateFormat.format(clearDate);
+			String sysDate = accusedDate.format(DateTimeFormatter.ofPattern("yy/MM/dd"));
+			
+			System.out.println(sysDate + "/" + DateClear);
+			ManagerVO managerVo = new ManagerVO();
+			ManagerService managerService = new ManagerServiceImpl();
+			managerService.updateMember(managerVo);
 		
+			int comparisonResult =sysDate.compareTo(DateClear);
+		if (comparisonResult < 0) {
+			//DateClear가 systDate보다 이전
+				String result = "비활성화";
+				managerVo.setUserId(userId);
+				managerVo.setUserActivation(result);
+				managerService.updateMember(managerVo);	
+			} else if (comparisonResult > 0) {
+			//DateClear가 systDate보다 이후
+				String result = "활성화";
+				managerVo.setUserId(userId);
+				managerVo.setUserActivation(result);
+				managerService.updateMember(managerVo); 
+			} 
+		}
 
-		return "main.do";
+
+return "main.do";
 	}
 	
 }

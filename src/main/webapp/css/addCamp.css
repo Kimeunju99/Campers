@@ -1,0 +1,42 @@
+#addCampDiv{
+	box-sizing: border-box;
+	background-color: white;
+	border-radius: 30px;
+	overflow:auto; 	float: left;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	margin-left: 200px;
+	width: 1000px;
+	height: 600px;
+	padding: 20px;
+}
+#addCampDiv *{
+	margin: 10px auto;	text-align: center;
+}/* userInfo div 안 중앙정렬 */
+
+/* 버튼 */
+form>input {
+	display: inline-block;
+	background-color: white;
+	margin: auto;
+	width: 100px;
+	height: 36px;
+	border-radius: 30px;
+	font-size: 15px;
+	cursor: pointer;
+}
+thead{
+	margin: 0 auto;
+}
+.rno{
+	width: 80px;
+}
+.rday{
+	width: 80px;
+}
+.rcnt{
+	width: 80px;
+}
+.rname{
+	width: 150px;
+}

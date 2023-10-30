@@ -1,0 +1,134 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap');
+
+button:hover {
+	color: green;
+	background-color: skyblue;
+}
+
+button {
+  border: 2px solid #91C3CE;
+  outline: none;
+  background: none;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+button {
+  display: inline-block;
+  margin: auto;
+  width: 100px;
+  height: 36px;
+  border-radius: 30px;
+  color: #008481;
+  font-size: 15px;
+  cursor: pointer;
+  border: 2px solid #91C3CE;
+  outline: none;
+  background: none;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+#container{
+
+margin: 0 auto;
+width: 1000px;
+
+}
+#likeBtn{
+	background-color: white;
+	border: none;
+}
+
+tr, td {
+	border: 1px solid #444444;
+}
+.recontainer {
+	position: absolute;
+	top: 30%;
+	left: 30%;
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: antiquewhite;
+	border-radius: 80px;
+}
+.remodal{
+	top: 30%;
+	left: 30%;
+	display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 15px;
+  padding: 50px;
+  border: 1px solid antiquewhite;
+  border-radius: 80px;
+}
+
+.liReply {
+  position: relative;
+  border: 0.2px dashed rgb(223, 211, 186);
+  border-radius: 3px;
+	margin-bottom: 6px;
+  margin-left: 5px;
+	padding: 10px;
+	text-align: left;
+  width: 900px;
+  display: inline-block;
+
+}
+
+.closeBtn {
+  color: rgb(255, 102, 102);
+  width: 36px;
+  height: 36px;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 2px;
+}
+
+.closeBtn:hover{
+  color: red;
+  background-color: white;
+}
+
+.modifyBtn, btnModi {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+}
+
+
+.comments {
+  text-decoration: underline;
+  text-underline-position: under;
+  cursor: pointer;
+}
+
+
+.hit-voting:hover {
+  color: blue;
+}
+
+.hit-voting {
+  cursor: pointer;
+}
+
+  .reple {
+    list-style :none;
+    padding: 0;
+    margin: 0;
+  }
+
+#ti {
+  text-align: left;
+  font-size: 26px;
+  font-weight: 700;
+  padding: 25px 10px 10px 10px;
+  margin: 10px;
+  background-color: rgb(255, 252, 248);
+  font-family: 'Cabin Sketch', cursive;
+}
+

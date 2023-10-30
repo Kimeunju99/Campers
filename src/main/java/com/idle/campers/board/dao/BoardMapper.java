@@ -1,14 +1,13 @@
 package com.idle.campers.board.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
 public interface BoardMapper {
+	//public List<BoardVO> boardList();
 	
-	public List<BoardVO> boardList(@Param("page") int page, @Param("type") String type);
-	public List<BoardVO> boardList(@Param("page") int page, @Param("sch") String sch, @Param("keyword") String keyword, @Param("type") String type);
+	public List<BoardVO> boardList(@Param("page") int page, @Param("sch") String key, @Param("keyword") String keyword, @Param("type") String type);
 	
 	public List<BoardVO> topInfoList();
 	
@@ -41,4 +40,9 @@ public interface BoardMapper {
 	public List<BoardVO> myBoardList(@Param("id")String id);
 	
 	public List<BoardVO> MainPageboardList();	//메인페이지 출력용
+	
+	public BoardVO latestBoard(String writer);
+
+
+
 }

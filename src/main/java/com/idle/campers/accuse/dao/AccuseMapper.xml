@@ -19,7 +19,7 @@
 	<!-- 아이디 제한 추가 -->
 	<insert id="AccuseInsert">
 		INSERT INTO TBL_ACCUSE (ACCUSE_ID ,ACCUSE_BRD, ACCUSE_REPLY, ACCUSE_REPORT, ACCUSE_CONTENT, ACCUSE_STATE, ACCUSE_RESULT, ACCUSE_RDATE, ACCUSE_USERID, ACCUSE_TITLE)
-		VALUES(accuse_seq.nextval,#{accuseBrd},#{reply},#{accuseReport},#{accuseContent},#{accuseState},#{accuseResult},#{accuseRdate},#{accuseUserId}, #{accuseTitle})
+		VALUES(accuse_seq.nextval,#{accuseBrd},#{reply},#{accuseReport},#{accuseContent},#{accuseState},#{accuseResult},#{accuseRdate},#{accuseUserId},#{accuseTitle})
 	</insert>
 	
 	<!-- 아이디 제한 수정 -->
@@ -27,9 +27,30 @@
 		UPDATE TBL_ACCUSE
 		SET ACCUSE_STATE = 1,
 		ACCUSE_RESULT = #{accuseResult},
-		ACCUSE_RDATE = sysdate
+		ACCUSE_RDATE = sysdate,
+		<choose>
+		<when test="accuseResult == '1개월'">
+			ACCUSE_CLEARDATE = (sysdate + 30)
+		</when>
+		<when test="accuseResult == '2개월'">
+			ACCUSE_CLEARDATE = (sysdate + 60)
+		</when>
+		<when test="accuseResult == '3개월'">
+			ACCUSE_CLEARDATE = (sysdate + 90)
+		</when>
+		<when test="accuseResult == '영구정지'">
+			ACCUSE_CLEARDATE = (sysdate + 9999)
+		</when>
+		<otherwise>
+			ACCUSE_CLEARDATE = sysdate
+		</otherwise>
+		</choose>
 		WHERE ACCUSE_USERID = #{accuseUserId}
 	</update>
+	
+	<select id="dayClear">
+		select  MAX(ACCUSE_CLEARDATE) as ACCUSE_CLEARDATE  from tbl_accuse where ACCUSE_USERID = #{accuseUserId}
+	</select>
 	
 	<!-- 아이디 제한 삭제 -->
 	<delete id="AccuseDelete">

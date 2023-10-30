@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 
-
 @Data
 public class BoardVO {
 	private int brdId;
@@ -121,5 +120,6 @@ public class BoardVO {
 		this.userName = userName;
 	}
 	
+	private String page;
 	
 }

@@ -98,9 +98,19 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.myBoardList(id);
 	}
 
-	//메인페이지 출력용 최신글 목록
 	@Override
-	public List<BoardVO> MainPageboardList() {	
+	public List<BoardVO> MainPageboardList() {
 		return mapper.MainPageboardList();
+	}
+
+	@Override
+	public List<BoardVO> boardList() {
+		return mapper.boardList();
+	}
+	
+	@Override
+	public BoardVO boardLatest(String writer) {
+
+		return mapper.latestBoard(writer);
 	}
 }

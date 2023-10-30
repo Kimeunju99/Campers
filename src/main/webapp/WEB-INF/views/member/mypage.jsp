@@ -39,7 +39,7 @@
 				<button type="button" class="infoBtn" name="byeBtn" id="byeBtn">회원탈퇴</button>
 			</c:if>
 			<c:if test="${logUser.userAuth == 'business' }">
-				<button type="button" class="infoBtn" name="addCampBtn" id="addCampBtn">캠핑장 등록</button>
+				<button type="button" class="infoBtn" name="addCampBtn" id="addCampBtn" onclick=campAddF()>캠핑장 등록</button>
 			</c:if>
 			<button type="button"  class="infoBtn" name="logoutBtn" id="logoutBtn">로그아웃</button>
 		</td>
@@ -107,7 +107,7 @@
 		
 		<!-- 내 게시글 모아보기 -->
 		<div  class="boardList actionView" id="boardList">
-			<h3>게시글 목록</h3>
+			<h3><a href="/campers/myBoard.do">게시글 목록</a></h3>
 			<table>
 			<thead>
 				<tr>
@@ -133,7 +133,7 @@
 		<!-- 사업자의 내 캠프 목록 -->
 		<c:if test="${logUser.userAuth == 'business' }">
 			<div  class="campList actionView" id="campList">
-				<h3>내 캠핑장 목록</h3>
+				<h3><a href="/campers/myCampList.do">내 캠핑장 목록</a></h3>
 				<ul class="campList"></ul>
 				<table>
 				<thead>
@@ -234,19 +234,19 @@
 	</div>
 </div>
 
-
 <script>
 let md = document.querySelector('.modifyWindow');
 let pw = document.getElementById("userPw");
 let npw1 = document.getElementById("userNewPw1");
 let npw2 = document.getElementById("userNewPw2");
 
-	document.getElementById("addCampBtn").addEventListener('click', function(e){
+	function campAddF(e){
 		document.location.href='campAddForm.do';
-	});
+	};
+	
 	document.getElementById("logoutBtn").addEventListener('click', logoutF);//로그아웃
 	function logoutF(){	document.location.href='logout.do';	};
-	
+
 	document.getElementById("byeBtn").addEventListener('click', 
 			e => document.querySelector('.byeWindow').style.display = 'block' );
 	document.getElementById("joinOut").addEventListener('click', function (e){
@@ -265,7 +265,7 @@ let npw2 = document.getElementById("userNewPw2");
 		}
 	});	
 	
-	document.getElementById("mdfInfo").addEventListener('click', function(e){
+	document.querySelector("#mdfInfo").addEventListener('click', function(e){
 		md.style.display = 'block';
 		document.querySelector('#checkPw').style.visibility='hidden';
 	});//모달창 열기
@@ -301,7 +301,6 @@ let npw2 = document.getElementById("userNewPw2");
 			alert('비밀번호는 필수값입니다.');
 			pw.focus();
 		}
-		
 	});//사용자 정보 수정
 	
 	function closeBtnF(e){
@@ -311,7 +310,6 @@ let npw2 = document.getElementById("userNewPw2");
 		$('#byePw').val("");
 		md.style.display = 'none';
 	};//모달창 닫기
-
 </script>
 </body>
 </html>

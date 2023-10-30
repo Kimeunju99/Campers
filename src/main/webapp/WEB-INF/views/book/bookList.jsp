@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/tableList.css"/>
+<link rel="stylesheet" href="css/myActList.css"/>
 <script src="js/jquery-3.7.0.min.js"></script>
 </head>
 <body>

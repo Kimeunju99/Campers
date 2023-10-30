@@ -18,4 +18,6 @@ public interface AccuseMapper {
 	public int AccuseDelete(String accuseUserId);
 	
 	public int getTotalCnt(@Param("type") String type);
+	
+	public AccuseVO dayClear(String accuseUserId);
 }

@@ -102,7 +102,6 @@ public class ReplyVO {
 		this.accuseUserId = accuseUserId;
 	}
 	
-	
 }
 
 

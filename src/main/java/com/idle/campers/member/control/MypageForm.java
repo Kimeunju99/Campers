@@ -28,6 +28,9 @@ public class MypageForm implements Control {
 		
 		//로그인 유저 정보 세팅
 		MemberVO memVo = (MemberVO)session.getAttribute("logUser");
+		if(memVo == null) {
+			return "main/main.do";
+		}
 		req.setAttribute("logUser", memVo);
 
 		//예약 -- 대기+승인 예약 개수, 목록

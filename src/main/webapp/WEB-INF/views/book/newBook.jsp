@@ -5,12 +5,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="js/jquery-3.7.0.min.js"></script>
+<link rel="stylesheet" href="css/newBook.css"/>
 </head>
 <body>
 <div id="container">
 	<h1>예약하기</h1>	
 	<form id="bookForm" name="bookForm">
-		<table border="1">
+	<input type="hidden" name="campId" id="campId" value="${camp.campId}" readonly>
+		<table>
 			<tr>
 				<th>업체명</th>
 				<td><input type="text" name="manager" id="manager" value="${camp.campOwner}" readonly></td>
@@ -19,9 +21,9 @@
 			</tr>
 			<tr>
 				<th>방번호</th>
-				<td><input type="text" name="roomId" id="roomId" value="${room.RoomId}" readonly></td>
+				<td><input type="text" name="roomId" id="roomId" value="${room.roomId}" readonly></td>
 				<th>인원</th>
-				<td><input type="text" name="personnel" id="personnel" value="${room.campPersonnel}" readonly></td>
+				<td><input type="text" name="personnel" id="personnel" value="${room.roomPersonnel}" readonly></td>
 			</tr>
 			<tr>
 				<th>일시</th>
@@ -69,7 +71,7 @@
 			<tr>
 				<td colspan="4" align="center">
 					<button type="button" id="bookBtn">예약</button>
-					<button type="button" id="backBtn">뒤로가기</button>
+					<button type="button" id="backBtn" onclick="history.back()">뒤로가기</button>
 				</td>
 			</tr>
 		</table>

@@ -6,7 +6,8 @@
 
 body {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  background: #ededed;
+  background: #f6f1e5;
+  /* background: #F0EADA; */
 }
 
 ul {
@@ -38,7 +39,7 @@ ul {
 
 .form {
   position: relative;
-  margin-top: 20px;
+  margin-top: 50px;
   height: 100%;
   transition: transform 1.2s ease-in-out;
   padding: 50px 30px 0;
@@ -224,6 +225,10 @@ label span {
   color: #cfcfcf;
 }
 
+.forgot-pass:hover {
+  color: #818181;
+}
+
 .fb-btn {
   border: 2px solid #91C3CE;
   color: #008481;
@@ -264,75 +269,6 @@ label span {
   right: 5px;
 }
 
-
-/* mainDiv 관련---------------------------------------------------------------------------- */
-
-#best-camp {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  height: 800px;
-  margin: auto;
-  background: #fff;
-}
-#camp-list-all{
-  display: flex;
-  transition: .3s ease-out;
-  width: 300%;
-}
-.camp-list-items {
-  width: 100%;
-  height: 750px;
-  background-color: #91C3CE;
-}
-
-.campImage {
-  background-size: cover;
-  width: 70%;
-  height: 100%;
-  float: left;
-  background-repeat: no-repeat;
-}
-.campInfo {
-  margin: auto;
-}
-
-#list-slide-btn {
-  float: right;
-  background-repeat: no-repeat;
-}
-
-#main-container {
-  display: flex;
-  height: 300px;
-}
-
-.container-items {
-  margin: auto;
-  text-align: center;
-}
-
-#Main-boardList {
-  width: 50%;
-}
-
-.main-icon {
-  display: inline-block;
-  border-radius: 10px;
-  margin: 10px;
-  width: 120px;
-  height: 120px;
-  background-color: #fff;
-  padding: 10px;
-}
-
-.icon-images {
-  width: 70%;
-  height: 70%;
-  display: block;
-  margin: 10px auto auto;
-}
-
 /* 로그인폼---------------------------------------------------------------------------- */
 .simple-btn {
   height: 30px;
@@ -340,60 +276,4 @@ label span {
   color: #008481;
   background: none;
   margin: auto 20px;
-}
-
-/* 회원가입---------------------------------------------------------------------------- */
-.joinType {
-  display: flex;
-  text-align: center;
-  justify-content: center
-}
-
-.joinType div{
-  width: 500px;
-  height: 250px;
-  margin: 40px;
-  background-color: #fff;
-  border-radius: 30px;
-  text-align: center;
-}
-
-#join-form-div {
-  overflow: hidden;
-  position: relative;
-  width: 900px;
-  height: auto;
-  margin: auto;
-  margin-top: 40px;
-  padding: 30px;
-  background: #fff;
-  border-radius: 30px;
-}
-
-#join-form-div form table tr{
-  height: 40px;
-}
-
-.redtext{
-  color: red;
-}
-
-.note {
-  color: dimgray;
-  font-size: 12px;
-}
-
-.tdName {
-  width: 120px;
-  text-align: right;
-  padding: 10px;
-}
-
-.tdVal {
-  width: 520px;
-}
-
-.inputValCheck{
-  display: none;
-  width: 40px;
 }

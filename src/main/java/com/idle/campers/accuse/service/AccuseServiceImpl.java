@@ -1,5 +1,6 @@
 package com.idle.campers.accuse.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -41,6 +42,12 @@ public class AccuseServiceImpl implements AccuseService {
 	@Override
 	public int totalCnt(String type) {
 		return 0;
+	}
+
+	@Override
+	public AccuseVO clearDay(String accuseUserId) {
+		// TODO 자동 생성된 메소드 스텁
+		return mapper.dayClear(accuseUserId);
 	}
 	
 	

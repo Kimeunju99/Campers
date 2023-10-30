@@ -1,5 +1,7 @@
 package com.idle.campers.business.control;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,15 +17,14 @@ public class CampInfoFormControl implements Control {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
 		String cid = req.getParameter("cid");
 		BusinessService svc = new BusinessServiceImpl();
-		BusinessVO vo = svc.selectCamp(Integer.parseInt(cid));
+		BusinessVO vo = svc.selectCamp(Integer.parseInt(cid), null, null);
 		RoomService service = new RoomServiceImpl();
-		RoomVO rvo = service.infoRoom(Integer.parseInt(cid));
+		List<RoomVO> rvo = service.roomList(Integer.parseInt(cid));
 		System.out.println(cid);
-		req.setAttribute("cid", vo);
-		req.setAttribute("rid", rvo);
+		req.setAttribute("cid", vo); //캠핌장 정보
+		req.setAttribute("rid", rvo);//룸 정보
 		
 		return "business/infoCamp";
 	}

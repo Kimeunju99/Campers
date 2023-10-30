@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 public class RoomVO {
 	private int roomId;
-	private String roomCampid;
+	private int roomCampid;
 	private	String roomManager;
 	private String roomName;
 	private int roomWeekday;
@@ -19,10 +19,10 @@ public class RoomVO {
 	public void setRoomId(int roomId) {
 		this.roomId = roomId;
 	}
-	public String getRoomCampid() {
+	public int getRoomCampid() {
 		return roomCampid;
 	}
-	public void setRoomCampid(String roomCampid) {
+	public void setRoomCampid(int roomCampid) {
 		this.roomCampid = roomCampid;
 	}
 	public String getRoomManager() {
@@ -55,6 +55,5 @@ public class RoomVO {
 	public void setRoomPersonnel(int roomPersonnel) {
 		this.roomPersonnel = roomPersonnel;
 	}
-	
 	
 }

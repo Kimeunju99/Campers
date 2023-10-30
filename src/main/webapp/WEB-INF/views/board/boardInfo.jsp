@@ -9,74 +9,7 @@
 <script src="https://kit.fontawesome.com/38655e7b9d.js" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css" >
-
-button:hover {
-	color: green;
-	background-color: skyblue;
-}
-
-button {
-  border: 2px solid #91C3CE;
-  outline: none;
-  background: none;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-}
-
-button {
-  display: inline-block;
-  margin: auto;
-  width: 100px;
-  height: 36px;
-  border-radius: 30px;
-  color: #008481;
-  font-size: 15px;
-  cursor: pointer;
-  border: 2px solid #91C3CE;
-  outline: none;
-  background: none;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-}
-
-#container{
-
-margin: 0 auto;
-width: 1000px;
-
-}
-#likeBtn{
-	background-color: white;
-	border: none;
-}
-
-tr, td {
-	border: 1px solid #444444;
-}
-.recontainer {
-	position: absolute;
-	top: 30%;
-	left: 30%;
-	display: none;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	background-color: antiquewhite;
-	border-radius: 80px;
-}
-.remodal{
-	top: 30%;
-	left: 30%;
-	display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  row-gap: 15px;
-  padding: 50px;
-  border: 1px solid antiquewhite;
-  border-radius: 80px;
-}
-
-</style>
+<link href="css/boardInfo.css" rel="stylesheet" />
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
@@ -104,6 +37,9 @@ tr, td {
 		<h3 style="text-align: left;">${board.brdTitle}<br></h3>
 		<p style="text-align: left;">작성자: ${board.brdWriter}</p>
 		<p style="text-align: left;">작성날짜: ${board.brdDate}</p>
+		<c:if test="${board.brdType == 'review' }">
+			<p style="text-align: left;">캠핑장 주소: <c:out value="${board.brdAddr}"></c:out></p>
+		</c:if>
 		<p style="text-align: right;">조회수: ${board.brdRead}</p>
 			<div style="display: inline-block; margin: 0 5px;  float: right;">
 				<c:if test="${id == board.brdWriter || auth eq 'admin'}">
@@ -139,12 +75,12 @@ tr, td {
 				<div class="remodal">
 				<h3>게시물 신고</h3>
 					<select name="content" id="content">
-						<option value="1">음란물 입니다.</option>
-						<option value="2">불법정보를 포함하고 있습니다.</option>
-						<option value="3">청소년에게 유해한 내용입니다.</option>
-						<option value="4">욕설/생명경시/혐오/차별적 표현입니다.</option>
-						<option value="5">개인정보 노출 게시물입니다.</option>
-						<option value="6">불쾌한 표현이 있습니다.</option>
+						<option value="음란물">음란물 입니다.</option>
+						<option value="불법정보">불법정보를 포함하고 있습니다.</option>
+						<option value="유해한 내용">청소년에게 유해한 내용입니다.</option>
+						<option value="욕성,비방">욕설/생명경시/혐오/차별적 표현입니다.</option>
+						<option value="개인정보 노출">개인정보 노출 게시물입니다.</option>
+						<option value="불쾌한 표현">불쾌한 표현이 있습니다.</option>
 					</select>
 					<div>
 						<button id="reportBtn">확인</button>
@@ -155,45 +91,30 @@ tr, td {
 
 	<!-- 댓글 부분 -->
 	<br>
-	<div class="replyBody">
-		<h2>댓글창</h2>
-		<div class="writeReply">
-			<ul>
-				<c:choose>
-					<c:when test="${id != null }">
-						<li><input type="text" id="replyer" readonly size="20"
-							value="${id}"></li>
-						<li>: <textarea rows="5" cols="170" id="reply"
-								style="resize: none"></textarea>
-							<button type="button" id="addRBtn">댓글작성</button>
-						</li>
-					</c:when>
-					<c:otherwise>
-						<input type="text" readonly size="20">
-						<li>: <textarea rows="5" cols="170" style="resize: none"
-								readonly>로그인한 사용자만 이용할 수 있습니다.</textarea>
-							<button type="button" id="addRBtn">댓글작성</button>
-						</li>
-					</c:otherwise>
-				</c:choose>
-			</ul>
-		</div>
-		<ul class="reple">
-			<li><div>
-					<div class="header">
-						<strong>user1</strong> <small>2023-06-05 15:24</small>
-						<c:if test="${id == list.replyer}">
-							<button class="close" style="align: right">&times;</button>
-							<button class="modify" style="align: right">수정</button>
-						</c:if>
-						<c:if test="${id != null && id != list.replyer}">
-							<button class="accuse" style="align: right">🚨</button>
-						</c:if>
+	<div class="container mt-5 mb-5">
+		<div class="d-flex justify-content-center row">
+			<div class="d-flex flex-column">
+					<div class="coment-bottom bg-white p-2 px-4 pb-3" style="border-radius: 10px;">
+	<p id="ti">Comment</p>
+						<div class="d-flex flex-row add-comment-section mt-4 mb-4">
+							<c:choose>
+								<c:when test="${id != null}">
+									<input type="hidden" id="replyer" readonly size="20" value="${id}">
+									<textarea class="form-control mr-3 ml-2" rows="3" cols="170" id="reply" style="resize: none" placeholder="내용을 입력해주세요."></textarea>
+									<button id="addRBtn" type="button" style="margin: 5px">작성</button>
+								</c:when>
+								<c:otherwise>
+									<textarea rows="3" cols="170" style="resize: none" readonly>로그인한 사용자만 이용할 수 있습니다.</textarea>
+									<button id="addRBtn" type="button" style="padding:5px; margin:5px" disabled>작성</button>
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<ul class="reple">
+						
+						</ul>
 					</div>
-					<p>Good Job!!!!!!!!!!!!</p>
-				</div></li>
-
-		</ul>
+			</div>
+		</div>
 	</div>
 
 </div>
@@ -235,8 +156,6 @@ tr, td {
 		reportCloseBtn.addEventListener('click', ()=>{
 			recontainer.style.display = 'none';
 		})
-
-		
 
 		
 		$('#likeBtn').on("click",function() {
@@ -295,12 +214,32 @@ tr, td {
 	};
 	recCount();
 
-
-		 //댓글부분
+		//댓글부분
+		function searchList(){
+			let li = $('.liReply');
+			Array.from(li).forEach(function(tag){
+				let rid = tag.dataset.rid
+				fetch('/campers/getReply.do?rid='+rid)
+				.then(response => response.json())
+				.then(function(result){
+				})
+				.catch(function(err){
+					console.error(err);
+				})
+			})
+				
+			
+		}
+		
+		
 		$('#addRBtn').on('click', function(){
 			let reply = $('#reply').val();
 			let replyer = $('#replyer').val();
 			let bid = ${board.brdId};
+			if(reply === null){
+				alert('내용이 비어있습니다.');
+			}else{
+				
 			console.log(reply, replyer, bid);
 			fetch('/campers/replyAdd.do',{
 				method: 'post',
@@ -312,96 +251,132 @@ tr, td {
 			.then(response => response.json())
 			.then(result => {
 				replyFnc(bid); 
+				$('#reply').val('');
 			})
 			.catch(err => console.error(err))
+			}
 		})
+		
+		
 		
 			
 		function makeList(reply={}){
 			let id = '${id}';
 			let str = '';
 			str += `
-		        <li data-rno=\${reply.replyId}>
+		        <li class="liReply" data-rid=\${reply.replyId}>
 		            <div>
 		                <div class="header">
 		                    <strong>\${reply.replyer}</strong>
 		                    <small>\${reply.replyDate}</small>
+		                    `;
+		    if(reply.replyModify == 'modify'){
+		    str += `
+		    	<small style="color: grey; font-size: 8px">수정됨</small>
+		    	`;
+		    }
+		    str += `
 		                </div>`;
 		     
 		    if (id == reply.replyer) { // 댓글 작성자인 경우
 		        str += `
-		                <button class="close" style="align: right">&times;</button>
-		                <button class="modify" style="align: right">수정</button>`;
-		    } else if (id != null) { // 로그인한 사용자이지만 댓글 작성자가 아닌 경우
-		        str += `
-		                <button class="accuse" style="align: right">신고</button>`;
-		    }
+		                <button type="button" class="closeBtn" onclick="closeFnc(this)">&times;</button>
+		                <button type="button" class="modifyBtn" onclick="modifyFnc(this)">수정</button>`;
+		    }		    	
 		    
 		    str += `
-		                <p>\${reply.reply}</p>
-		            </div>
-		        </li>
+		                <p class="content">\${reply.reply}</p>
+		                </div>
+						</div>
 		    `;
 			
 			return str;
 		}
 		
 		bid = '${board.brdId}';
-		replyUL = $('.reple');
 
+		const replyUL = $('.reple');
+		
 		function replyFnc(bid){
 			
 			fetch('/campers/replyList.do?bid='+ bid)
 				.then(function(response){
-					console.log(response);
 					return response.json(); 
 				})
 			.then(function(result){ 
-			console.log(result); 
+				console.log(result); 
 			
-			$('.reple').empty();
-			for(let reply of result.list){
-			    replyUL.append(makeList(reply)); 
-			}
-		})
+				$('.reple').empty();
+				for(let reply of result.list){
+			   	 	replyUL.append(makeList(reply)); 
+				}
+				searchList()
+			})
 			.catch(function(err){ 
-			console.error(err); 
+				console.error(err); 
+			});
+		}
+		replyFnc(bid); 
+
+		function modifyFnc(e){
+			let reply = $(e).next('.content').text();
+			let rid = $(e).closest('.liReply').data('rid');
+			$(e).next('.content').empty();
+			let textarea = $('<textarea />').text(reply);
+			let btnModi = $('<button />').text('확인').addClass('complete');
+			
+			$('.reple li[data-rid="'+rid+'"]').append(textarea);
+			$('.modifyBtn').replaceWith(btnModi);
+			
+			$('button.complete').on('click', function(){
+				let modiReply = textarea.val();
+				reply = modiReply;
+				fetch('/campers/replyModify.do', {
+				method: 'post',
+				headers: {
+						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;' 
+				},
+				body: 'rid=' + rid + '&reply=' + reply
+				})
+				.then(response => response.json())
+				.then(result => {
+					console.log(result.reply);
+					let targetLI = $('.reple li[data-rid="'+rid+'"]');
+					targetLI.append(reply);
+			        textarea.remove();
+			        btnModi.remove();
+					alert('수정되었습니다.');
+					
+			})
+			.catch(err=>console.error(err));
+			
+		
 			});
 		}
 		
-	replyFnc(bid); 
-		
-	$('ul').css({
-		border: 'solid 0.5px',
-		padding: '5px',
-		margin: '20px'
-		});
-		
-
-		$('ul>li').css('list-style', 'none');
-		
-		//댓글 리스트 보여주기
-		bid = '${board.brdId}';
-		replyUL = $('.reple');
-		
-		function replyFnc(bid){
-		let payload = "bid=" + bid;
-		url = '/campers/replyList.do';
-			fetch(url, {
+		function closeFnc(e){
+			let rid = $(e).closest('.liReply').data('rid');
+			let check = confirm('정말로 삭제하시겠습니까?');
+			if(check){
+				
+			fetch('/campers/replyRemove.do', {
 				method: 'post',
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;' 
 				},
-				body: payload
+				body: 'rid=' + rid
 			})
-			.then(Response => Response.json())
-			.then(json => viewHTML(json));
+			.then(response => response.json())
+			.then(result => { 
+				alert('성공적으로 삭제되었습니다.');
+				replyFnc(bid); 
+			})
+			.catch(err => console.error(err))
+			}else{
+				
+			}
+			
 		}
-		
-
-
-		replyUL.css('list-style', 'none');
-		
 
 	</script>
 </body>

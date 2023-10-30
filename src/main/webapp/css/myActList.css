@@ -1,0 +1,30 @@
+#container{
+	box-sizing: border-box;
+	background-color: white;
+	border-radius: 30px;
+	overflow:auto; 	float: left;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	margin-left: 570px;
+	width: 1000px;
+	height: 800px;
+	padding: 20px;
+}
+
+#container *{
+	margin: 10px auto;	text-align: center;
+}/* 안 중앙정렬 */
+
+
+table{
+	width: 900px;
+	height: auto;
+}
+
+th, td{
+	padding: 20px;
+}
+
+#Calendar> th, td{
+	padding: 2px;
+}

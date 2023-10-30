@@ -16,7 +16,7 @@
 	
 	<select id="bookSelectVo" resultType="book">
 		SELECT * FROM tbl_book
-		WHERE book_client = #{bookClient} AND book_camp_id = #{campId} AND book_start_date = #{bookStartDate}
+		WHERE book_client = #{bookClient} AND book_camp_id = #{bookCampId} AND book_start_date = #{bookStartDate}
 	</select>
 	<select id="bookSelectId" resultType="book">
 		SELECT * FROM tbl_book
